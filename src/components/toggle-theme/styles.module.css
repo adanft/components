@@ -1,0 +1,79 @@
+.input {
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(to left, #4776e6, #8e54e9);
+  transition: 0.4s;
+  border-radius: 36px;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  left: 2px;
+  bottom: 2px;
+  z-index: 10;
+  background-color: white;
+  transition: 0.4s;
+}
+
+.sun i,
+.moon i {
+  position: absolute;
+  top: 4px;
+  z-index: 1;
+  font-size: 1rem;
+  color: white;
+}
+
+.sun i {
+  right: 4px;
+  animation: rotate 15s linear infinite;
+}
+
+.moon i {
+  left: 4px;
+  animation: tilt 5s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes tilt {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-20deg);
+  }
+
+  75% {
+    transform: rotate(40deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.input:checked + .slider:before {
+  transform: translateX(24px);
+}

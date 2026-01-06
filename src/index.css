@@ -1,1 +1,104 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://www.nerdfonts.com/assets/css/webfont.css');
+
+@import 'tailwindcss';
+
+:root {
+  --border-color: #f0eff5;
+  --muted-color: #aaabb7;
+  --text-color: #727587;
+  --title-color: #2f1c6b;
+  --primary-color: #6747c8;
+  --shadow-color: #9d99aa42;
+  --bg-primary-color: #ffffff;
+  --bg-second-color: #ffffff;
+  --danger-color: #ff004c;
+  --secondary-color: #0bb4c0;
+  --info-color: #00a9ec;
+  --success-color: #00e091;
+  --white-color: #ffffff;
+  --bg-third-color: #ffffff;
+  --bg-scroll: #e5e4ec;
+  --bg-hover-scroll: #9798a7;
+  --profile-bg: #e4e6eb;
+  --bg-transparent: rgba(0, 0, 0, 0.3);
+  --dark-color: #25232b;
+}
+
+.dark {
+  --border-color: #231e2c;
+  --muted-color: #686a77;
+  --text-color: #8b8ea0;
+  --title-color: #6747c8;
+  --shadow-color: #322f3b42;
+  --bg-primary-color: #19171d;
+  --bg-second-color: #25232b;
+  --bg-scroll: #25232b;
+  --bg-hover-scroll: #5c5e6b;
+  --profile-bg: rgba(255, 255, 255, 0.1);
+  --bg-transparent: rgba(255, 255, 255, 0.3);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.bg-main-color {
+  background-color: var(--primary-color);
+}
+
+.bg-primary-color {
+  background-color: var(--bg-primary-color);
+}
+
+.bg-secondary-color {
+  background-color: var(--bg-second-color);
+}
+
+.border-color {
+  border-color: var(--border-color);
+}
+
+.shadow-personal {
+  --box-shadow: 0 0 8px;
+  box-shadow: var(--box-shadow) var(--shadow-color);
+}
+
+.box {
+  --box-shadow: 0 0 8px;
+  background-color: var(--bg-second-color);
+  box-shadow: var(--box-shadow) var(--shadow-color);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.border-primary-color {
+  border-color: var(--primary-color);
+}
+
+.text-primary-color {
+  color: var(--primary-color);
+}
+
+input::placeholder {
+  color: var(--muted-color);
+  font-weight: 400;
+}
+
+.text-muted {
+  color: var(--muted-color);
+}
+
+.text-color {
+  color: var(--text-color);
+}
+
+.simplebar-scrollbar:before {
+  background: var(--muted-color) !important;
+}
+
+.active {
+  background-color: var(--primary-color);
+  color: white;
+}
