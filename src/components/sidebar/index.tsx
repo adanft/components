@@ -117,25 +117,13 @@ function Sidebar(): JSX.Element {
               />
             </li>
             <li>
-              <SidebarLink
-                nfIconName="nf-md-folder_lock_open_outline"
-                text="Snapshots"
-                href="/snapshots"
-              />
+              <SidebarLink nfIconName="nf-fa-camera_retro" text="Snapshots" href="/snapshots" />
             </li>
             <li>
-              <SidebarLink
-                nfIconName="nf-md-folder_refresh_outline"
-                text="Schedule"
-                href="/schedule"
-              />
+              <SidebarLink nfIconName="nf-md-calendar" text="Schedule" href="/schedule" />
             </li>
             <li>
-              <SidebarLink
-                nfIconName="nf-md-folder_lock_open_outline"
-                text="Settings"
-                href="/settings"
-              />
+              <SidebarLink nfIconName="nf-cod-settings_gear" text="Settings" href="/settings" />
             </li>
           </ul>
         </nav>

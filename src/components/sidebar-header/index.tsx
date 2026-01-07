@@ -13,7 +13,7 @@ function SidebarHeader({ action, state }: Props) {
         <span className="font-semibold text-2xl whitespace-nowrap text-primary-color">Sidebar</span>
       </Link>
       <button
-        className={`text-primary-color leading-none transition-all duration-300 absolute top-2/4 -translate-y-1/2 ${
+        className={`text-primary-color leading-none transition-all duration-300 absolute top-2/4 -translate-y-1/2 cursor-pointer ${
           state ? 'left-68.5' : 'left-18.25'
         } border-2 border-primary-color p-2 rounded-md`}
         onClick={() => action(!state)}>
