@@ -14,8 +14,8 @@ function App() {
           <div className="container mx-auto">
             <Navbar />
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/components" element={<Home />} />
+              <Route path="/components/*" element={<NotFound />} />
             </Routes>
           </div>
         </main>

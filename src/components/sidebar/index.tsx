@@ -23,19 +23,27 @@ function Sidebar(): JSX.Element {
         <nav className="flex flex-col gap-2">
           <ul className="flex flex-col gap-2">
             <li>
-              <SidebarLink nfIconName="nf-fa-shopping_cart" text="Orders" href="/orders" />
+              <SidebarLink
+                nfIconName="nf-fa-shopping_cart"
+                text="Orders"
+                href="/components/orders"
+              />
             </li>
             <li>
-              <SidebarLink nfIconName="nf-md-shopping" text="Products" href="/products" />
+              <SidebarLink
+                nfIconName="nf-md-shopping"
+                text="Products"
+                href="/components/products"
+              />
             </li>
             <li>
-              <SidebarLink nfIconName="nf-fa-history" text="History" href="/history" />
+              <SidebarLink nfIconName="nf-fa-history" text="History" href="/components/history" />
             </li>
             <li>
-              <SidebarLink nfIconName="nf-fa-users" text="Users" href="/users" />
+              <SidebarLink nfIconName="nf-fa-users" text="Users" href="/components/users" />
             </li>
             <li>
-              <SidebarLink nfIconName="nf-oct-star" text="Favorites" href="/favorite" />
+              <SidebarLink nfIconName="nf-oct-star" text="Favorites" href="/components/favorite" />
             </li>
           </ul>
           <h5
@@ -49,7 +57,7 @@ function Sidebar(): JSX.Element {
                 <SidebarLink
                   nfIconName="nf-fa-money_check"
                   text="Financial Report"
-                  href="/financial-report"
+                  href="/components/financial-report"
                 />
               </li>
               <li>
@@ -59,14 +67,14 @@ function Sidebar(): JSX.Element {
                       <SidebarLink
                         nfIconName="nf-fa-hospital_user"
                         text="User Activity"
-                        href="/user-activity"
+                        href="/components/user-activity"
                       />
                     </li>
                     <li>
                       <SidebarLink
                         nfIconName="nf-fa-user_tie"
                         text="User Growth"
-                        href="/user-growth"
+                        href="/components/user-growth"
                       />
                     </li>
                   </ul>
@@ -76,7 +84,7 @@ function Sidebar(): JSX.Element {
                 <SidebarLink
                   nfIconName="nf-md-view_compact"
                   text="System Reports"
-                  href="/system-reports"
+                  href="/components/system-reports"
                 />
               </li>
             </ul>
@@ -86,14 +94,22 @@ function Sidebar(): JSX.Element {
               <SidebarLink
                 nfIconName="nf-md-integrated_circuit_chip"
                 text="Integrations"
-                href="/integrations"
+                href="/components/integrations"
               />
             </li>
             <li>
-              <SidebarLink nfIconName="nf-fa-bell" text="Notifications" href="/notifications" />
+              <SidebarLink
+                nfIconName="nf-fa-bell"
+                text="Notifications"
+                href="/components/notifications"
+              />
             </li>
             <li>
-              <SidebarLink nfIconName="nf-md-google_analytics" text="Analytics" href="/analytics" />
+              <SidebarLink
+                nfIconName="nf-md-google_analytics"
+                text="Analytics"
+                href="/components/analytics"
+              />
             </li>
           </ul>
           <h5
@@ -106,24 +122,36 @@ function Sidebar(): JSX.Element {
               <SidebarLink
                 nfIconName="nf-md-folder_lock_open_outline"
                 text="Backup"
-                href="/backup"
+                href="/components/backup"
               />
             </li>
             <li>
               <SidebarLink
                 nfIconName="nf-md-folder_refresh_outline"
                 text="Restore"
-                href="/restore"
+                href="/components/restore"
               />
             </li>
             <li>
-              <SidebarLink nfIconName="nf-fa-camera_retro" text="Snapshots" href="/snapshots" />
+              <SidebarLink
+                nfIconName="nf-fa-camera_retro"
+                text="Snapshots"
+                href="/components/snapshots"
+              />
             </li>
             <li>
-              <SidebarLink nfIconName="nf-md-calendar" text="Schedule" href="/schedule" />
+              <SidebarLink
+                nfIconName="nf-md-calendar"
+                text="Schedule"
+                href="/components/schedule"
+              />
             </li>
             <li>
-              <SidebarLink nfIconName="nf-cod-settings_gear" text="Settings" href="/settings" />
+              <SidebarLink
+                nfIconName="nf-cod-settings_gear"
+                text="Settings"
+                href="/components/settings"
+              />
             </li>
           </ul>
         </nav>

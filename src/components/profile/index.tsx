@@ -17,7 +17,7 @@ function Profile(): JSX.Element {
         }}>
         <img
           className="rounded-full bg-primary-color"
-          src={'/profile.png'}
+          src={'/components/profile.png'}
           alt="profile-img"
           width="64"
           height="64"
@@ -28,7 +28,7 @@ function Profile(): JSX.Element {
           <div className="flex items-center gap-2">
             <img
               className="rounded-full bg-primary-color"
-              src={'/profile.png'}
+              src={'/components/profile.png'}
               alt="profile-img"
               width="64"
               height="64"
