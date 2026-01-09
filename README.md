@@ -22,7 +22,7 @@ A reusable component library built with React, TypeScript, and Tailwind CSS. Thi
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/adanft/components.git
 
 # Install dependencies
 pnpm install
@@ -30,3 +30,7 @@ pnpm install
 # Start development server
 pnpm dev
 ```
+
+## Demo
+
+Components [PREVIEW](https://adanft.github.io/components)
