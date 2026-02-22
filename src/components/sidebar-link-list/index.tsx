@@ -9,23 +9,19 @@ type Props = {
 function SidebarLinkList({ children, text, iconName }: Props) {
   const [show, setShow] = useState(false);
   return (
-    <div className={`${show && 'bg-indigo-500/5'}`}>
+    <div className={show ? 'bg-indigo-500/5' : ''}>
       <button
         className="flex px-2 leading-none items-center ui-text-body gap-4 rounded-md w-full"
         onClick={() => setShow(!show)}>
-        <i className={`nf leading-none ${iconName} p-3.5 text-xl`} />
+        <i className={`nf leading-none p-3.5 text-xl ${iconName}`} />
         <span className="font-medium whitespace-nowrap">{text}</span>
         <i
-          className={`ml-auto nf leading-none nf-fa-angle_down duration-300 ${
-            show && 'rotate-180'
-          } p-3.5 text-xl`}
+          className={`ml-auto nf leading-none nf-fa-angle_down duration-300 p-3.5 text-xl ${show ? 'rotate-180' : ''}`}
         />
       </button>
 
       <div
-        className={`grid gap-2 overflow-hidden transition-all duration-300 ${
-          show ? 'grid-rows-[1fr] mt-2' : 'grid-rows-[0fr]'
-        }`}>
+        className={`grid gap-2 overflow-hidden transition-all duration-300 ${show ? 'grid-rows-[1fr] mt-2' : 'grid-rows-[0fr]'}`}>
         <div className="overflow-hidden">{children}</div>
       </div>
     </div>

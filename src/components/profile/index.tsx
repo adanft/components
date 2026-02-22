@@ -61,7 +61,7 @@ function Profile({
                 <i className="nf nf-fa-user ui-text-brand text-xl" />
               </div>
             )}
-            <div className="flex flex-col gap-2 ui-text-body bold">
+            <div className="flex flex-col gap-2 ui-text-body font-bold">
               <span>{handle}</span>
               <span>{displayName}</span>
             </div>

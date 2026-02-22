@@ -30,7 +30,7 @@ function DocsShell({
         brandTitle={docsBranding.title}
         navigation={navigation}
       />
-      <main className="absolute left-16.25 ui-text-body w-[calc(100%-65px)] p-4 min-h-[calc(100vh-97px)] ui-bg-surface-page top-24.25">
+      <main className="absolute left-[65px] ui-text-body w-[calc(100%-65px)] p-4 min-h-[calc(100vh-97px)] ui-bg-surface-page top-[97px]">
         <div className="container mx-auto">
           <Navbar {...navbarProps} />
           {children}
