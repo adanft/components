@@ -1,0 +1,16 @@
+.dark {
+  --ui-surface-page: #19171d;
+  --ui-surface-raised: #25232b;
+  --ui-surface-subtle: #25232b;
+  --ui-surface-scroll: #25232b;
+  --ui-surface-scroll-hover: #5c5e6b;
+  --ui-surface-profile: rgba(255, 255, 255, 0.1);
+  --ui-surface-overlay: rgba(255, 255, 255, 0.3);
+
+  --ui-text-primary: #6747c8;
+  --ui-text-body: #8b8ea0;
+  --ui-text-muted: #686a77;
+  --ui-shadow-color: #322f3b42;
+
+  --dark-color: #25232b;
+}

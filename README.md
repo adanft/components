@@ -43,7 +43,8 @@ import { initializeTheme } from './lib';
 initializeTheme();
 ```
 
-- `styles.css` loads shared library styling/tokens.
+- `styles.css` is the single styling entrypoint and loads semantic tokens/themes.
+- Token contract lives in `src/lib/theme/tokens.css` and `src/lib/theme/themes.css`.
 - Call `initializeTheme()` once at app startup before rendering UI.
 - Optional helpers: `applyTheme`, `toggleTheme`, `getStoredTheme`, `setStoredTheme`.
 

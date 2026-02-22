@@ -1,0 +1,66 @@
+:root {
+  --ui-font-family-base: 'Poppins', sans-serif;
+
+  --ui-color-primary: #6747c8;
+  --ui-color-accent: #0bb4c0;
+  --ui-color-danger: #ff004c;
+  --ui-color-info: #00a9ec;
+  --ui-color-success: #00e091;
+  --ui-color-white: #ffffff;
+
+  --ui-surface-page: #ffffff;
+  --ui-surface-raised: #ffffff;
+  --ui-surface-subtle: #ffffff;
+  --ui-surface-scroll: #e5e4ec;
+  --ui-surface-scroll-hover: #9798a7;
+  --ui-surface-profile: #e4e6eb;
+  --ui-surface-overlay: rgba(0, 0, 0, 0.3);
+
+  --ui-text-primary: #2f1c6b;
+  --ui-text-body: #727587;
+  --ui-text-muted: #aaabb7;
+  --ui-text-on-primary: #ffffff;
+  --ui-text-inverse: #8b8ea0;
+
+  --ui-border-default: #f0eff5;
+
+  --ui-radius-sm: 6px;
+  --ui-radius-md: 10px;
+  --ui-radius-pill: 9999px;
+
+  --ui-shadow-color: #9d99aa42;
+  --ui-shadow-sm: 0 0 8px var(--ui-shadow-color);
+
+  --ui-space-1: 0.25rem;
+  --ui-space-2: 0.5rem;
+  --ui-space-3: 0.75rem;
+  --ui-space-4: 1rem;
+  --ui-space-6: 1.5rem;
+  --ui-space-8: 2rem;
+
+  --ui-motion-duration-fast: 150ms;
+  --ui-motion-duration-base: 300ms;
+  --ui-motion-duration-slow: 500ms;
+  --ui-motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Legacy aliases for backward compatibility */
+  --border-color: var(--ui-border-default);
+  --muted-color: var(--ui-text-muted);
+  --text-color: var(--ui-text-body);
+  --title-color: var(--ui-text-primary);
+  --primary-color: var(--ui-color-primary);
+  --shadow-color: var(--ui-shadow-color);
+  --bg-primary-color: var(--ui-surface-page);
+  --bg-second-color: var(--ui-surface-raised);
+  --danger-color: var(--ui-color-danger);
+  --secondary-color: var(--ui-color-accent);
+  --info-color: var(--ui-color-info);
+  --success-color: var(--ui-color-success);
+  --white-color: var(--ui-color-white);
+  --bg-third-color: var(--ui-surface-subtle);
+  --bg-scroll: var(--ui-surface-scroll);
+  --bg-hover-scroll: var(--ui-surface-scroll-hover);
+  --profile-bg: var(--ui-surface-profile);
+  --bg-transparent: var(--ui-surface-overlay);
+  --dark-color: #25232b;
+}

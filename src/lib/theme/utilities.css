@@ -1,0 +1,78 @@
+body {
+  font-family: var(--ui-font-family-base);
+  background-color: var(--ui-surface-page);
+}
+
+.bg-dark {
+  background-color: #19171d;
+}
+
+.text-dark {
+  color: #8b8ea0;
+}
+
+.bg-light {
+  background-color: #ffffff;
+}
+
+.text-light {
+  color: #727587;
+}
+
+.bg-main-color {
+  background-color: var(--ui-color-primary);
+}
+
+.bg-primary-color {
+  background-color: var(--ui-surface-page);
+}
+
+.bg-secondary-color {
+  background-color: var(--ui-surface-raised);
+}
+
+.border-color {
+  border-color: var(--ui-border-default);
+}
+
+.shadow-personal {
+  box-shadow: var(--ui-shadow-sm);
+}
+
+.box {
+  background-color: var(--ui-surface-raised);
+  box-shadow: var(--ui-shadow-sm);
+  border: 1px solid var(--ui-border-default);
+  padding: var(--ui-space-4);
+  border-radius: var(--ui-radius-sm);
+}
+
+.border-primary-color {
+  border-color: var(--ui-color-primary);
+}
+
+.text-primary-color {
+  color: var(--ui-color-primary);
+}
+
+input::placeholder {
+  color: var(--ui-text-muted);
+  font-weight: 400;
+}
+
+.text-muted {
+  color: var(--ui-text-muted);
+}
+
+.text-color {
+  color: var(--ui-text-body);
+}
+
+.simplebar-scrollbar:before {
+  background: var(--ui-text-muted) !important;
+}
+
+.active {
+  background-color: var(--ui-color-primary);
+  color: var(--ui-text-on-primary);
+}
