@@ -23,5 +23,25 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    files: ['src/docs/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            '../components/*',
+            '../../components/*',
+            '../helpers/*',
+            '../../helpers/*',
+            '../hooks/*',
+            '../../hooks/*',
+            '../pages/*',
+            '../../pages/*',
+          ],
+        },
+      ],
+    },
+  },
   prettierConfig,
 ]);

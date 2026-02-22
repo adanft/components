@@ -8,7 +8,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc -b --pretty false",
+    "validate:boundaries": "node scripts/validate-docs-imports.mjs",
+    "validate": "pnpm lint && pnpm typecheck && pnpm validate:boundaries"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
