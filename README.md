@@ -48,11 +48,13 @@ initializeTheme();
 - Call `initializeTheme()` once at app startup before rendering UI.
 - Optional helpers: `applyTheme`, `toggleTheme`, `getStoredTheme`, `setStoredTheme`.
 
-### Token Alias Deprecation (Phase 2)
+### Token Alias Deprecation Policy (Phase 3)
 
-- Legacy token aliases (for example `--primary-color`, `--text-color`, `--bg-primary-color`) remain available temporarily for compatibility.
+- Legacy aliases were deprecated in `v1.0.0` and are scheduled for removal in `v2.0.0`.
+- Runtime compatibility remains enabled for external consumers through alias blocks in `src/lib/theme/tokens.css` and `src/lib/theme/utilities.css`.
+- Internal usage is blocked by validation unless a legacy alias appears inside explicit `legacy-compat` allowlisted blocks.
+- Migration matrix: `docs/migrations/legacy-alias-matrix.md`.
 - New styles should use semantic tokens (`--ui-*`) and semantic utility classes (`ui-*`) only.
-- Legacy utility classes (`bg-primary-color`, `text-primary-color`, `border-color`, etc.) are deprecated and kept as migration aliases.
 
 ## Build, Validate, and Test
 
@@ -60,6 +62,7 @@ initializeTheme();
 - `pnpm typecheck`: TypeScript project type checks.
 - `pnpm test`: runs Vitest test suite.
 - `pnpm validate:boundaries`: verifies docs imports use public API boundaries.
+- `pnpm validate:semantic-tokens`: blocks legacy aliases outside allowlisted compatibility blocks and enforces removal timeline gates.
 - `pnpm build:docs`: builds the docs app to `dist`.
 - `pnpm build:lib`: builds the library entrypoint to `dist-lib`.
 - `pnpm build`: `typecheck` + docs build + library build.

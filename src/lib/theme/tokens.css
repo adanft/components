@@ -43,7 +43,7 @@
   --ui-motion-duration-slow: 500ms;
   --ui-motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
 
-  /* Legacy aliases for backward compatibility */
+  /* legacy-compat:start tokens (remove in v2.0.0) */
   --border-color: var(--ui-border-default);
   --muted-color: var(--ui-text-muted);
   --text-color: var(--ui-text-body);
@@ -63,4 +63,5 @@
   --profile-bg: var(--ui-surface-profile);
   --bg-transparent: var(--ui-surface-overlay);
   --dark-color: #25232b;
+  /* legacy-compat:end tokens */
 }
