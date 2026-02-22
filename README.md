@@ -1,36 +1,71 @@
 # React Components
 
-A reusable component library built with React, TypeScript, and Tailwind CSS. This project includes essential components for creating modern and responsive user interfaces.
+Library-first React component system with a docs/demo app in the same repo.
 
-## Features
-
-- **Sidebar** - Navigable sidebar with nested menus and collapsible design
-- **Navbar** - Top navigation bar with search and user profile
-- **Theme** - Switch between light and dark themes
-- **Profile Component** - Component to display user information
-
-## Technologies
-
-- **React**
-- **TypeScript**
-- **Tailwind CSS**
-- **Vite**
-- **React Router**
-- **SimpleBar**
-
-## Installation
+## Consumer Quickstart
 
 ```bash
-# Clone the repository
-git clone https://github.com/adanft/components.git
-
-# Install dependencies
 pnpm install
-
-# Start development server
 pnpm dev
 ```
 
+- `pnpm dev`: runs the docs app locally (Vite + `vite.docs.config.ts`).
+- `pnpm preview`: serves the built docs output locally (run `pnpm build:docs` first).
+
+## Public API Imports (Important)
+
+Use the library entrypoint only:
+
+- In this repo: import from `src/lib`.
+- As a package (when published): import from the package root entrypoint.
+
+Avoid deep imports into internal folders (`src/components/*`, `src/helpers/*`, `src/hooks/*`, `src/pages/*`).
+
+```ts
+// Good (repo local, example from app entry)
+import { Sidebar, Navbar, initializeTheme } from './lib';
+
+// Good (published package)
+import { Sidebar, Navbar, initializeTheme } from 'your-package-name';
+
+// Avoid
+import Sidebar from '../components/sidebar';
+```
+
+## Styles and Theme Setup
+
+Consumers are responsible for loading library styles and initializing theme behavior.
+
+```ts
+import './lib/styles.css';
+import { initializeTheme } from './lib';
+
+initializeTheme();
+```
+
+- `styles.css` loads shared library styling/tokens.
+- Call `initializeTheme()` once at app startup before rendering UI.
+- Optional helpers: `applyTheme`, `toggleTheme`, `getStoredTheme`, `setStoredTheme`.
+
+## Build, Validate, and Test
+
+- `pnpm lint`: ESLint checks.
+- `pnpm typecheck`: TypeScript project type checks.
+- `pnpm test`: runs Vitest test suite.
+- `pnpm validate:boundaries`: verifies docs imports use public API boundaries.
+- `pnpm build:docs`: builds the docs app to `dist`.
+- `pnpm build:lib`: builds the library entrypoint to `dist-lib`.
+- `pnpm build`: `typecheck` + docs build + library build.
+- `pnpm validate`: full quality gate (`lint` + `typecheck` + boundary check + `build`).
+
+## Migration Note (Internal Consumers)
+
+If you currently import from internal source paths, migrate to the public API:
+
+1. Replace deep imports with `src/lib` imports.
+2. Ensure `src/lib/styles.css` is loaded once in your app bootstrap.
+3. Ensure `initializeTheme()` is called once during startup.
+
 ## Demo
 
-Components [PREVIEW](https://adanft.github.io/components)
+Components preview: https://adanft.github.io/components
