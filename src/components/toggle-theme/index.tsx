@@ -1,19 +1,12 @@
 import { useState, type JSX } from 'react';
 import styles from './styles.module.css';
-import { getStorage, removeStorage, setStorage } from '../../helpers/local-storage';
+import { getStoredTheme, toggleTheme, type ThemeMode } from '../../helpers/theme';
 
 function ToggleTheme(): JSX.Element {
-  const [theme, setTheme] = useState(getStorage('theme'));
+  const [theme, setTheme] = useState<ThemeMode>(getStoredTheme() ?? 'light');
 
   const changeTheme = (): void => {
-    if (theme === null) {
-      setStorage('theme', 'dark');
-      setTheme('dark');
-    } else {
-      removeStorage('theme');
-      setTheme(null);
-    }
-    document.body.classList.toggle('dark');
+    setTheme((previousTheme) => toggleTheme(previousTheme));
   };
 
   return (

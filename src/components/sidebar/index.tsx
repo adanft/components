@@ -10,6 +10,10 @@ import type { SidebarHeaderHomeLinkComponentProps } from '../sidebar-header';
 import type { SidebarLinkComponentProps } from '../sidebar-link';
 
 type SidebarProps = {
+  brandHref?: string;
+  brandLogoAlt?: string;
+  brandLogoSrc?: string;
+  brandTitle?: string;
   getIsActive?: (href: string) => boolean;
   HomeLinkComponent?: ComponentType<SidebarHeaderHomeLinkComponentProps>;
   LinkComponent?: ComponentType<SidebarLinkComponentProps>;
@@ -19,6 +23,10 @@ type SidebarProps = {
 };
 
 function Sidebar({
+  brandHref,
+  brandLogoAlt,
+  brandLogoSrc,
+  brandTitle,
   getIsActive,
   HomeLinkComponent,
   LinkComponent,
@@ -39,7 +47,12 @@ function Sidebar({
       <SidebarHeader
         action={setOnActive}
         state={onActive}
+        LinkComponent={LinkComponent}
         HomeLinkComponent={HomeLinkComponent}
+        brandHref={brandHref}
+        brandLogoAlt={brandLogoAlt}
+        brandLogoSrc={brandLogoSrc}
+        brandTitle={brandTitle}
         homeHref={homeHref}
         logoSrc={logoSrc}
         title={title}

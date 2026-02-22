@@ -9,37 +9,62 @@ type HomeLinkComponentProps = {
 type Props = {
   action: (prop: boolean) => void;
   state: boolean;
+  brandHref?: string;
+  brandLogoAlt?: string;
+  brandLogoSrc?: string;
+  brandTitle?: string;
   homeHref?: string;
   logoSrc?: string;
   title?: string;
+  LinkComponent?: ComponentType<HomeLinkComponentProps>;
   HomeLinkComponent?: ComponentType<HomeLinkComponentProps>;
 };
 
-export type { HomeLinkComponentProps as SidebarHeaderHomeLinkComponentProps };
+export type {
+  HomeLinkComponentProps as SidebarHeaderHomeLinkComponentProps,
+  HomeLinkComponentProps as SidebarHeaderLinkComponentProps,
+};
 
 function SidebarHeader({
   action,
   state,
-  homeHref = '/components',
-  logoSrc = '/components/logo.png',
-  title = 'Components',
+  brandHref,
+  brandLogoAlt,
+  brandLogoSrc,
+  brandTitle,
+  homeHref,
+  logoSrc,
+  title,
+  LinkComponent,
   HomeLinkComponent,
 }: Props) {
+  const resolvedHref = brandHref ?? homeHref ?? '/';
+  const resolvedLogoSrc = brandLogoSrc ?? logoSrc;
+  const resolvedTitle = brandTitle ?? title ?? 'Brand';
+  const resolvedLogoAlt = brandLogoAlt ?? `${resolvedTitle} logo`;
+  const ResolvedLinkComponent = LinkComponent ?? HomeLinkComponent;
+
   const content = (
     <>
-      <img src={logoSrc} alt="logo" width={48} height={48} />
-      <span className="font-semibold text-2xl whitespace-nowrap text-primary-color">{title}</span>
+      {resolvedLogoSrc ? (
+        <img src={resolvedLogoSrc} alt={resolvedLogoAlt} width={48} height={48} />
+      ) : null}
+      <span className="font-semibold text-2xl whitespace-nowrap text-primary-color">
+        {resolvedTitle}
+      </span>
     </>
   );
 
   return (
     <header className="relative flex items-center h-24 p-2">
-      {HomeLinkComponent ? (
-        <HomeLinkComponent className="flex items-center gap-2 overflow-hidden" href={homeHref}>
+      {ResolvedLinkComponent ? (
+        <ResolvedLinkComponent
+          className="flex items-center gap-2 overflow-hidden"
+          href={resolvedHref}>
           {content}
-        </HomeLinkComponent>
+        </ResolvedLinkComponent>
       ) : (
-        <a href={homeHref} className="flex items-center gap-2 overflow-hidden">
+        <a href={resolvedHref} className="flex items-center gap-2 overflow-hidden">
           {content}
         </a>
       )}

@@ -18,7 +18,7 @@ function Navbar() {
         <button className="p-2 bg-primary-color rounded-full leading-none border border-primary-color">
           <i className="nf nf-oct-bell text-xl text-primary-color leading-none"></i>
         </button>
-        <Profile />
+        <Profile avatarSrc="/components/profile.png" handle="adanft" displayName="Adan Franco T." />
       </div>
     </div>
   );

@@ -1,7 +1,23 @@
 import { useState, type JSX, type RefObject } from 'react';
 import useOutsideHandler from '../../hooks/use-outside-handler';
 
-function Profile(): JSX.Element {
+type ProfileProps = {
+  avatarAlt?: string;
+  avatarSrc?: string;
+  displayName?: string;
+  handle?: string;
+  onSignOut?: () => void;
+  signOutLabel?: string;
+};
+
+function Profile({
+  avatarAlt = 'profile avatar',
+  avatarSrc,
+  displayName = 'Guest User',
+  handle = '@user',
+  onSignOut,
+  signOutLabel = 'Sign out',
+}: ProfileProps): JSX.Element {
   const [show, setShow] = useState(false);
 
   const profileRef = useOutsideHandler(() => {
@@ -15,34 +31,48 @@ function Profile(): JSX.Element {
         onClick={() => {
           setShow(!show);
         }}>
-        <img
-          className="rounded-full bg-primary-color"
-          src={'/components/profile.png'}
-          alt="profile-img"
-          width="64"
-          height="64"
-        />
+        {avatarSrc ? (
+          <img
+            className="rounded-full bg-primary-color"
+            src={avatarSrc}
+            alt={avatarAlt}
+            width="64"
+            height="64"
+          />
+        ) : (
+          <div className="rounded-full bg-primary-color w-16 h-16 flex items-center justify-center">
+            <i className="nf nf-fa-user text-primary-color text-xl" />
+          </div>
+        )}
       </div>
       {show && (
         <div className="w-72 top-[calc(100%+1rem)] right-4 absolute box">
           <div className="flex items-center gap-2">
-            <img
-              className="rounded-full bg-primary-color"
-              src={'/components/profile.png'}
-              alt="profile-img"
-              width="64"
-              height="64"
-            />
+            {avatarSrc ? (
+              <img
+                className="rounded-full bg-primary-color"
+                src={avatarSrc}
+                alt={avatarAlt}
+                width="64"
+                height="64"
+              />
+            ) : (
+              <div className="rounded-full bg-primary-color w-16 h-16 flex items-center justify-center">
+                <i className="nf nf-fa-user text-primary-color text-xl" />
+              </div>
+            )}
             <div className="flex flex-col gap-2 text-color bold">
-              <span>adanft</span>
-              <span>Adan Franco T.</span>
+              <span>{handle}</span>
+              <span>{displayName}</span>
             </div>
           </div>
           <div className="flex flex-col justify-center mt-4">
             <button
               className="rounded-full text-white font-medium bg-main-color py-2"
-              onClick={() => {}}>
-              Sign out
+              onClick={() => {
+                onSignOut?.();
+              }}>
+              {signOutLabel}
             </button>
           </div>
         </div>
@@ -51,4 +81,5 @@ function Profile(): JSX.Element {
   );
 }
 
+export type { ProfileProps };
 export default Profile;

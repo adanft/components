@@ -10,8 +10,10 @@ function DocsSidebar() {
   return (
     <Sidebar
       LinkComponent={RouterLinkAdapter}
-      HomeLinkComponent={RouterLinkAdapter}
       getIsActive={getIsActive}
+      brandHref="/components"
+      brandLogoSrc="/components/logo.png"
+      brandTitle="Components"
     />
   );
 }
