@@ -10,6 +10,8 @@ export { default as ToggleTheme } from '../components/toggle-theme';
 export { applyTheme, getStoredTheme, initializeTheme, setStoredTheme, toggleTheme } from './theme';
 
 export type { ProfileProps } from '../components/profile';
+export type { NavbarProps } from '../components/navbar';
 export type { SidebarHeaderHomeLinkComponentProps } from '../components/sidebar-header';
 export type { SidebarLinkComponentProps } from '../components/sidebar-link';
+export type { SidebarNavigationNode } from '../components/sidebar';
 export type { ThemeMode, ThemeOptions } from './theme';

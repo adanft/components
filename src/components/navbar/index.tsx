@@ -1,7 +1,20 @@
+import type { ProfileProps } from '../profile';
 import Profile from '../profile';
 import ToggleTheme from '../toggle-theme';
 
-function Navbar() {
+type NavbarProps = {
+  profileProps?: ProfileProps;
+  searchPlaceholder?: string;
+};
+
+function Navbar({
+  profileProps = {
+    avatarSrc: '/components/profile.png',
+    handle: 'adanft',
+    displayName: 'Adan Franco T.',
+  },
+  searchPlaceholder = 'Search',
+}: NavbarProps) {
   return (
     <div className="fixed left-16.25 top-0 right-0 h-24.25 bg-secondary-color border-color border-b shadow-personal px-8 flex justify-between items-center z-10">
       <div></div>
@@ -10,7 +23,7 @@ function Navbar() {
         <input
           className="w-full bg-primary-color focus-visible:outline-none text-color font-medium"
           type="text"
-          placeholder="Search"
+          placeholder={searchPlaceholder}
         />
       </div>
       <div className="flex gap-4 items-center">
@@ -18,10 +31,11 @@ function Navbar() {
         <button className="p-2 bg-primary-color rounded-full leading-none border border-primary-color">
           <i className="nf nf-oct-bell text-xl text-primary-color leading-none"></i>
         </button>
-        <Profile avatarSrc="/components/profile.png" handle="adanft" displayName="Adan Franco T." />
+        <Profile {...profileProps} />
       </div>
     </div>
   );
 }
 
 export default Navbar;
+export type { NavbarProps };
