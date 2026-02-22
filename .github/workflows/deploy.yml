@@ -1,6 +1,7 @@
 name: Components deployment
+
 permissions:
-  contents: write
+  contents: read
 on:
   push:
     branches:
@@ -9,18 +10,42 @@ on:
     branches:
       - main
 jobs:
-  deployment:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: lts/*
+          cache: pnpm
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Install dependencies
-        run: npm install
-      - name: Build a project
-        run: npm run build
-      - name: Deploy a GitHub Pages
+        run: pnpm install --frozen-lockfile
+      - name: Validate quality gates
+        run: pnpm validate
+
+  deploy:
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: pnpm
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build docs app
+        run: pnpm build:docs
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist

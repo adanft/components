@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './lib/styles.css';
 
-import App from './app.tsx';
+import App from './docs/app.tsx';
 import { initializeTheme } from './lib/theme.ts';
 
 initializeTheme();

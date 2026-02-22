@@ -7,14 +7,7 @@ type NavbarProps = {
   searchPlaceholder?: string;
 };
 
-function Navbar({
-  profileProps = {
-    avatarSrc: '/components/profile.png',
-    handle: 'adanft',
-    displayName: 'Adan Franco T.',
-  },
-  searchPlaceholder = 'Search',
-}: NavbarProps) {
+function Navbar({ profileProps, searchPlaceholder = 'Search' }: NavbarProps) {
   return (
     <div className="fixed left-16.25 top-0 right-0 h-24.25 bg-secondary-color border-color border-b shadow-personal px-8 flex justify-between items-center z-10">
       <div></div>
@@ -31,7 +24,7 @@ function Navbar({
         <button className="p-2 bg-primary-color rounded-full leading-none border border-primary-color">
           <i className="nf nf-oct-bell text-xl text-primary-color leading-none"></i>
         </button>
-        <Profile {...profileProps} />
+        {profileProps ? <Profile {...profileProps} /> : null}
       </div>
     </div>
   );
