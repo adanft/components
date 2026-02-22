@@ -15,7 +15,8 @@
     "test": "vitest run",
     "typecheck": "tsc -b --pretty false",
     "validate:boundaries": "node scripts/validate-docs-imports.mjs",
-    "validate": "pnpm lint && pnpm typecheck && pnpm validate:boundaries && pnpm build"
+    "validate:semantic-tokens": "node scripts/validate-semantic-tokens.mjs",
+    "validate": "pnpm lint && pnpm typecheck && pnpm validate:boundaries && pnpm validate:semantic-tokens && pnpm build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",

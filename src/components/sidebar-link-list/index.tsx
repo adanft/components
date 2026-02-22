@@ -11,7 +11,7 @@ function SidebarLinkList({ children, text, iconName }: Props) {
   return (
     <div className={`${show && 'bg-indigo-500/5'}`}>
       <button
-        className="flex px-2 leading-none items-center text-color gap-4 rounded-md w-full"
+        className="flex px-2 leading-none items-center ui-text-body gap-4 rounded-md w-full"
         onClick={() => setShow(!show)}>
         <i className={`nf leading-none ${iconName} p-3.5 text-xl`} />
         <span className="font-medium whitespace-nowrap">{text}</span>

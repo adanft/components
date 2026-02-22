@@ -48,6 +48,12 @@ initializeTheme();
 - Call `initializeTheme()` once at app startup before rendering UI.
 - Optional helpers: `applyTheme`, `toggleTheme`, `getStoredTheme`, `setStoredTheme`.
 
+### Token Alias Deprecation (Phase 2)
+
+- Legacy token aliases (for example `--primary-color`, `--text-color`, `--bg-primary-color`) remain available temporarily for compatibility.
+- New styles should use semantic tokens (`--ui-*`) and semantic utility classes (`ui-*`) only.
+- Legacy utility classes (`bg-primary-color`, `text-primary-color`, `border-color`, etc.) are deprecated and kept as migration aliases.
+
 ## Build, Validate, and Test
 
 - `pnpm lint`: ESLint checks.

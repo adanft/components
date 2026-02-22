@@ -33,42 +33,42 @@ function Profile({
         }}>
         {avatarSrc ? (
           <img
-            className="rounded-full bg-primary-color"
+            className="rounded-full ui-bg-surface-page"
             src={avatarSrc}
             alt={avatarAlt}
             width="64"
             height="64"
           />
         ) : (
-          <div className="rounded-full bg-primary-color w-16 h-16 flex items-center justify-center">
-            <i className="nf nf-fa-user text-primary-color text-xl" />
+          <div className="rounded-full ui-bg-surface-page w-16 h-16 flex items-center justify-center">
+            <i className="nf nf-fa-user ui-text-brand text-xl" />
           </div>
         )}
       </div>
       {show && (
-        <div className="w-72 top-[calc(100%+1rem)] right-4 absolute box">
+        <div className="w-72 top-[calc(100%+1rem)] right-4 absolute ui-surface-card">
           <div className="flex items-center gap-2">
             {avatarSrc ? (
               <img
-                className="rounded-full bg-primary-color"
+                className="rounded-full ui-bg-surface-page"
                 src={avatarSrc}
                 alt={avatarAlt}
                 width="64"
                 height="64"
               />
             ) : (
-              <div className="rounded-full bg-primary-color w-16 h-16 flex items-center justify-center">
-                <i className="nf nf-fa-user text-primary-color text-xl" />
+              <div className="rounded-full ui-bg-surface-page w-16 h-16 flex items-center justify-center">
+                <i className="nf nf-fa-user ui-text-brand text-xl" />
               </div>
             )}
-            <div className="flex flex-col gap-2 text-color bold">
+            <div className="flex flex-col gap-2 ui-text-body bold">
               <span>{handle}</span>
               <span>{displayName}</span>
             </div>
           </div>
           <div className="flex flex-col justify-center mt-4">
             <button
-              className="rounded-full text-white font-medium bg-main-color py-2"
+              className="rounded-full text-white font-medium ui-bg-brand py-2"
               onClick={() => {
                 onSignOut?.();
               }}>

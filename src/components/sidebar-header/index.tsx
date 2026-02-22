@@ -49,7 +49,7 @@ function SidebarHeader({
       {resolvedLogoSrc ? (
         <img src={resolvedLogoSrc} alt={resolvedLogoAlt} width={48} height={48} />
       ) : null}
-      <span className="font-semibold text-2xl whitespace-nowrap text-primary-color">
+      <span className="font-semibold text-2xl whitespace-nowrap ui-text-brand">
         {resolvedTitle}
       </span>
     </>
@@ -69,9 +69,9 @@ function SidebarHeader({
         </a>
       )}
       <button
-        className={`text-primary-color leading-none transition-all duration-300 absolute top-2/4 -translate-y-1/2 cursor-pointer ${
+        className={`ui-text-brand leading-none transition-all duration-300 absolute top-2/4 -translate-y-1/2 cursor-pointer ${
           state ? 'left-68.5' : 'left-18.25'
-        } border-2 border-primary-color p-2 rounded-md`}
+        } border-2 ui-border-brand p-2 rounded-md`}
         onClick={() => action(!state)}>
         <i
           className={`nf ${

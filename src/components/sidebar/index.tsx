@@ -106,12 +106,12 @@ function Sidebar({
   });
 
   const resolvedNavigation = navigation ?? [];
-  const headingClassName = `text-muted py-4 ${onActive ? 'px-2' : 'px-6'} text-lg font-semibold whitespace-nowrap`;
+  const headingClassName = `ui-text-muted py-4 ${onActive ? 'px-2' : 'px-6'} text-lg font-semibold whitespace-nowrap`;
 
   return (
     <aside
       ref={asideRef}
-      className={`transition-all duration-300 fixed min-h-screen z-20 top-0 left-0 back border-r border-color shadow-personal bg-secondary-color
+      className={`transition-all duration-300 fixed min-h-screen z-20 top-0 left-0 back border-r ui-border-default ui-shadow-sm ui-bg-surface-raised
         ${onActive ? 'w-80.25' : 'w-16.25'}`}>
       <SidebarHeader
         action={setOnActive}
