@@ -1,7 +1,9 @@
 import type { SidebarNavigationNode } from '../../lib';
-import { docsPath } from './routes';
+import { DOCS_BOX_PATH, DOCS_ICON_PATH, docsPath } from './routes';
 
 const docsSidebarNavigation: SidebarNavigationNode[] = [
+  { type: 'link', nfIconName: 'nf-md-view_agenda_outline', text: 'Box', href: DOCS_BOX_PATH },
+  { type: 'link', nfIconName: 'nf-md-image_outline', text: 'Icon', href: DOCS_ICON_PATH },
   { type: 'link', nfIconName: 'nf-fa-shopping_cart', text: 'Orders', href: docsPath('/orders') },
   { type: 'link', nfIconName: 'nf-md-shopping', text: 'Products', href: docsPath('/products') },
   { type: 'link', nfIconName: 'nf-fa-history', text: 'History', href: docsPath('/history') },

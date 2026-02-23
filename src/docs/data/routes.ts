@@ -15,6 +15,15 @@ function docsPath(path: string) {
 }
 
 const DOCS_HOME_PATH = DOCS_BASE_PATH || '/';
+const DOCS_BOX_PATH = '/components/box';
+const DOCS_ICON_PATH = '/components/icon';
 const DOCS_NOT_FOUND_PATH = docsPath('/*');
 
-export { DOCS_BASE_PATH, DOCS_HOME_PATH, DOCS_NOT_FOUND_PATH, docsPath };
+export {
+  DOCS_BASE_PATH,
+  DOCS_HOME_PATH,
+  DOCS_BOX_PATH,
+  DOCS_ICON_PATH,
+  DOCS_NOT_FOUND_PATH,
+  docsPath,
+};

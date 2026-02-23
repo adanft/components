@@ -2,7 +2,9 @@ import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import {
+  Box,
   Home,
+  Icon,
   Navbar,
   NotFound,
   Profile,
@@ -18,7 +20,9 @@ describe('public API smoke', () => {
     const onHeaderAction = () => undefined;
 
     const cases = [
+      <Box key="box" />,
       <Home key="home" />,
+      <Icon key="icon" symbol="nf-fa-user" className="text-lg ui-text-brand" />,
       <Navbar key="navbar" searchPlaceholder="Search docs" />,
       <NotFound key="not-found" />,
       <Profile key="profile" />,

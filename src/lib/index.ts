@@ -1,4 +1,6 @@
 export { default as Home } from '../pages/home';
+export { default as Box } from './components/box';
+export { default as Icon } from './components/icon';
 export { default as Navbar } from '../components/navbar';
 export { default as NotFound } from '../components/not-found';
 export { default as Profile } from '../components/profile';
@@ -10,6 +12,8 @@ export { default as ToggleTheme } from '../components/toggle-theme';
 export { applyTheme, getStoredTheme, initializeTheme, setStoredTheme, toggleTheme } from './theme';
 
 export type { ProfileProps } from '../components/profile';
+export type { BoxProps } from './components/box';
+export type { IconProps } from './components/icon';
 export type { NavbarProps } from '../components/navbar';
 export type { SidebarHeaderHomeLinkComponentProps } from '../components/sidebar-header';
 export type { SidebarLinkComponentProps } from '../components/sidebar-link';

@@ -32,6 +32,26 @@ import { Sidebar, Navbar, initializeTheme } from 'your-package-name';
 import Sidebar from '../components/sidebar';
 ```
 
+## Icon Usage
+
+Use `Icon` to render Nerd Font symbols while keeping styling in the consumer via `className`.
+
+```tsx
+import { Icon } from './lib';
+
+<Icon symbol="nf-md-react" className="text-3xl text-sky-400" />
+<Icon
+  symbol="nf-fa-triangle_exclamation"
+  role="img"
+  aria-label="Warning"
+  className="text-2xl text-amber-500"
+/>
+```
+
+- `symbol` is the Nerd Font symbol class (for example `nf-md-react`).
+- `className` controls size/color/motion; the component always includes base `nf`.
+- Any native `<i>` attributes are forwarded (`role`, `aria-label`, `aria-hidden`, `title`, `data-*`, etc.).
+
 ## Styles and Theme Setup
 
 Consumers are responsible for loading library styles and initializing theme behavior.
