@@ -14,6 +14,7 @@ describe('Box', () => {
       'border',
       'ui-border-default',
       'ui-shadow-sm',
+      'rounded-md',
       'p-4',
     );
   });
@@ -23,6 +24,12 @@ describe('Box', () => {
 
     const box = screen.getByTestId('box');
 
-    expect(box).toHaveClass('ui-bg-surface-raised', 'p-4', 'rounded-lg', 'custom-box');
+    expect(box).toHaveClass(
+      'ui-bg-surface-raised',
+      'rounded-md',
+      'p-4',
+      'rounded-lg',
+      'custom-box',
+    );
   });
 });

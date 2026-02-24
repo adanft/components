@@ -8,6 +8,7 @@ function Box({ className, ...props }: BoxProps) {
     'border',
     'ui-border-default',
     'ui-shadow-sm',
+    'rounded-md',
     'p-4',
     className,
   ]
