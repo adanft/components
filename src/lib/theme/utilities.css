@@ -31,6 +31,23 @@ body {
   border-color: var(--ui-border-default);
 }
 
+.ui-radius-sm {
+  border-radius: var(--ui-radius-sm);
+}
+
+.group:focus-within .ui-group-focus-text-brand {
+  color: var(--ui-color-primary);
+}
+
+.ui-placeholder-muted::placeholder {
+  color: var(--ui-text-muted);
+}
+
+.ui-focus-visible-brand:focus-visible {
+  border-color: var(--ui-color-primary);
+  outline-color: var(--ui-color-primary);
+}
+
 .ui-shadow-sm {
   box-shadow: var(--ui-shadow-sm);
 }
