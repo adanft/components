@@ -1,4 +1,5 @@
 export { default as Home } from '../pages/home';
+export { default as Button } from './components/button';
 export { default as Box } from './components/box';
 export { default as Icon } from './components/icon';
 export { default as InputField } from './components/input-field';
@@ -13,6 +14,7 @@ export { default as ToggleTheme } from '../components/toggle-theme';
 export { applyTheme, getStoredTheme, initializeTheme, setStoredTheme, toggleTheme } from './theme';
 
 export type { ProfileProps } from './components/profile';
+export type { ButtonProps } from './components/button';
 export type { BoxProps } from './components/box';
 export type { IconProps } from './components/icon';
 export type { InputFieldProps } from './components/input-field';

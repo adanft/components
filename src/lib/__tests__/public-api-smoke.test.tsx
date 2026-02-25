@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import {
+  Button,
   Box,
   Home,
   Icon,
@@ -21,6 +22,7 @@ describe('public API smoke', () => {
     const onHeaderAction = () => undefined;
 
     const cases = [
+      <Button key="button">Click me</Button>,
       <Box key="box" />,
       <Home key="home" />,
       <Icon key="icon" symbol="nf-fa-user" className="text-lg ui-text-brand" />,

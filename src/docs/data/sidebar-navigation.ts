@@ -1,5 +1,6 @@
 import type { SidebarNavigationNode } from '../../lib';
 import {
+  DOCS_BUTTON_PATH,
   DOCS_BOX_PATH,
   DOCS_ICON_PATH,
   DOCS_INPUT_FIELD_PATH,
@@ -8,6 +9,7 @@ import {
 } from './routes';
 
 const docsSidebarNavigation: SidebarNavigationNode[] = [
+  { type: 'link', nfIconName: 'nf-fa-hand_pointer_o', text: 'Button', href: DOCS_BUTTON_PATH },
   { type: 'link', nfIconName: 'nf-md-view_agenda_outline', text: 'Box', href: DOCS_BOX_PATH },
   { type: 'link', nfIconName: 'nf-md-image_outline', text: 'Icon', href: DOCS_ICON_PATH },
   {

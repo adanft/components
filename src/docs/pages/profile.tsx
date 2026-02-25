@@ -42,8 +42,7 @@ function ProfilePage() {
           Import <code>Profile</code> from the public library entrypoint. Avatar supports either an
           image or text avatar. The image variant accepts local assets or remote URLs via{' '}
           <code>avatarSrc</code> and descriptive copy via <code>avatarAlt</code>. Use{' '}
-          <code>avatarText</code> when <code>avatarType</code> is <code>text</code>. If image props
-          are omitted, the component applies safe defaults.
+          <code>avatarText</code> when <code>avatarType</code> is <code>text</code>.
         </p>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={imageUsageSnippet} />

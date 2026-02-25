@@ -25,15 +25,6 @@ const validProfileTextAvatarProps: ProfileProps = {
 };
 void validProfileTextAvatarProps;
 
-const validProfileImageFallbackProps: ProfileProps = {
-  userKey: '@sam',
-  fullName: 'Sam Li',
-  btnAction: () => undefined,
-  btnName: 'Log out',
-  avatarType: 'image',
-};
-void validProfileImageFallbackProps;
-
 describe('Profile', () => {
   it('renders provided props and opens menu content on click', () => {
     const { container } = render(
@@ -100,20 +91,5 @@ describe('Profile', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Log out' }));
     expect(btnAction).toHaveBeenCalledTimes(1);
-  });
-
-  it('uses safe fallbacks for image avatar when src or alt is missing', () => {
-    render(
-      <Profile
-        userKey="@sam"
-        fullName="Sam Li"
-        btnAction={() => undefined}
-        btnName="Log out"
-        avatarType="image"
-      />,
-    );
-
-    const avatar = screen.getByRole('img', { name: 'Profile avatar' });
-    expect(avatar).toHaveAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAAAAACw=');
   });
 });

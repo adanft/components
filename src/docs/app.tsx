@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router';
 
 import { Home, NotFound } from '../lib';
 import {
+  DOCS_BUTTON_PATH,
   DOCS_BOX_PATH,
   DOCS_HOME_PATH,
   DOCS_ICON_PATH,
@@ -9,6 +10,7 @@ import {
   DOCS_PROFILE_PATH,
   DOCS_NOT_FOUND_PATH,
 } from './data/routes';
+import ButtonPage from './pages/button';
 import BoxPage from './pages/box';
 import IconPage from './pages/icon';
 import InputFieldPage from './pages/input-field';
@@ -21,6 +23,7 @@ function App() {
       <DocsShell>
         <Routes>
           <Route path={DOCS_HOME_PATH} element={<Home />} />
+          <Route path={DOCS_BUTTON_PATH} element={<ButtonPage />} />
           <Route path={DOCS_BOX_PATH} element={<BoxPage />} />
           <Route path={DOCS_ICON_PATH} element={<IconPage />} />
           <Route path={DOCS_INPUT_FIELD_PATH} element={<InputFieldPage />} />
