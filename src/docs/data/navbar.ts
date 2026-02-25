@@ -1,11 +1,13 @@
 import type { NavbarProps } from '../../lib';
-import { DOCS_BASE_PATH } from './routes';
 
 const docsNavbarProps: NavbarProps = {
   profileProps: {
-    avatarSrc: `${DOCS_BASE_PATH}/profile.png`,
-    handle: 'adanft',
-    displayName: 'Adan Franco T.',
+    avatarType: 'text',
+    avatarText: 'AF',
+    userKey: 'adanft',
+    fullName: 'Adan Franco T.',
+    btnAction: () => undefined,
+    btnName: 'Log out',
   },
   searchPlaceholder: 'Search docs',
 };

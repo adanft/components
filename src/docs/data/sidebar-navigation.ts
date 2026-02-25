@@ -1,5 +1,11 @@
 import type { SidebarNavigationNode } from '../../lib';
-import { DOCS_BOX_PATH, DOCS_ICON_PATH, DOCS_INPUT_FIELD_PATH, docsPath } from './routes';
+import {
+  DOCS_BOX_PATH,
+  DOCS_ICON_PATH,
+  DOCS_INPUT_FIELD_PATH,
+  DOCS_PROFILE_PATH,
+  docsPath,
+} from './routes';
 
 const docsSidebarNavigation: SidebarNavigationNode[] = [
   { type: 'link', nfIconName: 'nf-md-view_agenda_outline', text: 'Box', href: DOCS_BOX_PATH },
@@ -10,6 +16,7 @@ const docsSidebarNavigation: SidebarNavigationNode[] = [
     text: 'InputField',
     href: DOCS_INPUT_FIELD_PATH,
   },
+  { type: 'link', nfIconName: 'nf-fa-user', text: 'Profile', href: DOCS_PROFILE_PATH },
   { type: 'link', nfIconName: 'nf-fa-shopping_cart', text: 'Orders', href: docsPath('/orders') },
   { type: 'link', nfIconName: 'nf-md-shopping', text: 'Products', href: docsPath('/products') },
   { type: 'link', nfIconName: 'nf-fa-history', text: 'History', href: docsPath('/history') },

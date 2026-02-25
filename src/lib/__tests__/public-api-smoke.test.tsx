@@ -27,7 +27,16 @@ describe('public API smoke', () => {
       <InputField key="input-field" label="Email" id="email" placeholder="name@example.com" />,
       <Navbar key="navbar" searchPlaceholder="Search docs" />,
       <NotFound key="not-found" />,
-      <Profile key="profile" />,
+      <Profile
+        key="profile"
+        userKey="@taylor"
+        fullName="Taylor Brown"
+        btnAction={() => undefined}
+        btnName="Log out"
+        avatarType="image"
+        avatarSrc="https://example.com/avatar.png"
+        avatarAlt="Taylor avatar"
+      />,
       <Sidebar key="sidebar" title="Docs" navigation={[]} />,
       <SidebarHeader key="sidebar-header" action={onHeaderAction} state={false} title="Docs" />,
       <SidebarLink

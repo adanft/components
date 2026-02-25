@@ -68,6 +68,10 @@ body {
   color: var(--ui-color-primary);
 }
 
+.ui-text-on-primary {
+  color: var(--ui-text-on-primary);
+}
+
 input::placeholder {
   color: var(--ui-text-muted);
   font-weight: 400;
