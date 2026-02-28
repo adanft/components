@@ -14,7 +14,7 @@ function SidebarGroup({ children, iconName, text }: SidebarGroupProps) {
       <button
         type="button"
         className="flex px-2 leading-none items-center ui-text-body gap-4 rounded-md w-full"
-        onClick={() => setShow(!show)}
+        onClick={() => setShow((previousShow) => !previousShow)}
         aria-expanded={show}>
         <i className={`nf leading-none p-3.5 text-xl ${iconName}`} />
         <span className="font-medium whitespace-nowrap">{text}</span>

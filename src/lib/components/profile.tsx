@@ -50,11 +50,11 @@ function Profile({
       <div
         className="flex justify-center cursor-pointer"
         onClick={() => {
-          setShow(!show);
+          setShow((previousShow) => !previousShow);
         }}>
         {renderedAvatar}
       </div>
-      {show && (
+      {show ? (
         <Box className="w-72 top-[calc(100%+1rem)] right-4 absolute">
           <div className="flex items-center gap-2">
             {renderedAvatar}
@@ -73,7 +73,7 @@ function Profile({
             </button>
           </div>
         </Box>
-      )}
+      ) : null}
     </div>
   );
 }
