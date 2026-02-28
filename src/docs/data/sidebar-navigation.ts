@@ -1,14 +1,38 @@
-import type { SidebarNavigationNode } from '../../lib';
 import {
   DOCS_BUTTON_PATH,
   DOCS_BOX_PATH,
   DOCS_ICON_PATH,
   DOCS_INPUT_FIELD_PATH,
   DOCS_PROFILE_PATH,
+  DOCS_SIDEBAR_PATH,
   docsPath,
 } from './routes';
 
-const docsSidebarNavigation: SidebarNavigationNode[] = [
+type DocsSidebarNavigationLinkNode = {
+  href: string;
+  nfIconName: string;
+  text: string;
+  type: 'link';
+};
+
+type DocsSidebarNavigationGroupNode = {
+  children: DocsSidebarNavigationNode[];
+  iconName: string;
+  text: string;
+  type: 'group';
+};
+
+type DocsSidebarNavigationHeadingNode = {
+  text: string;
+  type: 'heading';
+};
+
+type DocsSidebarNavigationNode =
+  | DocsSidebarNavigationGroupNode
+  | DocsSidebarNavigationHeadingNode
+  | DocsSidebarNavigationLinkNode;
+
+const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'link', nfIconName: 'nf-fa-hand_pointer_o', text: 'Button', href: DOCS_BUTTON_PATH },
   { type: 'link', nfIconName: 'nf-md-view_agenda_outline', text: 'Box', href: DOCS_BOX_PATH },
   { type: 'link', nfIconName: 'nf-md-image_outline', text: 'Icon', href: DOCS_ICON_PATH },
@@ -19,6 +43,7 @@ const docsSidebarNavigation: SidebarNavigationNode[] = [
     href: DOCS_INPUT_FIELD_PATH,
   },
   { type: 'link', nfIconName: 'nf-fa-user', text: 'Profile', href: DOCS_PROFILE_PATH },
+  { type: 'link', nfIconName: 'nf-md-dock_left', text: 'Sidebar', href: DOCS_SIDEBAR_PATH },
   { type: 'link', nfIconName: 'nf-fa-shopping_cart', text: 'Orders', href: docsPath('/orders') },
   { type: 'link', nfIconName: 'nf-md-shopping', text: 'Products', href: docsPath('/products') },
   { type: 'link', nfIconName: 'nf-fa-history', text: 'History', href: docsPath('/history') },
@@ -110,3 +135,4 @@ const docsSidebarNavigation: SidebarNavigationNode[] = [
 ];
 
 export { docsSidebarNavigation };
+export type { DocsSidebarNavigationNode };

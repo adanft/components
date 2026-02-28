@@ -11,6 +11,11 @@ import {
   NotFound,
   Profile,
   Sidebar,
+  SidebarBody,
+  SidebarGroup,
+  SidebarHead,
+  SidebarList,
+  SidebarSection,
   SidebarHeader,
   SidebarLink,
   SidebarLinkList,
@@ -39,7 +44,25 @@ describe('public API smoke', () => {
         avatarSrc="https://example.com/avatar.png"
         avatarAlt="Taylor avatar"
       />,
-      <Sidebar key="sidebar" title="Docs" navigation={[]} />,
+      <Sidebar key="sidebar" state={false} action={() => undefined} />,
+      <SidebarHead
+        key="sidebar-head"
+        action={onHeaderAction}
+        state={false}
+        title="Docs"
+        logoSrc="/logo.png"
+      />,
+      <SidebarBody key="sidebar-body">
+        <SidebarList>
+          <SidebarSection text="Section" state={false} />
+          <SidebarLink href="/overview" nfIconName="nf-fa-home" text="Overview" />
+          <SidebarGroup iconName="nf-fa-list" text="Group">
+            <SidebarList>
+              <SidebarLink href="/group/child" nfIconName="nf-fa-circle" text="Child" />
+            </SidebarList>
+          </SidebarGroup>
+        </SidebarList>
+      </SidebarBody>,
       <SidebarHeader key="sidebar-header" action={onHeaderAction} state={false} title="Docs" />,
       <SidebarLink
         key="sidebar-link"
