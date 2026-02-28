@@ -8,7 +8,7 @@ type SidebarProps = ComponentPropsWithoutRef<'aside'> & {
 };
 
 function Sidebar({ className, children, state, action, ...props }: SidebarProps) {
-  const asideRef = useOutsideHandler(() => {
+  const asideRef = useOutsideHandler<HTMLElement>(() => {
     action(false);
   });
 

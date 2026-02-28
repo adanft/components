@@ -11,9 +11,7 @@ function Box({ className, ...props }: BoxProps) {
     'rounded-md',
     'p-4',
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  ].join(' ');
 
   return <div {...props} className={boxClassName} />;
 }

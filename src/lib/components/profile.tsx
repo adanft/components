@@ -1,4 +1,4 @@
-import { useState, type JSX, type RefObject } from 'react';
+import { useState, type JSX } from 'react';
 
 import useOutsideHandler from '../../hooks/use-outside-handler';
 import Box from './box';
@@ -28,7 +28,7 @@ function Profile({
 }: ProfileProps): JSX.Element {
   const [show, setShow] = useState(false);
 
-  const profileRef = useOutsideHandler(() => {
+  const profileRef = useOutsideHandler<HTMLDivElement>(() => {
     setShow(false);
   });
 
@@ -46,7 +46,7 @@ function Profile({
     );
 
   return (
-    <div ref={profileRef as RefObject<HTMLDivElement | null>} className="">
+    <div ref={profileRef} className="">
       <div
         className="flex justify-center cursor-pointer"
         onClick={() => {

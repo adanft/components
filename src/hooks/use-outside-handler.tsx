@@ -1,21 +1,29 @@
-import { useEffect, useRef, type RefObject } from 'react';
+import { useEffect, useEffectEvent, useRef, type RefObject } from 'react';
 
-function useOutsideHandler(action: VoidFunction): RefObject<HTMLElement | null> {
-  const ref = useRef<HTMLElement | null>(null);
+function useOutsideHandler<TElement extends HTMLElement>(
+  action: VoidFunction,
+): RefObject<TElement | null> {
+  const ref = useRef<TElement | null>(null);
+  const onOutside = useEffectEvent(action);
+
   useEffect(() => {
-    const eventAction = (event: MouseEvent | TouchEvent): void => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        action();
+    const eventAction = (event: PointerEvent): void => {
+      const target = event.target;
+      const container = ref.current;
+
+      if (!(target instanceof Node) || !container || container.contains(target)) {
+        return;
       }
+
+      onOutside();
     };
-    document.addEventListener('mousedown', eventAction);
-    document.addEventListener('touchstart', eventAction);
+
+    document.addEventListener('pointerdown', eventAction, { passive: true });
 
     return () => {
-      document.removeEventListener('mousedown', eventAction);
-      document.removeEventListener('touchstart', eventAction);
+      document.removeEventListener('pointerdown', eventAction);
     };
-  }, [action]);
+  }, []);
 
   return ref;
 }
