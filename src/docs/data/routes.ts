@@ -21,6 +21,7 @@ const DOCS_ICON_PATH = '/components/icon';
 const DOCS_INPUT_FIELD_PATH = '/components/input-field';
 const DOCS_PROFILE_PATH = '/components/profile';
 const DOCS_SIDEBAR_PATH = '/components/sidebar';
+const DOCS_TABLE_PATH = '/components/table';
 const DOCS_NOT_FOUND_PATH = docsPath('/*');
 
 export {
@@ -32,6 +33,7 @@ export {
   DOCS_INPUT_FIELD_PATH,
   DOCS_PROFILE_PATH,
   DOCS_SIDEBAR_PATH,
+  DOCS_TABLE_PATH,
   DOCS_NOT_FOUND_PATH,
   docsPath,
 };

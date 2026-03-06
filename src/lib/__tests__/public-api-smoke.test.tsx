@@ -20,6 +20,14 @@ import {
   SidebarLink,
   SidebarLinkList,
   ToggleTheme,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFoot,
+  TableHead,
+  TableHeadCell,
+  TableRow,
 } from '../index';
 
 describe('public API smoke', () => {
@@ -76,6 +84,24 @@ describe('public API smoke', () => {
         </ul>
       </SidebarLinkList>,
       <ToggleTheme key="toggle-theme" />,
+      <Table key="table">
+        <TableCaption>Smoke test table</TableCaption>
+        <TableHead>
+          <TableRow>
+            <TableHeadCell>Column</TableHeadCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>Value</TableCell>
+          </TableRow>
+        </TableBody>
+        <TableFoot>
+          <TableRow>
+            <TableCell>Total</TableCell>
+          </TableRow>
+        </TableFoot>
+      </Table>,
     ];
 
     for (const component of cases) {

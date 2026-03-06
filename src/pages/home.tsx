@@ -40,6 +40,11 @@ const COMPONENT_CARDS: HomeComponentCard[] = [
     href: '/components/sidebar',
     description: 'Composable navigation shell for dense side menus.',
   },
+  {
+    name: 'Table',
+    href: '/components/table',
+    description: 'Semantic table primitives for reusable data layouts.',
+  },
 ];
 
 const QUALITY_COMMANDS: HomeCommand[] = [

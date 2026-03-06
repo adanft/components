@@ -9,6 +9,7 @@ import {
   DOCS_INPUT_FIELD_PATH,
   DOCS_PROFILE_PATH,
   DOCS_SIDEBAR_PATH,
+  DOCS_TABLE_PATH,
   DOCS_NOT_FOUND_PATH,
 } from './data/routes';
 import ButtonPage from './pages/button';
@@ -17,6 +18,7 @@ import IconPage from './pages/icon';
 import InputFieldPage from './pages/input-field';
 import ProfilePage from './pages/profile';
 import SidebarPage from './pages/sidebar';
+import TablePage from './pages/table';
 import DocsShell from './shell';
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
           <Route path={DOCS_INPUT_FIELD_PATH} element={<InputFieldPage />} />
           <Route path={DOCS_PROFILE_PATH} element={<ProfilePage />} />
           <Route path={DOCS_SIDEBAR_PATH} element={<SidebarPage />} />
+          <Route path={DOCS_TABLE_PATH} element={<TablePage />} />
           <Route path={DOCS_NOT_FOUND_PATH} element={<NotFound />} />
         </Routes>
       </DocsShell>

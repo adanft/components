@@ -90,6 +90,10 @@ input::placeholder {
   color: var(--ui-text-on-primary);
 }
 
+.ui-hover-bg-brand-soft:hover {
+  background-color: color-mix(in srgb, var(--ui-color-primary) 12%, transparent);
+}
+
 /* legacy-compat:start utilities (remove in v2.0.0) */
 .bg-dark {
   background-color: #19171d;
