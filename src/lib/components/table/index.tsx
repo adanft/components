@@ -1,11 +1,11 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
+import { cn } from '../../helpers/cn';
+
 type TableProps = ComponentPropsWithoutRef<'table'>;
 
 function Table({ className, ...props }: TableProps) {
-  const tableClassName = ['w-full', 'border-collapse', 'text-left', 'ui-text-body', className]
-    .filter(Boolean)
-    .join(' ');
+  const tableClassName = cn('w-full', 'border-collapse', 'text-left', 'ui-text-body', className);
 
   return <table {...props} className={tableClassName} />;
 }

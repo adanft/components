@@ -1,11 +1,11 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
+import { cn } from '../../helpers/cn';
+
 type TableCaptionProps = ComponentPropsWithoutRef<'caption'>;
 
 function TableCaption({ className, ...props }: TableCaptionProps) {
-  const captionClassName = ['caption-bottom', 'pt-3', 'text-sm', 'ui-text-muted', className]
-    .filter(Boolean)
-    .join(' ');
+  const captionClassName = cn('caption-bottom', 'pt-3', 'text-sm', 'ui-text-muted', className);
 
   return <caption {...props} className={captionClassName} />;
 }

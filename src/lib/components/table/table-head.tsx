@@ -1,9 +1,11 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
+import { cn } from '../../helpers/cn';
+
 type TableHeadProps = ComponentPropsWithoutRef<'thead'>;
 
 function TableHead({ className, ...props }: TableHeadProps) {
-  const headClassName = ['border-b', 'ui-border-default', className].filter(Boolean).join(' ');
+  const headClassName = cn('border-b', 'ui-border-default', className);
 
   return <thead {...props} className={headClassName} />;
 }

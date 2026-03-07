@@ -1,18 +1,18 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
+import { cn } from '../../helpers/cn';
+
 type TableRowProps = ComponentPropsWithoutRef<'tr'>;
 
 function TableRow({ className, ...props }: TableRowProps) {
-  const rowClassName = [
+  const rowClassName = cn(
     'border-b',
     'ui-border-default',
     'last:border-b-0',
     'transition-colors',
     'ui-hover-bg-brand-soft',
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  );
 
   return <tr {...props} className={rowClassName} />;
 }

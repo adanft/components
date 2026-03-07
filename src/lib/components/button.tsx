@@ -1,9 +1,11 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
+import { cn } from '../helpers/cn';
+
 type ButtonProps = ComponentPropsWithoutRef<'button'>;
 
 function Button({ children, className, type = 'button', ...props }: ButtonProps) {
-  const buttonClassName = [
+  const buttonClassName = cn(
     'inline-flex',
     'leading-10',
     'rounded-full',
@@ -13,7 +15,7 @@ function Button({ children, className, type = 'button', ...props }: ButtonProps)
     'text-white',
     'cursor-pointer',
     className,
-  ].join(' ');
+  );
 
   return (
     <button {...props} type={type} className={buttonClassName}>

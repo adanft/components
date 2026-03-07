@@ -1,9 +1,11 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
+import { cn } from '../../helpers/cn';
+
 type TableFootProps = ComponentPropsWithoutRef<'tfoot'>;
 
 function TableFoot({ className, ...props }: TableFootProps) {
-  const footClassName = ['border-t', 'ui-border-default', className].filter(Boolean).join(' ');
+  const footClassName = cn('border-t', 'ui-border-default', className);
 
   return <tfoot {...props} className={footClassName} />;
 }

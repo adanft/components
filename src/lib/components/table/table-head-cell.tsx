@@ -1,9 +1,11 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
+import { cn } from '../../helpers/cn';
+
 type TableHeadCellProps = ComponentPropsWithoutRef<'th'>;
 
 function TableHeadCell({ className, scope = 'col', ...props }: TableHeadCellProps) {
-  const headCellClassName = [
+  const headCellClassName = cn(
     'px-4',
     'py-3',
     'text-xs',
@@ -12,9 +14,7 @@ function TableHeadCell({ className, scope = 'col', ...props }: TableHeadCellProp
     'tracking-[0.12em]',
     'ui-text-brand',
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  );
 
   return <th {...props} scope={scope} className={headCellClassName} />;
 }

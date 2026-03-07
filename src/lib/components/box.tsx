@@ -1,9 +1,11 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
+import { cn } from '../helpers/cn';
+
 type BoxProps = ComponentPropsWithoutRef<'div'>;
 
 function Box({ className, ...props }: BoxProps) {
-  const boxClassName = [
+  const boxClassName = cn(
     'ui-bg-surface-raised',
     'border',
     'ui-border-default',
@@ -11,7 +13,7 @@ function Box({ className, ...props }: BoxProps) {
     'rounded-md',
     'p-4',
     className,
-  ].join(' ');
+  );
 
   return <div {...props} className={boxClassName} />;
 }
