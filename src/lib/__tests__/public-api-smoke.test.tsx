@@ -8,6 +8,7 @@ import {
   Icon,
   InputField,
   Navbar,
+  Modal,
   NotFound,
   Profile,
   Sidebar,
@@ -41,6 +42,17 @@ describe('public API smoke', () => {
       <Icon key="icon" symbol="nf-fa-user" className="text-lg ui-text-brand" />,
       <InputField key="input-field" label="Email" id="email" placeholder="name@example.com" />,
       <Navbar key="navbar" searchPlaceholder="Search docs" />,
+      <Modal.Root key="modal">
+        <Modal.Trigger>
+          <button type="button">Open modal</button>
+        </Modal.Trigger>
+        <Modal.Body closeIcon="x" aria-label="Smoke test modal">
+          <p>Modal content</p>
+          <Modal.Close>
+            <button type="button">Close</button>
+          </Modal.Close>
+        </Modal.Body>
+      </Modal.Root>,
       <NotFound key="not-found" />,
       <Profile
         key="profile"

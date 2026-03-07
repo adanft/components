@@ -4,6 +4,7 @@ export { default as Box } from './components/box';
 export { default as Icon } from './components/icon';
 export { default as InputField } from './components/input-field';
 export { default as Profile } from './components/profile';
+export { default as Modal } from './components/modal';
 export { default as Table } from './components/table';
 export { default as TableBody } from './components/table/table-body';
 export { default as TableCaption } from './components/table/table-caption';
@@ -28,6 +29,12 @@ export { default as ToggleTheme } from '../components/toggle-theme';
 export { applyTheme, getStoredTheme, initializeTheme, setStoredTheme, toggleTheme } from './theme';
 
 export type { ProfileProps } from './components/profile';
+export type {
+  ModalBodyProps,
+  ModalCloseProps,
+  ModalRootProps,
+  ModalTriggerProps,
+} from './components/modal';
 export type { ButtonProps } from './components/button';
 export type { BoxProps } from './components/box';
 export type { IconProps } from './components/icon';
