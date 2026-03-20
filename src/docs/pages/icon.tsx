@@ -11,11 +11,11 @@ function IconPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] ui-text-muted">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           components {'>'} Icon
         </p>
-        <h1 className="text-3xl font-bold ui-text-brand">Icon</h1>
-        <p className="ui-text-body">
+        <h1 className="text-3xl font-bold text-brand">Icon</h1>
+        <p className="text-foreground">
           <code>Icon</code> renders a Nerd Font symbol through an <code>{'<i />'}</code> element.
           Control size, color and motion with <code>className</code> and pass native attributes when
           needed. Icon names come from the{' '}
@@ -31,14 +31,14 @@ function IconPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold ui-text-brand">Usage</h2>
-        <p className="ui-text-body">Import the component and provide a Nerd Fonts symbol string.</p>
+        <h2 className="text-xl font-semibold text-brand">Usage</h2>
+        <p className="text-foreground">Import the component and provide a Nerd Fonts symbol string.</p>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold ui-text-brand">Example</h2>
+        <h2 className="text-xl font-semibold text-brand">Example</h2>
         <Box className="flex items-center">
           <Icon symbol="nf-md-react" className="text-4xl text-sky-400" aria-hidden="true" />
         </Box>

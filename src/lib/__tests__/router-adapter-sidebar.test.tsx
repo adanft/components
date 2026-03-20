@@ -31,7 +31,7 @@ describe('router adapter sidebar behavior', () => {
     const ordersLink = screen.getByRole('link', { name: /orders/i });
     const usersLink = screen.getByRole('link', { name: /users/i });
 
-    expect(ordersLink).toHaveClass('ui-nav-active');
-    expect(usersLink).not.toHaveClass('ui-nav-active');
+    expect(ordersLink).toHaveClass('bg-brand');
+    expect(usersLink).not.toHaveClass('bg-brand');
   });
 });

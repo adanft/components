@@ -69,7 +69,7 @@ describe('Table primitives', () => {
     const [headRow] = screen.getAllByRole('row');
 
     expect(headRow).toHaveClass('border-b', 'custom-row');
-    expect(screen.getByRole('columnheader')).toHaveClass('ui-text-brand', 'custom-head-cell');
+    expect(screen.getByRole('columnheader')).toHaveClass('text-brand', 'custom-head-cell');
     expect(screen.getByRole('cell')).toHaveClass('align-middle', 'custom-cell');
   });
 });

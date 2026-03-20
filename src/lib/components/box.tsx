@@ -6,10 +6,10 @@ type BoxProps = ComponentPropsWithoutRef<'div'>;
 
 function Box({ className, ...props }: BoxProps) {
   const boxClassName = cn(
-    'ui-bg-surface-raised',
+    'bg-surface',
     'border',
-    'ui-border-default',
-    'ui-shadow-sm',
+    'border-border',
+    'shadow-card',
     'rounded-md',
     'p-4',
     className,

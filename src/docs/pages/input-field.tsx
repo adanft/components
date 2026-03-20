@@ -17,11 +17,11 @@ function InputFieldPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] ui-text-muted">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           components {'>'} InputField
         </p>
-        <h1 className="text-3xl font-bold ui-text-brand">InputField</h1>
-        <p className="ui-text-body">
+        <h1 className="text-3xl font-bold text-brand">InputField</h1>
+        <p className="text-foreground">
           <code>InputField</code> pairs a label with an accessible <code>{'<input />'}</code>{' '}
           element and ships with the library&apos;s default border, spacing, and focus styles. Use
           it as the base text input in forms and filter controls.
@@ -29,8 +29,8 @@ function InputFieldPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold ui-text-brand">Usage</h2>
-        <p className="ui-text-body">
+        <h2 className="text-xl font-semibold text-brand">Usage</h2>
+        <p className="text-foreground">
           Import <code>InputField</code> from the public library entrypoint.
         </p>
         <CodeBlock code={importSnippet} />
@@ -38,7 +38,7 @@ function InputFieldPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold ui-text-brand">Example</h2>
+        <h2 className="text-xl font-semibold text-brand">Example</h2>
         <Box>
           <InputField
             id="workEmail"

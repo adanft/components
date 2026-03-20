@@ -8,7 +8,7 @@ describe('Icon', () => {
     render(
       <Icon
         symbol="nf-fa-user"
-        className="text-2xl ui-text-brand"
+        className="text-2xl text-brand"
         role="img"
         aria-label="User"
         data-testid="icon"
@@ -17,7 +17,7 @@ describe('Icon', () => {
 
     const icon = screen.getByTestId('icon');
 
-    expect(icon).toHaveClass('nf', 'nf-fa-user', 'text-2xl', 'ui-text-brand');
+    expect(icon).toHaveClass('nf', 'nf-fa-user', 'text-2xl', 'text-brand');
     expect(icon).toHaveAttribute('role', 'img');
     expect(icon).toHaveAttribute('aria-label', 'User');
   });

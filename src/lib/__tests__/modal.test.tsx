@@ -81,6 +81,6 @@ describe('Modal', () => {
       </Modal.Root>,
     );
 
-    expect(screen.getByTestId('modal-body')).toHaveClass('ui-bg-surface-raised', 'custom-modal');
+    expect(screen.getByTestId('modal-body')).toHaveClass('bg-surface', 'custom-modal');
   });
 });

@@ -11,9 +11,9 @@ function InputField({ className, id, label, type = 'text', ...props }: InputFiel
     ? `group flex grow flex-col ${className}`
     : 'group flex grow flex-col';
   const labelClasses =
-    'mb-1 text-sm font-medium ui-text-body transition-colors duration-150 ui-group-focus-text-brand';
+    'mb-1 text-sm font-medium text-foreground transition-colors duration-150 group-focus-within:text-brand';
   const inputClasses =
-    'w-full border ui-border-default ui-radius-sm px-[0.6rem] py-2 ui-bg-surface-page ui-text-body ui-placeholder-muted placeholder:text-[14px] placeholder:opacity-60 placeholder:font-normal focus-visible:outline focus-visible:outline-1 ui-focus-visible-brand transition-colors duration-150';
+    'w-full border border-border rounded-md px-[0.6rem] py-2 bg-background text-foreground placeholder:text-muted placeholder:text-[14px] placeholder:opacity-60 placeholder:font-normal focus-visible:outline focus-visible:outline-1 focus-visible:border-brand focus-visible:outline-brand transition-colors duration-150';
 
   return (
     <div className={containerClasses}>

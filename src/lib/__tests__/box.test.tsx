@@ -10,10 +10,10 @@ describe('Box', () => {
     const box = screen.getByTestId('box');
 
     expect(box).toHaveClass(
-      'ui-bg-surface-raised',
+      'bg-surface',
       'border',
-      'ui-border-default',
-      'ui-shadow-sm',
+      'border-border',
+      'shadow-card',
       'rounded-md',
       'p-4',
     );
@@ -25,11 +25,14 @@ describe('Box', () => {
     const box = screen.getByTestId('box');
 
     expect(box).toHaveClass(
-      'ui-bg-surface-raised',
-      'rounded-md',
+      'bg-surface',
+      'border',
+      'border-border',
+      'shadow-card',
       'p-4',
       'rounded-lg',
       'custom-box',
     );
+    expect(box).not.toHaveClass('rounded-md');
   });
 });

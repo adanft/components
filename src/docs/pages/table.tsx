@@ -50,11 +50,11 @@ function TablePage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] ui-text-muted">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           components {'>'} Table
         </p>
-        <h1 className="text-3xl font-bold ui-text-brand">Table</h1>
-        <p className="ui-text-body">
+        <h1 className="text-3xl font-bold text-brand">Table</h1>
+        <p className="text-foreground">
           <code>Table</code> is a semantic composition set for data grids. Build structure with{' '}
           <code>TableHead</code>, <code>TableBody</code>, and <code>TableFoot</code>; then compose
           rows and cells with <code>TableRow</code>, <code>TableHeadCell</code>, and{' '}
@@ -63,8 +63,8 @@ function TablePage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold ui-text-brand">Usage</h2>
-        <p className="ui-text-body">
+        <h2 className="text-xl font-semibold text-brand">Usage</h2>
+        <p className="text-foreground">
           Prefer header cells for labels, add a caption for context, and keep numeric values aligned
           for readability.
         </p>
@@ -73,7 +73,7 @@ function TablePage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold ui-text-brand">Example</h2>
+        <h2 className="text-xl font-semibold text-brand">Example</h2>
         <Box className="overflow-x-auto">
           <Table>
             <TableCaption>Current month pipeline by account owner.</TableCaption>

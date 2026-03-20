@@ -7,10 +7,10 @@ type TableRowProps = ComponentPropsWithoutRef<'tr'>;
 function TableRow({ className, ...props }: TableRowProps) {
   const rowClassName = cn(
     'border-b',
-    'ui-border-default',
+    'border-border',
     'last:border-b-0',
     'transition-colors',
-    'ui-hover-bg-brand-soft',
+    'hover:bg-brand/10',
     className,
   );
 

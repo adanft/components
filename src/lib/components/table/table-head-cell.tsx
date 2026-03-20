@@ -12,7 +12,7 @@ function TableHeadCell({ className, scope = 'col', ...props }: TableHeadCellProp
     'font-semibold',
     'uppercase',
     'tracking-[0.12em]',
-    'ui-text-brand',
+    'text-brand',
     className,
   );
 

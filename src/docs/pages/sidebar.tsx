@@ -126,11 +126,11 @@ function SidebarPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] ui-text-muted">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           components {'>'} Sidebar
         </p>
-        <h1 className="text-3xl font-bold ui-text-brand">Sidebar</h1>
-        <p className="ui-text-body">
+        <h1 className="text-3xl font-bold text-brand">Sidebar</h1>
+        <p className="text-foreground">
           <code>Sidebar</code> is a composition-first aside primitive. Keep expansion controlled
           with <code>state</code> and <code>action</code>, then build navigation using{' '}
           <code>SidebarHead</code>, <code>SidebarBody</code>, <code>SidebarList</code>,{' '}
@@ -139,21 +139,21 @@ function SidebarPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold ui-text-brand">Usage</h2>
-        <p className="ui-text-body">
+        <h2 className="text-xl font-semibold text-brand">Usage</h2>
+        <p className="text-foreground">
           Import Sidebar primitives from the public entrypoint and compose links, sections, and
           groups directly in JSX.
         </p>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
-        <p className="ui-text-body">
+        <p className="text-foreground">
           <code>SidebarBody</code> uses <code>SimpleBar</code> for scrolling. In embedded layouts,
           provide a max height so content scrolls while the shell and header stay visible.
         </p>
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold ui-text-brand">Example</h2>
+        <h2 className="text-xl font-semibold text-brand">Example</h2>
         <Box className="relative">
           <Sidebar
             state={sidebarState}

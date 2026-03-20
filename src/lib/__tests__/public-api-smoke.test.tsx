@@ -39,7 +39,7 @@ describe('public API smoke', () => {
       <Button key="button">Click me</Button>,
       <Box key="box" />,
       <Home key="home" />,
-      <Icon key="icon" symbol="nf-fa-user" className="text-lg ui-text-brand" />,
+      <Icon key="icon" symbol="nf-fa-user" className="text-lg text-brand" />,
       <InputField key="input-field" label="Email" id="email" placeholder="name@example.com" />,
       <Navbar key="navbar" searchPlaceholder="Search docs" />,
       <Modal.Root key="modal">

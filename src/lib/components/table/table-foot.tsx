@@ -5,7 +5,7 @@ import { cn } from '../../helpers/cn';
 type TableFootProps = ComponentPropsWithoutRef<'tfoot'>;
 
 function TableFoot({ className, ...props }: TableFootProps) {
-  const footClassName = cn('border-t', 'ui-border-default', className);
+  const footClassName = cn('border-t', 'border-border', className);
 
   return <tfoot {...props} className={footClassName} />;
 }

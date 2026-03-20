@@ -18,8 +18,8 @@ export type { LinkComponentProps as SidebarLinkComponentProps };
 
 function SidebarLink({ text, nfIconName, href, isActive = false, LinkComponent }: Props) {
   const className = isActive
-    ? 'ui-nav-active flex mx-2 leading-none items-center ui-text-body gap-4 rounded-md'
-    : 'flex px-2 leading-none items-center ui-text-body gap-4 rounded-md';
+    ? 'bg-brand text-white flex mx-2 leading-none items-center text-foreground gap-4 rounded-md'
+    : 'flex px-2 leading-none items-center text-foreground gap-4 rounded-md';
 
   if (LinkComponent) {
     return (

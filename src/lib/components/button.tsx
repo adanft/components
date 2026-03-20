@@ -11,7 +11,7 @@ function Button({ children, className, type = 'button', ...props }: ButtonProps)
     'rounded-full',
     'px-4',
     'font-semibold',
-    'ui-bg-brand',
+    'bg-brand',
     'text-white',
     'cursor-pointer',
     className,

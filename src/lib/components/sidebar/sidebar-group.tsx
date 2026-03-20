@@ -13,7 +13,7 @@ function SidebarGroup({ children, iconName, text }: SidebarGroupProps) {
     <div className={show ? 'bg-indigo-500/5' : ''}>
       <button
         type="button"
-        className="flex px-2 leading-none items-center ui-text-body gap-4 rounded-md w-full"
+        className="flex px-2 leading-none items-center text-foreground gap-4 rounded-md w-full"
         onClick={() => setShow((previousShow) => !previousShow)}
         aria-expanded={show}>
         <i className={`nf leading-none p-3.5 text-xl ${iconName}`} />

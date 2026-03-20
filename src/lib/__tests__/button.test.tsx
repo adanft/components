@@ -26,7 +26,7 @@ describe('Button', () => {
     const button = screen.getByTestId('button');
 
     expect(button).toHaveClass(
-      'ui-bg-brand',
+      'bg-brand',
       'text-white',
       'rounded-full',
       'w-full',

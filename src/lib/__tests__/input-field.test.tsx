@@ -60,10 +60,10 @@ describe('InputField', () => {
     const label = screen.getByText('First name');
 
     expect(input).toHaveClass('w-full');
-    expect(input).toHaveClass('ui-radius-sm');
+    expect(input).toHaveClass('rounded-md');
     expect(input).toHaveClass('placeholder:text-[14px]');
     expect(input).toHaveClass('focus-visible:outline-1');
-    expect(label).toHaveClass('ui-group-focus-text-brand');
+    expect(label).toHaveClass('group-focus-within:text-brand');
     expect(label.parentElement).toHaveClass('grow');
   });
 

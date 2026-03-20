@@ -5,7 +5,7 @@ import { cn } from '../../helpers/cn';
 type TableHeadProps = ComponentPropsWithoutRef<'thead'>;
 
 function TableHead({ className, ...props }: TableHeadProps) {
-  const headClassName = cn('border-b', 'ui-border-default', className);
+  const headClassName = cn('border-b', 'border-border', className);
 
   return <thead {...props} className={headClassName} />;
 }

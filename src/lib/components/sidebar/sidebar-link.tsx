@@ -15,7 +15,7 @@ type SidebarLinkProps = {
   text: string;
 };
 
-const defaultClassName = 'flex px-2 leading-none items-center ui-text-body gap-4 rounded-md';
+const defaultClassName = 'flex px-2 leading-none items-center text-foreground gap-4 rounded-md';
 
 function SidebarLink({ className = defaultClassName, href, nfIconName, text }: SidebarLinkProps) {
   return (

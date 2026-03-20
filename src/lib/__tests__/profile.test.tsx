@@ -76,8 +76,8 @@ describe('Profile', () => {
     if (!avatar) {
       throw new Error('Missing text avatar container');
     }
-    expect(avatar).toHaveClass('ui-bg-brand');
-    expect(avatar).toHaveClass('ui-text-on-primary');
+    expect(avatar).toHaveClass('bg-brand');
+    expect(avatar).toHaveClass('text-white');
 
     const trigger = container.querySelector('.cursor-pointer');
     if (!trigger) {
