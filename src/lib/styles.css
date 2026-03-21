@@ -19,6 +19,7 @@
   --color-muted:      #aaabb7;
   --color-border:     #f0eff5;
   --shadow-card:      0 0 8px #9d99aa42;
+  --ui-font-family-base: 'Poppins', sans-serif;
 }
 
 @theme inline {
@@ -31,6 +32,26 @@
   --shadow-card:      var(--shadow-card);
 }
 
-@import './theme/tokens.css';
-@import './theme/themes.css';
-@import './theme/utilities.css';
+.dark {
+  --color-background: #19171d;
+  --color-surface:    #25232b;
+  --color-subtle:     #25232b;
+  --color-foreground: #8b8ea0;
+  --color-muted:      #686a77;
+  --color-border:     #231e2c;
+  --shadow-card:      0 0 8px #322f3b42;
+}
+
+body {
+  font-family: var(--ui-font-family-base);
+  background-color: var(--color-background);
+}
+
+input::placeholder {
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.simplebar-scrollbar:before {
+  background: var(--color-muted) !important;
+}
