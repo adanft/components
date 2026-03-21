@@ -5,17 +5,7 @@ import { cn } from '../helpers/cn';
 type ButtonProps = ComponentPropsWithoutRef<'button'>;
 
 function Button({ children, className, type = 'button', ...props }: ButtonProps) {
-  const buttonClassName = cn(
-    'inline-flex',
-    'leading-10',
-    'rounded-full',
-    'px-4',
-    'font-semibold',
-    'bg-brand',
-    'text-white',
-    'cursor-pointer',
-    className,
-  );
+  const buttonClassName = cn('inline-flex leading-10 rounded-full px-4 font-semibold bg-brand text-white cursor-pointer', className);
 
   return (
     <button {...props} type={type} className={buttonClassName}>

@@ -6,12 +6,7 @@ type BoxProps = ComponentPropsWithoutRef<'div'>;
 
 function Box({ className, ...props }: BoxProps) {
   const boxClassName = cn(
-    'bg-surface',
-    'border',
-    'border-border',
-    'shadow-card',
-    'rounded-md',
-    'p-4',
+    'bg-surface border border-border shadow-card rounded-md p-4',
     className,
   );
 

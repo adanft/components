@@ -33,7 +33,7 @@ function ModalBody({ children, className, closeIcon, ...props }: ModalBodyProps)
     return null;
   }
 
-  const bodyClassName = cn('rounded-md', 'bg-surface', 'p-4', 'relative', className);
+  const bodyClassName = cn('rounded-md bg-surface p-4 relative', className);
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex justify-center items-center p-4 bg-black/50 backdrop-blur-xs">
