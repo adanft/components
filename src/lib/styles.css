@@ -32,7 +32,7 @@
   --shadow-card:      var(--shadow-card);
 }
 
-.dark {
+:root.dark {
   --color-background: #19171d;
   --color-surface:    #25232b;
   --color-subtle:     #25232b;

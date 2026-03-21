@@ -18,7 +18,7 @@ function getThemeTarget(target?: HTMLElement): HTMLElement | null {
     return null;
   }
 
-  return document.body;
+  return document.documentElement;
 }
 
 function normalizeTheme(value: string | null): ThemeMode | null {

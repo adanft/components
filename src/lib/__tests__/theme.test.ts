@@ -5,7 +5,7 @@ import { applyTheme, getStoredTheme, initializeTheme, toggleTheme, type ThemeMod
 describe('theme helper transitions', () => {
   beforeEach(() => {
     localStorage.clear();
-    document.body.className = '';
+    document.documentElement.className = '';
   });
 
   it('returns null when stored value is missing or invalid', () => {
@@ -32,11 +32,11 @@ describe('theme helper transitions', () => {
 
   it('initializes to light when nothing is stored, then honors stored dark mode', () => {
     expect(initializeTheme()).toBe('light');
-    expect(document.body.classList.contains('dark')).toBe(false);
+    expect(document.documentElement.classList.contains('dark')).toBe(false);
 
     localStorage.setItem('theme', 'dark');
     expect(initializeTheme()).toBe('dark');
-    expect(document.body.classList.contains('dark')).toBe(true);
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
   });
 
   it('toggles theme, persists next value, and flips document class', () => {
@@ -46,11 +46,11 @@ describe('theme helper transitions', () => {
     currentTheme = toggleTheme(currentTheme);
     expect(currentTheme).toBe('dark');
     expect(localStorage.getItem('theme')).toBe('dark');
-    expect(document.body.classList.contains('dark')).toBe(true);
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
 
     currentTheme = toggleTheme(currentTheme);
     expect(currentTheme).toBe('light');
     expect(localStorage.getItem('theme')).toBe('light');
-    expect(document.body.classList.contains('dark')).toBe(false);
+    expect(document.documentElement.classList.contains('dark')).toBe(false);
   });
 });
