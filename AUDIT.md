@@ -15,12 +15,12 @@
 
 ## 🟡 Medio — accesibilidad y API
 
-| Componente       | Problema                                                                                                                                              |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ~~**Modal**~~    | ~~No tiene `role="dialog"`, `aria-modal="true"` ni `aria-labelledby`. Screen readers no lo anuncian como modal.~~ ✅ Resuelto — ver sección al final. |
-| **Profile**      | El avatar usa un `div` con `onClick` en vez de `<button>`. Violación de accesibilidad básica.                                                         |
-| **SidebarGroup** | El botón de toggle no tiene `aria-label` ni `aria-controls`.                                                                                          |
-| **InputField**   | Usa template literals hardcodeados para clases en vez del helper `cn()`. Inconsistente con el resto.                                                  |
+| Componente         | Problema                                                                                                                                              |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ~~**Modal**~~      | ~~No tiene `role="dialog"`, `aria-modal="true"` ni `aria-labelledby`. Screen readers no lo anuncian como modal.~~ ✅ Resuelto — ver sección al final. |
+| **Profile**        | El avatar usa un `div` con `onClick` en vez de `<button>`. Violación de accesibilidad básica.                                                         |
+| **SidebarGroup**   | El botón de toggle no tiene `aria-label` ni `aria-controls`.                                                                                          |
+| ~~**InputField**~~ | ~~Usa template literals hardcodeados para clases en vez del helper `cn()`. Inconsistente con el resto.~~ ✅ Resuelto — ver sección al final.          |
 
 ---
 
@@ -42,7 +42,7 @@
 | Box        | `box.tsx`               | ✅ Sin issues          |
 | Button     | `button.tsx`            | ✅ Sin issues          |
 | Icon       | `icon.tsx`              | ✅ Sin issues          |
-| InputField | `input-field.tsx`       | 🟡 cn() + aria         |
+| InputField | `input-field.tsx`       | ✅ Sin issues          |
 | Profile    | `profile.tsx`           | 🟡 Accesibilidad       |
 | Modal      | `modal/`                | ✅ Headless API + a11y |
 | Sidebar    | `sidebar/` (7 archivos) | 🔴 Tailwind bug        |
@@ -62,6 +62,20 @@
 ---
 
 ## ✅ Resuelto
+
+### InputField — Migración a cn() y accesibilidad (2026-03-22)
+
+Migrado a `cn()` en todas las clases del componente y agregados atributos de accesibilidad para estados de error.
+
+**Problemas resueltos:**
+
+| Issue original                                  | Solución implementada                                                     |
+| ----------------------------------------------- | ------------------------------------------------------------------------- |
+| Template literals hardcodeados en vez de `cn()` | Todas las clases migradas a `cn()`, consistente con el resto del proyecto |
+| Sin `aria-invalid` en estado de error           | Agregado `aria-invalid={!!error}` al `<input>`                            |
+| Sin `aria-describedby` para mensajes de error   | Agregado `aria-describedby` apuntando al ID del mensaje de error          |
+
+---
 
 ### Button — Estado disabled (2026-03-22)
 
