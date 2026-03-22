@@ -6,10 +6,10 @@
 
 ## 🔴 Alto — pueden romper
 
-| Componente           | Problema                                                                                                                   |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| **Sidebar**          | `left-68.5` y `left-18.5` no existen en Tailwind por defecto. El botón toggle probablemente no se posiciona correctamente. |
-| **local-storage.ts** | No tiene guards de SSR (`typeof window`). Explota en Next.js u otros entornos con server rendering.                        |
+| Componente               | Problema                                                                                                                                                                       |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Sidebar**              | `left-68.5` y `left-18.5` no existen en Tailwind por defecto. El botón toggle probablemente no se posiciona correctamente.                                                     |
+| ~~**local-storage.ts**~~ | ~~No tiene guards de SSR (`typeof window`). Explota en Next.js u otros entornos con server rendering.~~ ✅ Descartado — consumo exclusivamente client-side, guard innecesario. |
 
 ---
 
@@ -52,16 +52,28 @@
 
 ## Helpers & Hooks
 
-| Archivo                             | Issues                                        |
-| ----------------------------------- | --------------------------------------------- |
-| `src/lib/helpers/cn.ts`             | No resuelve conflictos de utilidades Tailwind |
-| `src/helpers/theme.ts`              | ✅ Sin issues críticos                        |
-| `src/helpers/local-storage.ts`      | 🔴 Sin guard SSR                              |
-| `src/hooks/use-outside-handler.tsx` | ✅ Bien implementado                          |
+| Archivo                             | Issues                                          |
+| ----------------------------------- | ----------------------------------------------- |
+| `src/lib/helpers/cn.ts`             | No resuelve conflictos de utilidades Tailwind   |
+| `src/helpers/theme.ts`              | ✅ Sin issues críticos                          |
+| `src/helpers/local-storage.ts`      | ✅ Analizado — falso positivo, solo client-side |
+| `src/hooks/use-outside-handler.tsx` | ✅ Bien implementado                            |
 
 ---
 
 ## ✅ Resuelto
+
+### local-storage.ts — Falso positivo descartado (2026-03-22)
+
+Analizado el helper `src/helpers/local-storage.ts`. El guard SSR (`typeof window`) es innecesario: el helper es consumido exclusivamente desde componentes client-side — `localStorage` siempre está disponible en el contexto de uso. No requiere cambios.
+
+**Conclusión:**
+
+| Issue original                  | Resultado                                                                  |
+| ------------------------------- | -------------------------------------------------------------------------- |
+| Sin guard SSR (`typeof window`) | Falso positivo — helper siempre corre en cliente, localStorage garantizado |
+
+---
 
 ### InputField — Migración a cn() y accesibilidad (2026-03-22)
 
