@@ -18,7 +18,7 @@
 | Componente         | Problema                                                                                                                                              |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ~~**Modal**~~      | ~~No tiene `role="dialog"`, `aria-modal="true"` ni `aria-labelledby`. Screen readers no lo anuncian como modal.~~ ✅ Resuelto — ver sección al final. |
-| **Profile**        | El avatar usa un `div` con `onClick` en vez de `<button>`. Violación de accesibilidad básica.                                                         |
+| ~~**Profile**~~    | ~~El avatar usa un `div` con `onClick` en vez de `<button>`. Violación de accesibilidad básica.~~ ✅ Resuelto — ver sección al final.                 |
 | **SidebarGroup**   | El botón de toggle no tiene `aria-label` ni `aria-controls`.                                                                                          |
 | ~~**InputField**~~ | ~~Usa template literals hardcodeados para clases en vez del helper `cn()`. Inconsistente con el resto.~~ ✅ Resuelto — ver sección al final.          |
 
@@ -43,7 +43,7 @@
 | Button     | `button.tsx`            | ✅ Sin issues          |
 | Icon       | `icon.tsx`              | ✅ Sin issues          |
 | InputField | `input-field.tsx`       | ✅ Sin issues          |
-| Profile    | `profile.tsx`           | 🟡 Accesibilidad       |
+| Profile    | `profile.tsx`           | ✅ Sin issues          |
 | Modal      | `modal/`                | ✅ Headless API + a11y |
 | Sidebar    | `sidebar/` (7 archivos) | 🔴 Tailwind bug        |
 | Table      | `table/` (8 archivos)   | ✅ Bien estructurado   |
@@ -110,3 +110,18 @@ El componente Modal fue reescrito desde cero con una API headless y accesibilida
 | Sin focus restore                          | El foco vuelve al elemento que abrió el modal al cerrarlo               |
 | Dark mode incompleto                       | Tokens de `Box` (`bg-surface`) heredan el tema automáticamente          |
 | Error messages pobres en context           | Mensajes descriptivos con instrucción de uso correcto                   |
+
+---
+
+### Profile — Trigger semántico y accesibilidad (2026-03-22)
+
+El trigger del avatar fue reemplazado por un `<button>` semántico con atributos ARIA correctos.
+
+**Problemas resueltos:**
+
+| Issue original                                        | Solución implementada                                       |
+| ----------------------------------------------------- | ----------------------------------------------------------- |
+| `div` con `onClick` como trigger del dropdown         | Reemplazado por `<button>` semántico, activable con teclado |
+| Sin `aria-expanded` para indicar estado del menú      | Agregado `aria-expanded={open}` al botón trigger            |
+| Sin `aria-haspopup` para anunciar el menú desplegable | Agregado `aria-haspopup="menu"` al botón trigger            |
+| Callbacks y tipos innecesariamente complejos          | Simplificados — eliminada complejidad sin impacto funcional |
