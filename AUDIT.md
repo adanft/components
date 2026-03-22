@@ -6,10 +6,10 @@
 
 ## 🔴 Alto — pueden romper
 
-| Componente               | Problema                                                                                                                                                                       |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Sidebar**              | `left-68.5` y `left-18.5` no existen en Tailwind por defecto. El botón toggle probablemente no se posiciona correctamente.                                                     |
-| ~~**local-storage.ts**~~ | ~~No tiene guards de SSR (`typeof window`). Explota en Next.js u otros entornos con server rendering.~~ ✅ Descartado — consumo exclusivamente client-side, guard innecesario. |
+| Componente               | Problema                                                                                                                                                                                                                                                                                      |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ~~**Sidebar**~~          | ~~`left-68.5` y `left-18.5` no existen en Tailwind por defecto. El botón toggle probablemente no se posiciona correctamente.~~ ✅ Descartado — Tailwind 4 soporta valores decimales en la escala dinámica (`left-68.5` = `17.125rem`). Falso positivo del audit escrito asumiendo Tailwind 3. |
+| ~~**local-storage.ts**~~ | ~~No tiene guards de SSR (`typeof window`). Explota en Next.js u otros entornos con server rendering.~~ ✅ Descartado — consumo exclusivamente client-side, guard innecesario.                                                                                                                |
 
 ---
 
@@ -45,7 +45,7 @@
 | InputField | `input-field.tsx`       | ✅ Sin issues          |
 | Profile    | `profile.tsx`           | ✅ Sin issues          |
 | Modal      | `modal/`                | ✅ Headless API + a11y |
-| Sidebar    | `sidebar/` (7 archivos) | 🔴 Tailwind bug        |
+| Sidebar    | `sidebar/` (7 archivos) | 🟡 Pendiente           |
 | Table      | `table/` (8 archivos)   | ✅ Bien estructurado   |
 
 ---
@@ -62,6 +62,18 @@
 ---
 
 ## ✅ Resuelto
+
+### Sidebar left-68.5 — Falso positivo descartado (2026-03-22)
+
+`left-68.5` y `left-18.5` fueron auditados como clases inexistentes en Tailwind. Incorrecto: Tailwind 4 genera valores de forma dinámica desde la escala base de `0.25rem`, por lo que `left-68.5` compila correctamente como `left: 17.125rem`. El audit original fue escrito asumiendo Tailwind 3, donde solo existen clases predefinidas en la escala. En Tailwind 4 esto es válido out-of-the-box.
+
+**Conclusión:**
+
+| Issue original                                     | Resultado                                                                   |
+| -------------------------------------------------- | --------------------------------------------------------------------------- |
+| `left-68.5` / `left-18.5` inexistentes por defecto | Falso positivo — Tailwind 4 soporta valores decimales en su escala dinámica |
+
+---
 
 ### local-storage.ts — Falso positivo descartado (2026-03-22)
 
