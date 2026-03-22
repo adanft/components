@@ -1,9 +1,9 @@
-import { useState, type JSX } from 'react';
+import { useState } from 'react';
 
 import useOutsideHandler from '../../hooks/use-outside-handler';
 import Box from './box';
 
-type BaseProfileProps = {
+type ProfileProps = {
   userKey: string;
   fullName: string;
   btnAction: () => void;
@@ -14,8 +14,6 @@ type BaseProfileProps = {
   avatarText?: string;
 };
 
-type ProfileProps = BaseProfileProps;
-
 function Profile({
   userKey,
   fullName,
@@ -25,7 +23,7 @@ function Profile({
   avatarSrc,
   avatarAlt,
   avatarText,
-}: ProfileProps): JSX.Element {
+}: ProfileProps) {
   const [show, setShow] = useState(false);
 
   const profileRef = useOutsideHandler<HTMLDivElement>(() => {
@@ -47,13 +45,14 @@ function Profile({
 
   return (
     <div ref={profileRef} className="">
-      <div
+      <button
+        type="button"
         className="flex justify-center cursor-pointer"
-        onClick={() => {
-          setShow((previousShow) => !previousShow);
-        }}>
+        onClick={() => setShow((s) => !s)}
+        aria-expanded={show}
+        aria-haspopup="true">
         {renderedAvatar}
-      </div>
+      </button>
       {show ? (
         <Box className="w-72 top-[calc(100%+1rem)] right-4 absolute">
           <div className="flex items-center gap-2">
@@ -65,10 +64,9 @@ function Profile({
           </div>
           <div className="flex flex-col justify-center mt-4">
             <button
+              type="button"
               className="rounded-full text-white font-medium bg-brand py-2 cursor-pointer"
-              onClick={() => {
-                btnAction();
-              }}>
+              onClick={btnAction}>
               {btnName}
             </button>
           </div>
