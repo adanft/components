@@ -1,18 +1,16 @@
-import ModalBody from './body';
-import ModalClose from './close';
-import ModalRoot from './root';
-import ModalTrigger from './trigger';
+import ModalRoot from './modal';
+import ModalBackdrop from './backdrop';
+import ModalPanel from './panel';
+import ModalTitle from './title';
 
-const Modal = {
-  Root: ModalRoot,
-  Trigger: ModalTrigger,
-  Body: ModalBody,
-  Close: ModalClose,
-};
+const Modal = Object.assign(ModalRoot, {
+  Backdrop: ModalBackdrop,
+  Panel: ModalPanel,
+  Title: ModalTitle,
+});
 
 export default Modal;
-export { ModalBody, ModalClose, ModalRoot, ModalTrigger };
-export type { ModalBodyProps } from './body';
-export type { ModalCloseProps } from './close';
-export type { ModalRootProps } from './root';
-export type { ModalTriggerProps } from './trigger';
+export type { ModalProps } from './modal';
+export type { ModalBackdropProps } from './backdrop';
+export type { ModalPanelProps } from './panel';
+export type { ModalTitleProps } from './title';

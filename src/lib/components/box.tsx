@@ -1,14 +1,11 @@
-import type { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
 import { cn } from '../helpers/cn';
 
-type BoxProps = ComponentPropsWithoutRef<'div'>;
+type BoxProps = ComponentPropsWithRef<'div'>;
 
 function Box({ className, ...props }: BoxProps) {
-  const boxClassName = cn(
-    'bg-surface border border-border shadow-card rounded-md p-4',
-    className,
-  );
+  const boxClassName = cn('bg-surface border border-border shadow-card rounded-md p-4', className);
 
   return <div {...props} className={boxClassName} />;
 }

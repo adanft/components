@@ -30,12 +30,12 @@ export { applyTheme, getStoredTheme, initializeTheme, setStoredTheme, toggleThem
 
 export type { ProfileProps } from './components/profile';
 export type {
-  ModalBodyProps,
-  ModalCloseProps,
-  ModalRootProps,
-  ModalTriggerProps,
+  ModalProps,
+  ModalBackdropProps,
+  ModalPanelProps,
+  ModalTitleProps,
 } from './components/modal';
-export type { ButtonProps } from './components/button';
+export type { ButtonProps, ButtonVariant, ButtonSize } from './components/button';
 export type { BoxProps } from './components/box';
 export type { IconProps } from './components/icon';
 export type { InputFieldProps } from './components/input-field';
