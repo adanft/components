@@ -29,7 +29,7 @@
 | Componente      | Problema                                                                                                |
 | --------------- | ------------------------------------------------------------------------------------------------------- |
 | **cn() helper** | No hace merge de Tailwind — `cn('px-4', 'px-6')` deja ambas clases. Considerar `clsx + tailwind-merge`. |
-| **Button**      | No tiene estilos para estado `disabled`.                                                                |
+| ~~**Button**~~  | ~~No tiene estilos para estado `disabled`.~~ ✅ Resuelto — ver sección al final.                        |
 | **SidebarLink** | No acepta un componente de router (React Router / Next.js `Link`). Hardcodea `<a>`.                     |
 | **Modal.Body**  | Siempre requiere `closeIcon` prop. No permite dialogs sin botón de cierre.                              |
 
@@ -40,7 +40,7 @@
 | Componente | Archivos                | Estado                 |
 | ---------- | ----------------------- | ---------------------- |
 | Box        | `box.tsx`               | ✅ Sin issues          |
-| Button     | `button.tsx`            | 🟢 Minor               |
+| Button     | `button.tsx`            | ✅ Sin issues          |
 | Icon       | `icon.tsx`              | ✅ Sin issues          |
 | InputField | `input-field.tsx`       | 🟡 cn() + aria         |
 | Profile    | `profile.tsx`           | 🟡 Accesibilidad       |
@@ -62,6 +62,18 @@
 ---
 
 ## ✅ Resuelto
+
+### Button — Estado disabled (2026-03-22)
+
+Agregados estilos para el estado `disabled` directamente en las clases base del componente.
+
+**Problemas resueltos:**
+
+| Issue original                   | Solución implementada                                                                    |
+| -------------------------------- | ---------------------------------------------------------------------------------------- |
+| Sin estilos para estado disabled | Agregados `disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none` |
+
+---
 
 ### Modal — Rewrite completo (2026-03-22)
 
