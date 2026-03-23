@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
+import * as components from '../index';
 
 import {
   Box,
@@ -19,13 +20,6 @@ import {
   SidebarLink,
   SidebarSection,
   Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFoot,
-  TableHead,
-  TableHeadCell,
-  TableRow,
   ToggleTheme,
 } from '../index';
 
@@ -84,23 +78,18 @@ describe('public API smoke', () => {
         <SidebarLink href="/orders" nfIconName="nf-fa-shopping_cart" text="Orders" />
       </MemoryRouter>,
       <ToggleTheme key="toggle-theme" />,
-      <Table key="table">
-        <TableCaption>Smoke test table</TableCaption>
-        <TableHead>
-          <TableRow>
-            <TableHeadCell>Column</TableHeadCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell>Value</TableCell>
-          </TableRow>
-        </TableBody>
-        <TableFoot>
-          <TableRow>
-            <TableCell>Total</TableCell>
-          </TableRow>
-        </TableFoot>
+      <Table key="table" aria-label="Smoke table">
+        <Table.Head
+          headers={[{ id: 'name', label: 'Name' }]}
+          getHeaderKey={(header) => header.id}
+          renderHeader={(header) => header.label}
+        />
+        <Table.Body
+          rows={[{ id: 1, name: 'Test' }]}
+          getRowKey={(row) => row.id}
+          getRowCells={(row) => [row.name]}
+          renderCell={(cell) => cell}
+        />
       </Table>,
     ];
 
@@ -128,5 +117,10 @@ describe('public API smoke', () => {
     expect(screen.getByText('Modal content')).toBeInTheDocument();
 
     unmount();
+  });
+
+  it('does not expose legacy table runtime exports', () => {
+    expect(components.Table).toBe(Table);
+    expect('Column' in components).toBe(false);
   });
 });

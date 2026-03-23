@@ -1,14 +1,18 @@
-import type { ComponentPropsWithoutRef } from 'react';
-
 import { cn } from '../../helpers/cn';
+import TableBody from './body';
+import TableFoot from './foot';
+import TableHead from './head';
+import type { TableProps } from './types';
 
-type TableProps = ComponentPropsWithoutRef<'table'>;
-
-function Table({ className, ...props }: TableProps) {
-  const tableClassName = cn('w-full border-collapse text-left text-foreground', className);
-
-  return <table {...props} className={tableClassName} />;
+function TableRoot({ className, ...props }: TableProps) {
+  return (
+    <div className="w-full overflow-hidden rounded-md border border-border">
+      <table className={cn('w-full border-collapse', className)} {...props} />
+    </div>
+  );
 }
 
+const Table = Object.assign(TableRoot, { Head: TableHead, Body: TableBody, Foot: TableFoot });
+
 export default Table;
-export type { TableProps };
+export type { TableBodyProps, TableFootProps, TableHeadProps, TableProps } from './types';
