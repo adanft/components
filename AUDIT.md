@@ -26,12 +26,12 @@
 
 ## 🟢 Bajo — mejoras de calidad
 
-| Componente      | Problema                                                                                                |
-| --------------- | ------------------------------------------------------------------------------------------------------- |
-| **cn() helper** | No hace merge de Tailwind — `cn('px-4', 'px-6')` deja ambas clases. Considerar `clsx + tailwind-merge`. |
-| ~~**Button**~~  | ~~No tiene estilos para estado `disabled`.~~ ✅ Resuelto — ver sección al final.                        |
-| **SidebarLink** | No acepta un componente de router (React Router / Next.js `Link`). Hardcodea `<a>`.                     |
-| **Modal.Body**  | Siempre requiere `closeIcon` prop. No permite dialogs sin botón de cierre.                              |
+| Componente          | Problema                                                                                                                                                             |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ~~**cn() helper**~~ | ~~No hace merge de Tailwind — `cn('px-4', 'px-6')` deja ambas clases. Considerar `clsx + tailwind-merge`.~~ ✅ Descartado — ya usaba tailwind-merge, falso positivo. |
+| ~~**Button**~~      | ~~No tiene estilos para estado `disabled`.~~ ✅ Resuelto — ver sección al final.                                                                                     |
+| ~~**SidebarLink**~~ | ~~No acepta un componente de router (React Router / Next.js `Link`). Hardcodea `<a>`.~~ ✅ Resuelto — ver sección al final.                                          |
+| ~~**Modal.Body**~~  | ~~Siempre requiere `closeIcon` prop. No permite dialogs sin botón de cierre.~~ ✅ Descartado — eliminado en rewrite headless del Modal.                              |
 
 ---
 
@@ -52,12 +52,12 @@
 
 ## Helpers & Hooks
 
-| Archivo                             | Issues                                          |
-| ----------------------------------- | ----------------------------------------------- |
-| `src/lib/helpers/cn.ts`             | No resuelve conflictos de utilidades Tailwind   |
-| `src/helpers/theme.ts`              | ✅ Sin issues críticos                          |
-| `src/helpers/local-storage.ts`      | ✅ Analizado — falso positivo, solo client-side |
-| `src/hooks/use-outside-handler.tsx` | ✅ Bien implementado                            |
+| Archivo                             | Issues                                                                                        |
+| ----------------------------------- | --------------------------------------------------------------------------------------------- |
+| ~~`src/lib/helpers/cn.ts`~~         | ~~No resuelve conflictos de utilidades Tailwind~~ ✅ Falso positivo — ya usaba tailwind-merge |
+| `src/helpers/theme.ts`              | ✅ Sin issues críticos                                                                        |
+| `src/helpers/local-storage.ts`      | ✅ Analizado — falso positivo, solo client-side                                               |
+| `src/hooks/use-outside-handler.tsx` | ✅ Bien implementado                                                                          |
 
 ---
 
@@ -165,22 +165,60 @@ El botón de toggle del grupo fue actualizado con `aria-controls` conectado vía
 
 ---
 
+### cn() helper — Falso positivo descartado (2026-03-22)
+
+Analizado el helper `src/lib/helpers/cn.ts`. El issue original indicaba que no hacía merge de utilidades Tailwind. Incorrecto: el helper ya utilizaba `tailwind-merge` internamente, por lo que `cn('px-4', 'px-6')` resuelve correctamente el conflicto y deja solo `px-6`. No requiere cambios.
+
+**Conclusión:**
+
+| Issue original                                        | Resultado                                                       |
+| ----------------------------------------------------- | --------------------------------------------------------------- |
+| No hace merge de Tailwind — ambas clases quedan vivas | Falso positivo — `tailwind-merge` ya estaba integrado en `cn()` |
+
+---
+
+### SidebarLink — Migración a Link de react-router (2026-03-22)
+
+El componente `SidebarLink` fue actualizado para usar `<Link>` de react-router en lugar del `<a>` nativo hardcodeado. Se eliminaron también los tipos muertos que habían quedado de la API anterior.
+
+**Problemas resueltos:**
+
+| Issue original                                      | Solución implementada                                            |
+| --------------------------------------------------- | ---------------------------------------------------------------- |
+| `<a>` hardcodeado — no soporta navegación de router | Reemplazado por `<Link>` de react-router                         |
+| Tipos muertos de la API anterior                    | Eliminados — interfaz simplificada y consistente con el proyecto |
+
+---
+
+### Modal.Body — Descartado por rewrite del Modal (2026-03-22)
+
+El componente `Modal.Body` fue eliminado en el rewrite headless del Modal. La API anterior (`Modal.Root`, `Modal.Trigger`, `Modal.Body`, `Modal.Close`) fue completamente reemplazada por la nueva API headless (`Modal`, `Modal.Backdrop`, `Modal.Panel`, `Modal.Title`), que no fuerza un `closeIcon` — el control de cierre queda en manos del consumidor.
+
+**Conclusión:**
+
+| Issue original                                 | Resultado                                                                           |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `Modal.Body` siempre requiere prop `closeIcon` | Descartado — `Modal.Body` eliminado en rewrite; nueva API no tiene esta restricción |
+
+---
+
 ## Estado final
 
 > Fecha de cierre: 2026-03-22
 
-| Componente   | Issues detectados   | Resultado                                      |
-| ------------ | ------------------- | ---------------------------------------------- |
-| Box          | 0                   | ✅ Sin issues                                  |
-| Button       | 1 (disabled)        | ✅ Resuelto — estilos disabled agregados       |
-| Icon         | 0                   | ✅ Sin issues                                  |
-| InputField   | 2 (cn, a11y)        | ✅ Resuelto — migrado a cn() + aria attributes |
-| Profile      | 3 (a11y)            | ✅ Resuelto — trigger semántico + ARIA         |
-| Modal        | 8 (a11y, API)       | ✅ Resuelto — rewrite headless completo        |
-| Sidebar      | 2 (false positives) | ✅ Descartado — falsos positivos Tailwind 3    |
-| SidebarGroup | 1 (aria-controls)   | ✅ Resuelto — aria-controls con useId()        |
-| Table        | 0                   | ✅ Sin issues                                  |
-| cn() helper  | 1 (no tw-merge)     | 🔲 Pendiente — mejora de calidad no crítica    |
-| SidebarLink  | 1 (router)          | 🔲 Pendiente — mejora de API no crítica        |
+| Componente   | Issues detectados   | Resultado                                                             |
+| ------------ | ------------------- | --------------------------------------------------------------------- |
+| Box          | 0                   | ✅ Sin issues                                                         |
+| Button       | 1 (disabled)        | ✅ Resuelto — estilos disabled agregados                              |
+| Icon         | 0                   | ✅ Sin issues                                                         |
+| InputField   | 2 (cn, a11y)        | ✅ Resuelto — migrado a cn() + aria attributes                        |
+| Profile      | 3 (a11y)            | ✅ Resuelto — trigger semántico + ARIA                                |
+| Modal        | 8 (a11y, API)       | ✅ Resuelto — rewrite headless completo                               |
+| Sidebar      | 2 (false positives) | ✅ Descartado — falsos positivos Tailwind 3                           |
+| SidebarGroup | 1 (aria-controls)   | ✅ Resuelto — aria-controls con useId()                               |
+| Table        | 0                   | ✅ Sin issues                                                         |
+| cn() helper  | 1 (no tw-merge)     | ✅ Descartado — ya usaba tailwind-merge, falso positivo               |
+| SidebarLink  | 1 (router)          | ✅ Resuelto — `<a>` → `<Link>` react-router, tipos muertos eliminados |
+| Modal.Body   | 1 (closeIcon)       | ✅ Descartado — eliminado en rewrite headless del Modal               |
 
-**Todos los issues críticos y de accesibilidad han sido resueltos o descartados. Los únicos pendientes son mejoras de calidad no bloqueantes.**
+**Todos los issues han sido resueltos o descartados. El audit está cerrado.**
