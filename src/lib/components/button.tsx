@@ -43,5 +43,5 @@ function Button({
   );
 }
 
-export type { ButtonProps, ButtonVariant, ButtonSize };
+export type { ButtonProps, ButtonSize, ButtonVariant };
 export default Button;

@@ -71,5 +71,5 @@ function toggleTheme(currentTheme: ThemeMode, options: ThemeOptions = {}): Theme
   return applyTheme(nextTheme, options);
 }
 
-export { applyTheme, getStoredTheme, initializeTheme, setStoredTheme, toggleTheme };
 export type { ThemeMode, ThemeOptions };
+export { applyTheme, getStoredTheme, initializeTheme, setStoredTheme, toggleTheme };

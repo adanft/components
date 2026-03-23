@@ -1,20 +1,20 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router';
+import { Route, BrowserRouter as Router, Routes } from 'react-router';
 
 import { Home, NotFound } from '../lib';
 import {
-  DOCS_BUTTON_PATH,
   DOCS_BOX_PATH,
+  DOCS_BUTTON_PATH,
   DOCS_HOME_PATH,
   DOCS_ICON_PATH,
   DOCS_INPUT_FIELD_PATH,
   DOCS_MODAL_PATH,
+  DOCS_NOT_FOUND_PATH,
   DOCS_PROFILE_PATH,
   DOCS_SIDEBAR_PATH,
   DOCS_TABLE_PATH,
-  DOCS_NOT_FOUND_PATH,
 } from './data/routes';
-import ButtonPage from './pages/button';
 import BoxPage from './pages/box';
+import ButtonPage from './pages/button';
 import IconPage from './pages/icon';
 import InputFieldPage from './pages/input-field';
 import ModalPage from './pages/modal';

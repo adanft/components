@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, type ReactNode } from 'react';
+import { type ReactNode, useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import { ModalContext } from './context';
@@ -24,14 +24,14 @@ function Modal({ open, onClose, children }: ModalProps) {
       (el) => !el.hasAttribute('data-modal-portal'),
     );
 
-    elements.forEach((el) => el.setAttribute('inert', ''));
+    for (const el of elements) el.setAttribute('inert', '');
 
     const style = document.documentElement.style;
     const previousOverflow = style.overflow;
     style.overflow = 'hidden';
 
     return () => {
-      elements.forEach((el) => el.removeAttribute('inert'));
+      for (const el of elements) el.removeAttribute('inert');
       style.overflow = previousOverflow;
       previousActiveElementRef.current?.focus();
       previousActiveElementRef.current = null;

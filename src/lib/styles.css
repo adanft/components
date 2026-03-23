@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-@import url('https://www.nerdfonts.com/assets/css/webfont.css');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://www.nerdfonts.com/assets/css/webfont.css");
 
-@import 'tailwindcss';
-@import './theme/utilities.css';
+@import "tailwindcss";
+@import "./theme/utilities.css";
 
 @theme {
   --color-brand: #6747c8;
@@ -17,7 +17,7 @@
   --color-muted: #aaabb7;
   --color-border: #f0eff5;
   --shadow-card: 0 0 8px #9d99aa42;
-  --font-base: 'Poppins', sans-serif;
+  --font-base: "Poppins", sans-serif;
 }
 
 :root.dark {
@@ -41,5 +41,6 @@ input::placeholder {
 }
 
 .simplebar-scrollbar:before {
+  /* biome-ignore lint/complexity/noImportantStyles: required to override simplebar's inline styles */
   background: var(--color-muted) !important;
 }

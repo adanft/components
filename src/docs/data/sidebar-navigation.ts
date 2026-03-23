@@ -1,6 +1,6 @@
 import {
-  DOCS_BUTTON_PATH,
   DOCS_BOX_PATH,
+  DOCS_BUTTON_PATH,
   DOCS_ICON_PATH,
   DOCS_INPUT_FIELD_PATH,
   DOCS_MODAL_PATH,
@@ -138,5 +138,5 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   },
 ];
 
-export { docsSidebarNavigation };
 export type { DocsSidebarNavigationNode };
+export { docsSidebarNavigation };

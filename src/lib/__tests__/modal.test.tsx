@@ -15,7 +15,10 @@ function makeVisible(el: HTMLElement) {
 function renderModal({
   open = true,
   onClose = vi.fn(),
-}: { open?: boolean; onClose?: () => void } = {}) {
+}: {
+  open?: boolean;
+  onClose?: () => void;
+} = {}) {
   return {
     onClose,
     ...render(

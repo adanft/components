@@ -1,6 +1,6 @@
-import { describe, expect, it, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
-import { applyTheme, getStoredTheme, initializeTheme, toggleTheme, type ThemeMode } from '../theme';
+import { applyTheme, getStoredTheme, initializeTheme, type ThemeMode, toggleTheme } from '../theme';
 
 describe('theme helper transitions', () => {
   beforeEach(() => {

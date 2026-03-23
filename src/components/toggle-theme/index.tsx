@@ -1,6 +1,6 @@
-import { useState, type JSX } from 'react';
+import { type JSX, useState } from 'react';
+import { getStoredTheme, type ThemeMode, toggleTheme } from '../../helpers/theme';
 import styles from './styles.module.css';
-import { getStoredTheme, toggleTheme, type ThemeMode } from '../../helpers/theme';
 
 function ToggleTheme(): JSX.Element {
   const [theme, setTheme] = useState<ThemeMode>(getStoredTheme() ?? 'light');

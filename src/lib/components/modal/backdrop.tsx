@@ -9,6 +9,8 @@ function ModalBackdrop({ className, ...props }: ModalBackdropProps) {
   const { onClose } = useModalContext('Backdrop');
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: intentionally hidden from a11y tree via aria-hidden
+    // biome-ignore lint/a11y/useKeyWithClickEvents: backdrop keyboard handling is managed by the Modal focus-trap
     <div
       aria-hidden="true"
       onClick={onClose}

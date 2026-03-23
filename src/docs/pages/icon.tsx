@@ -32,7 +32,9 @@ function IconPage() {
 
       <section className="space-y-4">
         <h2 className="text-xl font-semibold text-brand">Usage</h2>
-        <p className="text-foreground">Import the component and provide a Nerd Fonts symbol string.</p>
+        <p className="text-foreground">
+          Import the component and provide a Nerd Fonts symbol string.
+        </p>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>

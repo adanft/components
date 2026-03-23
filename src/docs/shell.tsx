@@ -1,18 +1,18 @@
-import { Fragment, useState, type JSX, type ReactNode } from 'react';
+import { Fragment, type JSX, type ReactNode, useState } from 'react';
 
 import {
   Navbar,
+  type NavbarProps,
   Sidebar,
   SidebarBody,
   SidebarGroup,
   SidebarHead,
   SidebarList,
   SidebarSection,
-  type NavbarProps,
 } from '../lib';
 import { docsBranding } from './data/branding';
 import { docsNavbarProps } from './data/navbar';
-import { docsSidebarNavigation, type DocsSidebarNavigationNode } from './data/sidebar-navigation';
+import { type DocsSidebarNavigationNode, docsSidebarNavigation } from './data/sidebar-navigation';
 import { RouterLinkAdapter } from './router-adapters';
 import useRouteActiveMatcher from './use-route-active-matcher';
 

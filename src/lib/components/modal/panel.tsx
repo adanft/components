@@ -1,9 +1,9 @@
 import {
-  useEffect,
-  useRef,
   type ComponentPropsWithoutRef,
   type KeyboardEvent,
   type MouseEvent,
+  useEffect,
+  useRef,
 } from 'react';
 
 import { cn } from '../../helpers/cn';

@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';
-
-import DocsShell from '../../docs/shell';
 import { docsPath } from '../../docs/data/routes';
+import DocsShell from '../../docs/shell';
 
 describe('router adapter sidebar behavior', () => {
   it('marks the matching docs link as active using adapter-driven inputs', () => {

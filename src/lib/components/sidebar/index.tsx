@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 
 import useOutsideHandler from '../../../hooks/use-outside-handler';
 import { cn } from '../../helpers/cn';

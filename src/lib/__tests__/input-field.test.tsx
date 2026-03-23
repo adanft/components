@@ -1,8 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-
-import { InputField } from '../index';
 import type { InputFieldProps } from '../index';
+import { InputField } from '../index';
 
 const validInputFieldProps: InputFieldProps = {
   id: 'email',

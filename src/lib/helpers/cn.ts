@@ -6,5 +6,5 @@ function cn(...values: ClassNameType[]) {
   return twMerge(values.filter(Boolean).join(' '));
 }
 
-export { cn };
 export type { ClassNameType };
+export { cn };

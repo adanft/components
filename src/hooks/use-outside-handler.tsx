@@ -1,4 +1,4 @@
-import { useEffect, useEffectEvent, useRef, type RefObject } from 'react';
+import { type RefObject, useEffect, useEffectEvent, useRef } from 'react';
 
 function useOutsideHandler<TElement extends HTMLElement>(
   action: VoidFunction,

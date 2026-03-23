@@ -14,6 +14,7 @@ function SidebarHead({ action, href = '/', logoSrc, state, title }: SidebarHeadP
         <span className="font-semibold text-2xl whitespace-nowrap text-brand">{title}</span>
       </a>
       <button
+        type="button"
         className={`text-brand leading-none transition-all duration-300 absolute top-2/4 -translate-y-1/2 cursor-pointer border-2 border-brand p-2 rounded-md ${state ? 'left-68.5' : 'left-18.5'}`}
         onClick={() => action(!state)}>
         <i

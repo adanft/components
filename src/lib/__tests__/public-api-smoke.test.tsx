@@ -3,23 +3,22 @@ import { MemoryRouter } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
 
 import {
-  Button,
   Box,
+  Button,
   Home,
   Icon,
   InputField,
-  Navbar,
   Modal,
+  Navbar,
   NotFound,
   Profile,
   Sidebar,
   SidebarBody,
   SidebarGroup,
   SidebarHead,
+  SidebarLink,
   SidebarList,
   SidebarSection,
-  SidebarLink,
-  ToggleTheme,
   Table,
   TableBody,
   TableCaption,
@@ -28,6 +27,7 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
+  ToggleTheme,
 } from '../index';
 
 describe('public API smoke', () => {

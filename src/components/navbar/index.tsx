@@ -21,7 +21,9 @@ function Navbar({ profileProps, searchPlaceholder = 'Search' }: NavbarProps) {
       </div>
       <div className="flex gap-4 items-center">
         <ToggleTheme />
-        <button className="p-2 bg-background rounded-full leading-none border border-brand">
+        <button
+          type="button"
+          className="p-2 bg-background rounded-full leading-none border border-brand">
           <i className="nf nf-oct-bell text-xl text-brand leading-none"></i>
         </button>
         {profileProps ? <Profile {...profileProps} /> : null}

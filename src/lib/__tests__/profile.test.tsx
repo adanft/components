@@ -1,8 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-
-import { Profile } from '../index';
 import type { ProfileProps } from '../index';
+import { Profile } from '../index';
 
 const validProfileProps: ProfileProps = {
   userKey: '@taylor',

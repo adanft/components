@@ -1,3 +1,4 @@
+export type { ThemeMode, ThemeOptions } from '../helpers/theme';
 export {
   applyTheme,
   getStoredTheme,
@@ -5,4 +6,3 @@ export {
   setStoredTheme,
   toggleTheme,
 } from '../helpers/theme';
-export type { ThemeMode, ThemeOptions } from '../helpers/theme';

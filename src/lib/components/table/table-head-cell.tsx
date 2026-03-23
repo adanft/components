@@ -5,7 +5,10 @@ import { cn } from '../../helpers/cn';
 type TableHeadCellProps = ComponentPropsWithoutRef<'th'>;
 
 function TableHeadCell({ className, scope = 'col', ...props }: TableHeadCellProps) {
-  const headCellClassName = cn('px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-brand', className);
+  const headCellClassName = cn(
+    'px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-brand',
+    className,
+  );
 
   return <th {...props} scope={scope} className={headCellClassName} />;
 }
