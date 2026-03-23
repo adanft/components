@@ -1,4 +1,4 @@
-import { type JSX, type ReactNode, useState } from "react";
+import { type JSX, type ReactNode, useState } from 'react';
 
 import {
   Navbar,
@@ -9,13 +9,10 @@ import {
   SidebarHead,
   SidebarLink,
   SidebarSection,
-} from "../lib";
-import { docsBranding } from "./data/branding";
-import { docsNavbarProps } from "./data/navbar";
-import {
-  type DocsSidebarNavigationNode,
-  docsSidebarNavigation,
-} from "./data/sidebar-navigation";
+} from '../lib';
+import { docsBranding } from './data/branding';
+import { docsNavbarProps } from './data/navbar';
+import { type DocsSidebarNavigationNode, docsSidebarNavigation } from './data/sidebar-navigation';
 
 type DocsShellProps = {
   children: ReactNode;
@@ -23,26 +20,17 @@ type DocsShellProps = {
   navigation?: DocsSidebarNavigationNode[];
 };
 
-function renderNavigationNode(
-  node: DocsSidebarNavigationNode,
-  expanded: boolean,
-): JSX.Element {
-  if (node.type === "heading") {
-    return (
-      <SidebarSection text={node.text} className={expanded ? "px-2" : "px-6"} />
-    );
+function renderNavigationNode(node: DocsSidebarNavigationNode, expanded: boolean): JSX.Element {
+  if (node.type === 'heading') {
+    return <SidebarSection text={node.text} className={expanded ? 'px-2' : 'px-6'} />;
   }
 
-  if (node.type === "group") {
+  if (node.type === 'group') {
     return (
       <SidebarGroup iconName={node.iconName} text={node.text}>
         <ul className="flex flex-col gap-2">
           {node.children.map((child) => (
-            <li
-              key={
-                child.type === "heading" ? `heading-${child.text}` : child.text
-              }
-            >
+            <li key={child.type === 'heading' ? `heading-${child.text}` : child.text}>
               {renderNavigationNode(child, expanded)}
             </li>
           ))}
@@ -51,13 +39,7 @@ function renderNavigationNode(
     );
   }
 
-  return (
-    <SidebarLink
-      href={node.href}
-      nfIconName={node.nfIconName}
-      text={node.text}
-    />
-  );
+  return <SidebarLink href={node.href} nfIconName={node.nfIconName} text={node.text} />;
 }
 
 function DocsShell({
@@ -80,11 +62,7 @@ function DocsShell({
         <SidebarBody>
           <ul className="flex flex-col gap-2">
             {navigation.map((node) => (
-              <li
-                key={
-                  node.type === "heading" ? `heading-${node.text}` : node.text
-                }
-              >
+              <li key={node.type === 'heading' ? `heading-${node.text}` : node.text}>
                 {renderNavigationNode(node, sidebarState)}
               </li>
             ))}

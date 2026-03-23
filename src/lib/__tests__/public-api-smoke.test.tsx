@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
-import { describe, expect, it, vi } from "vitest";
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
   Box,
@@ -27,10 +27,10 @@ import {
   TableHeadCell,
   TableRow,
   ToggleTheme,
-} from "../index";
+} from '../index';
 
-describe("public API smoke", () => {
-  it("renders exported components from src/lib without deep imports", () => {
+describe('public API smoke', () => {
+  it('renders exported components from src/lib without deep imports', () => {
     const onHeaderAction = () => undefined;
 
     const cases = [
@@ -38,12 +38,7 @@ describe("public API smoke", () => {
       <Box key="box" />,
       <Home key="home" />,
       <Icon key="icon" symbol="nf-fa-user" className="text-lg text-brand" />,
-      <InputField
-        key="input-field"
-        label="Email"
-        id="email"
-        placeholder="name@example.com"
-      />,
+      <InputField key="input-field" label="Email" id="email" placeholder="name@example.com" />,
       <Navbar key="navbar" searchPlaceholder="Search docs" />,
       <NotFound key="not-found" />,
       <Profile
@@ -71,21 +66,13 @@ describe("public API smoke", () => {
               <SidebarSection text="Section" />
             </li>
             <li>
-              <SidebarLink
-                href="/overview"
-                nfIconName="nf-fa-home"
-                text="Overview"
-              />
+              <SidebarLink href="/overview" nfIconName="nf-fa-home" text="Overview" />
             </li>
             <li>
               <SidebarGroup iconName="nf-fa-list" text="Group">
                 <ul className="flex flex-col gap-2">
                   <li>
-                    <SidebarLink
-                      href="/group/child"
-                      nfIconName="nf-fa-circle"
-                      text="Child"
-                    />
+                    <SidebarLink href="/group/child" nfIconName="nf-fa-circle" text="Child" />
                   </li>
                 </ul>
               </SidebarGroup>
@@ -94,11 +81,7 @@ describe("public API smoke", () => {
         </SidebarBody>
       </MemoryRouter>,
       <MemoryRouter key="sidebar-link">
-        <SidebarLink
-          href="/orders"
-          nfIconName="nf-fa-shopping_cart"
-          text="Orders"
-        />
+        <SidebarLink href="/orders" nfIconName="nf-fa-shopping_cart" text="Orders" />
       </MemoryRouter>,
       <ToggleTheme key="toggle-theme" />,
       <Table key="table">
@@ -128,7 +111,7 @@ describe("public API smoke", () => {
     }
   });
 
-  it("renders Modal compound component via portal", () => {
+  it('renders Modal compound component via portal', () => {
     const onClose = vi.fn();
 
     const { unmount } = render(
@@ -141,8 +124,8 @@ describe("public API smoke", () => {
       </Modal>,
     );
 
-    expect(screen.getByTestId("smoke-modal-panel")).toBeInTheDocument();
-    expect(screen.getByText("Modal content")).toBeInTheDocument();
+    expect(screen.getByTestId('smoke-modal-panel')).toBeInTheDocument();
+    expect(screen.getByText('Modal content')).toBeInTheDocument();
 
     unmount();
   });

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 import {
   Box,
@@ -8,8 +8,8 @@ import {
   SidebarHead,
   SidebarLink,
   SidebarSection,
-} from "../../lib";
-import { CodeBlock } from "../code-block";
+} from '../../lib';
+import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { useState } from 'react';
 
@@ -143,14 +143,13 @@ function SidebarPage() {
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          components {">"} Sidebar
+          components {'>'} Sidebar
         </p>
         <h1 className="text-3xl font-bold text-brand">Sidebar</h1>
         <p className="text-foreground">
-          <code>Sidebar</code> is a composition-first aside primitive. Keep
-          expansion controlled with <code>state</code> and <code>action</code>,
-          then build navigation using <code>SidebarHead</code>,{" "}
-          <code>SidebarBody</code>, <code>SidebarSection</code>,{" "}
+          <code>Sidebar</code> is a composition-first aside primitive. Keep expansion controlled
+          with <code>state</code> and <code>action</code>, then build navigation using{' '}
+          <code>SidebarHead</code>, <code>SidebarBody</code>, <code>SidebarSection</code>,{' '}
           <code>SidebarGroup</code>, and <code>SidebarLink</code>.
         </p>
       </header>
@@ -158,15 +157,14 @@ function SidebarPage() {
       <section className="space-y-4">
         <h2 className="text-xl font-semibold text-brand">Usage</h2>
         <p className="text-foreground">
-          Import Sidebar primitives from the public entrypoint and compose
-          links, sections, and groups directly in JSX.
+          Import Sidebar primitives from the public entrypoint and compose links, sections, and
+          groups directly in JSX.
         </p>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
         <p className="text-foreground">
-          <code>SidebarBody</code> uses <code>SimpleBar</code> for scrolling. In
-          embedded layouts, provide a max height so content scrolls while the
-          shell and header stay visible.
+          <code>SidebarBody</code> uses <code>SimpleBar</code> for scrolling. In embedded layouts,
+          provide a max height so content scrolls while the shell and header stay visible.
         </p>
       </section>
 
@@ -176,8 +174,7 @@ function SidebarPage() {
           <Sidebar
             state={sidebarState}
             action={setSidebarState}
-            className="static z-auto max-h-[560px]"
-          >
+            className="static z-auto max-h-[560px]">
             <SidebarHead
               href="/"
               logoSrc="https://raw.githubusercontent.com/uditkumar01/ReactComponentGeneratorExtension/main/assets/logo.png"
@@ -188,10 +185,7 @@ function SidebarPage() {
             <SidebarBody>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <SidebarSection
-                    text="Core"
-                    className={sidebarState ? "px-2" : "px-6"}
-                  />
+                  <SidebarSection text="Core" className={sidebarState ? 'px-2' : 'px-6'} />
                 </li>
                 <li>
                   <SidebarLink
@@ -201,25 +195,14 @@ function SidebarPage() {
                   />
                 </li>
                 <li>
-                  <SidebarLink
-                    href="/docs/box"
-                    nfIconName="nf-md-view_agenda_outline"
-                    text="Box"
-                  />
+                  <SidebarLink href="/docs/box" nfIconName="nf-md-view_agenda_outline" text="Box" />
                 </li>
                 <li>
-                  <SidebarLink
-                    href="/docs/sidebar"
-                    nfIconName="nf-md-dock_left"
-                    text="Sidebar"
-                  />
+                  <SidebarLink href="/docs/sidebar" nfIconName="nf-md-dock_left" text="Sidebar" />
                 </li>
 
                 <li>
-                  <SidebarSection
-                    text="Management"
-                    className={sidebarState ? "px-2" : "px-6"}
-                  />
+                  <SidebarSection text="Management" className={sidebarState ? 'px-2' : 'px-6'} />
                 </li>
                 <li>
                   <SidebarGroup iconName="nf-md-file_document" text="Reports">
@@ -232,10 +215,7 @@ function SidebarPage() {
                         />
                       </li>
                       <li>
-                        <SidebarGroup
-                          iconName="nf-fa-chalkboard_user"
-                          text="User Reports"
-                        >
+                        <SidebarGroup iconName="nf-fa-chalkboard_user" text="User Reports">
                           <ul className="flex flex-col gap-2">
                             <li>
                               <SidebarLink
@@ -266,10 +246,7 @@ function SidebarPage() {
                 </li>
 
                 <li>
-                  <SidebarSection
-                    text="Operations"
-                    className={sidebarState ? "px-2" : "px-6"}
-                  />
+                  <SidebarSection text="Operations" className={sidebarState ? 'px-2' : 'px-6'} />
                 </li>
                 <li>
                   <SidebarLink
