@@ -68,7 +68,7 @@ describe("public API smoke", () => {
         <SidebarBody>
           <ul className="flex flex-col gap-2">
             <li>
-              <SidebarSection text="Section" state={false} />
+              <SidebarSection text="Section" />
             </li>
             <li>
               <SidebarLink

@@ -188,7 +188,10 @@ function SidebarPage() {
             <SidebarBody>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <SidebarSection text="Core" state={sidebarState} />
+                  <SidebarSection
+                    text="Core"
+                    className={sidebarState ? "px-2" : "px-6"}
+                  />
                 </li>
                 <li>
                   <SidebarLink
@@ -213,7 +216,10 @@ function SidebarPage() {
                 </li>
 
                 <li>
-                  <SidebarSection text="Management" state={sidebarState} />
+                  <SidebarSection
+                    text="Management"
+                    className={sidebarState ? "px-2" : "px-6"}
+                  />
                 </li>
                 <li>
                   <SidebarGroup iconName="nf-md-file_document" text="Reports">
@@ -260,7 +266,10 @@ function SidebarPage() {
                 </li>
 
                 <li>
-                  <SidebarSection text="Operations" state={sidebarState} />
+                  <SidebarSection
+                    text="Operations"
+                    className={sidebarState ? "px-2" : "px-6"}
+                  />
                 </li>
                 <li>
                   <SidebarLink

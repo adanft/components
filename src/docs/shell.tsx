@@ -28,7 +28,9 @@ function renderNavigationNode(
   expanded: boolean,
 ): JSX.Element {
   if (node.type === "heading") {
-    return <SidebarSection text={node.text} state={expanded} />;
+    return (
+      <SidebarSection text={node.text} className={expanded ? "px-2" : "px-6"} />
+    );
   }
 
   if (node.type === "group") {

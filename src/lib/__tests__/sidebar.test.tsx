@@ -83,7 +83,7 @@ describe("Sidebar", () => {
           <SidebarBody>
             <ul className="flex flex-col gap-2">
               <li>
-                <SidebarSection text="Main" state={state} />
+                <SidebarSection text="Main" />
               </li>
               <li>
                 <SidebarLink
@@ -106,7 +106,7 @@ describe("Sidebar", () => {
                 </SidebarGroup>
               </li>
               <li>
-                <SidebarSection text="Secondary" state={state} />
+                <SidebarSection text="Secondary" />
               </li>
             </ul>
           </SidebarBody>
@@ -163,7 +163,7 @@ describe("Sidebar", () => {
       <MemoryRouter>
         <ul className="flex flex-col gap-2">
           <li>
-            <SidebarSection text="General" state={false} />
+            <SidebarSection text="General" />
           </li>
           <li>
             <SidebarLink

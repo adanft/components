@@ -1,13 +1,21 @@
-type SidebarSectionProps = {
+import type { ComponentPropsWithoutRef } from "react";
+
+import { cn } from "../../helpers/cn";
+
+type SidebarSectionProps = ComponentPropsWithoutRef<"h5"> & {
   text: string;
-  state: boolean;
 };
 
-function SidebarSection({ text, state }: SidebarSectionProps) {
+function SidebarSection({ text, className, ...props }: SidebarSectionProps) {
   return (
     <h5
-      className={`text-muted py-4 text-lg font-semibold whitespace-nowrap ${state ? 'px-2' : 'px-6'}`}>
-      <i className="nf nf-fa-minus"></i>
+      className={cn(
+        "text-muted py-4 text-lg font-semibold whitespace-nowrap px-6",
+        className,
+      )}
+      {...props}
+    >
+      <i aria-hidden="true" className="nf nf-fa-minus" />
       <span className="ml-6">{text}</span>
     </h5>
   );
