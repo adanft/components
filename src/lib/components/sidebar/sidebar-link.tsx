@@ -1,12 +1,4 @@
-import type { ComponentType, ReactNode } from 'react';
-
-type SidebarLinkComponentProps = {
-  children: ReactNode;
-  className: string;
-  href: string;
-};
-
-type SidebarLinkComponent = ComponentType<SidebarLinkComponentProps>;
+import { Link } from 'react-router';
 
 type SidebarLinkProps = {
   className?: string;
@@ -19,12 +11,12 @@ const defaultClassName = 'flex px-2 leading-none items-center text-foreground ga
 
 function SidebarLink({ className = defaultClassName, href, nfIconName, text }: SidebarLinkProps) {
   return (
-    <a className={className} href={href}>
+    <Link className={className} to={href}>
       <i className={`nf leading-none ${nfIconName} p-3.5 text-xl`} />
       <span className="font-medium">{text}</span>
-    </a>
+    </Link>
   );
 }
 
 export default SidebarLink;
-export type { SidebarLinkComponent, SidebarLinkComponentProps, SidebarLinkProps };
+export type { SidebarLinkProps };

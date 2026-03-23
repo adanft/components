@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -55,21 +56,23 @@ describe('Sidebar', () => {
     const [state, action] = [false, () => undefined];
 
     render(
-      <Sidebar state={state} action={action} className="static">
-        <SidebarHead href="/" logoSrc="/logo.png" title="Docs" state={state} action={action} />
-        <SidebarBody>
-          <SidebarList>
-            <SidebarSection text="Main" state={state} />
-            <SidebarLink href="/overview" nfIconName="nf-fa-home" text="Overview" />
-            <SidebarGroup iconName="nf-fa-folder_open" text="Reports">
-              <SidebarList>
-                <SidebarLink href="/reports/monthly" nfIconName="nf-fa-calendar" text="Monthly" />
-              </SidebarList>
-            </SidebarGroup>
-            <SidebarSection text="Secondary" state={state} />
-          </SidebarList>
-        </SidebarBody>
-      </Sidebar>,
+      <MemoryRouter>
+        <Sidebar state={state} action={action} className="static">
+          <SidebarHead href="/" logoSrc="/logo.png" title="Docs" state={state} action={action} />
+          <SidebarBody>
+            <SidebarList>
+              <SidebarSection text="Main" state={state} />
+              <SidebarLink href="/overview" nfIconName="nf-fa-home" text="Overview" />
+              <SidebarGroup iconName="nf-fa-folder_open" text="Reports">
+                <SidebarList>
+                  <SidebarLink href="/reports/monthly" nfIconName="nf-fa-calendar" text="Monthly" />
+                </SidebarList>
+              </SidebarGroup>
+              <SidebarSection text="Secondary" state={state} />
+            </SidebarList>
+          </SidebarBody>
+        </Sidebar>
+      </MemoryRouter>,
     );
 
     expect(screen.getByRole('link', { name: /overview/i })).toBeInTheDocument();
@@ -81,11 +84,13 @@ describe('Sidebar', () => {
 
   it('uses collapsible group behavior with open-state styling', () => {
     const { container } = render(
-      <SidebarGroup iconName="nf-fa-folder_open" text="Reports">
-        <SidebarList>
-          <SidebarLink href="/reports/monthly" nfIconName="nf-fa-calendar" text="Monthly" />
-        </SidebarList>
-      </SidebarGroup>,
+      <MemoryRouter>
+        <SidebarGroup iconName="nf-fa-folder_open" text="Reports">
+          <SidebarList>
+            <SidebarLink href="/reports/monthly" nfIconName="nf-fa-calendar" text="Monthly" />
+          </SidebarList>
+        </SidebarGroup>
+      </MemoryRouter>,
     );
 
     const groupButton = screen.getByRole('button', { name: /reports/i });
@@ -108,10 +113,12 @@ describe('Sidebar', () => {
 
   it('wraps each direct child in a list item preserving order', () => {
     render(
-      <SidebarList>
-        <SidebarSection text="General" state={false} />
-        <SidebarLink href="/dashboard" nfIconName="nf-md-view_dashboard" text="Dashboard" />
-      </SidebarList>,
+      <MemoryRouter>
+        <SidebarList>
+          <SidebarSection text="General" state={false} />
+          <SidebarLink href="/dashboard" nfIconName="nf-md-view_dashboard" text="Dashboard" />
+        </SidebarList>
+      </MemoryRouter>,
     );
 
     const list = screen.getByRole('list');
@@ -124,9 +131,11 @@ describe('Sidebar', () => {
 
   it('renders link children without requiring li wrappers', () => {
     render(
-      <SidebarList>
-        <SidebarLink href="/orders" nfIconName="nf-fa-shopping_cart" text="Orders" />
-      </SidebarList>,
+      <MemoryRouter>
+        <SidebarList>
+          <SidebarLink href="/orders" nfIconName="nf-fa-shopping_cart" text="Orders" />
+        </SidebarList>
+      </MemoryRouter>,
     );
 
     const list = screen.getByRole('list');

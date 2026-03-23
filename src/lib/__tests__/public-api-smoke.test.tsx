@@ -1,5 +1,6 @@
-import { render } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
   Button,
@@ -42,17 +43,6 @@ describe('public API smoke', () => {
       <Icon key="icon" symbol="nf-fa-user" className="text-lg text-brand" />,
       <InputField key="input-field" label="Email" id="email" placeholder="name@example.com" />,
       <Navbar key="navbar" searchPlaceholder="Search docs" />,
-      <Modal.Root key="modal">
-        <Modal.Trigger>
-          <button type="button">Open modal</button>
-        </Modal.Trigger>
-        <Modal.Body closeIcon="x" aria-label="Smoke test modal">
-          <p>Modal content</p>
-          <Modal.Close>
-            <button type="button">Close</button>
-          </Modal.Close>
-        </Modal.Body>
-      </Modal.Root>,
       <NotFound key="not-found" />,
       <Profile
         key="profile"
@@ -72,24 +62,23 @@ describe('public API smoke', () => {
         title="Docs"
         logoSrc="/logo.png"
       />,
-      <SidebarBody key="sidebar-body">
-        <SidebarList>
-          <SidebarSection text="Section" state={false} />
-          <SidebarLink href="/overview" nfIconName="nf-fa-home" text="Overview" />
-          <SidebarGroup iconName="nf-fa-list" text="Group">
-            <SidebarList>
-              <SidebarLink href="/group/child" nfIconName="nf-fa-circle" text="Child" />
-            </SidebarList>
-          </SidebarGroup>
-        </SidebarList>
-      </SidebarBody>,
+      <MemoryRouter key="sidebar-body">
+        <SidebarBody>
+          <SidebarList>
+            <SidebarSection text="Section" state={false} />
+            <SidebarLink href="/overview" nfIconName="nf-fa-home" text="Overview" />
+            <SidebarGroup iconName="nf-fa-list" text="Group">
+              <SidebarList>
+                <SidebarLink href="/group/child" nfIconName="nf-fa-circle" text="Child" />
+              </SidebarList>
+            </SidebarGroup>
+          </SidebarList>
+        </SidebarBody>
+      </MemoryRouter>,
       <SidebarHeader key="sidebar-header" action={onHeaderAction} state={false} title="Docs" />,
-      <SidebarLink
-        key="sidebar-link"
-        href="/orders"
-        nfIconName="nf-fa-shopping_cart"
-        text="Orders"
-      />,
+      <MemoryRouter key="sidebar-link">
+        <SidebarLink href="/orders" nfIconName="nf-fa-shopping_cart" text="Orders" />
+      </MemoryRouter>,
       <SidebarLinkList key="sidebar-link-list" iconName="nf-fa-list" text="Group">
         <ul>
           <li>Child</li>
@@ -121,5 +110,24 @@ describe('public API smoke', () => {
       expect(container.firstChild).not.toBeNull();
       unmount();
     }
+  });
+
+  it('renders Modal compound component via portal', () => {
+    const onClose = vi.fn();
+
+    const { unmount } = render(
+      <Modal open={true} onClose={onClose}>
+        <Modal.Backdrop />
+        <Modal.Panel data-testid="smoke-modal-panel">
+          <Modal.Title>Smoke test</Modal.Title>
+          <p>Modal content</p>
+        </Modal.Panel>
+      </Modal>,
+    );
+
+    expect(screen.getByTestId('smoke-modal-panel')).toBeInTheDocument();
+    expect(screen.getByText('Modal content')).toBeInTheDocument();
+
+    unmount();
   });
 });
