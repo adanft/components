@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useId, useState, type ReactNode } from 'react';
 
 type SidebarGroupProps = {
   children: ReactNode;
@@ -8,6 +8,7 @@ type SidebarGroupProps = {
 
 function SidebarGroup({ children, iconName, text }: SidebarGroupProps) {
   const [show, setShow] = useState(false);
+  const contentId = useId();
 
   return (
     <div className={show ? 'bg-indigo-500/5' : ''}>
@@ -15,7 +16,8 @@ function SidebarGroup({ children, iconName, text }: SidebarGroupProps) {
         type="button"
         className="flex px-2 leading-none items-center text-foreground gap-4 rounded-md w-full"
         onClick={() => setShow((previousShow) => !previousShow)}
-        aria-expanded={show}>
+        aria-expanded={show}
+        aria-controls={contentId}>
         <i className={`nf leading-none p-3.5 text-xl ${iconName}`} />
         <span className="font-medium whitespace-nowrap">{text}</span>
         <i
@@ -24,6 +26,7 @@ function SidebarGroup({ children, iconName, text }: SidebarGroupProps) {
       </button>
 
       <div
+        id={contentId}
         className={`grid gap-2 overflow-hidden transition-all duration-300 ${show ? 'grid-rows-[1fr] mt-2' : 'grid-rows-[0fr]'}`}>
         <div className="overflow-hidden">{children}</div>
       </div>

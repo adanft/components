@@ -32,7 +32,7 @@ describe('Sidebar', () => {
 
     const sidebar = screen.getByTestId('sidebar');
 
-    expect(sidebar).toHaveClass('w-[321px]');
+    expect(sidebar).toHaveClass('w-80.25');
     expect(sidebar).toHaveClass('static');
     expect(screen.getByText('content')).toBeInTheDocument();
   });
@@ -43,12 +43,12 @@ describe('Sidebar', () => {
     const sidebar = screen.getByTestId('sidebar');
     const toggle = container.querySelector('header button');
 
-    expect(sidebar).toHaveClass('w-[65px]');
+    expect(sidebar).toHaveClass('w-16.25');
     expect(toggle).not.toBeNull();
 
     fireEvent.click(toggle as HTMLButtonElement);
 
-    expect(sidebar).toHaveClass('w-[321px]');
+    expect(sidebar).toHaveClass('w-80.25');
   });
 
   it('supports composable sidebar body/list/group structure', () => {
