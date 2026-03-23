@@ -12,7 +12,7 @@ const validInputFieldProps: InputFieldProps = {
 void validInputFieldProps;
 const invalidLabelClassElement = (
   // @ts-expect-error label class overrides are intentionally not supported.
-  <InputField id="email" label="Email" labelClassName="text-red-500" />
+  <InputField id="email" label="Email" labelClassName="text-danger" />
 );
 void invalidLabelClassElement;
 
@@ -61,10 +61,11 @@ describe('InputField', () => {
 
     expect(input).toHaveClass('w-full');
     expect(input).toHaveClass('rounded-md');
-    expect(input).toHaveClass('placeholder:text-[14px]');
-    expect(input).toHaveClass('focus-visible:outline-1');
+    expect(input).toHaveClass('px-2.5');
+    expect(input).toHaveClass('placeholder:text-sm');
+    expect(input).toHaveClass('focus-visible:border-brand');
     expect(label).toHaveClass('group-focus-within:text-brand');
-    expect(label.parentElement).toHaveClass('grow');
+    expect(label.parentElement).not.toHaveClass('grow');
   });
 
   it('applies custom classes only to the container wrapper', () => {
@@ -76,5 +77,73 @@ describe('InputField', () => {
     expect(label.parentElement).toHaveClass('mt-4');
     expect(input).not.toHaveClass('mt-4');
     expect(label).not.toHaveClass('mt-4');
+  });
+
+  it('shows red border and label when error is true', () => {
+    render(<InputField label="Email" id="email" error />);
+
+    const input = screen.getByLabelText('Email');
+    const label = screen.getByText('Email');
+
+    expect(input).toHaveClass('border-danger');
+    expect(input).toHaveClass('focus-visible:border-danger');
+    expect(input).toHaveClass('focus-visible:outline-danger');
+    expect(input).not.toHaveClass('focus-visible:border-brand');
+    expect(label).toHaveClass('text-danger');
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+    expect(input).not.toHaveAttribute('aria-describedby');
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  it('shows red border and error message when error is a string', () => {
+    render(<InputField label="Email" id="email" error="Required field" />);
+
+    const input = screen.getByLabelText('Email');
+    const errorMessage = screen.getByRole('alert');
+
+    expect(input).toHaveClass('border-danger');
+    expect(input).toHaveClass('focus-visible:border-danger');
+    expect(input).toHaveClass('focus-visible:outline-danger');
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+    expect(input).toHaveAttribute('aria-describedby', 'email-error');
+    expect(errorMessage).toHaveTextContent('Required field');
+    expect(errorMessage).toHaveAttribute('id', 'email-error');
+    expect(errorMessage).toHaveClass('text-danger');
+  });
+
+  it('shows normal state when error is false', () => {
+    render(<InputField label="Email" id="email" error={false} />);
+
+    const input = screen.getByLabelText('Email');
+
+    expect(input).not.toHaveClass('border-danger');
+    expect(input).toHaveClass('focus-visible:border-brand');
+    expect(input).toHaveAttribute('aria-invalid', 'false');
+    expect(input).not.toHaveAttribute('aria-describedby');
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  it('shows normal state when error prop is omitted', () => {
+    render(<InputField label="Email" id="email" />);
+
+    const input = screen.getByLabelText('Email');
+    const label = screen.getByText('Email');
+
+    expect(label).toHaveClass('group-focus-within:text-brand');
+    expect(label).not.toHaveClass('text-danger');
+    expect(input).toHaveAttribute('aria-invalid', 'false');
+    expect(input).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('treats empty string error as no error', () => {
+    render(<InputField label="Email" id="email" error="" />);
+
+    const input = screen.getByLabelText('Email');
+
+    expect(input).toHaveAttribute('aria-invalid', 'false');
+    expect(input).not.toHaveAttribute('aria-describedby');
+    expect(input).not.toHaveClass('border-danger');
+    expect(input).toHaveClass('focus-visible:border-brand');
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 });

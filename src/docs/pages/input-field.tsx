@@ -13,6 +13,23 @@ const exampleJsx = `<InputField
   placeholder="you@company.com"
 />`;
 
+const errorBooleanSnippet = `<InputField
+  id="username"
+  label="Username"
+  name="username"
+  placeholder="johndoe"
+  error={true}
+/>`;
+
+const errorMessageSnippet = `<InputField
+  id="password"
+  label="Password"
+  name="password"
+  type="password"
+  placeholder="Enter password"
+  error="This field is required"
+/>`;
+
 function InputFieldPage() {
   return (
     <article className="space-y-8">
@@ -49,6 +66,43 @@ function InputFieldPage() {
           />
         </Box>
         <CodeBlock code={exampleJsx} />
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold text-brand">Error state</h2>
+        <p className="text-foreground">
+          Pass <code>error={'{true}'}</code> to highlight the border and label in red without
+          displaying a message.
+        </p>
+        <Box>
+          <InputField
+            id="username"
+            label="Username"
+            name="username"
+            placeholder="johndoe"
+            error={true}
+          />
+        </Box>
+        <CodeBlock code={errorBooleanSnippet} />
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold text-brand">Error with message</h2>
+        <p className="text-foreground">
+          Pass a string to <code>error</code> to show both the red highlight and an inline error
+          message below the input.
+        </p>
+        <Box>
+          <InputField
+            id="password"
+            label="Password"
+            name="password"
+            type="password"
+            placeholder="Enter password"
+            error="This field is required"
+          />
+        </Box>
+        <CodeBlock code={errorMessageSnippet} />
       </section>
     </article>
   );
