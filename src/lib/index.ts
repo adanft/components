@@ -22,9 +22,6 @@ export { default as SidebarList } from './components/sidebar/sidebar-list';
 export { default as SidebarSection } from './components/sidebar/sidebar-section';
 export { default as Navbar } from '../components/navbar';
 export { default as NotFound } from '../components/not-found';
-export { default as SidebarHeader } from '../components/sidebar-header';
-export { default as SidebarPrimitiveLink } from '../components/sidebar-link';
-export { default as SidebarLinkList } from '../components/sidebar-link-list';
 export { default as ToggleTheme } from '../components/toggle-theme';
 export { applyTheme, getStoredTheme, initializeTheme, setStoredTheme, toggleTheme } from './theme';
 
@@ -55,5 +52,4 @@ export type { SidebarGroupProps } from './components/sidebar/sidebar-group';
 export type { SidebarLinkProps } from './components/sidebar/sidebar-link';
 export type { SidebarListProps } from './components/sidebar/sidebar-list';
 export type { SidebarSectionProps } from './components/sidebar/sidebar-section';
-export type { SidebarHeaderHomeLinkComponentProps } from '../components/sidebar-header';
 export type { ThemeMode, ThemeOptions } from './theme';

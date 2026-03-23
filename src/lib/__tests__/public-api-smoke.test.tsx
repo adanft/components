@@ -18,9 +18,7 @@ import {
   SidebarHead,
   SidebarList,
   SidebarSection,
-  SidebarHeader,
   SidebarLink,
-  SidebarLinkList,
   ToggleTheme,
   Table,
   TableBody,
@@ -75,15 +73,9 @@ describe('public API smoke', () => {
           </SidebarList>
         </SidebarBody>
       </MemoryRouter>,
-      <SidebarHeader key="sidebar-header" action={onHeaderAction} state={false} title="Docs" />,
       <MemoryRouter key="sidebar-link">
         <SidebarLink href="/orders" nfIconName="nf-fa-shopping_cart" text="Orders" />
       </MemoryRouter>,
-      <SidebarLinkList key="sidebar-link-list" iconName="nf-fa-list" text="Group">
-        <ul>
-          <li>Child</li>
-        </ul>
-      </SidebarLinkList>,
       <ToggleTheme key="toggle-theme" />,
       <Table key="table">
         <TableCaption>Smoke test table</TableCaption>
