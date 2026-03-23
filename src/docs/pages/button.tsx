@@ -7,6 +7,16 @@ const usageSnippet = `<Button>Save changes</Button>`;
 
 const exampleJsx = `<Button className="px-6">Deploy now</Button>`;
 
+const variantsSnippet = `<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>`;
+
+const sizesSnippet = `<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>`;
+
+const combinedSnippet = `<Button variant="primary" size="sm">Save</Button>
+<Button variant="secondary" size="lg">Learn more</Button>`;
+
 function ButtonPage() {
   return (
     <article className="space-y-8">
@@ -37,6 +47,49 @@ function ButtonPage() {
           <Button className="px-6">Deploy now</Button>
         </Box>
         <CodeBlock code={exampleJsx} />
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold text-brand">Variants</h2>
+        <p className="text-foreground">
+          Use the <code>variant</code> prop to change the visual style. Defaults to{' '}
+          <code>primary</code>.
+        </p>
+        <Box className="flex flex-wrap items-center gap-3">
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+        </Box>
+        <CodeBlock code={variantsSnippet} />
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold text-brand">Sizes</h2>
+        <p className="text-foreground">
+          Use the <code>size</code> prop to control the button dimensions. Defaults to{' '}
+          <code>md</code>.
+        </p>
+        <Box className="flex flex-wrap items-center gap-3">
+          <Button size="sm">Small</Button>
+          <Button size="md">Medium</Button>
+          <Button size="lg">Large</Button>
+        </Box>
+        <CodeBlock code={sizesSnippet} />
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold text-brand">Combining variant and size</h2>
+        <p className="text-foreground">
+          Both props can be used together to achieve the exact look needed.
+        </p>
+        <Box className="flex flex-wrap items-center gap-3">
+          <Button variant="primary" size="sm">
+            Save
+          </Button>
+          <Button variant="secondary" size="lg">
+            Learn more
+          </Button>
+        </Box>
+        <CodeBlock code={combinedSnippet} />
       </section>
     </article>
   );
