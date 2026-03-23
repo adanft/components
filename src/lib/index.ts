@@ -36,8 +36,6 @@ export type { SidebarHeadProps } from "./components/sidebar/sidebar-head";
 export { default as SidebarHead } from "./components/sidebar/sidebar-head";
 export type { SidebarLinkProps } from "./components/sidebar/sidebar-link";
 export { default as SidebarLink } from "./components/sidebar/sidebar-link";
-export type { SidebarListProps } from "./components/sidebar/sidebar-list";
-export { default as SidebarList } from "./components/sidebar/sidebar-list";
 export type { SidebarSectionProps } from "./components/sidebar/sidebar-section";
 export { default as SidebarSection } from "./components/sidebar/sidebar-section";
 export type { TableProps } from "./components/table";

@@ -1,4 +1,4 @@
-import { Fragment, type JSX, type ReactNode, useState } from "react";
+import { type JSX, type ReactNode, useState } from "react";
 
 import {
   Navbar,
@@ -8,7 +8,6 @@ import {
   SidebarGroup,
   SidebarHead,
   SidebarLink,
-  SidebarList,
   SidebarSection,
 } from "../lib";
 import { docsBranding } from "./data/branding";
@@ -35,17 +34,17 @@ function renderNavigationNode(
   if (node.type === "group") {
     return (
       <SidebarGroup iconName={node.iconName} text={node.text}>
-        <SidebarList>
+        <ul className="flex flex-col gap-2">
           {node.children.map((child) => (
-            <Fragment
+            <li
               key={
                 child.type === "heading" ? `heading-${child.text}` : child.text
               }
             >
               {renderNavigationNode(child, expanded)}
-            </Fragment>
+            </li>
           ))}
-        </SidebarList>
+        </ul>
       </SidebarGroup>
     );
   }
@@ -77,17 +76,17 @@ function DocsShell({
           action={setSidebarState}
         />
         <SidebarBody>
-          <SidebarList>
+          <ul className="flex flex-col gap-2">
             {navigation.map((node) => (
-              <Fragment
+              <li
                 key={
                   node.type === "heading" ? `heading-${node.text}` : node.text
                 }
               >
                 {renderNavigationNode(node, sidebarState)}
-              </Fragment>
+              </li>
             ))}
-          </SidebarList>
+          </ul>
         </SidebarBody>
       </Sidebar>
       <main className="absolute left-[65px] text-foreground w-[calc(100%-65px)] p-4 min-h-[calc(100vh-97px)] bg-background top-[97px]">

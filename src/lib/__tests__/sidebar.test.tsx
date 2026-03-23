@@ -9,7 +9,6 @@ import {
   SidebarGroup,
   SidebarHead,
   SidebarLink,
-  SidebarList,
   SidebarSection,
 } from "../index";
 
@@ -82,24 +81,34 @@ describe("Sidebar", () => {
             action={action}
           />
           <SidebarBody>
-            <SidebarList>
-              <SidebarSection text="Main" state={state} />
-              <SidebarLink
-                href="/overview"
-                nfIconName="nf-fa-home"
-                text="Overview"
-              />
-              <SidebarGroup iconName="nf-fa-folder_open" text="Reports">
-                <SidebarList>
-                  <SidebarLink
-                    href="/reports/monthly"
-                    nfIconName="nf-fa-calendar"
-                    text="Monthly"
-                  />
-                </SidebarList>
-              </SidebarGroup>
-              <SidebarSection text="Secondary" state={state} />
-            </SidebarList>
+            <ul className="flex flex-col gap-2">
+              <li>
+                <SidebarSection text="Main" state={state} />
+              </li>
+              <li>
+                <SidebarLink
+                  href="/overview"
+                  nfIconName="nf-fa-home"
+                  text="Overview"
+                />
+              </li>
+              <li>
+                <SidebarGroup iconName="nf-fa-folder_open" text="Reports">
+                  <ul className="flex flex-col gap-2">
+                    <li>
+                      <SidebarLink
+                        href="/reports/monthly"
+                        nfIconName="nf-fa-calendar"
+                        text="Monthly"
+                      />
+                    </li>
+                  </ul>
+                </SidebarGroup>
+              </li>
+              <li>
+                <SidebarSection text="Secondary" state={state} />
+              </li>
+            </ul>
           </SidebarBody>
         </Sidebar>
       </MemoryRouter>,
@@ -118,13 +127,15 @@ describe("Sidebar", () => {
     const { container } = render(
       <MemoryRouter>
         <SidebarGroup iconName="nf-fa-folder_open" text="Reports">
-          <SidebarList>
-            <SidebarLink
-              href="/reports/monthly"
-              nfIconName="nf-fa-calendar"
-              text="Monthly"
-            />
-          </SidebarList>
+          <ul className="flex flex-col gap-2">
+            <li>
+              <SidebarLink
+                href="/reports/monthly"
+                nfIconName="nf-fa-calendar"
+                text="Monthly"
+              />
+            </li>
+          </ul>
         </SidebarGroup>
       </MemoryRouter>,
     );
@@ -147,17 +158,21 @@ describe("Sidebar", () => {
     expect(chevron).toHaveClass("rotate-180");
   });
 
-  it("wraps each direct child in a list item preserving order", () => {
+  it("renders list items in order using ul/li structure", () => {
     render(
       <MemoryRouter>
-        <SidebarList>
-          <SidebarSection text="General" state={false} />
-          <SidebarLink
-            href="/dashboard"
-            nfIconName="nf-md-view_dashboard"
-            text="Dashboard"
-          />
-        </SidebarList>
+        <ul className="flex flex-col gap-2">
+          <li>
+            <SidebarSection text="General" state={false} />
+          </li>
+          <li>
+            <SidebarLink
+              href="/dashboard"
+              nfIconName="nf-md-view_dashboard"
+              text="Dashboard"
+            />
+          </li>
+        </ul>
       </MemoryRouter>,
     );
 
@@ -171,16 +186,18 @@ describe("Sidebar", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders link children without requiring li wrappers", () => {
+  it("renders link children inside li wrappers", () => {
     render(
       <MemoryRouter>
-        <SidebarList>
-          <SidebarLink
-            href="/orders"
-            nfIconName="nf-fa-shopping_cart"
-            text="Orders"
-          />
-        </SidebarList>
+        <ul className="flex flex-col gap-2">
+          <li>
+            <SidebarLink
+              href="/orders"
+              nfIconName="nf-fa-shopping_cart"
+              text="Orders"
+            />
+          </li>
+        </ul>
       </MemoryRouter>,
     );
 

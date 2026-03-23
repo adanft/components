@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import useOutsideHandler from "../../hooks/use-outside-handler";
-import Avatar from "./avatar";
-import Box from "./box";
-import Button from "./button";
+import useOutsideHandler from '../../hooks/use-outside-handler';
+import Avatar from './avatar';
+import Box from './box';
+import Button from './button';
 
 type ProfileProps = {
   userKey: string;
   fullName: string;
   btnAction: () => void;
   btnName: string;
-  avatarType: "image" | "text";
+  avatarType: 'image' | 'text';
   avatarSrc?: string;
   avatarAlt?: string;
   avatarText?: string;
@@ -39,24 +39,13 @@ function Profile({
         className="flex justify-center cursor-pointer"
         onClick={() => setShow((s) => !s)}
         aria-expanded={show}
-        aria-haspopup="menu"
-      >
-        <Avatar
-          type={avatarType}
-          src={avatarSrc}
-          alt={avatarAlt}
-          text={avatarText}
-        />
+        aria-haspopup="menu">
+        <Avatar type={avatarType} src={avatarSrc} alt={avatarAlt} text={avatarText} />
       </button>
       {show ? (
         <Box className="w-72 top-[calc(100%+1rem)] right-4 absolute">
           <div className="flex items-center gap-2">
-            <Avatar
-              type={avatarType}
-              src={avatarSrc}
-              alt={avatarAlt}
-              text={avatarText}
-            />
+            <Avatar type={avatarType} src={avatarSrc} alt={avatarAlt} text={avatarText} />
             <div className="flex flex-col gap-2 text-foreground">
               <span>{fullName}</span>
               <span className="text-sm font-semibold">{userKey}</span>

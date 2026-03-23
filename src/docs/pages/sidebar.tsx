@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 import {
   Box,
@@ -7,10 +7,9 @@ import {
   SidebarGroup,
   SidebarHead,
   SidebarLink,
-  SidebarList,
   SidebarSection,
-} from '../../lib';
-import { CodeBlock } from '../code-block';
+} from "../../lib";
+import { CodeBlock } from "../code-block";
 
 const importSnippet = `import { useState } from 'react';
 
@@ -18,7 +17,6 @@ import {
   Sidebar,
   SidebarHead,
   SidebarBody,
-  SidebarList,
   SidebarLink,
   SidebarSection,
   SidebarGroup,
@@ -35,51 +33,65 @@ const usageSnippet = `const [sidebarState, setSidebarState] = useState(true);
     action={setSidebarState}
   />
   <SidebarBody>
-    <SidebarList>
-      <SidebarSection text="Core" state={sidebarState} />
-      <SidebarLink href="/docs/button" nfIconName="nf-fa-hand_pointer_o" text="Button" />
-      <SidebarLink href="/docs/box" nfIconName="nf-md-view_agenda_outline" text="Box" />
-      <SidebarLink href="/docs/sidebar" nfIconName="nf-md-dock_left" text="Sidebar" />
+    <ul className="flex flex-col gap-2">
+      <li><SidebarSection text="Core" state={sidebarState} /></li>
+      <li><SidebarLink href="/docs/button" nfIconName="nf-fa-hand_pointer_o" text="Button" /></li>
+      <li><SidebarLink href="/docs/box" nfIconName="nf-md-view_agenda_outline" text="Box" /></li>
+      <li><SidebarLink href="/docs/sidebar" nfIconName="nf-md-dock_left" text="Sidebar" /></li>
 
-      <SidebarSection text="Management" state={sidebarState} />
-      <SidebarGroup iconName="nf-md-file_document" text="Reports">
-        <SidebarList>
-          <SidebarLink
-            href="/docs/financial-report"
-            nfIconName="nf-fa-money_check"
-            text="Financial Report"
-          />
-          <SidebarGroup iconName="nf-fa-chalkboard_user" text="User Reports">
-            <SidebarList>
+      <li><SidebarSection text="Management" state={sidebarState} /></li>
+      <li>
+        <SidebarGroup iconName="nf-md-file_document" text="Reports">
+          <ul className="flex flex-col gap-2">
+            <li>
               <SidebarLink
-                href="/docs/user-activity"
-                nfIconName="nf-fa-hospital_user"
-                text="User Activity"
+                href="/docs/financial-report"
+                nfIconName="nf-fa-money_check"
+                text="Financial Report"
               />
+            </li>
+            <li>
+              <SidebarGroup iconName="nf-fa-chalkboard_user" text="User Reports">
+                <ul className="flex flex-col gap-2">
+                  <li>
+                    <SidebarLink
+                      href="/docs/user-activity"
+                      nfIconName="nf-fa-hospital_user"
+                      text="User Activity"
+                    />
+                  </li>
+                  <li>
+                    <SidebarLink
+                      href="/docs/user-growth"
+                      nfIconName="nf-fa-user_tie"
+                      text="User Growth"
+                    />
+                  </li>
+                </ul>
+              </SidebarGroup>
+            </li>
+            <li>
               <SidebarLink
-                href="/docs/user-growth"
-                nfIconName="nf-fa-user_tie"
-                text="User Growth"
+                href="/docs/system-reports"
+                nfIconName="nf-md-view_compact"
+                text="System Reports"
               />
-            </SidebarList>
-          </SidebarGroup>
-          <SidebarLink
-            href="/docs/system-reports"
-            nfIconName="nf-md-view_compact"
-            text="System Reports"
-          />
-        </SidebarList>
-      </SidebarGroup>
+            </li>
+          </ul>
+        </SidebarGroup>
+      </li>
 
-      <SidebarSection text="Operations" state={sidebarState} />
-      <SidebarLink href="/docs/backup" nfIconName="nf-md-folder_lock_open_outline" text="Backup" />
-      <SidebarLink
-        href="/docs/restore"
-        nfIconName="nf-md-folder_refresh_outline"
-        text="Restore"
-      />
-      <SidebarLink href="/docs/settings" nfIconName="nf-cod-settings_gear" text="Settings" />
-    </SidebarList>
+      <li><SidebarSection text="Operations" state={sidebarState} /></li>
+      <li><SidebarLink href="/docs/backup" nfIconName="nf-md-folder_lock_open_outline" text="Backup" /></li>
+      <li>
+        <SidebarLink
+          href="/docs/restore"
+          nfIconName="nf-md-folder_refresh_outline"
+          text="Restore"
+        />
+      </li>
+      <li><SidebarLink href="/docs/settings" nfIconName="nf-cod-settings_gear" text="Settings" /></li>
+    </ul>
   </SidebarBody>
 </Sidebar>`;
 
@@ -92,31 +104,35 @@ const exampleJsx = `<Sidebar state={sidebarState} action={setSidebarState} class
     action={setSidebarState}
   />
   <SidebarBody>
-    <SidebarList>
-      <SidebarSection text="Core" state={sidebarState} />
-      <SidebarLink href="/docs/button" nfIconName="nf-fa-hand_pointer_o" text="Button" />
-      <SidebarLink href="/docs/box" nfIconName="nf-md-view_agenda_outline" text="Box" />
-      <SidebarLink href="/docs/sidebar" nfIconName="nf-md-dock_left" text="Sidebar" />
+    <ul className="flex flex-col gap-2">
+      <li><SidebarSection text="Core" state={sidebarState} /></li>
+      <li><SidebarLink href="/docs/button" nfIconName="nf-fa-hand_pointer_o" text="Button" /></li>
+      <li><SidebarLink href="/docs/box" nfIconName="nf-md-view_agenda_outline" text="Box" /></li>
+      <li><SidebarLink href="/docs/sidebar" nfIconName="nf-md-dock_left" text="Sidebar" /></li>
 
-      <SidebarSection text="Management" state={sidebarState} />
-      <SidebarGroup iconName="nf-md-file_document" text="Reports">
-        <SidebarList>
-          <SidebarLink href="/docs/financial-report" nfIconName="nf-fa-money_check" text="Financial Report" />
-          <SidebarGroup iconName="nf-fa-chalkboard_user" text="User Reports">
-            <SidebarList>
-              <SidebarLink href="/docs/user-activity" nfIconName="nf-fa-hospital_user" text="User Activity" />
-              <SidebarLink href="/docs/user-growth" nfIconName="nf-fa-user_tie" text="User Growth" />
-            </SidebarList>
-          </SidebarGroup>
-          <SidebarLink href="/docs/system-reports" nfIconName="nf-md-view_compact" text="System Reports" />
-        </SidebarList>
-      </SidebarGroup>
+      <li><SidebarSection text="Management" state={sidebarState} /></li>
+      <li>
+        <SidebarGroup iconName="nf-md-file_document" text="Reports">
+          <ul className="flex flex-col gap-2">
+            <li><SidebarLink href="/docs/financial-report" nfIconName="nf-fa-money_check" text="Financial Report" /></li>
+            <li>
+              <SidebarGroup iconName="nf-fa-chalkboard_user" text="User Reports">
+                <ul className="flex flex-col gap-2">
+                  <li><SidebarLink href="/docs/user-activity" nfIconName="nf-fa-hospital_user" text="User Activity" /></li>
+                  <li><SidebarLink href="/docs/user-growth" nfIconName="nf-fa-user_tie" text="User Growth" /></li>
+                </ul>
+              </SidebarGroup>
+            </li>
+            <li><SidebarLink href="/docs/system-reports" nfIconName="nf-md-view_compact" text="System Reports" /></li>
+          </ul>
+        </SidebarGroup>
+      </li>
 
-      <SidebarSection text="Operations" state={sidebarState} />
-      <SidebarLink href="/docs/backup" nfIconName="nf-md-folder_lock_open_outline" text="Backup" />
-      <SidebarLink href="/docs/restore" nfIconName="nf-md-folder_refresh_outline" text="Restore" />
-      <SidebarLink href="/docs/settings" nfIconName="nf-cod-settings_gear" text="Settings" />
-    </SidebarList>
+      <li><SidebarSection text="Operations" state={sidebarState} /></li>
+      <li><SidebarLink href="/docs/backup" nfIconName="nf-md-folder_lock_open_outline" text="Backup" /></li>
+      <li><SidebarLink href="/docs/restore" nfIconName="nf-md-folder_refresh_outline" text="Restore" /></li>
+      <li><SidebarLink href="/docs/settings" nfIconName="nf-cod-settings_gear" text="Settings" /></li>
+    </ul>
   </SidebarBody>
 </Sidebar>`;
 
@@ -127,28 +143,30 @@ function SidebarPage() {
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          components {'>'} Sidebar
+          components {">"} Sidebar
         </p>
         <h1 className="text-3xl font-bold text-brand">Sidebar</h1>
         <p className="text-foreground">
-          <code>Sidebar</code> is a composition-first aside primitive. Keep expansion controlled
-          with <code>state</code> and <code>action</code>, then build navigation using{' '}
-          <code>SidebarHead</code>, <code>SidebarBody</code>, <code>SidebarList</code>,{' '}
-          <code>SidebarSection</code>, <code>SidebarGroup</code>, and <code>SidebarLink</code>.
+          <code>Sidebar</code> is a composition-first aside primitive. Keep
+          expansion controlled with <code>state</code> and <code>action</code>,
+          then build navigation using <code>SidebarHead</code>,{" "}
+          <code>SidebarBody</code>, <code>SidebarSection</code>,{" "}
+          <code>SidebarGroup</code>, and <code>SidebarLink</code>.
         </p>
       </header>
 
       <section className="space-y-4">
         <h2 className="text-xl font-semibold text-brand">Usage</h2>
         <p className="text-foreground">
-          Import Sidebar primitives from the public entrypoint and compose links, sections, and
-          groups directly in JSX.
+          Import Sidebar primitives from the public entrypoint and compose
+          links, sections, and groups directly in JSX.
         </p>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
         <p className="text-foreground">
-          <code>SidebarBody</code> uses <code>SimpleBar</code> for scrolling. In embedded layouts,
-          provide a max height so content scrolls while the shell and header stay visible.
+          <code>SidebarBody</code> uses <code>SimpleBar</code> for scrolling. In
+          embedded layouts, provide a max height so content scrolls while the
+          shell and header stay visible.
         </p>
       </section>
 
@@ -158,7 +176,8 @@ function SidebarPage() {
           <Sidebar
             state={sidebarState}
             action={setSidebarState}
-            className="static z-auto max-h-[560px]">
+            className="static z-auto max-h-[560px]"
+          >
             <SidebarHead
               href="/"
               logoSrc="https://raw.githubusercontent.com/uditkumar01/ReactComponentGeneratorExtension/main/assets/logo.png"
@@ -167,59 +186,104 @@ function SidebarPage() {
               action={setSidebarState}
             />
             <SidebarBody>
-              <SidebarList>
-                <SidebarSection text="Core" state={sidebarState} />
-                <SidebarLink href="/docs/button" nfIconName="nf-fa-hand_pointer_o" text="Button" />
-                <SidebarLink href="/docs/box" nfIconName="nf-md-view_agenda_outline" text="Box" />
-                <SidebarLink href="/docs/sidebar" nfIconName="nf-md-dock_left" text="Sidebar" />
+              <ul className="flex flex-col gap-2">
+                <li>
+                  <SidebarSection text="Core" state={sidebarState} />
+                </li>
+                <li>
+                  <SidebarLink
+                    href="/docs/button"
+                    nfIconName="nf-fa-hand_pointer_o"
+                    text="Button"
+                  />
+                </li>
+                <li>
+                  <SidebarLink
+                    href="/docs/box"
+                    nfIconName="nf-md-view_agenda_outline"
+                    text="Box"
+                  />
+                </li>
+                <li>
+                  <SidebarLink
+                    href="/docs/sidebar"
+                    nfIconName="nf-md-dock_left"
+                    text="Sidebar"
+                  />
+                </li>
 
-                <SidebarSection text="Management" state={sidebarState} />
-                <SidebarGroup iconName="nf-md-file_document" text="Reports">
-                  <SidebarList>
-                    <SidebarLink
-                      href="/docs/financial-report"
-                      nfIconName="nf-fa-money_check"
-                      text="Financial Report"
-                    />
-                    <SidebarGroup iconName="nf-fa-chalkboard_user" text="User Reports">
-                      <SidebarList>
+                <li>
+                  <SidebarSection text="Management" state={sidebarState} />
+                </li>
+                <li>
+                  <SidebarGroup iconName="nf-md-file_document" text="Reports">
+                    <ul className="flex flex-col gap-2">
+                      <li>
                         <SidebarLink
-                          href="/docs/user-activity"
-                          nfIconName="nf-fa-hospital_user"
-                          text="User Activity"
+                          href="/docs/financial-report"
+                          nfIconName="nf-fa-money_check"
+                          text="Financial Report"
                         />
+                      </li>
+                      <li>
+                        <SidebarGroup
+                          iconName="nf-fa-chalkboard_user"
+                          text="User Reports"
+                        >
+                          <ul className="flex flex-col gap-2">
+                            <li>
+                              <SidebarLink
+                                href="/docs/user-activity"
+                                nfIconName="nf-fa-hospital_user"
+                                text="User Activity"
+                              />
+                            </li>
+                            <li>
+                              <SidebarLink
+                                href="/docs/user-growth"
+                                nfIconName="nf-fa-user_tie"
+                                text="User Growth"
+                              />
+                            </li>
+                          </ul>
+                        </SidebarGroup>
+                      </li>
+                      <li>
                         <SidebarLink
-                          href="/docs/user-growth"
-                          nfIconName="nf-fa-user_tie"
-                          text="User Growth"
+                          href="/docs/system-reports"
+                          nfIconName="nf-md-view_compact"
+                          text="System Reports"
                         />
-                      </SidebarList>
-                    </SidebarGroup>
-                    <SidebarLink
-                      href="/docs/system-reports"
-                      nfIconName="nf-md-view_compact"
-                      text="System Reports"
-                    />
-                  </SidebarList>
-                </SidebarGroup>
+                      </li>
+                    </ul>
+                  </SidebarGroup>
+                </li>
 
-                <SidebarSection text="Operations" state={sidebarState} />
-                <SidebarLink
-                  href="/docs/backup"
-                  nfIconName="nf-md-folder_lock_open_outline"
-                  text="Backup"
-                />
-                <SidebarLink
-                  href="/docs/restore"
-                  nfIconName="nf-md-folder_refresh_outline"
-                  text="Restore"
-                />
-                <SidebarLink
-                  href="/docs/settings"
-                  nfIconName="nf-cod-settings_gear"
-                  text="Settings"
-                />
-              </SidebarList>
+                <li>
+                  <SidebarSection text="Operations" state={sidebarState} />
+                </li>
+                <li>
+                  <SidebarLink
+                    href="/docs/backup"
+                    nfIconName="nf-md-folder_lock_open_outline"
+                    text="Backup"
+                  />
+                </li>
+                <li>
+                  <SidebarLink
+                    href="/docs/restore"
+                    nfIconName="nf-md-folder_refresh_outline"
+                    text="Restore"
+                  />
+                </li>
+                <li>
+                  <SidebarLink
+                    href="/docs/settings"
+                    nfIconName="nf-cod-settings_gear"
+                    text="Settings"
+                  />
+                </li>
+              </ul>
             </SidebarBody>
           </Sidebar>
         </Box>
