@@ -15,7 +15,7 @@ function Sidebar({ className, children, state, action, ...props }: SidebarProps)
 
   const sidebarClassName = cn(
     'transition-all duration-300 fixed min-h-screen z-20 top-0 left-0 border-r border-border shadow-card bg-surface',
-    state ? 'w-[321px]' : 'w-[65px]',
+    state ? 'w-80.25' : 'w-16.25',
     className,
   );
 
