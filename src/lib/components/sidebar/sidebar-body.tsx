@@ -9,7 +9,7 @@ type SidebarBodyProps = ComponentPropsWithoutRef<'div'> & {
 };
 
 function SidebarBody({ children, className }: SidebarBodyProps) {
-  const componentClass = cn('max-h-[calc(100vh-6rem)] overflow-x-hidden', className);
+  const componentClass = cn('h-full overflow-x-hidden', className);
   return (
     <SimpleBar className={componentClass}>
       <nav className="flex flex-col gap-2">{children}</nav>
