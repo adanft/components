@@ -1,5 +1,5 @@
-import type { ProfileProps } from '../profile';
-import Profile from '../profile';
+import type { ProfileProps } from '../../lib/components/profile';
+import Profile from '../../lib/components/profile';
 import ToggleTheme from '../toggle-theme';
 
 type NavbarProps = {
