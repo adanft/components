@@ -10,15 +10,15 @@
     "build": "pnpm typecheck && pnpm build:docs && pnpm build:lib",
     "build:docs": "vite build --config vite.docs.config.ts",
     "build:lib": "vite build --config vite.lib.config.ts",
-    "lint": "biome lint .",
+    "lint": "biome lint --write .",
     "format": "biome format --write .",
-    "check": "biome check --write .",
+    "check": "biome check .",
     "preview": "vite preview --config vite.docs.config.ts",
     "test": "vitest run",
     "typecheck": "tsc -b --pretty false",
     "validate:boundaries": "node scripts/validate-docs-imports.mjs",
     "validate:semantic-tokens": "node scripts/validate-semantic-tokens.mjs",
-    "validate": "pnpm lint && pnpm typecheck && pnpm validate:boundaries && pnpm validate:semantic-tokens && pnpm build"
+    "validate": "pnpm check && pnpm typecheck && pnpm validate:boundaries && pnpm validate:semantic-tokens && pnpm build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
