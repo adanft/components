@@ -15,12 +15,12 @@
 
 ## 🟡 Medio — accesibilidad y API
 
-| Componente         | Problema                                                                                                                                              |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ~~**Modal**~~      | ~~No tiene `role="dialog"`, `aria-modal="true"` ni `aria-labelledby`. Screen readers no lo anuncian como modal.~~ ✅ Resuelto — ver sección al final. |
-| ~~**Profile**~~    | ~~El avatar usa un `div` con `onClick` en vez de `<button>`. Violación de accesibilidad básica.~~ ✅ Resuelto — ver sección al final.                 |
-| **SidebarGroup**   | El botón de toggle no tiene `aria-label` ni `aria-controls`.                                                                                          |
-| ~~**InputField**~~ | ~~Usa template literals hardcodeados para clases en vez del helper `cn()`. Inconsistente con el resto.~~ ✅ Resuelto — ver sección al final.          |
+| Componente           | Problema                                                                                                                                              |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ~~**Modal**~~        | ~~No tiene `role="dialog"`, `aria-modal="true"` ni `aria-labelledby`. Screen readers no lo anuncian como modal.~~ ✅ Resuelto — ver sección al final. |
+| ~~**Profile**~~      | ~~El avatar usa un `div` con `onClick` en vez de `<button>`. Violación de accesibilidad básica.~~ ✅ Resuelto — ver sección al final.                 |
+| ~~**SidebarGroup**~~ | ~~El botón de toggle no tiene `aria-label` ni `aria-controls`.~~ ✅ Resuelto — ver sección al final.                                                  |
+| ~~**InputField**~~   | ~~Usa template literals hardcodeados para clases en vez del helper `cn()`. Inconsistente con el resto.~~ ✅ Resuelto — ver sección al final.          |
 
 ---
 
@@ -45,7 +45,7 @@
 | InputField | `input-field.tsx`       | ✅ Sin issues          |
 | Profile    | `profile.tsx`           | ✅ Sin issues          |
 | Modal      | `modal/`                | ✅ Headless API + a11y |
-| Sidebar    | `sidebar/` (7 archivos) | 🟡 Pendiente           |
+| Sidebar    | `sidebar/` (7 archivos) | ✅ Sin issues          |
 | Table      | `table/` (8 archivos)   | ✅ Bien estructurado   |
 
 ---
@@ -149,3 +149,38 @@ El trigger del avatar fue reemplazado por un `<button>` semántico con atributos
 | Sin `aria-expanded` para indicar estado del menú      | Agregado `aria-expanded={open}` al botón trigger            |
 | Sin `aria-haspopup` para anunciar el menú desplegable | Agregado `aria-haspopup="menu"` al botón trigger            |
 | Callbacks y tipos innecesariamente complejos          | Simplificados — eliminada complejidad sin impacto funcional |
+
+---
+
+### SidebarGroup — aria-controls y tests a escala dinámica Tailwind 4 (2026-03-22)
+
+El botón de toggle del grupo fue actualizado con `aria-controls` conectado vía `useId()`, y los tests fueron migrados a la escala dinámica de Tailwind 4.
+
+**Problemas resueltos:**
+
+| Issue original                              | Solución implementada                                                                    |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Botón de toggle sin `aria-controls`         | Agregado `aria-controls` usando `useId()` para conectar el botón con el panel colapsable |
+| Tests con valores hardcodeados (`w-[65px]`) | Migrados a escala dinámica Tailwind 4 (`w-[65px]` → `w-16.25`)                           |
+
+---
+
+## Estado final
+
+> Fecha de cierre: 2026-03-22
+
+| Componente   | Issues detectados   | Resultado                                      |
+| ------------ | ------------------- | ---------------------------------------------- |
+| Box          | 0                   | ✅ Sin issues                                  |
+| Button       | 1 (disabled)        | ✅ Resuelto — estilos disabled agregados       |
+| Icon         | 0                   | ✅ Sin issues                                  |
+| InputField   | 2 (cn, a11y)        | ✅ Resuelto — migrado a cn() + aria attributes |
+| Profile      | 3 (a11y)            | ✅ Resuelto — trigger semántico + ARIA         |
+| Modal        | 8 (a11y, API)       | ✅ Resuelto — rewrite headless completo        |
+| Sidebar      | 2 (false positives) | ✅ Descartado — falsos positivos Tailwind 3    |
+| SidebarGroup | 1 (aria-controls)   | ✅ Resuelto — aria-controls con useId()        |
+| Table        | 0                   | ✅ Sin issues                                  |
+| cn() helper  | 1 (no tw-merge)     | 🔲 Pendiente — mejora de calidad no crítica    |
+| SidebarLink  | 1 (router)          | 🔲 Pendiente — mejora de API no crítica        |
+
+**Todos los issues críticos y de accesibilidad han sido resueltos o descartados. Los únicos pendientes son mejoras de calidad no bloqueantes.**
