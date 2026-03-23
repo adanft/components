@@ -1,4 +1,4 @@
-import { Fragment, type JSX, type ReactNode, useState } from 'react';
+import { Fragment, type JSX, type ReactNode, useState } from "react";
 
 import {
   Navbar,
@@ -7,14 +7,16 @@ import {
   SidebarBody,
   SidebarGroup,
   SidebarHead,
+  SidebarLink,
   SidebarList,
   SidebarSection,
-} from '../lib';
-import { docsBranding } from './data/branding';
-import { docsNavbarProps } from './data/navbar';
-import { type DocsSidebarNavigationNode, docsSidebarNavigation } from './data/sidebar-navigation';
-import { RouterLinkAdapter } from './router-adapters';
-import useRouteActiveMatcher from './use-route-active-matcher';
+} from "../lib";
+import { docsBranding } from "./data/branding";
+import { docsNavbarProps } from "./data/navbar";
+import {
+  type DocsSidebarNavigationNode,
+  docsSidebarNavigation,
+} from "./data/sidebar-navigation";
 
 type DocsShellProps = {
   children: ReactNode;
@@ -25,19 +27,22 @@ type DocsShellProps = {
 function renderNavigationNode(
   node: DocsSidebarNavigationNode,
   expanded: boolean,
-  getIsActive: (href: string) => boolean,
 ): JSX.Element {
-  if (node.type === 'heading') {
+  if (node.type === "heading") {
     return <SidebarSection text={node.text} state={expanded} />;
   }
 
-  if (node.type === 'group') {
+  if (node.type === "group") {
     return (
       <SidebarGroup iconName={node.iconName} text={node.text}>
         <SidebarList>
           {node.children.map((child) => (
-            <Fragment key={child.type === 'heading' ? `heading-${child.text}` : child.text}>
-              {renderNavigationNode(child, expanded, getIsActive)}
+            <Fragment
+              key={
+                child.type === "heading" ? `heading-${child.text}` : child.text
+              }
+            >
+              {renderNavigationNode(child, expanded)}
             </Fragment>
           ))}
         </SidebarList>
@@ -45,15 +50,12 @@ function renderNavigationNode(
     );
   }
 
-  const className = getIsActive(node.href)
-    ? 'bg-brand text-white flex mx-2 leading-none items-center text-foreground gap-4 rounded-md'
-    : 'flex px-2 leading-none items-center text-foreground gap-4 rounded-md';
-
   return (
-    <RouterLinkAdapter className={className} href={node.href}>
-      <i className={`nf leading-none ${node.nfIconName} p-3.5 text-xl`} />
-      <span className="font-medium">{node.text}</span>
-    </RouterLinkAdapter>
+    <SidebarLink
+      href={node.href}
+      nfIconName={node.nfIconName}
+      text={node.text}
+    />
   );
 }
 
@@ -63,7 +65,6 @@ function DocsShell({
   navigation = docsSidebarNavigation,
 }: DocsShellProps) {
   const [sidebarState, setSidebarState] = useState(false);
-  const getIsActive = useRouteActiveMatcher();
 
   return (
     <>
@@ -78,8 +79,12 @@ function DocsShell({
         <SidebarBody>
           <SidebarList>
             {navigation.map((node) => (
-              <Fragment key={node.type === 'heading' ? `heading-${node.text}` : node.text}>
-                {renderNavigationNode(node, sidebarState, getIsActive)}
+              <Fragment
+                key={
+                  node.type === "heading" ? `heading-${node.text}` : node.text
+                }
+              >
+                {renderNavigationNode(node, sidebarState)}
               </Fragment>
             ))}
           </SidebarList>

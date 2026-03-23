@@ -1,4 +1,6 @@
-import { Link } from 'react-router';
+import { NavLink } from "react-router";
+
+import { cn } from "../../helpers/cn";
 
 type SidebarLinkProps = {
   className?: string;
@@ -7,14 +9,21 @@ type SidebarLinkProps = {
   text: string;
 };
 
-const defaultClassName = 'flex px-2 leading-none items-center text-foreground gap-4 rounded-md';
-
-function SidebarLink({ className = defaultClassName, href, nfIconName, text }: SidebarLinkProps) {
+function SidebarLink({ className, href, nfIconName, text }: SidebarLinkProps) {
   return (
-    <Link className={className} to={href}>
+    <NavLink
+      to={href}
+      className={({ isActive }) =>
+        cn(
+          "flex leading-none items-center text-foreground gap-4 rounded-md",
+          isActive ? "bg-brand text-white mx-2" : "px-2",
+          className,
+        )
+      }
+    >
       <i className={`nf leading-none ${nfIconName} p-3.5 text-xl`} />
       <span className="font-medium">{text}</span>
-    </Link>
+    </NavLink>
   );
 }
 
