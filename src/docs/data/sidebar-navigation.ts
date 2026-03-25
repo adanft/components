@@ -1,6 +1,7 @@
 import {
   DOCS_BOX_PATH,
   DOCS_BUTTON_PATH,
+  DOCS_CHECKBOX_PATH,
   DOCS_ICON_PATH,
   DOCS_INPUT_FIELD_PATH,
   DOCS_MODAL_PATH,
@@ -35,8 +36,14 @@ type DocsSidebarNavigationNode =
   | DocsSidebarNavigationLinkNode;
 
 const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
-  { type: 'link', nfIconName: 'nf-fa-hand_pointer_o', text: 'Button', href: DOCS_BUTTON_PATH },
   { type: 'link', nfIconName: 'nf-md-view_agenda_outline', text: 'Box', href: DOCS_BOX_PATH },
+  { type: 'link', nfIconName: 'nf-fa-hand_pointer_o', text: 'Button', href: DOCS_BUTTON_PATH },
+  {
+    type: 'link',
+    nfIconName: 'nf-md-checkbox_marked_outline',
+    text: 'Checkbox',
+    href: DOCS_CHECKBOX_PATH,
+  },
   { type: 'link', nfIconName: 'nf-md-image_outline', text: 'Icon', href: DOCS_ICON_PATH },
   {
     type: 'link',

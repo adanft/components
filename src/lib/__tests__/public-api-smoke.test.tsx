@@ -6,6 +6,7 @@ import * as components from '../index';
 import {
   Box,
   Button,
+  Checkbox,
   Home,
   Icon,
   InputField,
@@ -30,6 +31,7 @@ describe('public API smoke', () => {
     const cases = [
       <Button key="button">Click me</Button>,
       <Box key="box" />,
+      <Checkbox key="checkbox" aria-label="Smoke checkbox" onChange={() => {}} />,
       <Home key="home" />,
       <Icon key="icon" symbol="nf-fa-user" className="text-lg text-brand" />,
       <InputField key="input-field" label="Email" id="email" placeholder="name@example.com" />,

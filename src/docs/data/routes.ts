@@ -23,12 +23,14 @@ const DOCS_MODAL_PATH = '/components/modal';
 const DOCS_PROFILE_PATH = '/components/profile';
 const DOCS_SIDEBAR_PATH = '/components/sidebar';
 const DOCS_TABLE_PATH = '/components/table';
+const DOCS_CHECKBOX_PATH = '/components/checkbox';
 const DOCS_NOT_FOUND_PATH = docsPath('/*');
 
 export {
   DOCS_BASE_PATH,
   DOCS_BOX_PATH,
   DOCS_BUTTON_PATH,
+  DOCS_CHECKBOX_PATH,
   DOCS_HOME_PATH,
   DOCS_ICON_PATH,
   DOCS_INPUT_FIELD_PATH,

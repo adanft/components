@@ -4,6 +4,7 @@ import { Home, NotFound } from '../lib';
 import {
   DOCS_BOX_PATH,
   DOCS_BUTTON_PATH,
+  DOCS_CHECKBOX_PATH,
   DOCS_HOME_PATH,
   DOCS_ICON_PATH,
   DOCS_INPUT_FIELD_PATH,
@@ -15,6 +16,7 @@ import {
 } from './data/routes';
 import BoxPage from './pages/box';
 import ButtonPage from './pages/button';
+import CheckboxPage from './pages/checkbox';
 import IconPage from './pages/icon';
 import InputFieldPage from './pages/input-field';
 import ModalPage from './pages/modal';
@@ -37,6 +39,7 @@ function App() {
           <Route path={DOCS_PROFILE_PATH} element={<ProfilePage />} />
           <Route path={DOCS_SIDEBAR_PATH} element={<SidebarPage />} />
           <Route path={DOCS_TABLE_PATH} element={<TablePage />} />
+          <Route path={DOCS_CHECKBOX_PATH} element={<CheckboxPage />} />
           <Route path={DOCS_NOT_FOUND_PATH} element={<NotFound />} />
         </Routes>
       </DocsShell>
