@@ -5,14 +5,14 @@ import PaginationHead from '../components/pagination/head';
 
 describe('PaginationHead', () => {
   it('renders capitalized label and total count', () => {
-    render(<PaginationHead pageSize={10} totalItems={42} onChange={() => {}} />);
+    render(<PaginationHead pageSize={10} totalItems={42} onPaginationChange={() => {}} />);
 
     expect(screen.getByText(/Items per page:/)).toBeInTheDocument();
     expect(screen.getByText('Total 42 items')).toBeInTheDocument();
   });
 
   it('renders all default page size options', () => {
-    render(<PaginationHead pageSize={10} totalItems={42} onChange={() => {}} />);
+    render(<PaginationHead pageSize={10} totalItems={42} onPaginationChange={() => {}} />);
 
     const options = screen.getAllByRole('option');
 
@@ -21,22 +21,24 @@ describe('PaginationHead', () => {
   });
 
   it('reflects current pageSize as the selected value', () => {
-    render(<PaginationHead pageSize={20} totalItems={100} onChange={() => {}} />);
+    render(<PaginationHead pageSize={20} totalItems={100} onPaginationChange={() => {}} />);
 
     const select = screen.getByRole('combobox') as HTMLSelectElement;
 
     expect(select.value).toBe('20');
   });
 
-  it('calls onChange with { pageSize: <new>, pageIndex: 0 } when user selects a new size', () => {
-    const onChange = vi.fn();
+  it('calls onPaginationChange with { pageSize: <new>, pageIndex: 0 } when user selects a new size', () => {
+    const onPaginationChange = vi.fn();
 
-    render(<PaginationHead pageSize={10} totalItems={42} onChange={onChange} />);
+    render(
+      <PaginationHead pageSize={10} totalItems={42} onPaginationChange={onPaginationChange} />,
+    );
 
     fireEvent.change(screen.getByRole('combobox'), { target: { value: '20' } });
 
-    expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith({ pageSize: 20, pageIndex: 0 });
+    expect(onPaginationChange).toHaveBeenCalledTimes(1);
+    expect(onPaginationChange).toHaveBeenCalledWith({ pageSize: 20, pageIndex: 0 });
   });
 
   it('respects custom pageSizeOptions prop', () => {
@@ -44,7 +46,7 @@ describe('PaginationHead', () => {
       <PaginationHead
         pageSize={25}
         totalItems={100}
-        onChange={() => {}}
+        onPaginationChange={() => {}}
         pageSizeOptions={[15, 25, 100]}
       />,
     );
@@ -55,14 +57,16 @@ describe('PaginationHead', () => {
   });
 
   it('respects custom label prop and capitalizes it', () => {
-    render(<PaginationHead pageSize={10} totalItems={3} onChange={() => {}} label="users" />);
+    render(
+      <PaginationHead pageSize={10} totalItems={3} onPaginationChange={() => {}} label="users" />,
+    );
 
     expect(screen.getByText(/Users per page:/)).toBeInTheDocument();
     expect(screen.getByText('Total 3 users')).toBeInTheDocument();
   });
 
   it('links label to select via htmlFor/id', () => {
-    render(<PaginationHead pageSize={10} totalItems={42} onChange={() => {}} />);
+    render(<PaginationHead pageSize={10} totalItems={42} onPaginationChange={() => {}} />);
 
     const select = screen.getByRole('combobox');
     const id = select.getAttribute('id');
@@ -75,7 +79,9 @@ describe('PaginationHead', () => {
   });
 
   it('exposes an accessible name on the select via aria-label', () => {
-    render(<PaginationHead pageSize={10} totalItems={42} onChange={() => {}} label="users" />);
+    render(
+      <PaginationHead pageSize={10} totalItems={42} onPaginationChange={() => {}} label="users" />,
+    );
 
     expect(screen.getByRole('combobox', { name: 'Users per page' })).toBeInTheDocument();
   });
@@ -85,7 +91,7 @@ describe('PaginationHead', () => {
       <PaginationHead
         pageSize={10}
         totalItems={42}
-        onChange={() => {}}
+        onPaginationChange={() => {}}
         className="custom-wrapper"
         id="my-pagination-head"
       />,
@@ -98,20 +104,20 @@ describe('PaginationHead', () => {
   });
 
   it('parses the select value as a base-10 integer', () => {
-    const onChange = vi.fn();
+    const onPaginationChange = vi.fn();
 
     render(
       <PaginationHead
         pageSize={5}
         totalItems={100}
-        onChange={onChange}
+        onPaginationChange={onPaginationChange}
         pageSizeOptions={[5, 50]}
       />,
     );
 
     fireEvent.change(screen.getByRole('combobox'), { target: { value: '50' } });
 
-    expect(onChange).toHaveBeenCalledWith({ pageSize: 50, pageIndex: 0 });
-    expect(typeof onChange.mock.calls[0][0].pageSize).toBe('number');
+    expect(onPaginationChange).toHaveBeenCalledWith({ pageSize: 50, pageIndex: 0 });
+    expect(typeof onPaginationChange.mock.calls[0][0].pageSize).toBe('number');
   });
 });

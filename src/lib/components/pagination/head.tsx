@@ -5,7 +5,7 @@ import { cn } from '../../helpers/cn';
 type PaginationHeadProps = ComponentPropsWithoutRef<'div'> & {
   pageSize: number;
   totalItems: number;
-  onChange: (next: { pageSize: number; pageIndex: number }) => void;
+  onPaginationChange: (next: { pageSize: number; pageIndex: number }) => void;
   label?: string;
   pageSizeOptions?: number[];
 };
@@ -21,7 +21,7 @@ function PaginationHead({
   className,
   id,
   label = 'items',
-  onChange,
+  onPaginationChange,
   pageSize,
   pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS,
   totalItems,
@@ -40,7 +40,7 @@ function PaginationHead({
           aria-label={`${capitalizedLabel} per page`}
           className="cursor-pointer bg-background text-foreground outline-none"
           onChange={(event) => {
-            onChange({
+            onPaginationChange({
               pageSize: parseInt(event.target.value, 10),
               pageIndex: 0,
             });

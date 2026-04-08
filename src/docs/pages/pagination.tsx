@@ -8,7 +8,7 @@ const importSnippet = `import { PaginationFoot, PaginationHead } from '@your-org
 const headSnippet = `<PaginationHead
   pageSize={pageSize}
   totalItems={125}
-  onChange={({ pageSize, pageIndex }) => {
+  onPaginationChange={({ pageSize, pageIndex }) => {
     setPageSize(pageSize);
     setPageIndex(pageIndex);
   }}
@@ -32,7 +32,7 @@ const fullSnippet = `function PaginationExample() {
       <PaginationHead
         pageSize={pageSize}
         totalItems={totalItems}
-        onChange={({ pageSize, pageIndex }) => {
+        onPaginationChange={({ pageSize, pageIndex }) => {
           setPageSize(pageSize);
           setPageIndex(pageIndex);
         }}
@@ -60,7 +60,7 @@ function PaginationPreview() {
       <PaginationHead
         pageSize={pageSize}
         totalItems={totalItems}
-        onChange={({ pageSize, pageIndex }) => {
+        onPaginationChange={({ pageSize, pageIndex }) => {
           setPageSize(pageSize);
           setPageIndex(pageIndex);
         }}
@@ -87,7 +87,7 @@ function PaginationPage() {
         <p className="text-foreground">
           <code>PaginationHead</code> and <code>PaginationFoot</code> are presentational pagination
           primitives. Keep routing, TanStack Table, or any other state management outside the
-          component boundary and adapt them through <code>onChange</code> and{' '}
+          component boundary and adapt them through <code>onPaginationChange</code> and{' '}
           <code>onPageChange</code>.
         </p>
       </header>
