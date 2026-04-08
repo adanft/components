@@ -26,6 +26,10 @@ export type {
   ModalTitleProps,
 } from './components/modal';
 export { default as Modal } from './components/modal';
+export type { PaginationFootProps } from './components/pagination/foot';
+export { default as PaginationFoot } from './components/pagination/foot';
+export type { PaginationHeadProps } from './components/pagination/head';
+export { default as PaginationHead } from './components/pagination/head';
 export type { ProfileProps } from './components/profile';
 export { default as Profile } from './components/profile';
 export type { SidebarProps } from './components/sidebar';
