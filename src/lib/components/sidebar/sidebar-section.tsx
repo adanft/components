@@ -1,3 +1,4 @@
+import { Minus } from 'lucide-react';
 import type { ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '../../helpers/cn';
@@ -11,7 +12,7 @@ function SidebarSection({ text, className, ...props }: SidebarSectionProps) {
     <h5
       className={cn('text-muted py-4 text-lg font-semibold whitespace-nowrap px-6', className)}
       {...props}>
-      <i aria-hidden="true" className="nf nf-fa-minus" />
+      <Minus aria-hidden="true" className="inline size-4 stroke-2" />
       <span className="ml-6">{text}</span>
     </h5>
   );

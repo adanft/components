@@ -6,7 +6,6 @@ import {
   DOCS_BUTTON_PATH,
   DOCS_CHECKBOX_PATH,
   DOCS_HOME_PATH,
-  DOCS_ICON_PATH,
   DOCS_INPUT_FIELD_PATH,
   DOCS_MODAL_PATH,
   DOCS_NOT_FOUND_PATH,
@@ -19,7 +18,6 @@ import {
 import BoxPage from './pages/box';
 import ButtonPage from './pages/button';
 import CheckboxPage from './pages/checkbox';
-import IconPage from './pages/icon';
 import InputFieldPage from './pages/input-field';
 import ModalPage from './pages/modal';
 import PaginationPage from './pages/pagination';
@@ -37,7 +35,6 @@ function App() {
           <Route path={DOCS_HOME_PATH} element={<Home />} />
           <Route path={DOCS_BUTTON_PATH} element={<ButtonPage />} />
           <Route path={DOCS_BOX_PATH} element={<BoxPage />} />
-          <Route path={DOCS_ICON_PATH} element={<IconPage />} />
           <Route path={DOCS_INPUT_FIELD_PATH} element={<InputFieldPage />} />
           <Route path={DOCS_MODAL_PATH} element={<ModalPage />} />
           <Route path={DOCS_PAGINATION_PATH} element={<PaginationPage />} />

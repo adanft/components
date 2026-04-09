@@ -21,11 +21,6 @@ const COMPONENT_CARDS: HomeComponentCard[] = [
     description: 'Surface container for grouping content blocks and layouts.',
   },
   {
-    name: 'Icon',
-    href: '/components/icon',
-    description: 'Nerd Font icon primitive with className-driven customization.',
-  },
-  {
     name: 'InputField',
     href: '/components/input-field',
     description: 'Label + input control with focus and tokenized visual states.',

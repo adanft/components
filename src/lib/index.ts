@@ -14,8 +14,6 @@ export type {
 export { default as Button } from './components/button';
 export type { CheckboxProps } from './components/checkbox';
 export { default as Checkbox } from './components/checkbox';
-export type { IconProps } from './components/icon';
-export { default as Icon } from './components/icon';
 export type { InputFieldProps } from './components/input-field';
 export { default as InputField } from './components/input-field';
 export type {

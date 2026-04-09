@@ -1,3 +1,4 @@
+import type { LucideIcon } from 'lucide-react';
 import { NavLink } from 'react-router';
 
 import { cn } from '../../helpers/cn';
@@ -5,11 +6,13 @@ import { cn } from '../../helpers/cn';
 type SidebarLinkProps = {
   className?: string;
   href: string;
-  nfIconName: string;
+  icon: LucideIcon;
   text: string;
 };
 
-function SidebarLink({ className, href, nfIconName, text }: SidebarLinkProps) {
+function SidebarLink({ className, href, icon, text }: SidebarLinkProps) {
+  const IconComponent = icon;
+
   return (
     <NavLink
       to={href}
@@ -20,7 +23,9 @@ function SidebarLink({ className, href, nfIconName, text }: SidebarLinkProps) {
           className,
         )
       }>
-      <i className={`nf leading-none ${nfIconName} p-3.5 text-xl`} />
+      <span className="flex shrink-0 items-center justify-center p-3.5">
+        <IconComponent aria-hidden="true" className="size-5 stroke-2" />
+      </span>
       <span className="font-medium">{text}</span>
     </NavLink>
   );

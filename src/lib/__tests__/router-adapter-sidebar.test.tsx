@@ -1,3 +1,4 @@
+import { ShoppingCart, Users } from 'lucide-react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';
@@ -12,11 +13,11 @@ describe('router adapter sidebar behavior', () => {
     const navigation = [
       {
         type: 'link' as const,
-        nfIconName: 'nf-fa-shopping_cart',
+        icon: ShoppingCart,
         text: 'Orders',
         href: ordersHref,
       },
-      { type: 'link' as const, nfIconName: 'nf-fa-users', text: 'Users', href: usersHref },
+      { type: 'link' as const, icon: Users, text: 'Users', href: usersHref },
     ];
 
     render(

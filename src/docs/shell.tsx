@@ -27,7 +27,7 @@ function renderNavigationNode(node: DocsSidebarNavigationNode, expanded: boolean
 
   if (node.type === 'group') {
     return (
-      <SidebarGroup iconName={node.iconName} text={node.text}>
+      <SidebarGroup icon={node.icon} text={node.text}>
         <ul className="flex flex-col gap-2">
           {node.children.map((child) => (
             <li key={child.type === 'heading' ? `heading-${child.text}` : child.text}>
@@ -39,7 +39,7 @@ function renderNavigationNode(node: DocsSidebarNavigationNode, expanded: boolean
     );
   }
 
-  return <SidebarLink href={node.href} nfIconName={node.nfIconName} text={node.text} />;
+  return <SidebarLink href={node.href} icon={node.icon} text={node.text} />;
 }
 
 function DocsShell({

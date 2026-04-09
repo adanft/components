@@ -1,3 +1,4 @@
+import { Calendar, FolderOpen, Home, LayoutDashboard, ShoppingCart } from 'lucide-react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useState } from 'react';
 import { MemoryRouter } from 'react-router';
@@ -64,17 +65,13 @@ describe('Sidebar', () => {
                 <SidebarSection text="Main" />
               </li>
               <li>
-                <SidebarLink href="/overview" nfIconName="nf-fa-home" text="Overview" />
+                <SidebarLink href="/overview" icon={Home} text="Overview" />
               </li>
               <li>
-                <SidebarGroup iconName="nf-fa-folder_open" text="Reports">
+                <SidebarGroup icon={FolderOpen} text="Reports">
                   <ul className="flex flex-col gap-2">
                     <li>
-                      <SidebarLink
-                        href="/reports/monthly"
-                        nfIconName="nf-fa-calendar"
-                        text="Monthly"
-                      />
+                      <SidebarLink href="/reports/monthly" icon={Calendar} text="Monthly" />
                     </li>
                   </ul>
                 </SidebarGroup>
@@ -98,10 +95,10 @@ describe('Sidebar', () => {
   it('uses collapsible group behavior with open-state styling', () => {
     const { container } = render(
       <MemoryRouter>
-        <SidebarGroup iconName="nf-fa-folder_open" text="Reports">
+        <SidebarGroup icon={FolderOpen} text="Reports">
           <ul className="flex flex-col gap-2">
             <li>
-              <SidebarLink href="/reports/monthly" nfIconName="nf-fa-calendar" text="Monthly" />
+              <SidebarLink href="/reports/monthly" icon={Calendar} text="Monthly" />
             </li>
           </ul>
         </SidebarGroup>
@@ -111,7 +108,8 @@ describe('Sidebar', () => {
     const groupButton = screen.getByRole('button', { name: /reports/i });
     const groupRoot = container.firstElementChild;
     const collapsible = groupRoot?.querySelector('div');
-    const chevron = groupButton.querySelector('.nf-fa-angle_down');
+    const chevrons = groupButton.querySelectorAll('svg');
+    const chevron = chevrons.item(chevrons.length - 1);
 
     expect(groupButton).toHaveAttribute('aria-expanded', 'false');
     expect(groupRoot).not.toHaveClass('bg-brand/5');
@@ -134,7 +132,7 @@ describe('Sidebar', () => {
             <SidebarSection text="General" />
           </li>
           <li>
-            <SidebarLink href="/dashboard" nfIconName="nf-md-view_dashboard" text="Dashboard" />
+            <SidebarLink href="/dashboard" icon={LayoutDashboard} text="Dashboard" />
           </li>
         </ul>
       </MemoryRouter>,
@@ -153,7 +151,7 @@ describe('Sidebar', () => {
       <MemoryRouter>
         <ul className="flex flex-col gap-2">
           <li>
-            <SidebarLink href="/orders" nfIconName="nf-fa-shopping_cart" text="Orders" />
+            <SidebarLink href="/orders" icon={ShoppingCart} text="Orders" />
           </li>
         </ul>
       </MemoryRouter>,

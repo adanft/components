@@ -17,7 +17,6 @@ function docsPath(path: string) {
 const DOCS_HOME_PATH = DOCS_BASE_PATH || '/';
 const DOCS_BUTTON_PATH = '/components/button';
 const DOCS_BOX_PATH = '/components/box';
-const DOCS_ICON_PATH = '/components/icon';
 const DOCS_INPUT_FIELD_PATH = '/components/input-field';
 const DOCS_MODAL_PATH = '/components/modal';
 const DOCS_PAGINATION_PATH = '/components/pagination';
@@ -34,7 +33,6 @@ export {
   DOCS_BUTTON_PATH,
   DOCS_CHECKBOX_PATH,
   DOCS_HOME_PATH,
-  DOCS_ICON_PATH,
   DOCS_INPUT_FIELD_PATH,
   DOCS_MODAL_PATH,
   DOCS_NOT_FOUND_PATH,

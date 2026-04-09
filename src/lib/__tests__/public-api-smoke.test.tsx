@@ -1,3 +1,4 @@
+import { Circle, List, ShoppingCart, User } from 'lucide-react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
@@ -8,7 +9,6 @@ import {
   Button,
   Checkbox,
   Home,
-  Icon,
   InputField,
   Modal,
   Navbar,
@@ -33,7 +33,6 @@ describe('public API smoke', () => {
       <Box key="box" />,
       <Checkbox key="checkbox" aria-label="Smoke checkbox" onChange={() => {}} />,
       <Home key="home" />,
-      <Icon key="icon" symbol="nf-fa-user" className="text-lg text-brand" />,
       <InputField key="input-field" label="Email" id="email" placeholder="name@example.com" />,
       <Navbar key="navbar" searchPlaceholder="Search docs" />,
       <NotFound key="not-found" />,
@@ -62,13 +61,13 @@ describe('public API smoke', () => {
               <SidebarSection text="Section" />
             </li>
             <li>
-              <SidebarLink href="/overview" nfIconName="nf-fa-home" text="Overview" />
+              <SidebarLink href="/overview" icon={User} text="Overview" />
             </li>
             <li>
-              <SidebarGroup iconName="nf-fa-list" text="Group">
+              <SidebarGroup icon={List} text="Group">
                 <ul className="flex flex-col gap-2">
                   <li>
-                    <SidebarLink href="/group/child" nfIconName="nf-fa-circle" text="Child" />
+                    <SidebarLink href="/group/child" icon={Circle} text="Child" />
                   </li>
                 </ul>
               </SidebarGroup>
@@ -77,7 +76,7 @@ describe('public API smoke', () => {
         </SidebarBody>
       </MemoryRouter>,
       <MemoryRouter key="sidebar-link">
-        <SidebarLink href="/orders" nfIconName="nf-fa-shopping_cart" text="Orders" />
+        <SidebarLink href="/orders" icon={ShoppingCart} text="Orders" />
       </MemoryRouter>,
       <ThemeSwitch key="theme-switch" />,
       <Table key="table" aria-label="Smoke table">

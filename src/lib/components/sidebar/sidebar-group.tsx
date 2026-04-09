@@ -1,14 +1,16 @@
+import { ChevronDown, type LucideIcon } from 'lucide-react';
 import { type ReactNode, useId, useState } from 'react';
 
 import { cn } from '../../helpers/cn';
 
 type SidebarGroupProps = {
   children: ReactNode;
-  iconName: string;
+  icon: LucideIcon;
   text: string;
 };
 
-function SidebarGroup({ children, iconName, text }: SidebarGroupProps) {
+function SidebarGroup({ children, icon, text }: SidebarGroupProps) {
+  const IconComponent = icon;
   const [show, setShow] = useState(false);
   const contentId = useId();
 
@@ -20,15 +22,16 @@ function SidebarGroup({ children, iconName, text }: SidebarGroupProps) {
         onClick={() => setShow((s) => !s)}
         aria-expanded={show}
         aria-controls={contentId}>
-        <i aria-hidden="true" className={cn('nf leading-none p-3.5 text-xl', iconName)} />
+        <span className="flex shrink-0 items-center justify-center p-3.5">
+          <IconComponent aria-hidden="true" className="size-5 stroke-2" />
+        </span>
         <span className="font-medium whitespace-nowrap">{text}</span>
-        <i
-          aria-hidden="true"
-          className={cn(
-            'ml-auto nf leading-none nf-fa-angle_down duration-300 p-3.5 text-xl',
-            show && 'rotate-180',
-          )}
-        />
+        <span className="ml-auto flex shrink-0 items-center justify-center p-3.5">
+          <ChevronDown
+            aria-hidden="true"
+            className={cn('duration-300 size-5 stroke-2', show && 'rotate-180')}
+          />
+        </span>
       </button>
 
       <div
