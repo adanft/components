@@ -1,14 +1,20 @@
 import { Moon, Sun } from 'lucide-react';
-import { type ComponentPropsWithoutRef, useState } from 'react';
+import { type ComponentPropsWithoutRef, useSyncExternalStore } from 'react';
 
-import { getStoredTheme, type ThemeMode, toggleTheme } from '../../helpers/theme';
+import { toggleTheme } from '../theme';
+import { readTheme, subscribeTheme } from '../helpers/theme';
 import { cn } from '../helpers/cn';
 
-type ThemeSwitchSize = 'sm' | 'md' | 'lg';
+const THEME_SWITCH_SIZE = {
+  SM: 'sm',
+  MD: 'md',
+  LG: 'lg',
+} as const;
+
+type ThemeSwitchSize = (typeof THEME_SWITCH_SIZE)[keyof typeof THEME_SWITCH_SIZE];
 
 type ThemeSwitchProps = Omit<ComponentPropsWithoutRef<'label'>, 'onChange'> & {
   size?: ThemeSwitchSize;
-  onChange?: (theme: ThemeMode) => void;
 };
 
 const SIZE_TRACK = {
@@ -35,15 +41,11 @@ const SIZE_ICON = {
   lg: 'size-5',
 } as const;
 
-function ThemeSwitch({ className, size = 'md', onChange, ...props }: ThemeSwitchProps) {
-  const [theme, setTheme] = useState<ThemeMode>(getStoredTheme() ?? 'light');
+function ThemeSwitch({ className, size = 'md', ...props }: ThemeSwitchProps) {
+  const theme = useSyncExternalStore(subscribeTheme, readTheme, readTheme);
 
   const handleChange = () => {
-    setTheme((previous) => {
-      const next = toggleTheme(previous);
-      onChange?.(next);
-      return next;
-    });
+    toggleTheme();
   };
 
   return (

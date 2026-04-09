@@ -7,13 +7,15 @@ import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { ThemeSwitch } from '@your-org/components';`;
 
+const setupSnippet = `import { initializeTheme } from '@your-org/components';
+
+initializeTheme();`;
+
 const usageSnippet = `<ThemeSwitch />`;
 
 const sizesSnippet = `<ThemeSwitch size="sm" />
 <ThemeSwitch size="md" />
 <ThemeSwitch size="lg" />`;
-
-const onChangeSnippet = `<ThemeSwitch onChange={(theme) => console.log(theme)} />`;
 
 const customClassSnippet = `<ThemeSwitch className="opacity-80" />`;
 
@@ -32,10 +34,21 @@ function ThemeSwitchPage() {
         <p className="text-foreground">
           <code>ThemeSwitch</code> is a toggle control that switches between light and dark themes.
           It persists the selection to <code>localStorage</code> and applies the <code>dark</code>{' '}
-          class to the document root. Uses <code>lucide-react</code> icons (Sun and Moon) with
-          smooth animations.
+          class to the document root. Use <code>initializeTheme()</code> once in your app entrypoint
+          so the stored theme is applied before the first render. Uses <code>lucide-react</code>{' '}
+          icons (Sun and Moon) with smooth animations.
         </p>
       </header>
+
+      {/* ── Setup ──────────────────────────────────────────────────── */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold text-brand">Setup</h2>
+        <p className="text-foreground">
+          Call <code>initializeTheme()</code> once in your application entrypoint before rendering
+          the app. That applies the persisted theme class on initial load.
+        </p>
+        <CodeBlock code={setupSnippet} />
+      </section>
 
       {/* ── Import ─────────────────────────────────────────────────── */}
       <section className="space-y-4">
@@ -47,7 +60,8 @@ function ThemeSwitchPage() {
       <section className="space-y-4">
         <h2 className="text-xl font-semibold text-brand">Usage</h2>
         <p className="text-foreground">
-          Drop it in and it works. No props required for basic theme toggling.
+          After the one-time setup, drop it in and it works. No props are required for basic theme
+          toggling.
         </p>
         <Box className="flex items-center">
           <ThemeSwitch />
@@ -69,19 +83,6 @@ function ThemeSwitchPage() {
           <ThemeSwitch size="lg" />
         </Box>
         <CodeBlock code={sizesSnippet} />
-      </section>
-
-      {/* ── onChange callback ──────────────────────────────────────── */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">onChange callback</h2>
-        <p className="text-foreground">
-          Use <code>onChange</code> to react to theme changes. The callback receives the new{' '}
-          <code>ThemeMode</code> value (<code>"light"</code> or <code>"dark"</code>).
-        </p>
-        <Box className="flex items-center">
-          <ThemeSwitch onChange={(theme) => console.log('Theme changed to:', theme)} />
-        </Box>
-        <CodeBlock code={onChangeSnippet} />
       </section>
 
       {/* ── Custom className ──────────────────────────────────────── */}

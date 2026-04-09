@@ -1,5 +1,7 @@
 type ThemeMode = 'light' | 'dark';
 
+type ThemeListener = () => void;
+
 type ThemeOptions = {
   storageKey?: string;
   className?: string;
@@ -8,6 +10,8 @@ type ThemeOptions = {
 
 const DEFAULT_STORAGE_KEY = 'theme';
 const DEFAULT_CLASS_NAME = 'dark';
+
+const themeListeners = new Set<ThemeListener>();
 
 function getThemeTarget(target?: HTMLElement): HTMLElement | null {
   if (target) {
@@ -41,6 +45,28 @@ function getStoredTheme(storageKey = DEFAULT_STORAGE_KEY): ThemeMode | null {
   return normalizeTheme(localStorage.getItem(storageKey));
 }
 
+function readTheme(storageKey = DEFAULT_STORAGE_KEY): ThemeMode {
+  return getStoredTheme(storageKey) ?? 'light';
+}
+
+function notifyThemeListeners(): void {
+  for (const listener of themeListeners) {
+    listener();
+  }
+}
+
+function subscribeTheme(listener: ThemeListener): () => void {
+  themeListeners.add(listener);
+
+  return () => {
+    themeListeners.delete(listener);
+  };
+}
+
+function dispatchThemeChange(): void {
+  notifyThemeListeners();
+}
+
 function setStoredTheme(theme: ThemeMode, storageKey = DEFAULT_STORAGE_KEY): void {
   if (typeof localStorage === 'undefined') {
     return;
@@ -61,15 +87,20 @@ function applyTheme(theme: ThemeMode, options: ThemeOptions = {}): ThemeMode {
 }
 
 function initializeTheme(options: ThemeOptions = {}): ThemeMode {
-  const theme = getStoredTheme(options.storageKey) ?? 'light';
-  return applyTheme(theme, options);
+  const theme = readTheme(options.storageKey);
+  const appliedTheme = applyTheme(theme, options);
+  dispatchThemeChange();
+  return appliedTheme;
 }
 
-function toggleTheme(currentTheme: ThemeMode, options: ThemeOptions = {}): ThemeMode {
+function toggleTheme(options: ThemeOptions = {}): ThemeMode {
+  const currentTheme = readTheme(options.storageKey);
   const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
   setStoredTheme(nextTheme, options.storageKey);
-  return applyTheme(nextTheme, options);
+  const appliedTheme = applyTheme(nextTheme, options);
+  dispatchThemeChange();
+  return appliedTheme;
 }
 
 export type { ThemeMode, ThemeOptions };
-export { applyTheme, getStoredTheme, initializeTheme, setStoredTheme, toggleTheme };
+export { initializeTheme, readTheme, subscribeTheme, toggleTheme };

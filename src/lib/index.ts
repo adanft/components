@@ -53,10 +53,4 @@ export { default as Table } from './components/table';
 export type { ThemeSwitchProps, ThemeSwitchSize } from './components/theme-switch';
 export { default as ThemeSwitch } from './components/theme-switch';
 export type { ThemeMode, ThemeOptions } from './theme';
-export {
-  applyTheme,
-  getStoredTheme,
-  initializeTheme,
-  setStoredTheme,
-  toggleTheme,
-} from './theme';
+export { initializeTheme, toggleTheme } from './theme';

@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { ThemeSwitch } from '../index';
 
@@ -36,15 +36,23 @@ describe('ThemeSwitch', () => {
     expect(input).toBeChecked();
   });
 
-  it('calls onChange callback with the new theme', () => {
-    const onChange = vi.fn();
+  it('keeps multiple mounted switches in sync', () => {
+    render(
+      <>
+        <ThemeSwitch />
+        <ThemeSwitch />
+      </>,
+    );
 
-    render(<ThemeSwitch onChange={onChange} />);
+    const [firstSwitch, secondSwitch] = screen.getAllByRole('switch');
 
-    fireEvent.click(screen.getByRole('switch'));
+    expect(firstSwitch).not.toBeChecked();
+    expect(secondSwitch).not.toBeChecked();
 
-    expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith('dark');
+    fireEvent.click(firstSwitch);
+
+    expect(firstSwitch).toBeChecked();
+    expect(secondSwitch).toBeChecked();
   });
 
   it('merges custom className with base styles', () => {
