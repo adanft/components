@@ -1,7 +1,6 @@
 export type { NavbarProps } from '../components/navbar';
 export { default as Navbar } from '../components/navbar';
 export { default as NotFound } from '../components/not-found';
-export { default as ToggleTheme } from '../components/toggle-theme';
 export { default as Home } from '../pages/home';
 export type { AvatarProps } from './components/avatar';
 export { default as Avatar } from './components/avatar';
@@ -47,6 +46,8 @@ export type {
   TableProps,
 } from './components/table';
 export { default as Table } from './components/table';
+export type { ThemeSwitchProps, ThemeSwitchSize } from './components/theme-switch';
+export { default as ThemeSwitch } from './components/theme-switch';
 export type { ThemeMode, ThemeOptions } from './theme';
 export {
   applyTheme,

@@ -9,3 +9,21 @@
     outline-offset: 0;
   }
 }
+
+@keyframes tilt {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-20deg);
+  }
+
+  75% {
+    transform: rotate(40deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}

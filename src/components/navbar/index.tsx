@@ -1,6 +1,6 @@
 import type { ProfileProps } from '../../lib/components/profile';
 import Profile from '../../lib/components/profile';
-import ToggleTheme from '../toggle-theme';
+import ThemeSwitch from '../../lib/components/theme-switch';
 
 type NavbarProps = {
   profileProps?: ProfileProps;
@@ -20,7 +20,7 @@ function Navbar({ profileProps, searchPlaceholder = 'Search' }: NavbarProps) {
         />
       </div>
       <div className="flex gap-4 items-center">
-        <ToggleTheme />
+        <ThemeSwitch />
         <button
           type="button"
           className="p-2 bg-background rounded-full leading-none border border-brand">

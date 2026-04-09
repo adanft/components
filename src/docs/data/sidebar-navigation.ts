@@ -8,6 +8,7 @@ import {
   DOCS_PROFILE_PATH,
   DOCS_SIDEBAR_PATH,
   DOCS_TABLE_PATH,
+  DOCS_THEME_SWITCH_PATH,
   docsPath,
 } from './routes';
 
@@ -55,6 +56,12 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'link', nfIconName: 'nf-fa-user', text: 'Profile', href: DOCS_PROFILE_PATH },
   { type: 'link', nfIconName: 'nf-md-dock_left', text: 'Sidebar', href: DOCS_SIDEBAR_PATH },
   { type: 'link', nfIconName: 'nf-md-table', text: 'Table', href: DOCS_TABLE_PATH },
+  {
+    type: 'link',
+    nfIconName: 'nf-md-theme_light_dark',
+    text: 'ThemeSwitch',
+    href: DOCS_THEME_SWITCH_PATH,
+  },
   { type: 'link', nfIconName: 'nf-fa-shopping_cart', text: 'Orders', href: docsPath('/orders') },
   { type: 'link', nfIconName: 'nf-md-shopping', text: 'Products', href: docsPath('/products') },
   { type: 'link', nfIconName: 'nf-fa-history', text: 'History', href: docsPath('/history') },

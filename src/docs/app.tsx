@@ -13,6 +13,7 @@ import {
   DOCS_PROFILE_PATH,
   DOCS_SIDEBAR_PATH,
   DOCS_TABLE_PATH,
+  DOCS_THEME_SWITCH_PATH,
 } from './data/routes';
 import BoxPage from './pages/box';
 import ButtonPage from './pages/button';
@@ -23,6 +24,7 @@ import ModalPage from './pages/modal';
 import ProfilePage from './pages/profile';
 import SidebarPage from './pages/sidebar';
 import TablePage from './pages/table';
+import ThemeSwitchPage from './pages/theme-switch';
 import DocsShell from './shell';
 
 function App() {
@@ -40,6 +42,7 @@ function App() {
           <Route path={DOCS_SIDEBAR_PATH} element={<SidebarPage />} />
           <Route path={DOCS_TABLE_PATH} element={<TablePage />} />
           <Route path={DOCS_CHECKBOX_PATH} element={<CheckboxPage />} />
+          <Route path={DOCS_THEME_SWITCH_PATH} element={<ThemeSwitchPage />} />
           <Route path={DOCS_NOT_FOUND_PATH} element={<NotFound />} />
         </Routes>
       </DocsShell>

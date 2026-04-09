@@ -21,7 +21,7 @@ import {
   SidebarLink,
   SidebarSection,
   Table,
-  ToggleTheme,
+  ThemeSwitch,
 } from '../index';
 
 describe('public API smoke', () => {
@@ -79,7 +79,7 @@ describe('public API smoke', () => {
       <MemoryRouter key="sidebar-link">
         <SidebarLink href="/orders" nfIconName="nf-fa-shopping_cart" text="Orders" />
       </MemoryRouter>,
-      <ToggleTheme key="toggle-theme" />,
+      <ThemeSwitch key="theme-switch" />,
       <Table key="table" aria-label="Smoke table">
         <Table.Head
           headers={[{ id: 'name', label: 'Name' }]}
