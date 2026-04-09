@@ -10,6 +10,7 @@ import {
   DOCS_INPUT_FIELD_PATH,
   DOCS_MODAL_PATH,
   DOCS_NOT_FOUND_PATH,
+  DOCS_PAGINATION_PATH,
   DOCS_PROFILE_PATH,
   DOCS_SIDEBAR_PATH,
   DOCS_TABLE_PATH,
@@ -21,6 +22,7 @@ import CheckboxPage from './pages/checkbox';
 import IconPage from './pages/icon';
 import InputFieldPage from './pages/input-field';
 import ModalPage from './pages/modal';
+import PaginationPage from './pages/pagination';
 import ProfilePage from './pages/profile';
 import SidebarPage from './pages/sidebar';
 import TablePage from './pages/table';
@@ -38,6 +40,7 @@ function App() {
           <Route path={DOCS_ICON_PATH} element={<IconPage />} />
           <Route path={DOCS_INPUT_FIELD_PATH} element={<InputFieldPage />} />
           <Route path={DOCS_MODAL_PATH} element={<ModalPage />} />
+          <Route path={DOCS_PAGINATION_PATH} element={<PaginationPage />} />
           <Route path={DOCS_PROFILE_PATH} element={<ProfilePage />} />
           <Route path={DOCS_SIDEBAR_PATH} element={<SidebarPage />} />
           <Route path={DOCS_TABLE_PATH} element={<TablePage />} />
