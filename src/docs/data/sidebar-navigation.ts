@@ -13,6 +13,7 @@ import {
   FileText,
   Hand,
   History,
+  Info,
   LayoutGrid,
   Package,
   PanelLeft,
@@ -40,6 +41,7 @@ import {
   DOCS_SIDEBAR_PATH,
   DOCS_TABLE_PATH,
   DOCS_THEME_SWITCH_PATH,
+  DOCS_TOOLTIP_PATH,
   docsPath,
 } from './routes';
 
@@ -79,6 +81,7 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'link', icon: PanelLeft, text: 'Sidebar', href: DOCS_SIDEBAR_PATH },
   { type: 'link', icon: Table, text: 'Table', href: DOCS_TABLE_PATH },
   { type: 'link', icon: SunMoon, text: 'ThemeSwitch', href: DOCS_THEME_SWITCH_PATH },
+  { type: 'link', icon: Info, text: 'Tooltip', href: DOCS_TOOLTIP_PATH },
   { type: 'link', icon: ShoppingCart, text: 'Orders', href: docsPath('/orders') },
   { type: 'link', icon: Package, text: 'Products', href: docsPath('/products') },
   { type: 'link', icon: History, text: 'History', href: docsPath('/history') },

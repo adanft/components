@@ -56,5 +56,11 @@ export type {
 export { default as Table } from './components/table';
 export type { ThemeSwitchProps, ThemeSwitchSize } from './components/theme-switch';
 export { default as ThemeSwitch } from './components/theme-switch';
+export type {
+  TooltipContentProps,
+  TooltipProps,
+  TooltipTriggerProps,
+} from './components/tooltip';
+export { default as Tooltip } from './components/tooltip';
 export type { ThemeMode, ThemeOptions } from './theme';
 export { initializeTheme, toggleTheme } from './theme';

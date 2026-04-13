@@ -23,6 +23,7 @@ import {
   SidebarSection,
   Table,
   ThemeSwitch,
+  Tooltip,
 } from '../index';
 
 describe('public API smoke', () => {
@@ -99,6 +100,12 @@ describe('public API smoke', () => {
           renderCell={(cell) => cell}
         />
       </Table>,
+      <Tooltip key="tooltip" open={false} onOpenChange={() => undefined}>
+        <Tooltip.Trigger>
+          <button type="button">Show tooltip</button>
+        </Tooltip.Trigger>
+        <Tooltip.Content>Tooltip content</Tooltip.Content>
+      </Tooltip>,
     ];
 
     for (const component of cases) {

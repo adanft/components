@@ -24,6 +24,7 @@ const DOCS_POPOVER_PATH = '/components/popover';
 const DOCS_PROFILE_PATH = '/components/profile';
 const DOCS_SIDEBAR_PATH = '/components/sidebar';
 const DOCS_TABLE_PATH = '/components/table';
+const DOCS_TOOLTIP_PATH = '/components/tooltip';
 const DOCS_CHECKBOX_PATH = '/components/checkbox';
 const DOCS_THEME_SWITCH_PATH = '/components/theme-switch';
 const DOCS_NOT_FOUND_PATH = docsPath('/*');
@@ -43,5 +44,6 @@ export {
   DOCS_SIDEBAR_PATH,
   DOCS_TABLE_PATH,
   DOCS_THEME_SWITCH_PATH,
+  DOCS_TOOLTIP_PATH,
   docsPath,
 };
