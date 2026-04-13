@@ -12,7 +12,7 @@
     "build:lib": "vite build --config vite.lib.config.ts",
     "lint": "biome lint --write .",
     "format": "biome format --write .",
-    "check": "biome check .",
+    "check": "biome check --write .",
     "preview": "vite preview --config vite.docs.config.ts",
     "test": "vitest run",
     "typecheck": "tsc -b --pretty false",
@@ -21,6 +21,7 @@
     "validate": "pnpm check && pnpm typecheck && pnpm validate:boundaries && pnpm validate:semantic-tokens && pnpm build"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.19",
     "@tailwindcss/vite": "^4.2.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

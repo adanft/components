@@ -22,8 +22,8 @@ import {
   Star,
   SunMoon,
   Table,
-  Type,
   TrendingUp,
+  Type,
   User,
   Users,
 } from 'lucide-react';

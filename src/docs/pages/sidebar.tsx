@@ -2,13 +2,13 @@ import { Archive, BarChart3, Box, FileText, Hand, PanelLeft, Settings, Users } f
 import { useState } from 'react';
 
 import {
-  Box as Surface,
   Sidebar,
   SidebarBody,
   SidebarGroup,
   SidebarHead,
   SidebarLink,
   SidebarSection,
+  Box as Surface,
 } from '../../lib';
 import { CodeBlock } from '../code-block';
 

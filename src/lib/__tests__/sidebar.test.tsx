@@ -1,5 +1,5 @@
-import { Calendar, FolderOpen, Home, LayoutDashboard, ShoppingCart } from 'lucide-react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { Calendar, FolderOpen, Home, LayoutDashboard, ShoppingCart } from 'lucide-react';
 import { useState } from 'react';
 import { MemoryRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';

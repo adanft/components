@@ -1,6 +1,18 @@
+import {
+  autoUpdate,
+  FloatingFocusManager,
+  FloatingPortal,
+  flip,
+  offset,
+  shift,
+  useClick,
+  useDismiss,
+  useFloating,
+  useInteractions,
+  useRole,
+} from '@floating-ui/react';
 import { useState } from 'react';
 
-import useOutsideHandler from '../../hooks/use-outside-handler';
 import Avatar from './avatar';
 import Box from './box';
 import Button from './button';
@@ -26,37 +38,57 @@ function Profile({
   avatarAlt,
   avatarText,
 }: ProfileProps) {
-  const [show, setShow] = useState(false);
-
-  const profileRef = useOutsideHandler<HTMLDivElement>(() => {
-    setShow(false);
+  const [open, setOpen] = useState(false);
+  const { refs, floatingStyles, context } = useFloating({
+    open,
+    onOpenChange: setOpen,
+    placement: 'bottom-end',
+    middleware: [offset(16), flip(), shift({ padding: 16 })],
+    whileElementsMounted: autoUpdate,
   });
 
+  const click = useClick(context);
+  const dismiss = useDismiss(context);
+  const role = useRole(context, { role: 'dialog' });
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, role]);
+
   return (
-    <div ref={profileRef} className="">
+    <>
       <button
+        ref={refs.setReference}
         type="button"
-        className="flex justify-center cursor-pointer"
-        onClick={() => setShow((s) => !s)}
-        aria-expanded={show}
-        aria-haspopup="menu">
+        className="inline-flex cursor-pointer"
+        aria-expanded={open}
+        aria-haspopup="dialog"
+        {...getReferenceProps()}>
         <Avatar type={avatarType} src={avatarSrc} alt={avatarAlt} text={avatarText} />
       </button>
-      {show ? (
-        <Box className="w-72 top-[calc(100%+1rem)] right-4 absolute">
-          <div className="flex items-center gap-2">
-            <Avatar type={avatarType} src={avatarSrc} alt={avatarAlt} text={avatarText} />
-            <div className="flex flex-col gap-2 text-foreground">
-              <span>{fullName}</span>
-              <span className="text-sm font-semibold">{userKey}</span>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center mt-4">
-            <Button onClick={btnAction}>{btnName}</Button>
-          </div>
-        </Box>
-      ) : null}
-    </div>
+      <FloatingPortal>
+        {open ? (
+          <FloatingFocusManager context={context} modal={false}>
+            <Box
+              ref={refs.setFloating}
+              style={floatingStyles}
+              className="w-72 z-50"
+              {...getFloatingProps()}>
+              <div className="flex items-center gap-2">
+                <Avatar type={avatarType} src={avatarSrc} alt={avatarAlt} text={avatarText} />
+                <div className="flex flex-col gap-2 text-foreground">
+                  <span>{fullName}</span>
+                  <span className="text-sm font-semibold">{userKey}</span>
+                </div>
+              </div>
+              <div className="mt-4">
+                <Button className="w-full" onClick={btnAction}>
+                  {btnName}
+                </Button>
+              </div>
+            </Box>
+          </FloatingFocusManager>
+        ) : null}
+      </FloatingPortal>
+    </>
   );
 }
 

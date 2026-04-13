@@ -1,5 +1,5 @@
-import { Circle, List, ShoppingCart, User } from 'lucide-react';
 import { render, screen } from '@testing-library/react';
+import { Circle, List, ShoppingCart, User } from 'lucide-react';
 import { MemoryRouter } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
 import * as components from '../index';

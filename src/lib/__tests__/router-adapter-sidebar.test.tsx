@@ -1,5 +1,5 @@
-import { ShoppingCart, Users } from 'lucide-react';
 import { render, screen } from '@testing-library/react';
+import { ShoppingCart, Users } from 'lucide-react';
 import { MemoryRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';
 import { docsPath } from '../../docs/data/routes';

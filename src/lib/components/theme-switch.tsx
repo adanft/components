@@ -1,9 +1,8 @@
 import { Moon, Sun } from 'lucide-react';
 import { type ComponentPropsWithoutRef, useSyncExternalStore } from 'react';
-
-import { toggleTheme } from '../theme';
-import { readTheme, subscribeTheme } from '../helpers/theme';
 import { cn } from '../helpers/cn';
+import { readTheme, subscribeTheme } from '../helpers/theme';
+import { toggleTheme } from '../theme';
 
 const THEME_SWITCH_SIZE = {
   SM: 'sm',
