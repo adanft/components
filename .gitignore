@@ -37,3 +37,4 @@ playwright-report
 *.njsproj
 *.sln
 *.sw?
+.docs

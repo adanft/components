@@ -13,6 +13,7 @@ import {
   Modal,
   Navbar,
   NotFound,
+  Popover,
   Profile,
   Sidebar,
   SidebarBody,
@@ -46,6 +47,12 @@ describe('public API smoke', () => {
         avatarSrc="https://example.com/avatar.png"
         avatarAlt="Taylor avatar"
       />,
+      <Popover key="popover" open={false} onOpenChange={() => undefined}>
+        <Popover.Trigger>
+          <button type="button">Open popover</button>
+        </Popover.Trigger>
+        <Popover.Content>Popover content</Popover.Content>
+      </Popover>,
       <Sidebar key="sidebar" state={false} action={() => undefined} />,
       <SidebarHead
         key="sidebar-head"

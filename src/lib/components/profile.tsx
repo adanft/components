@@ -64,8 +64,8 @@ function Profile({
         {...getReferenceProps()}>
         <Avatar type={avatarType} src={avatarSrc} alt={avatarAlt} text={avatarText} />
       </button>
-      <FloatingPortal>
-        {open ? (
+      {open ? (
+        <FloatingPortal>
           <FloatingFocusManager context={context} modal={false}>
             <Box
               ref={refs.setFloating}
@@ -86,8 +86,8 @@ function Profile({
               </div>
             </Box>
           </FloatingFocusManager>
-        ) : null}
-      </FloatingPortal>
+        </FloatingPortal>
+      ) : null}
     </>
   );
 }
