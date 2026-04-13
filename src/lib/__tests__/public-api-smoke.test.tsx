@@ -22,6 +22,7 @@ import {
   SidebarLink,
   SidebarSection,
   Table,
+  Tabs,
   ThemeSwitch,
   Tooltip,
 } from '../index';
@@ -86,6 +87,14 @@ describe('public API smoke', () => {
       <MemoryRouter key="sidebar-link">
         <SidebarLink href="/orders" icon={ShoppingCart} text="Orders" />
       </MemoryRouter>,
+      <Tabs key="tabs" value="overview" onValueChange={() => undefined}>
+        <Tabs.List>
+          <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
+          <Tabs.Trigger value="details">Details</Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="overview">Overview panel</Tabs.Content>
+        <Tabs.Content value="details">Details panel</Tabs.Content>
+      </Tabs>,
       <ThemeSwitch key="theme-switch" />,
       <Table key="table" aria-label="Smoke table">
         <Table.Head

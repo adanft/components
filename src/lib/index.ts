@@ -54,6 +54,13 @@ export type {
   TableProps,
 } from './components/table';
 export { default as Table } from './components/table';
+export type {
+  TabsContentProps,
+  TabsListProps,
+  TabsProps,
+  TabsTriggerProps,
+} from './components/tabs';
+export { default as Tabs } from './components/tabs';
 export type { ThemeSwitchProps, ThemeSwitchSize } from './components/theme-switch';
 export { default as ThemeSwitch } from './components/theme-switch';
 export type {

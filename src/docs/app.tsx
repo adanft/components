@@ -14,6 +14,7 @@ import {
   DOCS_PROFILE_PATH,
   DOCS_SIDEBAR_PATH,
   DOCS_TABLE_PATH,
+  DOCS_TABS_PATH,
   DOCS_THEME_SWITCH_PATH,
   DOCS_TOOLTIP_PATH,
 } from './data/routes';
@@ -27,6 +28,7 @@ import PopoverPage from './pages/popover';
 import ProfilePage from './pages/profile';
 import SidebarPage from './pages/sidebar';
 import TablePage from './pages/table';
+import TabsPage from './pages/tabs';
 import ThemeSwitchPage from './pages/theme-switch';
 import TooltipPage from './pages/tooltip';
 import DocsShell from './shell';
@@ -45,6 +47,7 @@ function App() {
           <Route path={DOCS_POPOVER_PATH} element={<PopoverPage />} />
           <Route path={DOCS_PROFILE_PATH} element={<ProfilePage />} />
           <Route path={DOCS_SIDEBAR_PATH} element={<SidebarPage />} />
+          <Route path={DOCS_TABS_PATH} element={<TabsPage />} />
           <Route path={DOCS_TABLE_PATH} element={<TablePage />} />
           <Route path={DOCS_CHECKBOX_PATH} element={<CheckboxPage />} />
           <Route path={DOCS_THEME_SWITCH_PATH} element={<ThemeSwitchPage />} />
