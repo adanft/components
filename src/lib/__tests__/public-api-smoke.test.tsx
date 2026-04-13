@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import * as components from '../index';
 
 import {
+  Accordion,
   Box,
   Button,
   Checkbox,
@@ -32,6 +33,14 @@ describe('public API smoke', () => {
     const onHeaderAction = () => undefined;
 
     const cases = [
+      <Accordion key="accordion" value="overview" onValueChange={() => undefined}>
+        <Accordion.Item value="overview">
+          <Accordion.Header>
+            <Accordion.Trigger>Overview</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>Overview content</Accordion.Content>
+        </Accordion.Item>
+      </Accordion>,
       <Button key="button">Click me</Button>,
       <Box key="box" />,
       <Checkbox key="checkbox" aria-label="Smoke checkbox" onChange={() => {}} />,

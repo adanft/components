@@ -2,6 +2,14 @@ export type { NavbarProps } from '../components/navbar';
 export { default as Navbar } from '../components/navbar';
 export { default as NotFound } from '../components/not-found';
 export { default as Home } from '../pages/home';
+export type {
+  AccordionContentProps,
+  AccordionHeaderProps,
+  AccordionItemProps,
+  AccordionProps,
+  AccordionTriggerProps,
+} from './components/accordion';
+export { default as Accordion } from './components/accordion';
 export type { AvatarProps } from './components/avatar';
 export { default as Avatar } from './components/avatar';
 export type { BoxProps } from './components/box';

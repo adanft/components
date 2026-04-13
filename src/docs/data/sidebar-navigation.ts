@@ -30,6 +30,7 @@ import {
 } from 'lucide-react';
 
 import {
+  DOCS_ACCORDION_PATH,
   DOCS_BOX_PATH,
   DOCS_BUTTON_PATH,
   DOCS_CHECKBOX_PATH,
@@ -71,6 +72,7 @@ type DocsSidebarNavigationNode =
   | DocsSidebarNavigationLinkNode;
 
 const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
+  { type: 'link', icon: ChevronRight, text: 'Accordion', href: DOCS_ACCORDION_PATH },
   { type: 'link', icon: Box, text: 'Box', href: DOCS_BOX_PATH },
   { type: 'link', icon: Hand, text: 'Button', href: DOCS_BUTTON_PATH },
   { type: 'link', icon: CheckSquare, text: 'Checkbox', href: DOCS_CHECKBOX_PATH },
