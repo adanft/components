@@ -24,6 +24,7 @@ const DOCS_PAGINATION_PATH = '/components/pagination';
 const DOCS_POPOVER_PATH = '/components/popover';
 const DOCS_PROFILE_PATH = '/components/profile';
 const DOCS_SIDEBAR_PATH = '/components/sidebar';
+const DOCS_SWITCH_PATH = '/components/switch';
 const DOCS_TABLE_PATH = '/components/table';
 const DOCS_TABS_PATH = '/components/tabs';
 const DOCS_TOOLTIP_PATH = '/components/tooltip';
@@ -45,6 +46,7 @@ export {
   DOCS_POPOVER_PATH,
   DOCS_PROFILE_PATH,
   DOCS_SIDEBAR_PATH,
+  DOCS_SWITCH_PATH,
   DOCS_TABLE_PATH,
   DOCS_TABS_PATH,
   DOCS_THEME_SWITCH_PATH,

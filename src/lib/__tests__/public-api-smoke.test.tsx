@@ -22,6 +22,7 @@ import {
   SidebarHead,
   SidebarLink,
   SidebarSection,
+  Switch,
   Table,
   Tabs,
   ThemeSwitch,
@@ -96,6 +97,12 @@ describe('public API smoke', () => {
       <MemoryRouter key="sidebar-link">
         <SidebarLink href="/orders" icon={ShoppingCart} text="Orders" />
       </MemoryRouter>,
+      <Switch
+        key="switch"
+        checked={false}
+        aria-label="Airplane mode"
+        onCheckedChange={() => undefined}
+      />,
       <Tabs key="tabs" value="overview" onValueChange={() => undefined}>
         <Tabs.List>
           <Tabs.Trigger value="overview">Overview</Tabs.Trigger>

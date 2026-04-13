@@ -55,6 +55,8 @@ export type { SidebarLinkProps } from './components/sidebar/sidebar-link';
 export { default as SidebarLink } from './components/sidebar/sidebar-link';
 export type { SidebarSectionProps } from './components/sidebar/sidebar-section';
 export { default as SidebarSection } from './components/sidebar/sidebar-section';
+export type { SwitchProps } from './components/switch';
+export { default as Switch } from './components/switch';
 export type {
   TableBodyProps,
   TableFootProps,
