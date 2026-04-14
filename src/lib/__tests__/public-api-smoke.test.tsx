@@ -16,6 +16,7 @@ import {
   NotFound,
   Popover,
   Profile,
+  RadioGroup,
   Sidebar,
   SidebarBody,
   SidebarGroup,
@@ -65,6 +66,10 @@ describe('public API smoke', () => {
         </Popover.Trigger>
         <Popover.Content>Popover content</Popover.Content>
       </Popover>,
+      <RadioGroup key="radio-group" value="starter" onValueChange={() => undefined}>
+        <RadioGroup.Item value="starter" label="Starter" />
+        <RadioGroup.Item value="pro" label="Pro" />
+      </RadioGroup>,
       <Sidebar key="sidebar" state={false} action={() => undefined} />,
       <SidebarHead
         key="sidebar-head"

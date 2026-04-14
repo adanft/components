@@ -23,6 +23,7 @@ const DOCS_MODAL_PATH = '/components/modal';
 const DOCS_PAGINATION_PATH = '/components/pagination';
 const DOCS_POPOVER_PATH = '/components/popover';
 const DOCS_PROFILE_PATH = '/components/profile';
+const DOCS_RADIO_GROUP_PATH = '/components/radio-group';
 const DOCS_SIDEBAR_PATH = '/components/sidebar';
 const DOCS_SWITCH_PATH = '/components/switch';
 const DOCS_TABLE_PATH = '/components/table';
@@ -45,6 +46,7 @@ export {
   DOCS_PAGINATION_PATH,
   DOCS_POPOVER_PATH,
   DOCS_PROFILE_PATH,
+  DOCS_RADIO_GROUP_PATH,
   DOCS_SIDEBAR_PATH,
   DOCS_SWITCH_PATH,
   DOCS_TABLE_PATH,

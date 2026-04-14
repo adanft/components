@@ -13,6 +13,7 @@ import {
   DOCS_PAGINATION_PATH,
   DOCS_POPOVER_PATH,
   DOCS_PROFILE_PATH,
+  DOCS_RADIO_GROUP_PATH,
   DOCS_SIDEBAR_PATH,
   DOCS_SWITCH_PATH,
   DOCS_TABLE_PATH,
@@ -29,6 +30,7 @@ import ModalPage from './pages/modal';
 import PaginationPage from './pages/pagination';
 import PopoverPage from './pages/popover';
 import ProfilePage from './pages/profile';
+import RadioGroupPage from './pages/radio-group';
 import SidebarPage from './pages/sidebar';
 import SwitchPage from './pages/switch';
 import TablePage from './pages/table';
@@ -51,6 +53,7 @@ function App() {
           <Route path={DOCS_PAGINATION_PATH} element={<PaginationPage />} />
           <Route path={DOCS_POPOVER_PATH} element={<PopoverPage />} />
           <Route path={DOCS_PROFILE_PATH} element={<ProfilePage />} />
+          <Route path={DOCS_RADIO_GROUP_PATH} element={<RadioGroupPage />} />
           <Route path={DOCS_SIDEBAR_PATH} element={<SidebarPage />} />
           <Route path={DOCS_SWITCH_PATH} element={<SwitchPage />} />
           <Route path={DOCS_TABS_PATH} element={<TabsPage />} />
