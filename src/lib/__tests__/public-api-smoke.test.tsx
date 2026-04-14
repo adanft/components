@@ -9,6 +9,7 @@ import {
   Box,
   Button,
   Checkbox,
+  DropdownMenu,
   Home,
   InputField,
   Modal,
@@ -46,6 +47,17 @@ describe('public API smoke', () => {
       <Button key="button">Click me</Button>,
       <Box key="box" />,
       <Checkbox key="checkbox" aria-label="Smoke checkbox" onChange={() => {}} />,
+      <DropdownMenu key="dropdown-menu" open={false} onOpenChange={() => undefined}>
+        <DropdownMenu.Trigger>
+          <button type="button">Actions</button>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Label>Account</DropdownMenu.Label>
+          <DropdownMenu.Item>Profile</DropdownMenu.Item>
+          <DropdownMenu.Separator />
+          <DropdownMenu.Item disabled>Delete</DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu>,
       <Home key="home" />,
       <InputField key="input-field" label="Email" id="email" placeholder="name@example.com" />,
       <Navbar key="navbar" searchPlaceholder="Search docs" />,

@@ -18,6 +18,7 @@ const DOCS_HOME_PATH = DOCS_BASE_PATH || '/';
 const DOCS_ACCORDION_PATH = '/components/accordion';
 const DOCS_BUTTON_PATH = '/components/button';
 const DOCS_BOX_PATH = '/components/box';
+const DOCS_DROPDOWN_MENU_PATH = '/components/dropdown-menu';
 const DOCS_INPUT_FIELD_PATH = '/components/input-field';
 const DOCS_MODAL_PATH = '/components/modal';
 const DOCS_PAGINATION_PATH = '/components/pagination';
@@ -39,6 +40,7 @@ export {
   DOCS_BOX_PATH,
   DOCS_BUTTON_PATH,
   DOCS_CHECKBOX_PATH,
+  DOCS_DROPDOWN_MENU_PATH,
   DOCS_HOME_PATH,
   DOCS_INPUT_FIELD_PATH,
   DOCS_MODAL_PATH,

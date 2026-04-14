@@ -22,6 +22,15 @@ export type {
 export { default as Button } from './components/button';
 export type { CheckboxProps } from './components/checkbox';
 export { default as Checkbox } from './components/checkbox';
+export type {
+  DropdownMenuContentProps,
+  DropdownMenuItemProps,
+  DropdownMenuLabelProps,
+  DropdownMenuProps,
+  DropdownMenuSeparatorProps,
+  DropdownMenuTriggerProps,
+} from './components/dropdown-menu';
+export { default as DropdownMenu } from './components/dropdown-menu';
 export type { InputFieldProps } from './components/input-field';
 export { default as InputField } from './components/input-field';
 export type {
