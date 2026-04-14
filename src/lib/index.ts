@@ -54,6 +54,8 @@ export type { ProfileProps } from './components/profile';
 export { default as Profile } from './components/profile';
 export type { RadioGroupItemProps, RadioGroupProps } from './components/radio-group';
 export { default as RadioGroup } from './components/radio-group';
+export type { SelectProps } from './components/select';
+export { default as Select } from './components/select';
 export type { SidebarProps } from './components/sidebar';
 export { default as Sidebar } from './components/sidebar';
 export type { SidebarBodyProps } from './components/sidebar/sidebar-body';

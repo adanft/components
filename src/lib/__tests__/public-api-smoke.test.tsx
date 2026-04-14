@@ -18,6 +18,7 @@ import {
   Popover,
   Profile,
   RadioGroup,
+  Select,
   Sidebar,
   SidebarBody,
   SidebarGroup,
@@ -82,6 +83,14 @@ describe('public API smoke', () => {
         <RadioGroup.Item value="starter" label="Starter" />
         <RadioGroup.Item value="pro" label="Pro" />
       </RadioGroup>,
+      <Select
+        key="select"
+        aria-label="Select plan"
+        defaultValue="starter"
+        placeholder="Choose plan">
+        <option value="starter">Starter</option>
+        <option value="pro">Pro</option>
+      </Select>,
       <Sidebar key="sidebar" state={false} action={() => undefined} />,
       <SidebarHead
         key="sidebar-head"
