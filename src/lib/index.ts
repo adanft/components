@@ -40,6 +40,16 @@ export type {
   DropdownMenuTriggerProps,
 } from './components/dropdown-menu';
 export { default as DropdownMenu } from './components/dropdown-menu';
+export type {
+  FieldControlProps,
+  FieldDescriptionProps,
+  FieldErrorProps,
+  FieldLabelProps,
+  FieldLegendProps,
+  FieldProps,
+  FieldSetProps,
+} from './components/field';
+export { default as Field } from './components/field';
 export type { InputFieldProps } from './components/input-field';
 export { default as InputField } from './components/input-field';
 export type {

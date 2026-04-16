@@ -12,6 +12,7 @@ import {
   Button,
   Checkbox,
   DropdownMenu,
+  Field,
   Home,
   InputField,
   Modal,
@@ -67,6 +68,13 @@ describe('public API smoke', () => {
           <DropdownMenu.Item disabled>Delete</DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu>,
+      <Field key="field" id="email">
+        <Field.Label>Email</Field.Label>
+        <Field.Control asChild>
+          <input type="email" />
+        </Field.Control>
+        <Field.Description>We never share your email.</Field.Description>
+      </Field>,
       <Home key="home" />,
       <InputField key="input-field" label="Email" id="email" placeholder="name@example.com" />,
       <Navbar key="navbar" searchPlaceholder="Search docs" />,
