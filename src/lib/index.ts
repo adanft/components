@@ -10,6 +10,13 @@ export type {
   AccordionTriggerProps,
 } from './components/accordion';
 export { default as Accordion } from './components/accordion';
+export type {
+  AlertDescriptionProps,
+  AlertProps,
+  AlertTitleProps,
+  AlertVariant,
+} from './components/alert';
+export { default as Alert } from './components/alert';
 export type { AvatarProps } from './components/avatar';
 export { default as Avatar } from './components/avatar';
 export type { BadgeProps, BadgeSize, BadgeVariant } from './components/badge';

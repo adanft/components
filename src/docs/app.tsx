@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router';
 import { Home, NotFound } from '../lib';
 import {
   DOCS_ACCORDION_PATH,
+  DOCS_ALERT_PATH,
   DOCS_BADGE_PATH,
   DOCS_BOX_PATH,
   DOCS_BUTTON_PATH,
@@ -26,6 +27,7 @@ import {
   DOCS_TOOLTIP_PATH,
 } from './data/routes';
 import AccordionPage from './pages/accordion';
+import AlertPage from './pages/alert';
 import BadgePage from './pages/badge';
 import BoxPage from './pages/box';
 import ButtonPage from './pages/button';
@@ -54,6 +56,7 @@ function App() {
         <Routes>
           <Route path={DOCS_HOME_PATH} element={<Home />} />
           <Route path={DOCS_ACCORDION_PATH} element={<AccordionPage />} />
+          <Route path={DOCS_ALERT_PATH} element={<AlertPage />} />
           <Route path={DOCS_BADGE_PATH} element={<BadgePage />} />
           <Route path={DOCS_BUTTON_PATH} element={<ButtonPage />} />
           <Route path={DOCS_BOX_PATH} element={<BoxPage />} />

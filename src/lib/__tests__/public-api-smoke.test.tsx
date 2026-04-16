@@ -6,6 +6,7 @@ import * as components from '../index';
 
 import {
   Accordion,
+  Alert,
   Badge,
   Box,
   Button,
@@ -47,6 +48,10 @@ describe('public API smoke', () => {
           <Accordion.Content>Overview content</Accordion.Content>
         </Accordion.Item>
       </Accordion>,
+      <Alert key="alert">
+        <Alert.Title>Heads up</Alert.Title>
+        <Alert.Description>Review the latest changes before continuing.</Alert.Description>
+      </Alert>,
       <Badge key="badge">Beta</Badge>,
       <Button key="button">Click me</Button>,
       <Box key="box" />,
