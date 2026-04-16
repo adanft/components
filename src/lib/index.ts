@@ -68,6 +68,8 @@ export type { SidebarLinkProps } from './components/sidebar/sidebar-link';
 export { default as SidebarLink } from './components/sidebar/sidebar-link';
 export type { SidebarSectionProps } from './components/sidebar/sidebar-section';
 export { default as SidebarSection } from './components/sidebar/sidebar-section';
+export type { SkeletonAnimation, SkeletonProps, SkeletonShape } from './components/skeleton';
+export { default as Skeleton } from './components/skeleton';
 export type { SwitchProps } from './components/switch';
 export { default as Switch } from './components/switch';
 export type {

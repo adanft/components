@@ -27,6 +27,7 @@ const DOCS_PROFILE_PATH = '/components/profile';
 const DOCS_RADIO_GROUP_PATH = '/components/radio-group';
 const DOCS_SELECT_PATH = '/components/select';
 const DOCS_SIDEBAR_PATH = '/components/sidebar';
+const DOCS_SKELETON_PATH = '/components/skeleton';
 const DOCS_SWITCH_PATH = '/components/switch';
 const DOCS_TABLE_PATH = '/components/table';
 const DOCS_TABS_PATH = '/components/tabs';
@@ -52,6 +53,7 @@ export {
   DOCS_RADIO_GROUP_PATH,
   DOCS_SELECT_PATH,
   DOCS_SIDEBAR_PATH,
+  DOCS_SKELETON_PATH,
   DOCS_SWITCH_PATH,
   DOCS_TABLE_PATH,
   DOCS_TABS_PATH,

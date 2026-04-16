@@ -25,6 +25,7 @@ import {
   SidebarHead,
   SidebarLink,
   SidebarSection,
+  Skeleton,
   Switch,
   Table,
   Tabs,
@@ -91,6 +92,7 @@ describe('public API smoke', () => {
         <option value="starter">Starter</option>
         <option value="pro">Pro</option>
       </Select>,
+      <Skeleton key="skeleton" className="h-4 w-24" />,
       <Sidebar key="sidebar" state={false} action={() => undefined} />,
       <SidebarHead
         key="sidebar-head"
