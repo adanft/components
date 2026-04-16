@@ -26,7 +26,6 @@ import {
   Table,
   ToggleLeft,
   TrendingUp,
-  Type,
   User,
   Users,
 } from 'lucide-react';
@@ -40,7 +39,6 @@ import {
   DOCS_CHECKBOX_PATH,
   DOCS_DROPDOWN_MENU_PATH,
   DOCS_FIELD_PATH,
-  DOCS_INPUT_FIELD_PATH,
   DOCS_MODAL_PATH,
   DOCS_PAGINATION_PATH,
   DOCS_POPOVER_PATH,
@@ -90,7 +88,6 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'link', icon: CheckSquare, text: 'Checkbox', href: DOCS_CHECKBOX_PATH },
   { type: 'link', icon: MoreHorizontal, text: 'DropdownMenu', href: DOCS_DROPDOWN_MENU_PATH },
   { type: 'link', icon: FileText, text: 'Field', href: DOCS_FIELD_PATH },
-  { type: 'link', icon: Type, text: 'InputField', href: DOCS_INPUT_FIELD_PATH },
   { type: 'link', icon: LayoutGrid, text: 'Modal', href: DOCS_MODAL_PATH },
   { type: 'link', icon: ChevronRight, text: 'Pagination', href: DOCS_PAGINATION_PATH },
   { type: 'link', icon: Box, text: 'Popover', href: DOCS_POPOVER_PATH },

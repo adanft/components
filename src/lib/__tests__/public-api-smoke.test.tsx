@@ -14,7 +14,6 @@ import {
   DropdownMenu,
   Field,
   Home,
-  InputField,
   Modal,
   Navbar,
   NotFound,
@@ -76,7 +75,6 @@ describe('public API smoke', () => {
         <Field.Description>We never share your email.</Field.Description>
       </Field>,
       <Home key="home" />,
-      <InputField key="input-field" label="Email" id="email" placeholder="name@example.com" />,
       <Navbar key="navbar" searchPlaceholder="Search docs" />,
       <NotFound key="not-found" />,
       <Profile

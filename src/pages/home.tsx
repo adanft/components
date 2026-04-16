@@ -21,11 +21,6 @@ const COMPONENT_CARDS: HomeComponentCard[] = [
     description: 'Surface container for grouping content blocks and layouts.',
   },
   {
-    name: 'InputField',
-    href: '/components/input-field',
-    description: 'Label + input control with focus and tokenized visual states.',
-  },
-  {
     name: 'Profile',
     href: '/components/profile',
     description: 'User profile dropdown with avatar variants and actions.',

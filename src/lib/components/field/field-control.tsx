@@ -37,7 +37,7 @@ function FieldControl({ children }: FieldControlProps) {
     id: childProps.id ?? controlId,
     'aria-describedby': mergeDescribedBy(childProps['aria-describedby'], describedBy || undefined),
     'aria-errormessage': hasError ? errorId : childProps['aria-errormessage'],
-    'aria-invalid': hasError || undefined,
+    'aria-invalid': hasError ? true : childProps['aria-invalid'],
     required: childProps.required ?? required,
   });
 }

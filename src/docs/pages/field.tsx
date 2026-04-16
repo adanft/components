@@ -1,4 +1,4 @@
-import { Field, InputField, RadioGroup, Select } from '../../lib';
+import { Field, RadioGroup, Select } from '../../lib';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { Field } from '../../lib';`;
@@ -144,10 +144,6 @@ function FieldPage() {
         <h2 className="text-xl font-semibold text-brand">How it fits the current library</h2>
         <ul className="list-disc space-y-2 pl-5 text-foreground">
           <li>
-            <code>InputField</code> can later be reimplemented on top of <code>Field</code> as a
-            convenience wrapper.
-          </li>
-          <li>
             <code>Select</code> can already be composed with <code>Field.Control</code>.
           </li>
           <li>
@@ -155,7 +151,7 @@ function FieldPage() {
             <code>Field.Legend</code> story immediately.
           </li>
         </ul>
-        <div className="grid gap-6 rounded-xl border border-border bg-surface p-6 shadow-card md:grid-cols-2">
+        <div className="rounded-xl border border-border bg-surface p-6 shadow-card">
           <div className="space-y-3">
             <p className="text-sm font-semibold text-foreground">Select with Field</p>
             <Field id="workspace-plan">
@@ -169,16 +165,6 @@ function FieldPage() {
               </Field.Control>
               <Field.Description>Choose the current workspace plan.</Field.Description>
             </Field>
-          </div>
-
-          <div className="space-y-3">
-            <p className="text-sm font-semibold text-foreground">Existing InputField</p>
-            <InputField
-              id="legacy-email"
-              label="Email"
-              type="email"
-              error="This is the current convenience wrapper."
-            />
           </div>
         </div>
       </section>
