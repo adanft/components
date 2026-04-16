@@ -12,6 +12,8 @@ export type {
 export { default as Accordion } from './components/accordion';
 export type { AvatarProps } from './components/avatar';
 export { default as Avatar } from './components/avatar';
+export type { BadgeProps, BadgeSize, BadgeVariant } from './components/badge';
+export { default as Badge } from './components/badge';
 export type { BoxProps } from './components/box';
 export { default as Box } from './components/box';
 export type {
