@@ -2,14 +2,17 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const DOCS_DIR = path.join(ROOT, 'src', 'docs');
+const DOCS_WORKSPACE = 'apps/docs';
+const DOCS_DIR = path.join(ROOT, DOCS_WORKSPACE, 'src');
 const TARGET_EXTENSIONS = new Set(['.ts', '.tsx']);
-const FORBIDDEN_SEGMENTS = [
-  `${path.sep}src${path.sep}components${path.sep}`,
-  `${path.sep}src${path.sep}helpers${path.sep}`,
-  `${path.sep}src${path.sep}hooks${path.sep}`,
-  `${path.sep}src${path.sep}pages${path.sep}`,
+const FORBIDDEN_PATHS = [
+  path.join(ROOT, 'packages', 'ui', 'src'),
+  path.join(ROOT, 'src', 'lib'),
+  path.join(ROOT, 'src', 'components'),
+  path.join(ROOT, 'src', 'hooks'),
+  path.join(ROOT, 'src', 'pages'),
 ];
+const REQUIRED_PACKAGE_IMPORT = '@adanft/ui';
 
 async function collectFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -33,7 +36,7 @@ function isRelativeImport(importPath) {
 }
 
 function resolvesForbidden(absoluteImportPath) {
-  return FORBIDDEN_SEGMENTS.some((segment) => absoluteImportPath.includes(segment));
+  return FORBIDDEN_PATHS.some((forbiddenPath) => absoluteImportPath.startsWith(forbiddenPath));
 }
 
 function toCandidatePaths(fromFile, importPath) {
@@ -56,6 +59,7 @@ async function validateFile(filePath) {
   const content = await readFile(filePath, 'utf8');
   const importMatches = [...content.matchAll(/from\s+['"]([^'"]+)['"]/g)];
   const violations = [];
+  const packageImportSeen = content.includes(REQUIRED_PACKAGE_IMPORT);
 
   for (const match of importMatches) {
     const importPath = match[1];
@@ -69,6 +73,15 @@ async function validateFile(filePath) {
     if (candidates.some((candidate) => resolvesForbidden(candidate))) {
       violations.push(importPath);
     }
+  }
+
+  if (
+    filePath.includes(`${path.sep}pages${path.sep}`) &&
+    !packageImportSeen &&
+    !filePath.endsWith(`${path.sep}home.tsx`) &&
+    !filePath.endsWith(`${path.sep}code-block.tsx`)
+  ) {
+    violations.push(`missing required package import: ${REQUIRED_PACKAGE_IMPORT}`);
   }
 
   return violations;

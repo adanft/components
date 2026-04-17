@@ -2,15 +2,15 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const PACKAGE_JSON_PATH = path.join(ROOT, 'package.json');
+const PACKAGE_JSON_PATH = path.join(ROOT, 'packages', 'ui', 'package.json');
+const UI_WORKSPACE = 'packages/ui';
 
 export const LEGACY_ALIAS_POLICY = {
   deprecatedSince: '1.0.0',
   internalBlockSince: '1.0.0',
   removalVersion: '2.0.0',
   allowlistedCompatibilityFiles: new Set([
-    path.join('src', 'lib', 'theme', 'tokens.css'),
-    path.join('src', 'lib', 'theme', 'utilities.css'),
+    path.join(UI_WORKSPACE, 'src', 'theme', 'utilities.css'),
   ]),
   compatibilityBlockStart: 'legacy-compat:start',
   compatibilityBlockEnd: 'legacy-compat:end',

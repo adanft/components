@@ -10,10 +10,12 @@ lerna-debug.log*
 node_modules
 dist
 dist-lib
+**/dist
 dist-ssr
 storybook-static
 .cache
 coverage
+.coverage
 test-results
 playwright-report
 *.local
@@ -38,3 +40,4 @@ playwright-report
 *.sln
 *.sw?
 .docs
+.atl

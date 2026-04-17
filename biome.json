@@ -58,7 +58,7 @@
   },
   "overrides": [
     {
-      "includes": ["**/src/docs/**/*.{ts,tsx}"],
+      "includes": ["apps/docs/src/**/*.{ts,tsx}"],
       "linter": {
         "rules": {
           "correctness": {},
@@ -67,14 +67,12 @@
               "level": "error",
               "options": {
                 "paths": {
-                  "../components": "Import from lib/ instead.",
-                  "../../components": "Import from lib/ instead.",
-                  "../helpers": "Import from lib/ instead.",
-                  "../../helpers": "Import from lib/ instead.",
-                  "../hooks": "Import from lib/ instead.",
-                  "../../hooks": "Import from lib/ instead.",
-                  "../pages": "Import from lib/ instead.",
-                  "../../pages": "Import from lib/ instead."
+                  "../../components": "Docs app chrome must stay inside apps/docs; import local docs modules or @adanft/ui instead.",
+                  "../../../src/lib": "Docs must consume the publishable contract from @adanft/ui instead of legacy root sources.",
+                  "../../../../src/lib": "Docs must consume the publishable contract from @adanft/ui instead of legacy root sources.",
+                  "../../../packages/ui/src": "Docs must consume the publishable contract from @adanft/ui instead of package internals.",
+                  "../../../../packages/ui/src": "Docs must consume the publishable contract from @adanft/ui instead of package internals.",
+                  "@adanft/ui/src": "Docs must consume the public package root @adanft/ui instead of package internals."
                 }
               }
             }

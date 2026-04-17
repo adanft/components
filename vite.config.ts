@@ -1,1 +1,1 @@
-export { default } from './vite.docs.config';
+export { default } from './apps/docs/vite.config';

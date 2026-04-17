@@ -1,81 +1,47 @@
-# React Components
+# adanft components workspace
 
-Library-first React component system with a docs/demo app in the same repo.
+Monorepo for the `@adanft/ui` React component library and its docs consumer app.
 
-## Consumer Quickstart
+## Workspace layout
+
+- `packages/ui` — publishable UI package (`@adanft/ui`)
+- `apps/docs` — Vite docs app and first real consumer of the package
+- `scripts` — workspace validators
+- `.changeset` — versioning and release metadata
+
+## Local development
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-- `pnpm dev`: runs the docs app locally (Vite + `vite.docs.config.ts`).
-- `pnpm preview`: serves the built docs output locally (run `pnpm build:docs` first).
+Useful commands:
 
-## Public API Imports (Important)
+- `pnpm dev` — run the docs app locally
+- `pnpm test` — run workspace tests
+- `pnpm typecheck` — run workspace type checking
+- `pnpm validate:boundaries` — enforce public API boundaries
+- `pnpm validate:pack-contract` — verify the publish manifest/export/workflow contract for `@adanft/ui`
+- `pnpm validate:semantic-tokens` — enforce token usage rules
 
-Use the library entrypoint only:
+## Package contract
 
-- In this repo: import from `src/lib`.
-- As a package (when published): import from the package root entrypoint.
+The reusable library lives in `packages/ui` and is consumed as `@adanft/ui`.
 
-Avoid deep imports into internal folders (`src/components/*`, `src/helpers/*`, `src/hooks/*`, `src/pages/*`).
+- Docs must import from `@adanft/ui`
+- Docs must not deep-import package internals
+- `@adanft/ui` is currently a **Tailwind-dependent** package model
+- `apps/docs/src/index.css` is the consumer-owned Tailwind entrypoint for the docs app
 
-```ts
-// Good (repo local, example from app entry)
-import { Sidebar, Navbar, initializeTheme } from './lib';
+## Release status
 
-// Good (published package)
-import { Sidebar, Navbar, initializeTheme } from 'your-package-name';
+This workspace is currently being stabilized for the first public beta release of `@adanft/ui`.
 
-// Avoid
-import Sidebar from '../components/sidebar';
-```
+- Recommended initial public version: `0.1.0-beta.1`
+- Stable `1.0.0` is **not** the current target yet
+- Beta publish guardrail: `pnpm validate:pack-contract`
 
-## Styles and Theme Setup
+## Docs preview
 
-Consumers are responsible for loading library styles and initializing theme behavior.
-
-```ts
-import './lib/styles.css';
-import { initializeTheme } from './lib';
-
-initializeTheme();
-```
-
-- `styles.css` is the single styling entrypoint and loads semantic tokens/themes.
-- Token contract lives in `src/lib/theme/tokens.css` and `src/lib/theme/themes.css`.
-- Call `initializeTheme()` once at app startup before rendering UI.
-- Runtime helpers exposed publicly: `initializeTheme` and `toggleTheme`.
-
-### Token Alias Deprecation Policy (Phase 3)
-
-- Legacy aliases were deprecated in `v1.0.0` and are scheduled for removal in `v2.0.0`.
-- Runtime compatibility remains enabled for external consumers through alias blocks in `src/lib/theme/tokens.css` and `src/lib/theme/utilities.css`.
-- Internal usage is blocked by validation unless a legacy alias appears inside explicit `legacy-compat` allowlisted blocks.
-- Migration matrix: `docs/migrations/legacy-alias-matrix.md`.
-- New styles should use semantic tokens (`--ui-*`) and semantic utility classes (`ui-*`) only.
-
-## Build, Validate, and Test
-
-- `pnpm lint`: ESLint checks.
-- `pnpm typecheck`: TypeScript project type checks.
-- `pnpm test`: runs Vitest test suite.
-- `pnpm validate:boundaries`: verifies docs imports use public API boundaries.
-- `pnpm validate:semantic-tokens`: blocks legacy aliases outside allowlisted compatibility blocks and enforces removal timeline gates.
-- `pnpm build:docs`: builds the docs app to `dist`.
-- `pnpm build:lib`: builds the library entrypoint to `dist-lib`.
-- `pnpm build`: `typecheck` + docs build + library build.
-- `pnpm validate`: full quality gate (`lint` + `typecheck` + boundary check + `build`).
-
-## Migration Note (Internal Consumers)
-
-If you currently import from internal source paths, migrate to the public API:
-
-1. Replace deep imports with `src/lib` imports.
-2. Ensure `src/lib/styles.css` is loaded once in your app bootstrap.
-3. Ensure `initializeTheme()` is called once during startup.
-
-## Demo
-
-Components preview: https://adanft.github.io/components
+https://adanft.github.io/components

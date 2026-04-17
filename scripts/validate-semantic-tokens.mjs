@@ -3,7 +3,9 @@ import path from 'node:path';
 import { compareSemver, LEGACY_ALIAS_POLICY, readPackageVersion } from './legacy-alias-policy.mjs';
 
 const ROOT = process.cwd();
-const SRC_DIR = path.join(ROOT, 'src');
+const UI_WORKSPACE = 'packages/ui';
+const DOCS_WORKSPACE = 'apps/docs';
+const SOURCE_DIRS = [path.join(ROOT, UI_WORKSPACE, 'src'), path.join(ROOT, DOCS_WORKSPACE, 'src')];
 const TARGET_EXTENSIONS = new Set(['.css', '.ts', '.tsx']);
 const LEGACY_TOKEN_VARIABLES = [
   '--border-color',
@@ -146,7 +148,7 @@ function validateContent(
 
     const isCssFile = path.extname(relativePath) === '.css';
     const classMatch =
-      isCssFile || line.includes('className') || line.includes('class=')
+      isCssFile || line.includes('className=') || line.includes('class=')
         ? line.match(isCssFile ? cssClassRegex : sourceClassRegex)
         : null;
     if (classMatch && requiresCompatibilityBlock) {
@@ -200,7 +202,8 @@ function validateContent(
 
 async function run() {
   const packageVersion = await readPackageVersion();
-  const files = await collectFiles(SRC_DIR);
+  const fileSets = await Promise.all(SOURCE_DIRS.map((directory) => collectFiles(directory)));
+  const files = fileSets.flat();
   const varRegex = createVarRegex();
   const varDeclarationRegex = createVarDeclarationRegex();
   const cssClassRegex = createCssClassRegex();
