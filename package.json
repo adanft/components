@@ -22,7 +22,8 @@
     "validate": "pnpm check && pnpm typecheck && pnpm test && pnpm validate:boundaries && pnpm validate:pack-contract && pnpm validate:semantic-tokens && pnpm build",
     "changeset": "changeset",
     "changeset:version": "changeset version",
-    "release": "pnpm validate:pack-contract && pnpm --dir packages/ui build && changeset publish --tag beta"
+    "release": "changeset publish --tag beta",
+    "release:beta": "pnpm validate:pack-contract && pnpm --dir packages/ui build && pnpm release"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.10",
