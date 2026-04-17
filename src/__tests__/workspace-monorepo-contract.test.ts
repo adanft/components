@@ -92,10 +92,8 @@ describe('workspace monorepo contract', () => {
     expect(docsManifest.devDependencies?.tailwindcss).toBeDefined();
   });
 
-  it('tracks migration operations with a docs checklist', () => {
-    expect(
-      existsSync(path.join(repoRoot, 'docs/implementation/monorepo-publishable-ui-checklist.md')),
-    ).toBe(true);
+  it('tracks migration operations with the implementation plan', () => {
+    expect(existsSync(path.join(repoRoot, 'IMPLEMENTATION_PLAN.md'))).toBe(true);
   });
 
   it('uses a docs-owned Tailwind entry that scans docs and package sources', () => {
