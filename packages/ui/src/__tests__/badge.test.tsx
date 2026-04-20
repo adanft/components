@@ -10,20 +10,19 @@ describe('Badge', () => {
     const badge = screen.getByText('Beta');
 
     expect(badge.tagName).toBe('SPAN');
-    expect(badge).toHaveClass('inline-flex');
-    expect(badge).toHaveClass('bg-muted');
-    expect(badge).toHaveClass('text-sm');
+    expect(badge).toHaveClass('bg-muted', 'text-white');
+    expect(badge).toHaveClass('px-2', 'text-xs', 'leading-4');
   });
 
   it('supports variant styles', () => {
     render(<Badge variant="success">Active</Badge>);
 
-    expect(screen.getByText('Active')).toHaveClass('bg-success/15');
+    expect(screen.getByText('Active')).toHaveClass('bg-success/10');
   });
 
-  it('supports size styles', () => {
-    render(<Badge size="sm">Draft</Badge>);
+  it('supports primary variant styles', () => {
+    render(<Badge variant="primary">New</Badge>);
 
-    expect(screen.getByText('Draft')).toHaveClass('text-xs');
+    expect(screen.getByText('New')).toHaveClass('bg-brand/10', 'text-brand');
   });
 });

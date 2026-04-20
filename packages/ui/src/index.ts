@@ -15,7 +15,7 @@ export type {
 export { default as Alert } from './components/alert';
 export type { AvatarProps, AvatarSize } from './components/avatar';
 export { default as Avatar } from './components/avatar';
-export type { BadgeProps, BadgeSize, BadgeVariant } from './components/badge';
+export type { BadgeProps, BadgeVariant } from './components/badge';
 export { default as Badge } from './components/badge';
 export type { BoxProps } from './components/box';
 export { default as Box } from './components/box';
