@@ -24,11 +24,7 @@ describe('Box', () => {
 
     const box = screen.getByTestId('box');
 
-    expect(box).toHaveClass(
-      'border',
-      'border-border',
-      'rounded-md',
-    );
+    expect(box).toHaveClass('border', 'border-border', 'rounded-md');
     expect(box).not.toHaveClass('bg-surface', 'shadow-card', 'p-4');
   });
 

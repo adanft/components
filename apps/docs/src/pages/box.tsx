@@ -1,8 +1,15 @@
 import { Box } from '@adanft/ui';
-import { Code } from '../components/code';
 import { CodeBlock } from '../code-block';
+import { Code } from '../components/code';
 
-const exampleJsx = `<Box surface="none" shadow="none" className="space-y-2">
+const defaultExampleJsx = `<Box className="space-y-2">
+  <h3 className="text-lg font-semibold text-brand">Default box</h3>
+  <p className="text-foreground">
+    Use the default Box when you want a standard bordered surface.
+  </p>
+</Box>`;
+
+const transparentExampleJsx = `<Box surface="none" shadow="none" className="space-y-2">
   <h3 className="text-lg font-semibold text-brand">Release notes</h3>
   <p className="text-foreground">
     Version 2.4 ships improved card spacing and keyboard focus styles.
@@ -33,22 +40,34 @@ function BoxPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Example</h2>
+        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h3 className="text-lg font-semibold text-brand">Default</h3>
         <Box shadow="none" surface="none">
           <Box className="space-y-2">
+            <h3 className="text-lg font-semibold text-brand">Default box</h3>
+            <p className="text-foreground">
+              Use the default Box when you want a standard bordered surface.
+            </p>
+          </Box>
+        </Box>
+        <CodeBlock code={defaultExampleJsx} />
+
+        <h3 className="text-lg font-semibold text-brand">Transparent</h3>
+        <Box shadow="none" surface="none">
+          <Box surface="none" shadow="none" className="space-y-2">
             <h3 className="text-lg font-semibold text-brand">Release notes</h3>
             <p className="text-foreground">
               Version 2.4 ships improved card spacing and keyboard focus styles.
             </p>
           </Box>
         </Box>
-        <CodeBlock code={exampleJsx} />
+        <CodeBlock code={transparentExampleJsx} />
       </section>
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
         <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-180 border-collapse text-left text-sm text-foreground">
+          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
             <thead className="bg-surface/60 text-muted">
               <tr>
                 <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
