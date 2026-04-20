@@ -1,11 +1,10 @@
 import { Box, Checkbox } from '@adanft/ui';
 import { CodeBlock } from '../code-block';
+import { Code } from '../components/code';
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Snippets
-// ─────────────────────────────────────────────────────────────────────────────
+const importSnippet = `import { Checkbox } from '@adanft/ui';`;
 
-const importSnippet = `import { Checkbox } from '@your-org/components';`;
+const usageSnippet = `<Checkbox label="Accept terms" onChange={() => {}} />`;
 
 const statesSnippet = `<Checkbox label="Unchecked" onChange={() => {}} />
 <Checkbox label="Checked" checked onChange={() => {}} />
@@ -18,74 +17,149 @@ const labelPositionSnippet = `<Checkbox label="Label on the right (default)" lab
 
 const withoutLabelSnippet = `<Checkbox aria-label="Accept terms" onChange={() => {}} />`;
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Page
-// ─────────────────────────────────────────────────────────────────────────────
-
 function CheckboxPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          components {'>'} Checkbox
-        </p>
         <h1 className="text-3xl font-bold text-brand">Checkbox</h1>
-        <p className="text-foreground">
-          <code>Checkbox</code> is a controlled form input that supports checked and unchecked
-          states. It auto-generates accessible <code>id</code>/<code>htmlFor</code> wiring, and lets
-          you position the label on any side via <code>labelPosition</code>.
+        <p className="text-base leading-7 text-foreground">
+          <Code>Checkbox</Code> is a form control used to toggle a checked or unchecked state.
         </p>
       </header>
 
-      {/* ── Import ─────────────────────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Import</h2>
+        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
         <CodeBlock code={importSnippet} />
+        <CodeBlock code={usageSnippet} />
       </section>
 
-      {/* ── States ─────────────────────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">States</h2>
-        <p className="text-foreground">
-          The component supports three visual states: unchecked, checked, and disabled.
-        </p>
-        <Box className="flex flex-wrap items-center gap-6">
+        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+
+        <h3 className="text-lg font-semibold text-brand">Default</h3>
+        <Box className="flex items-center gap-4" shadow="none" surface="none">
+          <Checkbox label="Accept terms" onChange={() => {}} />
+        </Box>
+        <CodeBlock code={usageSnippet} />
+
+        <h3 className="text-lg font-semibold text-brand">States</h3>
+        <Box className="flex flex-wrap items-center gap-6" shadow="none" surface="none">
           <Checkbox label="Unchecked" onChange={() => {}} />
           <Checkbox label="Checked" defaultChecked onChange={() => {}} />
           <Checkbox label="Disabled" disabled onChange={() => {}} />
         </Box>
         <CodeBlock code={statesSnippet} />
-      </section>
 
-      {/* ── Label position ─────────────────────────────────────────── */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Label position</h2>
-        <p className="text-foreground">
-          Use <code>labelPosition</code> to control where the label renders relative to the
-          checkbox. Defaults to <code>"right"</code>. Accepts <code>"left"</code>,{' '}
-          <code>"right"</code>, <code>"top"</code>, or <code>"bottom"</code>.
-        </p>
-        <Box className="flex flex-wrap items-center gap-8">
+        <h3 className="text-lg font-semibold text-brand">Label position</h3>
+        <Box className="flex flex-wrap items-center gap-8" shadow="none" surface="none">
           <Checkbox label="Right (default)" labelPosition="right" onChange={() => {}} />
           <Checkbox label="Left" labelPosition="left" onChange={() => {}} />
           <Checkbox label="Top" labelPosition="top" onChange={() => {}} />
           <Checkbox label="Bottom" labelPosition="bottom" onChange={() => {}} />
         </Box>
         <CodeBlock code={labelPositionSnippet} />
-      </section>
 
-      {/* ── Without label ──────────────────────────────────────────── */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Without label</h2>
+        <h3 className="text-lg font-semibold text-brand">Without label</h3>
         <p className="text-foreground">
-          When no <code>label</code> prop is given, no <code>{'<label>'}</code> element is rendered.
-          Always provide an <code>aria-label</code> or <code>aria-labelledby</code> for screen
-          readers.
+          When no <Code>label</Code> prop is provided, make sure the control still has an accessible
+          name through <Code>aria-label</Code> or <Code>aria-labelledby</Code>.
         </p>
-        <Box className="flex items-center gap-4">
+        <Box className="flex items-center gap-4" shadow="none" surface="none">
           <Checkbox aria-label="Accept terms" onChange={() => {}} />
         </Box>
         <CodeBlock code={withoutLabelSnippet} />
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <div className="overflow-x-auto rounded-md border border-border">
+          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
+            <thead className="bg-surface/60 text-sm text-muted">
+              <tr>
+                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>label</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>string</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">—</td>
+                <td className="border-b border-border px-4 py-3">
+                  Optional text rendered next to the checkbox.
+                </td>
+              </tr>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>labelPosition</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>{`"left" | "right" | "top" | "bottom"`}</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>{`"right"`}</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  Controls where the label appears relative to the checkbox.
+                </td>
+              </tr>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>checked</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>boolean</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">—</td>
+                <td className="border-b border-border px-4 py-3">
+                  Controls the checked state when used as a controlled input.
+                </td>
+              </tr>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>defaultChecked</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>boolean</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">—</td>
+                <td className="border-b border-border px-4 py-3">
+                  Sets the initial checked state for uncontrolled usage.
+                </td>
+              </tr>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>disabled</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>boolean</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">—</td>
+                <td className="border-b border-border px-4 py-3">
+                  Disables interaction and applies the disabled visual state.
+                </td>
+              </tr>
+              <tr className="align-top">
+                <td className="px-4 py-3">
+                  <Code>className</Code>
+                </td>
+                <td className="px-4 py-3">
+                  <Code>string</Code>
+                </td>
+                <td className="px-4 py-3">—</td>
+                <td className="px-4 py-3">
+                  Extends the component styles and can override default values when needed.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </article>
   );

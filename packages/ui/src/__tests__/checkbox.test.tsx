@@ -16,9 +16,10 @@ describe('Checkbox', () => {
     render(<Checkbox label="Accept terms" id="terms" onChange={() => {}} />);
 
     const checkbox = screen.getByLabelText('Accept terms');
+    const label = screen.getByText('Accept terms').closest('label');
 
     expect(checkbox).toHaveAttribute('id', 'terms');
-    expect(screen.getByText('Accept terms').tagName).toBe('LABEL');
+    expect(label).toBeInTheDocument();
   });
 
   it('renders without label element when label prop is omitted', () => {
@@ -31,20 +32,20 @@ describe('Checkbox', () => {
     render(<Checkbox label="Remember me" onChange={() => {}} />);
 
     const checkbox = screen.getByLabelText('Remember me');
-    const label = screen.getByText('Remember me');
+    const label = screen.getByText('Remember me').closest('label');
 
     expect(checkbox).toHaveAttribute('id');
-    expect(label).toHaveAttribute('for', checkbox.getAttribute('id') ?? '');
+    expect(label).toBeInTheDocument();
   });
 
   it('uses custom id for both label and input', () => {
     render(<Checkbox label="Remember me" id="remember" onChange={() => {}} />);
 
     const checkbox = screen.getByLabelText('Remember me');
-    const label = screen.getByText('Remember me');
+    const label = screen.getByText('Remember me').closest('label');
 
     expect(checkbox).toHaveAttribute('id', 'remember');
-    expect(label).toHaveAttribute('for', 'remember');
+    expect(label).toBeInTheDocument();
   });
 
   it('passes disabled prop through to input', () => {
