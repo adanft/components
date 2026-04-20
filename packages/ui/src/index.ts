@@ -13,7 +13,7 @@ export type {
   AlertVariant,
 } from './components/alert';
 export { default as Alert } from './components/alert';
-export type { AvatarProps } from './components/avatar';
+export type { AvatarProps, AvatarSize } from './components/avatar';
 export { default as Avatar } from './components/avatar';
 export type { BadgeProps, BadgeSize, BadgeVariant } from './components/badge';
 export { default as Badge } from './components/badge';

@@ -1,8 +1,9 @@
 import { Route, Routes } from 'react-router';
-
+import NotFound from './components/not-found';
 import {
   DOCS_ACCORDION_PATH,
   DOCS_ALERT_PATH,
+  DOCS_AVATAR_PATH,
   DOCS_BADGE_PATH,
   DOCS_BOX_PATH,
   DOCS_BUTTON_PATH,
@@ -25,16 +26,16 @@ import {
   DOCS_THEME_SWITCH_PATH,
   DOCS_TOOLTIP_PATH,
 } from './data/routes';
-import NotFound from './components/not-found';
-import Home from './pages/home';
 import AccordionPage from './pages/accordion';
 import AlertPage from './pages/alert';
+import AvatarPage from './pages/avatar';
 import BadgePage from './pages/badge';
 import BoxPage from './pages/box';
 import ButtonPage from './pages/button';
 import CheckboxPage from './pages/checkbox';
 import DropdownMenuPage from './pages/dropdown-menu';
 import FieldPage from './pages/field';
+import Home from './pages/home';
 import ModalPage from './pages/modal';
 import PaginationPage from './pages/pagination';
 import PopoverPage from './pages/popover';
@@ -57,6 +58,7 @@ function App() {
         <Route path={DOCS_HOME_PATH} element={<Home />} />
         <Route path={DOCS_ACCORDION_PATH} element={<AccordionPage />} />
         <Route path={DOCS_ALERT_PATH} element={<AlertPage />} />
+        <Route path={DOCS_AVATAR_PATH} element={<AvatarPage />} />
         <Route path={DOCS_BADGE_PATH} element={<BadgePage />} />
         <Route path={DOCS_BUTTON_PATH} element={<ButtonPage />} />
         <Route path={DOCS_BOX_PATH} element={<BoxPage />} />

@@ -53,6 +53,20 @@ function Profile({
 
   const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, role]);
 
+  const triggerAvatar =
+    avatarType === 'image' ? (
+      <Avatar type="image" src={avatarSrc ?? ''} alt={avatarAlt ?? ''} />
+    ) : (
+      <Avatar type="text" text={avatarText ?? ''} />
+    );
+
+  const floatingAvatar =
+    avatarType === 'image' ? (
+      <Avatar type="image" src={avatarSrc ?? ''} alt={avatarAlt ?? ''} />
+    ) : (
+      <Avatar type="text" text={avatarText ?? ''} />
+    );
+
   return (
     <>
       <button
@@ -62,7 +76,7 @@ function Profile({
         aria-expanded={open}
         aria-haspopup="dialog"
         {...getReferenceProps()}>
-        <Avatar type={avatarType} src={avatarSrc} alt={avatarAlt} text={avatarText} />
+        {triggerAvatar}
       </button>
       {open ? (
         <FloatingPortal>
@@ -73,7 +87,7 @@ function Profile({
               className="w-72 z-50"
               {...getFloatingProps()}>
               <div className="flex items-center gap-2">
-                <Avatar type={avatarType} src={avatarSrc} alt={avatarAlt} text={avatarText} />
+                {floatingAvatar}
                 <div className="flex flex-col gap-2 text-foreground">
                   <span>{fullName}</span>
                   <span className="text-sm font-semibold">{userKey}</span>

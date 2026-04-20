@@ -17,6 +17,7 @@ function docsPath(path: string) {
 const DOCS_HOME_PATH = DOCS_BASE_PATH || '/';
 const DOCS_ACCORDION_PATH = '/components/accordion';
 const DOCS_ALERT_PATH = '/components/alert';
+const DOCS_AVATAR_PATH = '/components/avatar';
 const DOCS_BADGE_PATH = '/components/badge';
 const DOCS_BUTTON_PATH = '/components/button';
 const DOCS_BOX_PATH = '/components/box';
@@ -41,6 +42,7 @@ const DOCS_NOT_FOUND_PATH = docsPath('/*');
 export {
   DOCS_ACCORDION_PATH,
   DOCS_ALERT_PATH,
+  DOCS_AVATAR_PATH,
   DOCS_BADGE_PATH,
   DOCS_BASE_PATH,
   DOCS_BOX_PATH,
