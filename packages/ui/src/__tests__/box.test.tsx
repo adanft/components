@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { Box } from '../index';
 
 describe('Box', () => {
-  it('always applies fixed container styles', () => {
+  it('applies the default visual contract', () => {
     render(<Box data-testid="box" />);
 
     const box = screen.getByTestId('box');
@@ -19,8 +19,21 @@ describe('Box', () => {
     );
   });
 
+  it('supports semantic style switches without dropping the fixed border contract', () => {
+    render(<Box data-testid="box" padding="none" shadow="none" surface="none" />);
+
+    const box = screen.getByTestId('box');
+
+    expect(box).toHaveClass(
+      'border',
+      'border-border',
+      'rounded-md',
+    );
+    expect(box).not.toHaveClass('bg-surface', 'shadow-card', 'p-4');
+  });
+
   it('merges custom className with base classes', () => {
-    render(<Box className="rounded-lg custom-box" data-testid="box" />);
+    render(<Box className="custom-box" data-testid="box" />);
 
     const box = screen.getByTestId('box');
 
@@ -29,10 +42,9 @@ describe('Box', () => {
       'border',
       'border-border',
       'shadow-card',
+      'rounded-md',
       'p-4',
-      'rounded-lg',
       'custom-box',
     );
-    expect(box).not.toHaveClass('rounded-md');
   });
 });
