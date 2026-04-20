@@ -1,6 +1,5 @@
-import { useState } from 'react';
-
 import { Box, Modal } from '@adanft/ui';
+import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { Modal } from '@adanft/ui';`;

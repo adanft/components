@@ -1,5 +1,5 @@
-import { type ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { Box, Table } from '@adanft/ui';
+import { type ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { CodeBlock } from '../code-block';
 
 // ─────────────────────────────────────────────────────────────────────────────

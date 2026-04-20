@@ -1,9 +1,8 @@
+import * as components from '@adanft/ui';
+import { Accordion, Alert, Button, Modal, Select, SidebarLink, Table } from '@adanft/ui';
 import { render, screen } from '@testing-library/react';
 import { ShoppingCart } from 'lucide-react';
 import { describe, expect, it, vi } from 'vitest';
-import * as components from '@adanft/ui';
-
-import { Accordion, Alert, Button, Modal, Select, SidebarLink, Table } from '@adanft/ui';
 
 describe('@adanft/ui public API', () => {
   it('re-exports representative component behavior without deep imports or router context', () => {

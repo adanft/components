@@ -1,7 +1,6 @@
+import { Box, Button, DropdownMenu } from '@adanft/ui';
 import { LogOut, MoreHorizontal, Settings, User } from 'lucide-react';
 import { useState } from 'react';
-
-import { Box, Button, DropdownMenu } from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { DropdownMenu } from '@adanft/ui';`;

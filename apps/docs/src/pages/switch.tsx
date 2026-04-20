@@ -1,7 +1,6 @@
+import { Box, Switch } from '@adanft/ui';
 import { Moon, Plane } from 'lucide-react';
 import { useState } from 'react';
-
-import { Box, Switch } from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { Switch } from '@adanft/ui';`;

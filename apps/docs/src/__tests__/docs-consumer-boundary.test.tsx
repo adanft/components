@@ -3,8 +3,8 @@ import { MemoryRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';
 
 import App from '../app';
-import DocsShell from '../shell';
 import { docsPath } from '../data/routes';
+import DocsShell from '../shell';
 
 describe('docs consumer boundary', () => {
   it('renders docs shell navigation using the router adapter', () => {

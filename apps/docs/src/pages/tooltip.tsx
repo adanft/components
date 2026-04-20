@@ -1,7 +1,6 @@
+import { Box, Button, Tooltip } from '@adanft/ui';
 import { Info, Save } from 'lucide-react';
 import { useState } from 'react';
-
-import { Box, Button, Tooltip } from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { Tooltip } from '@adanft/ui';`;

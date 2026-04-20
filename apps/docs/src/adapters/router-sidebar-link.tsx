@@ -1,7 +1,6 @@
+import { SidebarLink } from '@adanft/ui';
 import type { LucideIcon } from 'lucide-react';
 import { Link, useMatch, useResolvedPath } from 'react-router';
-
-import { SidebarLink } from '@adanft/ui';
 
 type RouterSidebarLinkProps = {
   className?: string;

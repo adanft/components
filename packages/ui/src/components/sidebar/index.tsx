@@ -1,7 +1,6 @@
 import type { ComponentPropsWithoutRef } from 'react';
-
-import useOutsideHandler from '../../hooks/use-outside-handler';
 import { cn } from '../../helpers/cn';
+import useOutsideHandler from '../../hooks/use-outside-handler';
 
 type SidebarProps = ComponentPropsWithoutRef<'aside'> & {
   state: boolean;

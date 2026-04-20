@@ -1,8 +1,7 @@
-import { type JSX, type ReactNode, useState } from 'react';
-
 import { Sidebar, SidebarBody, SidebarGroup, SidebarHead, SidebarSection } from '@adanft/ui';
-import Navbar, { type NavbarProps } from './components/navbar';
+import { type JSX, type ReactNode, useState } from 'react';
 import RouterSidebarLink from './adapters/router-sidebar-link';
+import Navbar, { type NavbarProps } from './components/navbar';
 import { docsBranding } from './data/branding';
 import { docsNavbarProps } from './data/navbar';
 import { type DocsSidebarNavigationNode, docsSidebarNavigation } from './data/sidebar-navigation';

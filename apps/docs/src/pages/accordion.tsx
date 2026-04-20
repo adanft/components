@@ -1,7 +1,6 @@
+import { Accordion, Box } from '@adanft/ui';
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
-
-import { Accordion, Box } from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { Accordion } from '@adanft/ui';`;

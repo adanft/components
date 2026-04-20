@@ -1,6 +1,5 @@
+import { Profile, type ProfileProps, ThemeSwitch } from '@adanft/ui';
 import { Bell, Search } from 'lucide-react';
-
-import { Profile, ThemeSwitch, type ProfileProps } from '@adanft/ui';
 
 type NavbarProps = {
   profileProps?: ProfileProps;

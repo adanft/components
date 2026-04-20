@@ -1,6 +1,3 @@
-import { Archive, BarChart3, Box, FileText, Hand, PanelLeft, Settings, Users } from 'lucide-react';
-import { useState } from 'react';
-
 import {
   Sidebar,
   SidebarBody,
@@ -10,6 +7,8 @@ import {
   SidebarSection,
   Box as Surface,
 } from '@adanft/ui';
+import { Archive, BarChart3, Box, FileText, Hand, PanelLeft, Settings, Users } from 'lucide-react';
+import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { Archive, BarChart3, Box, FileText, Hand, PanelLeft, Settings, Users } from 'lucide-react';

@@ -1,6 +1,5 @@
-import { useState } from 'react';
-
 import { Box, Button, Popover } from '@adanft/ui';
+import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { Popover } from '@adanft/ui';`;

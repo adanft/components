@@ -1,6 +1,5 @@
-import { useState } from 'react';
-
 import { Box, PaginationFoot, PaginationHead } from '@adanft/ui';
+import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { PaginationFoot, PaginationHead } from '@your-org/components';`;

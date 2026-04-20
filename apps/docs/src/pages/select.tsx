@@ -1,6 +1,5 @@
-import { useState } from 'react';
-
 import { Box, Select } from '@adanft/ui';
+import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { Select } from '@adanft/ui';`;

@@ -1,7 +1,6 @@
+import { Box, Tabs } from '@adanft/ui';
 import { BarChart3, LayoutGrid, Settings } from 'lucide-react';
 import { useState } from 'react';
-
-import { Box, Tabs } from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { Tabs } from '@adanft/ui';`;

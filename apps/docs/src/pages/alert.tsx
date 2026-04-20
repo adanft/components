@@ -1,6 +1,5 @@
-import { AlertCircle, CheckCircle2, Info, TriangleAlert } from 'lucide-react';
-
 import { Alert, Box } from '@adanft/ui';
+import { AlertCircle, CheckCircle2, Info, TriangleAlert } from 'lucide-react';
 import { CodeBlock } from '../code-block';
 
 const importSnippet = `import { Alert } from '@adanft/ui';`;
