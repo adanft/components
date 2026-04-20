@@ -5,7 +5,7 @@ vi.mock('../index.css', () => {
   const style = document.createElement('style');
 
   style.setAttribute('data-testid', 'mock-docs-styles');
-  style.textContent = 'body { font-family: "Poppins", sans-serif; }';
+  style.textContent = 'body { background-color: var(--color-background); }';
   document.head.append(style);
 
   return {};
@@ -36,7 +36,7 @@ describe('docs bootstrap package contract', () => {
     const hasInjectedDocsStyles = Array.from(document.head.querySelectorAll('style')).some(
       (style) => {
         const cssText = style.textContent ?? '';
-        return cssText.includes('font-family: "Poppins", sans-serif');
+        return cssText.includes('background-color: var(--color-background)');
       },
     );
 
