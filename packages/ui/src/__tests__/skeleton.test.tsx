@@ -4,19 +4,19 @@ import { describe, expect, it } from 'vitest';
 import { Skeleton } from '../index';
 
 describe('Skeleton', () => {
-  it('renders with default pulse animation and text shape', () => {
-    render(<Skeleton data-testid="skeleton" className="h-4 w-24" />);
+  it('renders with default pulse animation', () => {
+    render(<Skeleton data-testid="skeleton" className="h-4 w-24 rounded-sm" />);
 
     const skeleton = screen.getByTestId('skeleton');
 
     expect(skeleton).toHaveAttribute('aria-hidden', 'true');
     expect(skeleton).toHaveClass('bg-muted');
-    expect(skeleton).toHaveClass('rounded-md');
+    expect(skeleton).toHaveClass('rounded-sm');
     expect(skeleton).toHaveClass('motion-safe:animate-pulse');
   });
 
-  it('supports circle shape', () => {
-    render(<Skeleton data-testid="skeleton" shape="circle" className="size-10" />);
+  it('supports consumer-defined shapes through className', () => {
+    render(<Skeleton data-testid="skeleton" className="size-10 rounded-full" />);
 
     expect(screen.getByTestId('skeleton')).toHaveClass('rounded-full');
   });
