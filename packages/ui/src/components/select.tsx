@@ -28,7 +28,7 @@ function Select({
         {...controlledProps}
         data-placeholder={isPlaceholderSelected ? '' : undefined}
         className={cn(
-          'w-full appearance-none rounded-md border border-border bg-background px-3 py-2 pr-10 text-foreground transition-colors duration-150',
+          'w-full appearance-none rounded-md border border-border bg-background px-3 py-2 pr-10 text-foreground',
           'data-placeholder:text-muted',
           'disabled:cursor-not-allowed disabled:opacity-50',
           className,

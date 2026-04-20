@@ -29,7 +29,21 @@ describe('Select', () => {
       </Select>,
     );
 
-    expect(screen.getByRole('combobox', { name: 'Plan' })).toHaveValue('starter');
+    const control = screen.getByRole('combobox', { name: 'Plan' });
+
+    expect(control).toHaveValue('starter');
+    expect(control).toHaveClass(
+      'w-full',
+      'appearance-none',
+      'rounded-md',
+      'border',
+      'border-border',
+      'bg-background',
+      'px-3',
+      'py-2',
+      'pr-10',
+      'text-foreground',
+    );
   });
 
   it('supports controlled updates', () => {
