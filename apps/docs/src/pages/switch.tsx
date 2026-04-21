@@ -1,7 +1,7 @@
 import { Box, Switch } from '@adanft/ui';
-import { Moon, Plane } from 'lucide-react';
 import { useState } from 'react';
 import { CodeBlock } from '../code-block';
+import { Code } from '../components/code';
 
 const importSnippet = `import { Switch } from '@adanft/ui';`;
 
@@ -12,83 +12,164 @@ const [checked, setChecked] = useState(false);
 
 <Switch checked={checked} onCheckedChange={setChecked} label="Dark mode" />`;
 
-const exampleSnippet = `const [darkMode, setDarkMode] = useState(false);
-const [airplaneMode, setAirplaneMode] = useState(true);
+const positionsSnippet = `<Switch checked={false} onCheckedChange={() => undefined} label="Right" labelPosition="right" />
+<Switch checked={false} onCheckedChange={() => undefined} label="Left" labelPosition="left" />
+<Switch checked={false} onCheckedChange={() => undefined} label="Top" labelPosition="top" />
+<Switch checked={false} onCheckedChange={() => undefined} label="Bottom" labelPosition="bottom" />`;
 
-<Switch checked={darkMode} onCheckedChange={setDarkMode} label="Dark mode" />
-<Switch checked={airplaneMode} onCheckedChange={setAirplaneMode} label="Airplane mode" />`;
+const disabledSnippet = `<Switch checked={false} disabled onCheckedChange={() => undefined} label="Disabled" />`;
 
 function SwitchPage() {
   const [darkMode, setDarkMode] = useState(false);
-  const [airplaneMode, setAirplaneMode] = useState(true);
 
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          components {'>'} Switch
-        </p>
         <h1 className="text-3xl font-bold text-brand">Switch</h1>
-        <p className="text-foreground">
-          <code>Switch</code> is a controlled on/off control for settings and preferences. Use it
-          when the UI should communicate enabled or disabled state rather than a generic checkbox
-          choice.
+        <p className="text-base leading-7 text-foreground">
+          <Code>Switch</Code> is a controlled input used to toggle an on or off state.
         </p>
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Usage</h2>
-        <p className="text-foreground">
-          <code>Switch</code> is controlled through <code>checked</code> and{' '}
-          <code>onCheckedChange</code>.
-        </p>
+        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Example</h2>
-        <Box className="space-y-4 p-6">
-          <div className="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface p-4">
-            <div className="flex items-center gap-3 text-foreground">
-              <Moon size={18} />
-              <div>
-                <p className="font-medium">Dark mode</p>
-                <p className="text-sm text-muted">Use the dark theme across the dashboard.</p>
-              </div>
-            </div>
-            <Switch
-              checked={darkMode}
-              onCheckedChange={setDarkMode}
-              aria-label="Toggle dark mode"
-            />
-          </div>
+        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
 
-          <div className="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface p-4">
-            <div className="flex items-center gap-3 text-foreground">
-              <Plane size={18} />
-              <div>
-                <p className="font-medium">Airplane mode</p>
-                <p className="text-sm text-muted">Pause sync and background notifications.</p>
-              </div>
-            </div>
-            <Switch
-              checked={airplaneMode}
-              onCheckedChange={setAirplaneMode}
-              aria-label="Toggle airplane mode"
-            />
-          </div>
-
-          <div className="flex items-center gap-6">
-            <Switch checked={darkMode} onCheckedChange={setDarkMode} label="Dark mode" />
-            <Switch
-              checked={airplaneMode}
-              onCheckedChange={setAirplaneMode}
-              label="Airplane mode"
-            />
-          </div>
+        <h3 className="text-lg font-semibold text-brand">Default</h3>
+        <Box shadow="none" surface="none">
+          <Switch checked={darkMode} onCheckedChange={setDarkMode} label="Dark mode" />
         </Box>
-        <CodeBlock code={exampleSnippet} />
+        <CodeBlock code={usageSnippet} />
+
+        <h3 className="text-lg font-semibold text-brand">Label positions</h3>
+        <Box className="flex flex-wrap gap-8" shadow="none" surface="none">
+          <Switch
+            checked={false}
+            onCheckedChange={() => undefined}
+            label="Right"
+            labelPosition="right"
+          />
+          <Switch
+            checked={false}
+            onCheckedChange={() => undefined}
+            label="Left"
+            labelPosition="left"
+          />
+          <Switch
+            checked={false}
+            onCheckedChange={() => undefined}
+            label="Top"
+            labelPosition="top"
+          />
+          <Switch
+            checked={false}
+            onCheckedChange={() => undefined}
+            label="Bottom"
+            labelPosition="bottom"
+          />
+        </Box>
+        <CodeBlock code={positionsSnippet} />
+
+        <h3 className="text-lg font-semibold text-brand">Disabled</h3>
+        <Box shadow="none" surface="none">
+          <Switch checked={false} disabled onCheckedChange={() => undefined} label="Disabled" />
+        </Box>
+        <CodeBlock code={disabledSnippet} />
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <div className="overflow-x-auto rounded-md border border-border">
+          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
+            <thead className="bg-surface/60 text-sm text-muted">
+              <tr>
+                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>checked</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>boolean</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">—</td>
+                <td className="border-b border-border px-4 py-3">Controls the switch state.</td>
+              </tr>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>onCheckedChange</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>{`(checked: boolean) => void`}</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">—</td>
+                <td className="border-b border-border px-4 py-3">
+                  Called with the next checked state.
+                </td>
+              </tr>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>label</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>string</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">—</td>
+                <td className="border-b border-border px-4 py-3">
+                  Optional text rendered next to the switch.
+                </td>
+              </tr>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>labelPosition</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>{`"left" | "right" | "top" | "bottom"`}</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>{`"right"`}</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  Controls where the label appears relative to the switch.
+                </td>
+              </tr>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>disabled</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>boolean</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">—</td>
+                <td className="border-b border-border px-4 py-3">
+                  Disables interaction and applies the disabled visual state.
+                </td>
+              </tr>
+              <tr className="align-top">
+                <td className="px-4 py-3">
+                  <Code>className</Code>
+                </td>
+                <td className="px-4 py-3">
+                  <Code>string</Code>
+                </td>
+                <td className="px-4 py-3">—</td>
+                <td className="px-4 py-3">
+                  Extends the component styles and can override default values when needed.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </article>
   );

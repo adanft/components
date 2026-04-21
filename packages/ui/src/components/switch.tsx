@@ -30,8 +30,8 @@ function Switch({
     'inline-flex gap-2',
     labelPosition === 'right' && 'flex-row items-center',
     labelPosition === 'left' && 'flex-row-reverse items-center',
-    labelPosition === 'top' && 'flex-col-reverse items-center',
-    labelPosition === 'bottom' && 'flex-col items-center',
+    labelPosition === 'top' && 'flex-col-reverse items-start',
+    labelPosition === 'bottom' && 'flex-col items-start',
     disabled && 'cursor-not-allowed opacity-50',
   );
 
@@ -54,9 +54,8 @@ function Switch({
         <span
           aria-hidden="true"
           className={cn(
-            'inline-flex h-6 w-11 rounded-full border border-transparent bg-muted transition-colors duration-150',
-            'peer-checked:bg-brand peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-brand peer-focus-visible:ring-offset-2',
-            'peer-disabled:pointer-events-none',
+            'inline-flex h-6 w-11 rounded-full bg-muted',
+            'peer-checked:bg-brand peer-focus-visible:outline-2 peer-focus-visible:outline-brand peer-focus-visible:outline-offset-2',
             className,
           )}
         />
