@@ -17,26 +17,33 @@ import Avatar from './avatar';
 import Box from './box';
 import Button from './button';
 
-type ProfileProps = {
-  userKey: string;
-  fullName: string;
-  btnAction: () => void;
-  btnName: string;
-  avatarType: 'image' | 'text';
-  avatarSrc?: string;
-  avatarAlt?: string;
-  avatarText?: string;
+type ProfileBaseProps = {
+  actionLabel: string;
+  name: string;
+  onAction: () => void;
+  username: string;
 };
 
+type ProfileImageProps = ProfileBaseProps & {
+  avatarAlt: string;
+  avatarSrc: string;
+  avatarType: 'image';
+};
+
+type ProfileTextProps = ProfileBaseProps & {
+  avatarText: string;
+  avatarType: 'text';
+};
+
+type ProfileProps = ProfileImageProps | ProfileTextProps;
+
 function Profile({
-  userKey,
-  fullName,
-  btnAction,
-  btnName,
+  actionLabel,
+  name,
+  onAction,
+  username,
   avatarType,
-  avatarSrc,
-  avatarAlt,
-  avatarText,
+  ...avatarProps
 }: ProfileProps) {
   const [open, setOpen] = useState(false);
   const { refs, floatingStyles, context } = useFloating({
@@ -53,18 +60,15 @@ function Profile({
 
   const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, role]);
 
-  const triggerAvatar =
+  const avatarNode =
     avatarType === 'image' ? (
-      <Avatar type="image" src={avatarSrc ?? ''} alt={avatarAlt ?? ''} />
+      <Avatar
+        type="image"
+        src={(avatarProps as ProfileImageProps).avatarSrc}
+        alt={(avatarProps as ProfileImageProps).avatarAlt}
+      />
     ) : (
-      <Avatar type="text" text={avatarText ?? ''} />
-    );
-
-  const floatingAvatar =
-    avatarType === 'image' ? (
-      <Avatar type="image" src={avatarSrc ?? ''} alt={avatarAlt ?? ''} />
-    ) : (
-      <Avatar type="text" text={avatarText ?? ''} />
+      <Avatar type="text" text={(avatarProps as ProfileTextProps).avatarText} />
     );
 
   return (
@@ -72,11 +76,11 @@ function Profile({
       <button
         ref={refs.setReference}
         type="button"
-        className="inline-flex cursor-pointer"
+        className="inline-flex cursor-pointer rounded-full"
         aria-expanded={open}
         aria-haspopup="dialog"
         {...getReferenceProps()}>
-        {triggerAvatar}
+        {avatarNode}
       </button>
       {open ? (
         <FloatingPortal>
@@ -87,15 +91,15 @@ function Profile({
               className="w-72 z-50"
               {...getFloatingProps()}>
               <div className="flex items-center gap-2">
-                {floatingAvatar}
+                {avatarNode}
                 <div className="flex flex-col gap-2 text-foreground">
-                  <span>{fullName}</span>
-                  <span className="text-sm font-semibold">{userKey}</span>
+                  <span>{name}</span>
+                  <span className="text-sm font-semibold">{username}</span>
                 </div>
               </div>
               <div className="mt-4">
-                <Button className="w-full" onClick={btnAction}>
-                  {btnName}
+                <Button className="w-full" onClick={onAction}>
+                  {actionLabel}
                 </Button>
               </div>
             </Box>

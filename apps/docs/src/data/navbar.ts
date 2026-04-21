@@ -4,10 +4,10 @@ const docsNavbarProps: NavbarProps = {
   profileProps: {
     avatarType: 'text',
     avatarText: 'AF',
-    userKey: 'adanft',
-    fullName: 'Adan Franco T.',
-    btnAction: () => undefined,
-    btnName: 'Log out',
+    username: 'adanft',
+    name: 'Adan Franco T.',
+    onAction: () => undefined,
+    actionLabel: 'Log out',
   },
   searchPlaceholder: 'Search docs',
 };
