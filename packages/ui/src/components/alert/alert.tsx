@@ -12,14 +12,14 @@ type AlertProps = ComponentPropsWithoutRef<'div'> & {
 const variantStyles: Record<AlertVariant, string> = {
   info: 'border-info/30 bg-info/10',
   success: 'border-success/30 bg-success/10',
-  warning: 'border-accent/30 bg-accent/10',
+  warning: 'border-warning/30 bg-warning/10',
   danger: 'border-danger/30 bg-danger/10',
 };
 
 const iconStyles: Record<AlertVariant, string> = {
   info: 'text-info',
   success: 'text-success',
-  warning: 'text-accent',
+  warning: 'text-warning',
   danger: 'text-danger',
 };
 
@@ -27,7 +27,7 @@ function Alert({ children, className, icon, variant = 'info', ...props }: AlertP
   return (
     <div
       className={cn(
-        'flex gap-3 rounded-xl border p-4 text-foreground',
+        'flex gap-3 rounded-md border p-4 text-foreground',
         variantStyles[variant],
         className,
       )}
