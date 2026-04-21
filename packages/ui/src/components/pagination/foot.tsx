@@ -40,7 +40,7 @@ const baseButtonClasses =
 
 const arrowButtonClasses = cn(
   baseButtonClasses,
-  'border border-transparent text-foreground transition',
+  'border border-transparent text-foreground',
   'hover:border-border hover:bg-surface hover:shadow-sm',
   'disabled:cursor-not-allowed disabled:text-muted disabled:hover:border-transparent disabled:hover:bg-transparent disabled:hover:shadow-none',
 );
@@ -101,10 +101,7 @@ function PaginationFoot({
                   aria-label={`Page ${page + 1}`}
                   aria-current={pageIndex === page ? 'page' : undefined}
                   onClick={() => onPageChange(page)}
-                  className={cn(
-                    pageButtonClasses,
-                    pageIndex === page && 'bg-brand text-background',
-                  )}>
+                  className={cn(pageButtonClasses, pageIndex === page && 'bg-brand text-white')}>
                   {page + 1}
                 </button>
               )}
