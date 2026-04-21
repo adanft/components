@@ -1,13 +1,10 @@
 import { Box, ThemeSwitch } from '@adanft/ui';
 import { CodeBlock } from '../code-block';
+import { Code } from '../components/code';
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Snippets
-// ─────────────────────────────────────────────────────────────────────────────
+const importSnippet = `import { ThemeSwitch } from '@adanft/ui';`;
 
-const importSnippet = `import { ThemeSwitch } from '@your-org/components';`;
-
-const setupSnippet = `import { initializeTheme } from '@your-org/components';
+const setupSnippet = `import { initializeTheme } from '@adanft/ui';
 
 initializeTheme();`;
 
@@ -17,67 +14,38 @@ const sizesSnippet = `<ThemeSwitch size="sm" />
 <ThemeSwitch size="md" />
 <ThemeSwitch size="lg" />`;
 
-const customClassSnippet = `<ThemeSwitch className="opacity-80" />`;
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Page
-// ─────────────────────────────────────────────────────────────────────────────
-
 function ThemeSwitchPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          components {'>'} ThemeSwitch
-        </p>
         <h1 className="text-3xl font-bold text-brand">ThemeSwitch</h1>
-        <p className="text-foreground">
-          <code>ThemeSwitch</code> is a toggle control that switches between light and dark themes.
-          It persists the selection to <code>localStorage</code> and applies the <code>dark</code>{' '}
-          class to the document root. Use <code>initializeTheme()</code> once in your app entrypoint
-          so the stored theme is applied before the first render. Uses <code>lucide-react</code>{' '}
-          icons (Sun and Moon) with smooth animations.
+        <p className="text-base leading-7 text-foreground">
+          <Code>ThemeSwitch</Code> toggles between light and dark themes.
         </p>
       </header>
 
-      {/* ── Setup ──────────────────────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Setup</h2>
-        <p className="text-foreground">
-          Call <code>initializeTheme()</code> once in your application entrypoint before rendering
-          the app. That applies the persisted theme class on initial load.
-        </p>
+        <h2 className="text-2xl font-semibold text-brand">Setup</h2>
         <CodeBlock code={setupSnippet} />
       </section>
 
-      {/* ── Import ─────────────────────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Import</h2>
+        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
         <CodeBlock code={importSnippet} />
-      </section>
-
-      {/* ── Basic usage ────────────────────────────────────────────── */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Usage</h2>
-        <p className="text-foreground">
-          After the one-time setup, drop it in and it works. No props are required for basic theme
-          toggling.
-        </p>
-        <Box className="flex items-center">
-          <ThemeSwitch />
-        </Box>
         <CodeBlock code={usageSnippet} />
       </section>
 
-      {/* ── Sizes ──────────────────────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Sizes</h2>
-        <p className="text-foreground">
-          Use the <code>size</code> prop to control the switch dimensions. Defaults to{' '}
-          <code>"md"</code>. Available sizes: <code>"sm"</code>, <code>"md"</code>, and{' '}
-          <code>"lg"</code>.
-        </p>
-        <Box className="flex flex-wrap items-center gap-6">
+        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+
+        <h3 className="text-lg font-semibold text-brand">Default</h3>
+        <Box shadow="none" surface="none">
+          <ThemeSwitch />
+        </Box>
+        <CodeBlock code={usageSnippet} />
+
+        <h3 className="text-lg font-semibold text-brand">Sizes</h3>
+        <Box className="flex flex-wrap items-center gap-6" shadow="none" surface="none">
           <ThemeSwitch size="sm" />
           <ThemeSwitch size="md" />
           <ThemeSwitch size="lg" />
@@ -85,17 +53,48 @@ function ThemeSwitchPage() {
         <CodeBlock code={sizesSnippet} />
       </section>
 
-      {/* ── Custom className ──────────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Custom className</h2>
-        <p className="text-foreground">
-          Pass <code>className</code> to extend or override the wrapper styles without replacing the
-          base layout.
-        </p>
-        <Box className="flex items-center">
-          <ThemeSwitch className="opacity-80" />
-        </Box>
-        <CodeBlock code={customClassSnippet} />
+        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <div className="overflow-x-auto rounded-md border border-border">
+          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
+            <thead className="bg-surface/60 text-sm text-muted">
+              <tr>
+                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>size</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>{`"sm" | "md" | "lg"`}</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  <Code>{`"md"`}</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">
+                  Controls the size of the track, thumb, and icons.
+                </td>
+              </tr>
+              <tr className="align-top">
+                <td className="px-4 py-3">
+                  <Code>className</Code>
+                </td>
+                <td className="px-4 py-3">
+                  <Code>string</Code>
+                </td>
+                <td className="px-4 py-3">—</td>
+                <td className="px-4 py-3">
+                  Extends the component styles and can override default values when needed.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </article>
   );

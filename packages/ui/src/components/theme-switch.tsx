@@ -4,44 +4,39 @@ import { cn } from '../helpers/cn';
 import { readTheme, subscribeTheme } from '../helpers/theme';
 import { toggleTheme } from '../theme';
 
-const THEME_SWITCH_SIZE = {
-  SM: 'sm',
-  MD: 'md',
-  LG: 'lg',
-} as const;
-
-type ThemeSwitchSize = (typeof THEME_SWITCH_SIZE)[keyof typeof THEME_SWITCH_SIZE];
+type ThemeSwitchSize = 'sm' | 'md' | 'lg';
 
 type ThemeSwitchProps = Omit<ComponentPropsWithoutRef<'label'>, 'onChange'> & {
   size?: ThemeSwitchSize;
 };
 
-const SIZE_TRACK = {
-  sm: 'w-10 h-5',
-  md: 'w-12 h-6',
-  lg: 'w-14 h-7',
-} as const;
-
-const SIZE_THUMB = {
-  sm: 'size-4',
-  md: 'size-5',
-  lg: 'size-6',
-} as const;
-
-const SIZE_THUMB_TRANSLATE = {
-  sm: 'peer-checked:translate-x-5',
-  md: 'peer-checked:translate-x-6',
-  lg: 'peer-checked:translate-x-7',
-} as const;
-
-const SIZE_ICON = {
-  sm: 'size-3',
-  md: 'size-4',
-  lg: 'size-5',
+const sizeClassNames: Record<
+  ThemeSwitchSize,
+  { icon: string; thumb: string; thumbTranslate: string; track: string }
+> = {
+  sm: {
+    icon: 'size-3',
+    thumb: 'size-4',
+    thumbTranslate: 'peer-checked:translate-x-5',
+    track: 'w-10 h-5',
+  },
+  md: {
+    icon: 'size-4',
+    thumb: 'size-5',
+    thumbTranslate: 'peer-checked:translate-x-6',
+    track: 'w-12 h-6',
+  },
+  lg: {
+    icon: 'size-5',
+    thumb: 'size-6',
+    thumbTranslate: 'peer-checked:translate-x-7',
+    track: 'w-14 h-7',
+  },
 } as const;
 
 function ThemeSwitch({ className, size = 'md', ...props }: ThemeSwitchProps) {
   const theme = useSyncExternalStore(subscribeTheme, readTheme, readTheme);
+  const sizeClasses = sizeClassNames[size];
 
   const handleChange = () => {
     toggleTheme();
@@ -52,7 +47,7 @@ function ThemeSwitch({ className, size = 'md', ...props }: ThemeSwitchProps) {
       {...props}
       className={cn(
         'relative inline-flex cursor-pointer items-center justify-between',
-        SIZE_TRACK[size],
+        sizeClasses.track,
         className,
       )}>
       <span className="sr-only">Toggle theme</span>
@@ -61,7 +56,7 @@ function ThemeSwitch({ className, size = 'md', ...props }: ThemeSwitchProps) {
         aria-hidden="true"
         className={cn(
           'absolute right-1 z-1 text-white animate-[spin_15s_linear_infinite]',
-          SIZE_ICON[size],
+          sizeClasses.icon,
         )}
       />
 
@@ -69,7 +64,7 @@ function ThemeSwitch({ className, size = 'md', ...props }: ThemeSwitchProps) {
         aria-hidden="true"
         className={cn(
           'absolute left-1 z-1 text-white animate-[tilt_5s_linear_infinite]',
-          SIZE_ICON[size],
+          sizeClasses.icon,
         )}
       />
 
@@ -95,8 +90,8 @@ function ThemeSwitch({ className, size = 'md', ...props }: ThemeSwitchProps) {
         className={cn(
           'absolute bottom-0.5 left-0.5 rounded-full bg-white z-10',
           'transition-transform duration-400',
-          SIZE_THUMB[size],
-          SIZE_THUMB_TRANSLATE[size],
+          sizeClasses.thumb,
+          sizeClasses.thumbTranslate,
         )}
       />
     </label>
