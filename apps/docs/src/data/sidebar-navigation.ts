@@ -12,21 +12,17 @@ import {
   Cpu,
   FileText,
   Hand,
-  History,
   Info,
   LayoutGrid,
   MoreHorizontal,
-  Package,
   PanelLeft,
   RefreshCcw,
   Settings,
   ShoppingCart,
-  Star,
   SunMoon,
   Table,
   ToggleLeft,
   User,
-  Users,
 } from 'lucide-react';
 
 import {
@@ -103,10 +99,6 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'link', icon: SunMoon, text: 'ThemeSwitch', href: DOCS_THEME_SWITCH_PATH },
   { type: 'link', icon: Info, text: 'Tooltip', href: DOCS_TOOLTIP_PATH },
   { type: 'link', icon: ShoppingCart, text: 'Orders', href: docsPath('/orders') },
-  { type: 'link', icon: Package, text: 'Products', href: docsPath('/products') },
-  { type: 'link', icon: History, text: 'History', href: docsPath('/history') },
-  { type: 'link', icon: Users, text: 'Users', href: docsPath('/users') },
-  { type: 'link', icon: Star, text: 'Favorites', href: docsPath('/favorite') },
   { type: 'heading', text: 'CONTENT MANAGEMENT' },
   {
     type: 'group',
