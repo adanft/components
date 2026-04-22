@@ -1,98 +1,124 @@
-import { Box, Table } from '@adanft/ui';
-import { type ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui';
 import { CodeBlock } from '../code-block';
+import { Code } from '../components/code';
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Snippets
-// ─────────────────────────────────────────────────────────────────────────────
+const importSnippet = `import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui';`;
 
-const importSnippet = `import { Table } from '@your-org/components';`;
-
-const presentationalSnippet = `const headers = ['Owner', 'Stage', 'Deals', 'Pipeline'];
-
-const rows = [
-  { owner: 'Ana Torres', stage: 'Negotiation', deals: 7, pipeline: '$42,300' },
-];
-
-<Table aria-label="Deals">
-  <Table.Head
-    headers={headers}
-    renderHeader={(header) => header}
-  />
-  <Table.Body
-    rows={rows}
-    getRowKey={(row) => row.owner}
-    getRowCells={(row) => [row.owner, row.stage, row.deals, row.pipeline]}
-    renderCell={(cell) => cell}
-    striped
-  />
+const usageSnippet = `<Table aria-label="Deals">
+  <TableCaption>Pipeline by owner</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead scope="col">Owner</TableHead>
+      <TableHead scope="col">Stage</TableHead>
+      <TableHead scope="col" className="text-right">Deals</TableHead>
+      <TableHead scope="col" className="text-right">Pipeline</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Ana Torres</TableCell>
+      <TableCell>Negotiation</TableCell>
+      <TableCell className="text-right">7</TableCell>
+      <TableCell className="text-right">$42,300</TableCell>
+    </TableRow>
+  </TableBody>
 </Table>`;
 
-const footSnippet = `<Table aria-label="Deals summary">
-  <Table.Head headers={headers} renderHeader={(header) => header} />
-  <Table.Body
-    rows={rows}
-    getRowKey={(row) => row.owner}
-    getRowCells={(row) => [row.owner, row.stage, row.deals, row.pipeline]}
-    renderCell={(cell) => cell}
-  />
-  <Table.Foot>
-    <tr>
-      <td colSpan={2}>Total</td>
-      <td className="text-right font-semibold">7</td>
-      <td className="text-right font-semibold">$42,300</td>
-    </tr>
-  </Table.Foot>
+const simpleExampleJsx = `<Table aria-label="Deals">
+  <TableCaption>Pipeline by owner</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead scope="col">Owner</TableHead>
+      <TableHead scope="col">Stage</TableHead>
+      <TableHead scope="col" className="text-right">Deals</TableHead>
+      <TableHead scope="col" className="text-right">Pipeline</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Ana Torres</TableCell>
+      <TableCell>Negotiation</TableCell>
+      <TableCell className="text-right">7</TableCell>
+      <TableCell className="text-right">$42,300</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Diego Ruiz</TableCell>
+      <TableCell>Proposal</TableCell>
+      <TableCell className="text-right">5</TableCell>
+      <TableCell className="text-right">$31,700</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Camila Vega</TableCell>
+      <TableCell>Qualified</TableCell>
+      <TableCell className="text-right">9</TableCell>
+      <TableCell className="text-right">$58,900</TableCell>
+    </TableRow>
+  </TableBody>
 </Table>`;
 
-const tanstackSnippet = `import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-  type ColumnDef,
-} from '@tanstack/react-table';
+const footerExampleJsx = `<Table aria-label="Deals summary">
+  <TableHeader>
+    <TableRow>
+      <TableHead scope="col">Owner</TableHead>
+      <TableHead scope="col">Stage</TableHead>
+      <TableHead scope="col" className="text-right">Deals</TableHead>
+      <TableHead scope="col" className="text-right">Pipeline</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Ana Torres</TableCell>
+      <TableCell>Negotiation</TableCell>
+      <TableCell className="text-right">7</TableCell>
+      <TableCell className="text-right">$42,300</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Diego Ruiz</TableCell>
+      <TableCell>Proposal</TableCell>
+      <TableCell className="text-right">5</TableCell>
+      <TableCell className="text-right">$31,700</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Camila Vega</TableCell>
+      <TableCell>Qualified</TableCell>
+      <TableCell className="text-right">9</TableCell>
+      <TableCell className="text-right">$58,900</TableCell>
+    </TableRow>
+  </TableBody>
+  <TableFooter>
+    <TableRow>
+      <TableCell colSpan={2} className="font-semibold text-foreground">Total</TableCell>
+      <TableCell className="text-right font-semibold text-foreground">21</TableCell>
+      <TableCell className="text-right font-semibold text-foreground">$132,900</TableCell>
+    </TableRow>
+  </TableFooter>
+</Table>`;
 
-type User = { name: string; role: string };
-
-const columnDefs: ColumnDef<User>[] = [
-  { id: 'name', header: 'Name', accessorKey: 'name' },
-  { id: 'role', header: 'Role', accessorKey: 'role' },
-];
-
-function TanStackTable() {
-  const table = useReactTable({
-    data,
-    columns: columnDefs,
-    getCoreRowModel: getCoreRowModel(),
-  });
-
-  return (
-    <Table aria-label="Users">
-      <Table.Head
-        headers={table.getFlatHeaders()}
-        getHeaderKey={(header) => header.id}
-        renderHeader={(header) =>
-          flexRender(header.column.columnDef.header, header.getContext())
-        }
-      />
-      <Table.Body
-        rows={table.getRowModel().rows}
-        getRowKey={(row) => row.id}
-        getRowCells={(row) => row.getVisibleCells()}
-        getCellKey={(cell) => cell.id}
-        renderCell={(cell) =>
-          flexRender(cell.column.columnDef.cell, cell.getContext())
-        }
-      />
-    </Table>
-  );
-}`;
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Example data
-// ─────────────────────────────────────────────────────────────────────────────
-
-type Deal = { owner: string; stage: string; deals: number; pipeline: string };
+type Deal = {
+  deals: number;
+  owner: string;
+  pipeline: string;
+  stage: string;
+};
 
 const deals: Deal[] = [
   { owner: 'Ana Torres', stage: 'Negotiation', deals: 7, pipeline: '$42,300' },
@@ -100,145 +126,204 @@ const deals: Deal[] = [
   { owner: 'Camila Vega', stage: 'Qualified', deals: 9, pipeline: '$58,900' },
 ];
 
-const dealHeaders = ['Owner', 'Stage', 'Deals', 'Pipeline'] as const;
-
-// ─────────────────────────────────────────────────────────────────────────────
-type User = { name: string; role: string };
-
-const users: User[] = [
-  { name: 'Ana Torres', role: 'Admin' },
-  { name: 'Diego Ruiz', role: 'Editor' },
-  { name: 'Camila Vega', role: 'Viewer' },
-  { name: 'Luis Mora', role: 'Editor' },
-];
-
-const userColumnDefs: ColumnDef<User>[] = [
-  { id: 'name', header: 'Name', accessorKey: 'name' },
-  { id: 'role', header: 'Role', accessorKey: 'role' },
-];
-
-function SortableTableExample() {
-  const table = useReactTable({
-    data: users,
-    columns: userColumnDefs,
-    getCoreRowModel: getCoreRowModel(),
-  });
-
-  return (
-    <Table aria-label="Users">
-      <Table.Head
-        headers={table.getFlatHeaders()}
-        getHeaderKey={(header) => header.id}
-        renderHeader={(header) => flexRender(header.column.columnDef.header, header.getContext())}
-      />
-      <Table.Body
-        rows={table.getRowModel().rows}
-        getRowKey={(row) => row.id}
-        getRowCells={(row) => row.getVisibleCells()}
-        getCellKey={(cell) => cell.id}
-        renderCell={(cell) => flexRender(cell.column.columnDef.cell, cell.getContext())}
-      />
-    </Table>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Page
-// ─────────────────────────────────────────────────────────────────────────────
-
 function TablePage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          components {'>'} Table
-        </p>
         <h1 className="text-3xl font-bold text-brand">Table</h1>
-        <p className="text-foreground">
-          <code>Table</code> is a presentational compound component. The root renders the bordered
-          shell and native <code>{'<table>'}</code>, while <code>Table.Head</code> and{' '}
-          <code>Table.Body</code> receive precomputed headers, rows, and render functions.
+        <p className="text-base leading-7 text-foreground">
+          <Code>Table</Code> displays structured tabular data with consistent base styles and
+          semantic HTML.
         </p>
       </header>
 
-      {/* ── Import ─────────────────────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Import</h2>
+        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
         <CodeBlock code={importSnippet} />
+        <CodeBlock code={usageSnippet} />
       </section>
 
-      {/* ── Standalone ─────────────────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Presentational usage</h2>
-        <p className="text-foreground">
-          Pass plain headers and rows when you already know the final shape you want to render.
-          <code>striped</code> now belongs to <code>Table.Body</code> because row styling is a body
-          concern, not root orchestration.
-        </p>
-        <CodeBlock code={presentationalSnippet} />
-        <Box className="overflow-x-auto">
+        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+
+        <h3 className="text-lg font-semibold text-brand">Simple</h3>
+        <Box shadow="none" surface="none">
           <Table aria-label="Deals">
-            <Table.Head headers={dealHeaders} renderHeader={(header) => header} />
-            <Table.Body
-              rows={deals}
-              getRowKey={(row) => row.owner}
-              getRowCells={(row) => [row.owner, row.stage, row.deals, row.pipeline]}
-              renderCell={(cell, _row, _rowIndex, cellIndex) =>
-                cellIndex >= 2 ? <span className="block text-right">{cell}</span> : cell
-              }
-              striped
-            />
+            <TableCaption>Pipeline by owner</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead scope="col">Owner</TableHead>
+                <TableHead scope="col">Stage</TableHead>
+                <TableHead scope="col" className="text-right">
+                  Deals
+                </TableHead>
+                <TableHead scope="col" className="text-right">
+                  Pipeline
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {deals.map((deal) => (
+                <TableRow key={deal.owner}>
+                  <TableCell>{deal.owner}</TableCell>
+                  <TableCell>{deal.stage}</TableCell>
+                  <TableCell className="text-right">{deal.deals}</TableCell>
+                  <TableCell className="text-right">{deal.pipeline}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
           </Table>
         </Box>
+        <CodeBlock code={simpleExampleJsx} />
+
+        <h3 className="text-lg font-semibold text-brand">Footer</h3>
+        <Box shadow="none" surface="none">
+          <Table aria-label="Deals summary">
+            <TableHeader>
+              <TableRow>
+                <TableHead scope="col">Owner</TableHead>
+                <TableHead scope="col">Stage</TableHead>
+                <TableHead scope="col" className="text-right">
+                  Deals
+                </TableHead>
+                <TableHead scope="col" className="text-right">
+                  Pipeline
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {deals.map((deal) => (
+                <TableRow key={deal.owner}>
+                  <TableCell>{deal.owner}</TableCell>
+                  <TableCell>{deal.stage}</TableCell>
+                  <TableCell className="text-right">{deal.deals}</TableCell>
+                  <TableCell className="text-right">{deal.pipeline}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={2} className="font-semibold text-foreground">
+                  Total
+                </TableCell>
+                <TableCell className="text-right font-semibold text-foreground">21</TableCell>
+                <TableCell className="text-right font-semibold text-foreground">$132,900</TableCell>
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </Box>
+        <CodeBlock code={footerExampleJsx} />
       </section>
 
-      {/* ── Footer ─────────────────────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">With Table.Foot</h2>
-        <p className="text-foreground">
-          <code>Table.Foot</code> is a semantic <code>{'<tfoot>'}</code> pass-through. You own the
-          footer rows, so add your own <code>{'<tr>'}</code> and keep any <code>colSpan</code>
-          exactly where you need it.
-        </p>
-        <CodeBlock code={footSnippet} />
-        <Box className="overflow-x-auto">
-          <Table aria-label="Deals summary">
-            <Table.Head headers={dealHeaders} renderHeader={(header) => header} />
-            <Table.Body
-              rows={deals}
-              getRowKey={(row) => row.owner}
-              getRowCells={(row) => [row.owner, row.stage, row.deals, row.pipeline]}
-              renderCell={(cell, _row, _rowIndex, cellIndex) =>
-                cellIndex >= 2 ? <span className="block text-right">{cell}</span> : cell
-              }
-            />
-            <Table.Foot>
+        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+
+        <h3 className="text-lg font-semibold text-brand">Table</h3>
+        <div className="overflow-x-auto rounded-md border border-border">
+          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
+            <thead className="bg-surface/60 text-sm text-muted">
               <tr>
-                <td colSpan={2} className="px-4 py-3 text-sm font-semibold text-foreground">
-                  Total
+                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>className</Code>
                 </td>
-                <td className="px-4 py-3 text-sm font-semibold text-right text-foreground">21</td>
-                <td className="px-4 py-3 text-sm font-semibold text-right text-foreground">
-                  $132,900
+                <td className="border-b border-border px-4 py-3">
+                  <Code>string</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">—</td>
+                <td className="border-b border-border px-4 py-3">
+                  Extends the base table element inside the scrollable wrapper.
                 </td>
               </tr>
-            </Table.Foot>
-          </Table>
-        </Box>
-      </section>
+              <tr className="align-top">
+                <td className="px-4 py-3">native table props</td>
+                <td className="px-4 py-3">table attributes</td>
+                <td className="px-4 py-3">—</td>
+                <td className="px-4 py-3">
+                  Supports semantic attributes like <Code>aria-label</Code> directly on the table.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      {/* ── TanStack (sorting) ─────────────────────────────────────── */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">TanStack adapter usage</h2>
-        <p className="text-foreground">
-          Keep TanStack outside the component boundary. Build the table instance in your app, then
-          adapt <code>getFlatHeaders()</code>, <code>getRowModel().rows</code>, and{' '}
-          <code>flexRender(...)</code> into the presentational props.
-        </p>
-        <CodeBlock code={tanstackSnippet} />
-        <Box className="overflow-x-auto">
-          <SortableTableExample />
-        </Box>
+        <h3 className="text-lg font-semibold text-brand">TableCaption</h3>
+        <div className="space-y-3 text-base leading-7 text-foreground">
+          <p>
+            Use <Code>TableCaption</Code> when the table needs a short textual label or summary.
+          </p>
+        </div>
+
+        <h3 className="text-lg font-semibold text-brand">TableHeader, TableBody and TableFooter</h3>
+        <div className="overflow-x-auto rounded-md border border-border">
+          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
+            <thead className="bg-surface/60 text-sm text-muted">
+              <tr>
+                <th className="border-b border-border px-4 py-3 font-semibold">Component</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>TableHeader</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">Wraps column headers.</td>
+              </tr>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>TableBody</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">Wraps the main table rows.</td>
+              </tr>
+              <tr className="align-top">
+                <td className="px-4 py-3">
+                  <Code>TableFooter</Code>
+                </td>
+                <td className="px-4 py-3">Wraps totals or summary rows.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 className="text-lg font-semibold text-brand">TableRow, TableHead and TableCell</h3>
+        <div className="overflow-x-auto rounded-md border border-border">
+          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
+            <thead className="bg-surface/60 text-sm text-muted">
+              <tr>
+                <th className="border-b border-border px-4 py-3 font-semibold">Component</th>
+                <th className="border-b border-border px-4 py-3 font-semibold">Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>TableRow</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">Defines a single row.</td>
+              </tr>
+              <tr className="align-top">
+                <td className="border-b border-border px-4 py-3">
+                  <Code>TableHead</Code>
+                </td>
+                <td className="border-b border-border px-4 py-3">Defines a header cell.</td>
+              </tr>
+              <tr className="align-top">
+                <td className="px-4 py-3">
+                  <Code>TableCell</Code>
+                </td>
+                <td className="px-4 py-3">Defines a body or footer cell.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </article>
   );

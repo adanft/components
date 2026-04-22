@@ -1,18 +1,33 @@
 import { cn } from '../../helpers/cn';
 import TableBody from './body';
-import TableFoot from './foot';
-import TableHead from './head';
+import TableCaption from './caption';
+import TableCell from './cell';
+import TableFooter from './footer';
+import TableHeader from './header';
+import TableRow from './row';
+import TableHead from './table-head';
 import type { TableProps } from './types';
 
-function TableRoot({ className, ...props }: TableProps) {
+function Table({ className, ...props }: TableProps) {
   return (
-    <div className="w-full overflow-hidden rounded-md border border-border">
-      <table className={cn('w-full border-collapse', className)} {...props} />
+    <div className="relative w-full overflow-x-auto rounded-md border-2 border-border">
+      <table
+        className={cn('w-full caption-bottom border-collapse text-sm', className)}
+        {...props}
+      />
     </div>
   );
 }
 
-const Table = Object.assign(TableRoot, { Head: TableHead, Body: TableBody, Foot: TableFoot });
-
 export default Table;
-export type { TableBodyProps, TableFootProps, TableHeadProps, TableProps } from './types';
+export type {
+  TableBodyProps,
+  TableCaptionProps,
+  TableCellProps,
+  TableFooterProps,
+  TableHeaderProps,
+  TableHeadProps,
+  TableProps,
+  TableRowProps,
+} from './types';
+export { TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow };

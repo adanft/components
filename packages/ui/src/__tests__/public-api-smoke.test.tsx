@@ -8,6 +8,11 @@ import {
   SidebarGroupLink,
   SidebarLink,
   Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@adanft/ui';
 import { render, screen } from '@testing-library/react';
 import { ShoppingCart } from 'lucide-react';
@@ -42,17 +47,16 @@ describe('@adanft/ui public API', () => {
         <SidebarGroupLink href="/orders/history" text="Order history" />
 
         <Table aria-label="Smoke table">
-          <Table.Head
-            headers={[{ id: 'name', label: 'Name' }]}
-            getHeaderKey={(header) => header.id}
-            renderHeader={(header) => header.label}
-          />
-          <Table.Body
-            rows={[{ id: 1, name: 'Taylor' }]}
-            getRowKey={(row) => row.id}
-            getRowCells={(row) => [row.name]}
-            renderCell={(cell) => cell}
-          />
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>Taylor</TableCell>
+            </TableRow>
+          </TableBody>
         </Table>
       </div>,
     );

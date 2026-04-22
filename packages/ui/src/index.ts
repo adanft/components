@@ -89,11 +89,24 @@ export type { SwitchProps } from './components/switch';
 export { default as Switch } from './components/switch';
 export type {
   TableBodyProps,
-  TableFootProps,
+  TableCaptionProps,
+  TableCellProps,
+  TableFooterProps,
+  TableHeaderProps,
   TableHeadProps,
   TableProps,
+  TableRowProps,
 } from './components/table';
-export { default as Table } from './components/table';
+export {
+  default as Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from './components/table';
 export type {
   TabsContentProps,
   TabsListProps,

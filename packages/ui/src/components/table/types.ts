@@ -1,22 +1,21 @@
-import type { ComponentPropsWithoutRef, Key, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 
 type TableProps = ComponentPropsWithoutRef<'table'>;
+type TableCaptionProps = ComponentPropsWithoutRef<'caption'>;
+type TableHeaderProps = ComponentPropsWithoutRef<'thead'>;
+type TableBodyProps = ComponentPropsWithoutRef<'tbody'>;
+type TableFooterProps = ComponentPropsWithoutRef<'tfoot'>;
+type TableRowProps = ComponentPropsWithoutRef<'tr'>;
+type TableHeadProps = ComponentPropsWithoutRef<'th'>;
+type TableCellProps = ComponentPropsWithoutRef<'td'>;
 
-type TableHeadProps<THeader> = ComponentPropsWithoutRef<'thead'> & {
-  headers: readonly THeader[];
-  renderHeader: (header: THeader, index: number) => ReactNode;
-  getHeaderKey?: (header: THeader, index: number) => Key;
+export type {
+  TableBodyProps,
+  TableCaptionProps,
+  TableCellProps,
+  TableFooterProps,
+  TableHeaderProps,
+  TableHeadProps,
+  TableProps,
+  TableRowProps,
 };
-
-type TableBodyProps<TRow, TCell> = ComponentPropsWithoutRef<'tbody'> & {
-  rows: readonly TRow[];
-  getRowKey: (row: TRow, index: number) => Key;
-  getRowCells: (row: TRow, rowIndex: number) => readonly TCell[];
-  renderCell: (cell: TCell, row: TRow, rowIndex: number, cellIndex: number) => ReactNode;
-  getCellKey?: (cell: TCell, row: TRow, rowIndex: number, cellIndex: number) => Key;
-  striped?: boolean;
-};
-
-type TableFootProps = ComponentPropsWithoutRef<'tfoot'>;
-
-export type { TableBodyProps, TableFootProps, TableHeadProps, TableProps };
