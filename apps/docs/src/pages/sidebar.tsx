@@ -7,6 +7,12 @@ import {
   SidebarHead,
   SidebarLink,
   SidebarSection,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@adanft/ui';
 import { Archive, Box as BoxIcon, FileText, Hand, PanelLeft, Settings } from 'lucide-react';
 import { type MouseEvent, useState } from 'react';
@@ -257,325 +263,293 @@ function SidebarPage() {
         <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
 
         <h3 className="text-lg font-semibold text-brand">Sidebar</h3>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-sm text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>state</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>boolean</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Controls whether the sidebar renders expanded or collapsed.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="px-4 py-3">
-                  <Code>action</Code>
-                </td>
-                <td className="px-4 py-3">
-                  <Code>{`(state: boolean) => void`}</Code>
-                </td>
-                <td className="px-4 py-3">—</td>
-                <td className="px-4 py-3">
-                  Receives expansion changes from the toggle button and outside click handler.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>state</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Controls whether the sidebar renders expanded or collapsed.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>action</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`(state: boolean) => void`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Receives expansion changes from the toggle button and outside click handler.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
         <h3 className="text-lg font-semibold text-brand">SidebarHead</h3>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-sm text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>logoSrc</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Brand image rendered at the top of the sidebar.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>title</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Brand label rendered next to the logo.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>href</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>"/"</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  Optional destination for the brand link.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="px-4 py-3">
-                  <Code>className</Code>
-                </td>
-                <td className="px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="px-4 py-3">—</td>
-                <td className="px-4 py-3">
-                  Extends the wrapper header with custom classes or native header props.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>logoSrc</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Brand image rendered at the top of the sidebar.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>title</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Brand label rendered next to the logo.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>href</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>
+                <Code>"/"</Code>
+              </TableCell>
+              <TableCell>Optional destination for the brand link.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Extends the wrapper header with custom classes or native header props.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
         <h3 className="text-lg font-semibold text-brand">SidebarLink</h3>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-sm text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>href</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Required unless <Code>asChild</Code> is enabled; defines the destination for the
-                  top-level navigation entry.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>icon</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>LucideIcon</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Icon rendered before the top-level link label.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>text</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">Visible label for the link.</td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>active</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>boolean</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>false</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  Marks the current route visually.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="px-4 py-3">
-                  <Code>asChild</Code>
-                </td>
-                <td className="px-4 py-3">
-                  <Code>boolean</Code>
-                </td>
-                <td className="px-4 py-3">
-                  <Code>false</Code>
-                </td>
-                <td className="px-4 py-3">
-                  Delegates rendering to a custom child such as a router link.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>href</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Required unless <Code>asChild</Code> is enabled; defines the destination for the
+                top-level navigation entry.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>icon</Code>
+              </TableCell>
+              <TableCell>
+                <Code>LucideIcon</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Icon rendered before the top-level link label.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>text</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Visible label for the link.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>active</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>Marks the current route visually.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>asChild</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>Delegates rendering to a custom child such as a router link.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
         <h3 className="text-lg font-semibold text-brand">SidebarGroup</h3>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-sm text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>icon</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>LucideIcon</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Icon rendered in the group trigger.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>text</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Visible label for the group trigger.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>children</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>ReactNode</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Accepts only <Code>SidebarGroupLink</Code> children.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="px-4 py-3">
-                  <Code>active</Code>
-                </td>
-                <td className="px-4 py-3">
-                  <Code>boolean</Code>
-                </td>
-                <td className="px-4 py-3">
-                  <Code>false</Code>
-                </td>
-                <td className="px-4 py-3">
-                  Styles the group trigger independently from its open or closed state. Expanded
-                  sidebars still start open when any nested <Code>SidebarGroupLink</Code> is active.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>icon</Code>
+              </TableCell>
+              <TableCell>
+                <Code>LucideIcon</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Icon rendered in the group trigger.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>text</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Visible label for the group trigger.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>children</Code>
+              </TableCell>
+              <TableCell>
+                <Code>ReactNode</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Accepts only <Code>SidebarGroupLink</Code> children.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>active</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Styles the group trigger independently from its open or closed state. Expanded
+                sidebars still start open when any nested <Code>SidebarGroupLink</Code> is active.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
         <h3 className="text-lg font-semibold text-brand">SidebarGroupLink</h3>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-sm text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>href</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Required unless <Code>asChild</Code> is enabled; defines the destination for the
-                  nested navigation entry.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>text</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Visible label for the nested link.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>active</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>boolean</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>false</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  Marks the selected nested route.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="px-4 py-3">
-                  <Code>asChild</Code>
-                </td>
-                <td className="px-4 py-3">
-                  <Code>boolean</Code>
-                </td>
-                <td className="px-4 py-3">
-                  <Code>false</Code>
-                </td>
-                <td className="px-4 py-3">
-                  Delegates rendering to a custom child like <Code>Link</Code>.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>href</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Required unless <Code>asChild</Code> is enabled; defines the destination for the
+                nested navigation entry.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>text</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Visible label for the nested link.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>active</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>Marks the selected nested route.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>asChild</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Delegates rendering to a custom child like <Code>Link</Code>.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
         <h3 className="text-lg font-semibold text-brand">SidebarBody and SidebarSection</h3>
         <div className="space-y-3 text-base leading-7 text-foreground">

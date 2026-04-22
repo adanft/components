@@ -29,16 +29,16 @@ const usageSnippet = `<Table aria-label="Deals">
     <TableRow>
       <TableHead scope="col">Owner</TableHead>
       <TableHead scope="col">Stage</TableHead>
-      <TableHead scope="col" className="text-right">Deals</TableHead>
-      <TableHead scope="col" className="text-right">Pipeline</TableHead>
+      <TableHead scope="col">Deals</TableHead>
+      <TableHead scope="col">Pipeline</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
     <TableRow>
       <TableCell>Ana Torres</TableCell>
       <TableCell>Negotiation</TableCell>
-      <TableCell className="text-right">7</TableCell>
-      <TableCell className="text-right">$42,300</TableCell>
+      <TableCell>7</TableCell>
+      <TableCell>$42,300</TableCell>
     </TableRow>
   </TableBody>
 </Table>`;
@@ -49,28 +49,28 @@ const simpleExampleJsx = `<Table aria-label="Deals">
     <TableRow>
       <TableHead scope="col">Owner</TableHead>
       <TableHead scope="col">Stage</TableHead>
-      <TableHead scope="col" className="text-right">Deals</TableHead>
-      <TableHead scope="col" className="text-right">Pipeline</TableHead>
+      <TableHead scope="col">Deals</TableHead>
+      <TableHead scope="col">Pipeline</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
     <TableRow>
       <TableCell>Ana Torres</TableCell>
       <TableCell>Negotiation</TableCell>
-      <TableCell className="text-right">7</TableCell>
-      <TableCell className="text-right">$42,300</TableCell>
+      <TableCell>7</TableCell>
+      <TableCell>$42,300</TableCell>
     </TableRow>
     <TableRow>
       <TableCell>Diego Ruiz</TableCell>
       <TableCell>Proposal</TableCell>
-      <TableCell className="text-right">5</TableCell>
-      <TableCell className="text-right">$31,700</TableCell>
+      <TableCell>5</TableCell>
+      <TableCell>$31,700</TableCell>
     </TableRow>
     <TableRow>
       <TableCell>Camila Vega</TableCell>
       <TableCell>Qualified</TableCell>
-      <TableCell className="text-right">9</TableCell>
-      <TableCell className="text-right">$58,900</TableCell>
+      <TableCell>9</TableCell>
+      <TableCell>$58,900</TableCell>
     </TableRow>
   </TableBody>
 </Table>`;
@@ -80,35 +80,35 @@ const footerExampleJsx = `<Table aria-label="Deals summary">
     <TableRow>
       <TableHead scope="col">Owner</TableHead>
       <TableHead scope="col">Stage</TableHead>
-      <TableHead scope="col" className="text-right">Deals</TableHead>
-      <TableHead scope="col" className="text-right">Pipeline</TableHead>
+      <TableHead scope="col">Deals</TableHead>
+      <TableHead scope="col">Pipeline</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
     <TableRow>
       <TableCell>Ana Torres</TableCell>
       <TableCell>Negotiation</TableCell>
-      <TableCell className="text-right">7</TableCell>
-      <TableCell className="text-right">$42,300</TableCell>
+      <TableCell>7</TableCell>
+      <TableCell>$42,300</TableCell>
     </TableRow>
     <TableRow>
       <TableCell>Diego Ruiz</TableCell>
       <TableCell>Proposal</TableCell>
-      <TableCell className="text-right">5</TableCell>
-      <TableCell className="text-right">$31,700</TableCell>
+      <TableCell>5</TableCell>
+      <TableCell>$31,700</TableCell>
     </TableRow>
     <TableRow>
       <TableCell>Camila Vega</TableCell>
       <TableCell>Qualified</TableCell>
-      <TableCell className="text-right">9</TableCell>
-      <TableCell className="text-right">$58,900</TableCell>
+      <TableCell>9</TableCell>
+      <TableCell>$58,900</TableCell>
     </TableRow>
   </TableBody>
   <TableFooter>
     <TableRow>
-      <TableCell colSpan={2} className="font-semibold text-foreground">Total</TableCell>
-      <TableCell className="text-right font-semibold text-foreground">21</TableCell>
-      <TableCell className="text-right font-semibold text-foreground">$132,900</TableCell>
+      <TableCell colSpan={2}>Total</TableCell>
+      <TableCell>21</TableCell>
+      <TableCell>$132,900</TableCell>
     </TableRow>
   </TableFooter>
 </Table>`;
@@ -154,12 +154,8 @@ function TablePage() {
               <TableRow>
                 <TableHead scope="col">Owner</TableHead>
                 <TableHead scope="col">Stage</TableHead>
-                <TableHead scope="col" className="text-right">
-                  Deals
-                </TableHead>
-                <TableHead scope="col" className="text-right">
-                  Pipeline
-                </TableHead>
+                <TableHead scope="col">Deals</TableHead>
+                <TableHead scope="col">Pipeline</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -167,8 +163,8 @@ function TablePage() {
                 <TableRow key={deal.owner}>
                   <TableCell>{deal.owner}</TableCell>
                   <TableCell>{deal.stage}</TableCell>
-                  <TableCell className="text-right">{deal.deals}</TableCell>
-                  <TableCell className="text-right">{deal.pipeline}</TableCell>
+                  <TableCell>{deal.deals}</TableCell>
+                  <TableCell>{deal.pipeline}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -183,12 +179,8 @@ function TablePage() {
               <TableRow>
                 <TableHead scope="col">Owner</TableHead>
                 <TableHead scope="col">Stage</TableHead>
-                <TableHead scope="col" className="text-right">
-                  Deals
-                </TableHead>
-                <TableHead scope="col" className="text-right">
-                  Pipeline
-                </TableHead>
+                <TableHead scope="col">Deals</TableHead>
+                <TableHead scope="col">Pipeline</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -196,18 +188,16 @@ function TablePage() {
                 <TableRow key={deal.owner}>
                   <TableCell>{deal.owner}</TableCell>
                   <TableCell>{deal.stage}</TableCell>
-                  <TableCell className="text-right">{deal.deals}</TableCell>
-                  <TableCell className="text-right">{deal.pipeline}</TableCell>
+                  <TableCell>{deal.deals}</TableCell>
+                  <TableCell>{deal.pipeline}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
             <TableFooter>
               <TableRow>
-                <TableCell colSpan={2} className="font-semibold text-foreground">
-                  Total
-                </TableCell>
-                <TableCell className="text-right font-semibold text-foreground">21</TableCell>
-                <TableCell className="text-right font-semibold text-foreground">$132,900</TableCell>
+                <TableCell colSpan={2}>Total</TableCell>
+                <TableCell>21</TableCell>
+                <TableCell>$132,900</TableCell>
               </TableRow>
             </TableFooter>
           </Table>
@@ -219,40 +209,36 @@ function TablePage() {
         <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
 
         <h3 className="text-lg font-semibold text-brand">Table</h3>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-sm text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>className</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Extends the base table element inside the scrollable wrapper.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="px-4 py-3">native table props</td>
-                <td className="px-4 py-3">table attributes</td>
-                <td className="px-4 py-3">—</td>
-                <td className="px-4 py-3">
-                  Supports semantic attributes like <Code>aria-label</Code> directly on the table.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the base table element inside the scrollable wrapper.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>native table props</TableCell>
+              <TableCell>table attributes</TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Supports semantic attributes like <Code>aria-label</Code> directly on the table.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
         <h3 className="text-lg font-semibold text-brand">TableCaption</h3>
         <div className="space-y-3 text-base leading-7 text-foreground">
@@ -262,68 +248,64 @@ function TablePage() {
         </div>
 
         <h3 className="text-lg font-semibold text-brand">TableHeader, TableBody and TableFooter</h3>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-sm text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Component</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Use</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>TableHeader</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">Wraps column headers.</td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>TableBody</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">Wraps the main table rows.</td>
-              </tr>
-              <tr className="align-top">
-                <td className="px-4 py-3">
-                  <Code>TableFooter</Code>
-                </td>
-                <td className="px-4 py-3">Wraps totals or summary rows.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Component</TableHead>
+              <TableHead scope="col">Use</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>TableHeader</Code>
+              </TableCell>
+              <TableCell>Wraps column headers.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>TableBody</Code>
+              </TableCell>
+              <TableCell>Wraps the main table rows.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>TableFooter</Code>
+              </TableCell>
+              <TableCell>Wraps totals or summary rows.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
         <h3 className="text-lg font-semibold text-brand">TableRow, TableHead and TableCell</h3>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-sm text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Component</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Use</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>TableRow</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">Defines a single row.</td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>TableHead</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">Defines a header cell.</td>
-              </tr>
-              <tr className="align-top">
-                <td className="px-4 py-3">
-                  <Code>TableCell</Code>
-                </td>
-                <td className="px-4 py-3">Defines a body or footer cell.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Component</TableHead>
+              <TableHead scope="col">Use</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>TableRow</Code>
+              </TableCell>
+              <TableCell>Defines a single row.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>TableHead</Code>
+              </TableCell>
+              <TableCell>Defines a header cell.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>TableCell</Code>
+              </TableCell>
+              <TableCell>Defines a body or footer cell.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );

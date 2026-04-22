@@ -1,4 +1,13 @@
-import { Box, Checkbox } from '@adanft/ui';
+import {
+  Box,
+  Checkbox,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
@@ -72,94 +81,82 @@ function CheckboxPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-sm text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>label</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Optional text rendered next to the checkbox.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>labelPosition</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"left" | "right" | "top" | "bottom"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"right"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  Controls where the label appears relative to the checkbox.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>checked</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>boolean</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Controls the checked state when used as a controlled input.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>defaultChecked</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>boolean</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Sets the initial checked state for uncontrolled usage.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>disabled</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>boolean</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Disables interaction and applies the disabled visual state.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="px-4 py-3">
-                  <Code>className</Code>
-                </td>
-                <td className="px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="px-4 py-3">—</td>
-                <td className="px-4 py-3">
-                  Extends the component styles and can override default values when needed.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>label</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Optional text rendered next to the checkbox.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>labelPosition</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"left" | "right" | "top" | "bottom"`}</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"right"`}</Code>
+              </TableCell>
+              <TableCell>Controls where the label appears relative to the checkbox.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>checked</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Controls the checked state when used as a controlled input.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>defaultChecked</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Sets the initial checked state for uncontrolled usage.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>disabled</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Disables interaction and applies the disabled visual state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Extends the component styles and can override default values when needed.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );

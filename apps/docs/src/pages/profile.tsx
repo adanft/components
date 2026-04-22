@@ -1,4 +1,13 @@
-import { Box, Profile } from '@adanft/ui';
+import {
+  Box,
+  Profile,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
@@ -91,116 +100,106 @@ function ProfilePage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-sm text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>username</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Secondary user identifier shown in the account panel.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>name</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Primary user name shown in the panel.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>actionLabel</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Label used for the action button.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>onAction</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`() => void`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Called when the action button is pressed.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>avatarType</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"image" | "text"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Chooses whether the trigger avatar is rendered from an image or text.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>avatarSrc</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Required when <Code>avatarType</Code> is <Code>"image"</Code>.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>avatarAlt</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Required when <Code>avatarType</Code> is <Code>"image"</Code>.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="px-4 py-3">
-                  <Code>avatarText</Code>
-                </td>
-                <td className="px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="px-4 py-3">—</td>
-                <td className="px-4 py-3">
-                  Required when <Code>avatarType</Code> is <Code>"text"</Code>.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>username</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Secondary user identifier shown in the account panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>name</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Primary user name shown in the panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>actionLabel</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Label used for the action button.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>onAction</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`() => void`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Called when the action button is pressed.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>avatarType</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"image" | "text"`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Chooses whether the trigger avatar is rendered from an image or text.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>avatarSrc</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Required when <Code>avatarType</Code> is <Code>"image"</Code>.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>avatarAlt</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Required when <Code>avatarType</Code> is <Code>"image"</Code>.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>avatarText</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Required when <Code>avatarType</Code> is <Code>"text"</Code>.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );

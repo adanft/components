@@ -1,4 +1,13 @@
-import { Avatar, Box } from '@adanft/ui';
+import {
+  Avatar,
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
@@ -90,97 +99,90 @@ function AvatarPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-sm text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>type</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"image" | "text"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Chooses whether the avatar renders an image or text initials.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>size</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"sm" | "md" | "lg"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"md"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  Controls the visual size of both image and text avatars.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>src</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Required when <Code>type</Code> is <Code>"image"</Code>. Provides the image
-                  source.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>alt</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Required when <Code>type</Code> is <Code>"image"</Code>. Provides accessible alt
-                  text for the image variant.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>text</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Required when <Code>type</Code> is <Code>"text"</Code>. Provides the initials or
-                  short text content.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="px-4 py-3">
-                  <Code>className</Code>
-                </td>
-                <td className="px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="px-4 py-3">—</td>
-                <td className="px-4 py-3">
-                  Extends the component styles and can override default values when needed.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>type</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"image" | "text"`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Chooses whether the avatar renders an image or text initials.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>size</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"sm" | "md" | "lg"`}</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"md"`}</Code>
+              </TableCell>
+              <TableCell>Controls the visual size of both image and text avatars.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>src</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Required when <Code>type</Code> is <Code>"image"</Code>. Provides the image source.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>alt</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Required when <Code>type</Code> is <Code>"image"</Code>. Provides accessible alt
+                text for the image variant.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>text</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Required when <Code>type</Code> is <Code>"text"</Code>. Provides the initials or
+                short text content.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Extends the component styles and can override default values when needed.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );

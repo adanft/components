@@ -1,4 +1,4 @@
-import { Box } from '@adanft/ui';
+import { Box, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
@@ -66,74 +66,68 @@ function BoxPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm text-foreground">
-            <thead className="bg-surface/60 text-muted">
-              <tr>
-                <th className="border-b border-border px-4 py-3 font-semibold">Prop</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Type</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Default</th>
-                <th className="border-b border-border px-4 py-3 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>surface</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"default" | "none"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"default"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  Defines whether <Code>Box</Code> renders its default surface or stays transparent.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>padding</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"default" | "none"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"default"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  Controls the built-in inner spacing of the container.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>shadow</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"default" | "none"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>{`"default"`}</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  Adds or removes the default card shadow.
-                </td>
-              </tr>
-              <tr className="align-top">
-                <td className="border-b border-border px-4 py-3">
-                  <Code>className</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">
-                  <Code>string</Code>
-                </td>
-                <td className="border-b border-border px-4 py-3">—</td>
-                <td className="border-b border-border px-4 py-3">
-                  Extends the component styles and can override default values when needed.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>surface</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"default" | "none"`}</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"default"`}</Code>
+              </TableCell>
+              <TableCell>
+                Defines whether <Code>Box</Code> renders its default surface or stays transparent.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>padding</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"default" | "none"`}</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"default"`}</Code>
+              </TableCell>
+              <TableCell>Controls the built-in inner spacing of the container.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>shadow</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"default" | "none"`}</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"default"`}</Code>
+              </TableCell>
+              <TableCell>Adds or removes the default card shadow.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Extends the component styles and can override default values when needed.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );
