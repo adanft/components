@@ -1,163 +1,357 @@
-import { Box, Button, DropdownMenu } from '@adanft/ui';
-import { LogOut, MoreHorizontal, Settings, User } from 'lucide-react';
+import {
+  Box,
+  Button,
+  DropdownMenu,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui';
+import { LogOut, Settings, User } from 'lucide-react';
 import { useState } from 'react';
 import { CodeBlock } from '../code-block';
+import { Code } from '../components/code';
 
 const importSnippet = `import { DropdownMenu } from '@adanft/ui';`;
 
 const usageSnippet = `import { useState } from 'react';
 import { DropdownMenu } from '@adanft/ui';
 
-const [open, setOpen] = useState(false);
+function ExampleDropdownMenu() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenu.Trigger>
+        <button type="button">Actions</button>
+      </DropdownMenu.Trigger>
+
+      <DropdownMenu.Content>
+        <DropdownMenu.Item onSelect={() => {}}>Profile</DropdownMenu.Item>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Item disabled>Delete</DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu>
+  );
+}`;
+
+const simpleExampleJsx = `const [open, setOpen] = useState(false);
 
 <DropdownMenu open={open} onOpenChange={setOpen}>
   <DropdownMenu.Trigger>
-    <button type="button">Actions</button>
+    <Button>Actions</Button>
   </DropdownMenu.Trigger>
 
   <DropdownMenu.Content>
-    <DropdownMenu.Item onSelect={() => {}}>Profile</DropdownMenu.Item>
-    <DropdownMenu.Separator />
-    <DropdownMenu.Item disabled>Delete</DropdownMenu.Item>
-  </DropdownMenu.Content>
-</DropdownMenu>`;
-
-const exampleSnippet = `const [open, setOpen] = useState(false);
-
-<DropdownMenu open={open} onOpenChange={setOpen}>
-  <DropdownMenu.Trigger>
-    <Button aria-label="Open account actions" className="h-10 w-10 px-0">
-      <MoreHorizontal size={16} />
-    </Button>
-  </DropdownMenu.Trigger>
-
-  <DropdownMenu.Content className="min-w-48 rounded-md border border-border bg-background p-1 shadow-card">
     <DropdownMenu.Label>Account</DropdownMenu.Label>
-    <DropdownMenu.Item onSelect={() => {}}>
+
+    <DropdownMenu.Item onSelect={() => {}} textValue="Profile">
       <User size={16} />
       Profile
     </DropdownMenu.Item>
+
     <DropdownMenu.Item onSelect={() => {}} textValue="Settings">
       <Settings size={16} />
       Settings
     </DropdownMenu.Item>
+
     <DropdownMenu.Separator />
-    <DropdownMenu.Item disabled>
+
+    <DropdownMenu.Item disabled textValue="Sign out">
       <LogOut size={16} />
       Sign out
     </DropdownMenu.Item>
   </DropdownMenu.Content>
 </DropdownMenu>`;
 
+const advancedExampleJsx = `const [open, setOpen] = useState(false);
+
+<DropdownMenu open={open} onOpenChange={setOpen} placement="bottom-end">
+  <DropdownMenu.Trigger>
+    <Button variant="secondary">Row actions</Button>
+  </DropdownMenu.Trigger>
+
+  <DropdownMenu.Content>
+    <DropdownMenu.Item onSelect={() => {}}>Duplicate</DropdownMenu.Item>
+    <DropdownMenu.Item onSelect={() => {}}>Archive</DropdownMenu.Item>
+    <DropdownMenu.Separator />
+    <DropdownMenu.Item onSelect={() => {}}>Export CSV</DropdownMenu.Item>
+  </DropdownMenu.Content>
+</DropdownMenu>`;
+
 function DropdownMenuPage() {
-  const [open, setOpen] = useState(false);
+  const [simpleOpen, setSimpleOpen] = useState(false);
+  const [advancedOpen, setAdvancedOpen] = useState(false);
 
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          components {'>'} DropdownMenu
-        </p>
         <h1 className="text-3xl font-bold text-brand">DropdownMenu</h1>
-        <p className="text-foreground">
-          <code>DropdownMenu</code> provides a controlled menu for actions and commands. Use it for
-          menu items, not for arbitrary interactive content.
+        <p className="text-base leading-7 text-foreground">
+          <Code>DropdownMenu</Code> is a controlled actions menu with compound parts for the
+          trigger, floating content, items, labels, and separators.
         </p>
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Usage</h2>
-        <p className="text-foreground">
-          The menu is controlled through <code>open</code> and <code>onOpenChange</code>. Items
-          close the menu automatically when selected.
-        </p>
-        <p className="text-foreground">
-          For richer item content, pass <code>textValue</code> so keyboard typeahead still matches
-          the visible action label.
-        </p>
-        <p className="text-foreground">
-          <code>DropdownMenu.Trigger</code> expects a single child that renders a real DOM element
-          or correctly forwards its <code>ref</code>.
-        </p>
+        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Full example</h2>
-        <Box className="overflow-visible p-8">
-          <div className="mx-auto flex max-w-xl items-center justify-between rounded-xl border border-border bg-surface p-6 shadow-card">
-            <div className="space-y-1">
-              <p className="text-sm font-semibold text-foreground">Team workspace</p>
-              <p className="text-sm text-muted">
-                Manage profile actions and account settings from the menu.
-              </p>
-            </div>
+        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
 
-            <DropdownMenu open={open} onOpenChange={setOpen}>
-              <DropdownMenu.Trigger>
-                <Button aria-label="Open account actions" className="h-10 w-10 px-0">
-                  <MoreHorizontal size={16} />
-                </Button>
-              </DropdownMenu.Trigger>
+        <h3 className="text-lg font-semibold text-brand">Simple</h3>
+        <Box shadow="none" surface="none" className="overflow-visible p-8">
+          <DropdownMenu open={simpleOpen} onOpenChange={setSimpleOpen}>
+            <DropdownMenu.Trigger>
+              <Button>Actions</Button>
+            </DropdownMenu.Trigger>
 
-              <DropdownMenu.Content className="min-w-64 rounded-xl border border-border bg-background p-2 shadow-card">
-                <DropdownMenu.Label>Account</DropdownMenu.Label>
-                <DropdownMenu.Item
-                  className="gap-3 rounded-lg px-3 py-2.5"
-                  onSelect={() => undefined}
-                  textValue="Profile">
-                  <User size={16} />
-                  <span className="flex flex-col items-start">
-                    <span className="font-medium">Profile</span>
-                    <span className="text-xs text-muted">Open your public information</span>
-                  </span>
-                </DropdownMenu.Item>
-                <DropdownMenu.Item
-                  className="gap-3 rounded-lg px-3 py-2.5"
-                  onSelect={() => undefined}
-                  textValue="Settings">
-                  <Settings size={16} />
-                  <span className="flex flex-col items-start">
-                    <span className="font-medium">Settings</span>
-                    <span className="text-xs text-muted">Update team preferences</span>
-                  </span>
-                </DropdownMenu.Item>
-                <DropdownMenu.Separator className="my-2" />
-                <DropdownMenu.Item
-                  className="gap-3 rounded-lg px-3 py-2.5 text-muted"
-                  disabled
-                  textValue="Sign out">
-                  <LogOut size={16} />
-                  <span className="flex flex-col items-start">
-                    <span className="font-medium">Sign out</span>
-                    <span className="text-xs text-muted">Unavailable for guest sessions</span>
-                  </span>
-                </DropdownMenu.Item>
-              </DropdownMenu.Content>
-            </DropdownMenu>
-          </div>
+            <DropdownMenu.Content>
+              <DropdownMenu.Label>Account</DropdownMenu.Label>
+              <DropdownMenu.Item onSelect={() => undefined} textValue="Profile">
+                <User size={16} />
+                Profile
+              </DropdownMenu.Item>
+              <DropdownMenu.Item onSelect={() => undefined} textValue="Settings">
+                <Settings size={16} />
+                Settings
+              </DropdownMenu.Item>
+              <DropdownMenu.Separator />
+              <DropdownMenu.Item disabled textValue="Sign out">
+                <LogOut size={16} />
+                Sign out
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu>
         </Box>
-        <CodeBlock code={exampleSnippet} />
+        <CodeBlock code={simpleExampleJsx} />
+
+        <h3 className="text-lg font-semibold text-brand">Advanced</h3>
+        <Box shadow="none" surface="none" className="overflow-visible p-8">
+          <DropdownMenu open={advancedOpen} onOpenChange={setAdvancedOpen} placement="bottom-end">
+            <DropdownMenu.Trigger>
+              <Button variant="secondary">Row actions</Button>
+            </DropdownMenu.Trigger>
+
+            <DropdownMenu.Content>
+              <DropdownMenu.Item onSelect={() => undefined}>Duplicate</DropdownMenu.Item>
+              <DropdownMenu.Item onSelect={() => undefined}>Archive</DropdownMenu.Item>
+              <DropdownMenu.Separator />
+              <DropdownMenu.Item onSelect={() => undefined}>Export CSV</DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu>
+        </Box>
+        <CodeBlock code={advancedExampleJsx} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">What this v1 includes</h2>
-        <ul className="list-disc space-y-2 pl-5 text-foreground">
-          <li>
-            <code>DropdownMenu.Trigger</code> with a single child element.
-          </li>
-          <li>
-            <code>DropdownMenu.Content</code> positioned with Floating UI.
-          </li>
-          <li>
-            <code>DropdownMenu.Item</code> with automatic close on select.
-          </li>
-          <li>
-            <code>DropdownMenu.Label</code> and <code>DropdownMenu.Separator</code> for grouping.
-          </li>
-          <li>Disabled items, arrow-key navigation, typeahead, and Escape to close.</li>
-        </ul>
+        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+
+        <h3 className="text-lg font-semibold text-brand">DropdownMenu</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>open</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Controls whether the menu content is rendered.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>onOpenChange</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{'(open: boolean) => void'}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Receives the next open state after trigger or dismiss interactions.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>placement</Code>
+              </TableCell>
+              <TableCell>
+                <Code>Placement</Code>
+              </TableCell>
+              <TableCell>
+                <Code>bottom-start</Code>
+              </TableCell>
+              <TableCell>Sets the Floating UI placement used for the menu content.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>children</Code>
+              </TableCell>
+              <TableCell>
+                <Code>ReactNode</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Composes the trigger and content parts inside the controlled root.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-brand">DropdownMenu.Trigger</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>children</Code>
+              </TableCell>
+              <TableCell>
+                <Code>ReactElement</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Expects a single valid element child so the component can attach refs and trigger
+                props.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-brand">DropdownMenu.Content</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>children</Code>
+              </TableCell>
+              <TableCell>
+                <Code>ReactNode</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Renders the floating menu body when the root is open.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Extends the rendered div for consumer-owned spacing and visuals.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>style</Code>
+              </TableCell>
+              <TableCell>
+                <Code>CSSProperties</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Merges with the computed floating styles from the root.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-brand">DropdownMenu.Item</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>onSelect</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{'() => void'}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Runs when the item is activated, then closes the menu.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>textValue</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Provides the typeahead label when the visible item content is not plain text.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>disabled</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Prevents selection and applies the disabled state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the button element rendered for each menu item.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-brand">
+          DropdownMenu.Label and DropdownMenu.Separator
+        </h3>
+        <div className="space-y-3 text-base leading-7 text-foreground">
+          <p>
+            Use <Code>DropdownMenu.Label</Code> to group related actions with a lightweight heading.
+          </p>
+          <p>
+            Use <Code>DropdownMenu.Separator</Code> to divide action groups inside the menu.
+          </p>
+        </div>
       </section>
     </article>
   );

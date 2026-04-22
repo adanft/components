@@ -13,9 +13,7 @@ function DropdownMenuHarness() {
       <DropdownMenu.Trigger>
         <button type="button">Actions</button>
       </DropdownMenu.Trigger>
-      <DropdownMenu.Content
-        data-testid="menu-content"
-        className="min-w-40 rounded-md border border-border bg-background p-1 shadow-card">
+      <DropdownMenu.Content data-testid="menu-content">
         <DropdownMenu.Label>Account</DropdownMenu.Label>
         <DropdownMenu.Item onSelect={onSelect}>Profile</DropdownMenu.Item>
         <DropdownMenu.Item onSelect={() => undefined}>Settings</DropdownMenu.Item>
@@ -34,6 +32,32 @@ describe('DropdownMenu', () => {
 
     expect(screen.getByRole('menu')).toBeInTheDocument();
     expect(screen.getByText('Profile')).toBeInTheDocument();
+    expect(screen.getByTestId('menu-content')).toHaveClass(
+      'bg-surface',
+      'flex',
+      'flex-col',
+      'gap-2',
+      'rounded-md',
+      'border',
+      'border-border',
+      'p-2',
+      'shadow-card',
+    );
+  });
+
+  it('merges consumer className into the menu content without losing base styles', () => {
+    render(
+      <DropdownMenu open={true} onOpenChange={() => undefined}>
+        <DropdownMenu.Trigger>
+          <button type="button">Actions</button>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content data-testid="custom-menu-content" className="min-w-64">
+          <DropdownMenu.Item onSelect={() => undefined}>Profile</DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu>,
+    );
+
+    expect(screen.getByTestId('custom-menu-content')).toHaveClass('min-w-64', 'bg-surface', 'p-2');
   });
 
   it('closes after selecting an item', () => {

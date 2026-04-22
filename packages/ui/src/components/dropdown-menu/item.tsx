@@ -37,7 +37,7 @@ function DropdownMenuItem({
       className={cn(
         'flex w-full items-center rounded-md px-3 py-2 text-left text-sm text-foreground outline-none',
         'data-active:bg-brand data-active:text-white',
-        'data-disabled:pointer-events-none data-disabled:opacity-50',
+        'data-disabled:pointer-events-none data-disabled:text-muted',
         className,
       )}
       {...getItemProps({
