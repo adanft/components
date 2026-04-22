@@ -16,12 +16,21 @@ import { PopoverContext } from './context';
 
 type PopoverProps = {
   children: ReactNode;
+  contentRole?: 'dialog' | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   placement?: Placement;
+  triggerHasPopup?: boolean;
 };
 
-function Popover({ children, open, onOpenChange, placement = 'bottom' }: PopoverProps) {
+function Popover({
+  children,
+  contentRole = 'dialog',
+  open,
+  onOpenChange,
+  placement = 'bottom',
+  triggerHasPopup = true,
+}: PopoverProps) {
   const { refs, floatingStyles, context } = useFloating({
     open,
     onOpenChange(nextOpen) {
@@ -34,7 +43,7 @@ function Popover({ children, open, onOpenChange, placement = 'bottom' }: Popover
 
   const click = useClick(context);
   const dismiss = useDismiss(context);
-  const role = useRole(context, { role: 'dialog' });
+  const role = useRole(context, contentRole ? { role: contentRole } : { enabled: false });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, role]);
 
@@ -45,6 +54,7 @@ function Popover({ children, open, onOpenChange, placement = 'bottom' }: Popover
         floatingStyles,
         getFloatingProps,
         getReferenceProps,
+        hasPopup: triggerHasPopup,
         open,
         setFloating: refs.setFloating,
         setReference: refs.setReference,

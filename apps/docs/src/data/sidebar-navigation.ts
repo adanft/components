@@ -25,7 +25,6 @@ import {
   SunMoon,
   Table,
   ToggleLeft,
-  TrendingUp,
   User,
   Users,
 } from 'lucide-react';
@@ -64,8 +63,8 @@ type DocsSidebarNavigationLinkNode = {
 };
 
 type DocsSidebarNavigationGroupNode = {
-  children: DocsSidebarNavigationNode[];
   icon: LucideIcon;
+  items: Array<Pick<DocsSidebarNavigationLinkNode, 'href' | 'text'>>;
   text: string;
   type: 'group';
 };
@@ -113,35 +112,20 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
     type: 'group',
     icon: FileText,
     text: 'Reports',
-    children: [
+    items: [
       {
-        type: 'link',
-        icon: BarChart3,
         text: 'Financial Report',
         href: docsPath('/financial-report'),
       },
       {
-        type: 'group',
-        icon: Users,
-        text: 'User Reports',
-        children: [
-          {
-            type: 'link',
-            icon: Activity,
-            text: 'User Activity',
-            href: docsPath('/user-activity'),
-          },
-          {
-            type: 'link',
-            icon: TrendingUp,
-            text: 'User Growth',
-            href: docsPath('/user-growth'),
-          },
-        ],
+        text: 'User Activity',
+        href: docsPath('/user-activity'),
       },
       {
-        type: 'link',
-        icon: LayoutGrid,
+        text: 'User Growth',
+        href: docsPath('/user-growth'),
+      },
+      {
         text: 'System Reports',
         href: docsPath('/system-reports'),
       },

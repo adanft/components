@@ -1,4 +1,3 @@
-import type { LucideIcon } from 'lucide-react';
 import {
   type AnchorHTMLAttributes,
   Children,
@@ -10,45 +9,47 @@ import {
 
 import { cn } from '../../helpers/cn';
 
-type SidebarLinkBaseProps = {
+type SidebarGroupLinkBaseProps = {
   active?: boolean;
   className?: string;
-  icon: LucideIcon;
   text: string;
 };
 
-type SidebarLinkAnchorProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> &
-  SidebarLinkBaseProps & {
+type SidebarGroupLinkAnchorProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> &
+  SidebarGroupLinkBaseProps & {
     asChild?: false;
     href: string;
   };
 
-type SidebarLinkChildProps = SidebarLinkBaseProps & {
+type SidebarGroupLinkChildProps = SidebarGroupLinkBaseProps & {
   asChild: true;
   children: ReactElement;
   href?: string;
 };
 
-type SidebarLinkProps = SidebarLinkAnchorProps | SidebarLinkChildProps;
-type SidebarLinkChildElementProps = {
+type SidebarGroupLinkProps = SidebarGroupLinkAnchorProps | SidebarGroupLinkChildProps;
+type SidebarGroupLinkChildElementProps = {
   'aria-current'?: AnchorHTMLAttributes<HTMLAnchorElement>['aria-current'];
   children?: ReactNode;
   className?: string;
 };
 
-function SidebarLink({ active = false, className, href, icon, text, ...props }: SidebarLinkProps) {
-  const IconComponent = icon;
+function SidebarGroupLink({
+  active = false,
+  className,
+  href,
+  text,
+  ...props
+}: SidebarGroupLinkProps) {
   const linkClassName = cn(
-    'flex leading-none items-center text-foreground gap-4 rounded-md',
-    active ? 'bg-brand text-white mx-2' : 'px-2',
+    'flex items-center gap-3 rounded-md p-3 font-medium text-foreground',
+    active && 'bg-brand text-white',
     className,
   );
   const content = (
     <>
-      <span className="flex shrink-0 items-center justify-center p-3.5">
-        <IconComponent aria-hidden="true" className="size-5 stroke-2" />
-      </span>
-      <span className="min-w-0 truncate font-medium">{text}</span>
+      <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-current" />
+      <span className="truncate">{text}</span>
     </>
   );
   const ariaCurrent = active ? 'page' : undefined;
@@ -58,11 +59,11 @@ function SidebarLink({ active = false, className, href, icon, text, ...props }: 
 
     if (!isValidElement(child)) {
       throw new Error(
-        '<SidebarLink> expects a single valid React element child when `asChild` is true.',
+        '<SidebarGroupLink> expects a single valid React element child when `asChild` is true.',
       );
     }
 
-    const childElement = child as ReactElement<SidebarLinkChildElementProps>;
+    const childElement = child as ReactElement<SidebarGroupLinkChildElementProps>;
     const childProps = childElement.props;
 
     return cloneElement(childElement, {
@@ -80,5 +81,10 @@ function SidebarLink({ active = false, className, href, icon, text, ...props }: 
   );
 }
 
-export default SidebarLink;
-export type { SidebarLinkProps };
+Object.assign(SidebarGroupLink, {
+  displayName: 'SidebarGroupLink',
+  __sidebarGroupLink: true,
+});
+
+export default SidebarGroupLink;
+export type { SidebarGroupLinkProps };

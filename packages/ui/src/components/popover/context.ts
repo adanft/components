@@ -7,6 +7,7 @@ type PopoverContextValue = {
   floatingStyles: CSSProperties;
   getFloatingProps: UseInteractionsReturn['getFloatingProps'];
   getReferenceProps: UseInteractionsReturn['getReferenceProps'];
+  hasPopup: boolean;
   open: boolean;
   setFloating: (node: HTMLElement | null) => void;
   setReference: (node: Element | null) => void;

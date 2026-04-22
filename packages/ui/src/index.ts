@@ -75,6 +75,8 @@ export type { SidebarBodyProps } from './components/sidebar/sidebar-body';
 export { default as SidebarBody } from './components/sidebar/sidebar-body';
 export type { SidebarGroupProps } from './components/sidebar/sidebar-group';
 export { default as SidebarGroup } from './components/sidebar/sidebar-group';
+export type { SidebarGroupLinkProps } from './components/sidebar/sidebar-group-link';
+export { default as SidebarGroupLink } from './components/sidebar/sidebar-group-link';
 export type { SidebarHeadProps } from './components/sidebar/sidebar-head';
 export { default as SidebarHead } from './components/sidebar/sidebar-head';
 export type { SidebarLinkProps } from './components/sidebar/sidebar-link';

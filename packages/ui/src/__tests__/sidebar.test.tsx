@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Calendar, FolderOpen, Home, LayoutDashboard, ShoppingCart } from 'lucide-react';
+import { FolderOpen, Home, LayoutDashboard, ShoppingCart } from 'lucide-react';
 import { useState } from 'react';
 import { describe, expect, it } from 'vitest';
 
@@ -7,6 +7,7 @@ import {
   Sidebar,
   SidebarBody,
   SidebarGroup,
+  SidebarGroupLink,
   SidebarHead,
   SidebarLink,
   SidebarSection,
@@ -17,13 +18,13 @@ function StatefulSidebar() {
 
   return (
     <Sidebar state={state} action={action} data-testid="sidebar" className="static">
-      <SidebarHead href="/" logoSrc="/logo.png" title="Docs" state={state} action={action} />
+      <SidebarHead href="/" logoSrc="/logo.png" title="Docs" />
     </Sidebar>
   );
 }
 
 describe('Sidebar', () => {
-  it('renders children and applies state-based width classes', () => {
+  it('renders children and forwards custom class names', () => {
     render(
       <Sidebar state action={() => undefined} data-testid="sidebar" className="static">
         <div>content</div>
@@ -32,126 +33,294 @@ describe('Sidebar', () => {
 
     const sidebar = screen.getByTestId('sidebar');
 
-    expect(sidebar).toHaveClass('w-80.25');
     expect(sidebar).toHaveClass('static');
     expect(screen.getByText('content')).toBeInTheDocument();
   });
 
-  it('toggles width classes when header action button is clicked', () => {
-    const { container } = render(<StatefulSidebar />);
+  it('toggles the header action through its accessible label', () => {
+    render(<StatefulSidebar />);
 
-    const sidebar = screen.getByTestId('sidebar');
-    const toggle = container.querySelector('header button');
+    const toggle = screen.getByRole('button', { name: /expand sidebar/i });
 
-    expect(sidebar).toHaveClass('w-16.25');
-    expect(toggle).not.toBeNull();
+    fireEvent.click(toggle);
 
-    fireEvent.click(toggle as HTMLButtonElement);
-
-    expect(sidebar).toHaveClass('w-80.25');
+    expect(screen.getByRole('button', { name: /collapse sidebar/i })).toBeInTheDocument();
   });
 
-  it('supports composable sidebar body/list/group structure', () => {
-    const [state, action] = [false, () => undefined];
+  it('forwards custom header props through SidebarHead', () => {
+    render(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarHead
+          href="/"
+          logoSrc="/logo.png"
+          title="Docs"
+          className="bg-brand"
+          data-testid="sidebar-head"
+        />
+      </Sidebar>,
+    );
+
+    expect(screen.getByTestId('sidebar-head')).toHaveClass('bg-brand');
+  });
+
+  it('supports direct composition inside SidebarBody', () => {
+    const [state, action] = [true, () => undefined];
 
     render(
       <Sidebar state={state} action={action} className="static">
-        <SidebarHead href="/" logoSrc="/logo.png" title="Docs" state={state} action={action} />
+        <SidebarHead href="/" logoSrc="/logo.png" title="Docs" />
         <SidebarBody>
-          <ul className="flex flex-col gap-2">
-            <li>
-              <SidebarSection text="Main" />
-            </li>
-            <li>
-              <SidebarLink href="/overview" icon={Home} text="Overview" />
-            </li>
-            <li>
-              <SidebarGroup icon={FolderOpen} text="Reports">
-                <ul className="flex flex-col gap-2">
-                  <li>
-                    <SidebarLink href="/reports/monthly" icon={Calendar} text="Monthly" />
-                  </li>
-                </ul>
-              </SidebarGroup>
-            </li>
-            <li>
-              <SidebarSection text="Secondary" />
-            </li>
-          </ul>
+          <SidebarSection text="Main" />
+          <SidebarLink href="/overview" icon={Home} text="Overview" />
+          <SidebarGroup icon={FolderOpen} text="Reports">
+            <SidebarGroupLink href="/reports/monthly" text="Monthly" />
+          </SidebarGroup>
+          <SidebarSection text="Secondary" />
         </SidebarBody>
       </Sidebar>,
     );
 
     expect(screen.getByRole('link', { name: /overview/i })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: /sidebar/i })).toBeInTheDocument();
     expect(screen.getByText('Main')).toBeInTheDocument();
     expect(screen.getByText('Reports')).toBeInTheDocument();
-    expect(screen.getAllByRole('list').length).toBeGreaterThanOrEqual(2);
     expect(screen.getByRole('button', { name: /reports/i })).toBeInTheDocument();
   });
 
-  it('uses collapsible group behavior with open-state styling', () => {
-    const { container } = render(
-      <SidebarGroup icon={FolderOpen} text="Reports">
-        <ul className="flex flex-col gap-2">
-          <li>
-            <SidebarLink href="/reports/monthly" icon={Calendar} text="Monthly" />
-          </li>
-        </ul>
-      </SidebarGroup>,
+  it('applies section spacing from sidebar state', () => {
+    const { rerender } = render(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarSection text="Main" />
+      </Sidebar>,
+    );
+
+    expect(screen.getByText('Main').closest('h5')).toHaveClass('px-2');
+
+    rerender(
+      <Sidebar state={false} action={() => undefined} className="static">
+        <SidebarSection text="Main" />
+      </Sidebar>,
+    );
+
+    expect(screen.getByText('Main').closest('h5')).toHaveClass('px-6');
+  });
+
+  it('exposes expanded-state semantics for inline groups', () => {
+    render(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink href="/reports/monthly" text="Monthly" />
+        </SidebarGroup>
+      </Sidebar>,
     );
 
     const groupButton = screen.getByRole('button', { name: /reports/i });
-    const groupRoot = container.firstElementChild;
-    const collapsible = groupRoot?.querySelector('div');
-    const chevrons = groupButton.querySelectorAll('svg');
-    const chevron = chevrons.item(chevrons.length - 1);
+    const collapsibleId = groupButton.getAttribute('aria-controls');
 
     expect(groupButton).toHaveAttribute('aria-expanded', 'false');
-    expect(groupRoot).not.toHaveClass('bg-brand/5');
-    expect(collapsible).toHaveClass('grid-rows-[0fr]');
-    expect(chevron).not.toHaveClass('rotate-180');
+    expect(collapsibleId).toBeTruthy();
+    expect(document.getElementById(collapsibleId as string)).not.toBeNull();
 
     fireEvent.click(groupButton);
 
     expect(groupButton).toHaveAttribute('aria-expanded', 'true');
-    expect(groupRoot).toHaveClass('bg-brand/5');
-    expect(collapsible).toHaveClass('grid-rows-[1fr]');
-    expect(chevron).toHaveClass('rotate-180');
+    expect(screen.getByRole('link', { name: /monthly/i })).toBeInTheDocument();
   });
 
-  it('renders list items in order using ul/li structure', () => {
+  it('starts inline groups open when a nested link is active', () => {
     render(
-      <ul className="flex flex-col gap-2">
-        <li>
-          <SidebarSection text="General" />
-        </li>
-        <li>
-          <SidebarLink href="/dashboard" icon={LayoutDashboard} text="Dashboard" />
-        </li>
-      </ul>,
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink href="/reports/monthly" text="Monthly" />
+          <SidebarGroupLink active href="/reports/weekly" text="Weekly" />
+        </SidebarGroup>
+      </Sidebar>,
     );
 
-    const list = screen.getByRole('list');
-    const listItems = list.querySelectorAll(':scope > li');
+    const groupButton = screen.getByRole('button', { name: /reports/i });
 
-    expect(listItems).toHaveLength(2);
-    expect(listItems[0]).toHaveTextContent('General');
+    expect(groupButton).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('link', { name: /monthly/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /weekly/i })).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('allows manually closing a group that started open from an active nested link', () => {
+    render(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink href="/reports/monthly" text="Monthly" />
+          <SidebarGroupLink active href="/reports/weekly" text="Weekly" />
+        </SidebarGroup>
+      </Sidebar>,
+    );
+
+    const groupButton = screen.getByRole('button', { name: /reports/i });
+
+    expect(groupButton).toHaveAttribute('aria-expanded', 'true');
+
+    fireEvent.click(groupButton);
+
+    expect(groupButton).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.getByRole('link', { name: /weekly/i })).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('derives inline group expansion from active nested links after mount', () => {
+    const { rerender } = render(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink href="/reports/monthly" text="Monthly" />
+          <SidebarGroupLink href="/reports/weekly" text="Weekly" />
+        </SidebarGroup>
+      </Sidebar>,
+    );
+
+    expect(screen.getByRole('button', { name: /reports/i })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
+
+    rerender(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink active href="/reports/monthly" text="Monthly" />
+          <SidebarGroupLink href="/reports/weekly" text="Weekly" />
+        </SidebarGroup>
+      </Sidebar>,
+    );
+
+    expect(screen.getByRole('button', { name: /reports/i })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
+    expect(screen.getByRole('link', { name: /monthly/i })).toHaveAttribute('aria-current', 'page');
+
+    rerender(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink href="/reports/monthly" text="Monthly" />
+          <SidebarGroupLink active href="/reports/weekly" text="Weekly" />
+        </SidebarGroup>
+      </Sidebar>,
+    );
+
+    expect(screen.getByRole('button', { name: /reports/i })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
+    expect(screen.getByRole('link', { name: /weekly/i })).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('reopens a manually closed group when the active nested link changes', () => {
+    const { rerender } = render(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink active href="/reports/monthly" text="Monthly" />
+          <SidebarGroupLink href="/reports/weekly" text="Weekly" />
+        </SidebarGroup>
+      </Sidebar>,
+    );
+
+    const groupButton = screen.getByRole('button', { name: /reports/i });
+
+    expect(groupButton).toHaveAttribute('aria-expanded', 'true');
+
+    fireEvent.click(groupButton);
+
+    expect(groupButton).toHaveAttribute('aria-expanded', 'false');
+
+    rerender(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink href="/reports/monthly" text="Monthly" />
+          <SidebarGroupLink active href="/reports/weekly" text="Weekly" />
+        </SidebarGroup>
+      </Sidebar>,
+    );
+
+    expect(screen.getByRole('button', { name: /reports/i })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
+    expect(screen.getByRole('link', { name: /weekly/i })).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('opens collapsed groups without exposing inline disclosure wiring', () => {
+    render(
+      <Sidebar state={false} action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink href="/reports/monthly" text="Monthly" />
+        </SidebarGroup>
+      </Sidebar>,
+    );
+
+    const groupButton = screen.getByRole('button', { name: /reports/i });
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(groupButton).toHaveAttribute('aria-expanded', 'false');
+    expect(groupButton).not.toHaveAttribute('aria-haspopup');
+    expect(groupButton).not.toHaveAttribute('aria-controls');
+
+    fireEvent.click(groupButton);
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(groupButton).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('link', { name: /monthly/i })).toBeInTheDocument();
+  });
+
+  it('renders nested links from explicit SidebarGroupLink children', () => {
+    render(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink href="/reports/monthly" text="Monthly" />
+          <SidebarGroupLink href="/reports/weekly" text="Weekly" />
+        </SidebarGroup>
+      </Sidebar>,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /reports/i }));
+
+    expect(screen.getByRole('link', { name: /monthly/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /weekly/i })).toBeInTheDocument();
+  });
+
+  it('rejects non-SidebarGroupLink children', () => {
+    expect(() =>
+      render(
+        <Sidebar state action={() => undefined} className="static">
+          <SidebarGroup icon={FolderOpen} text="Reports">
+            <SidebarLink href="/reports/monthly" icon={Home} text="Monthly" />
+          </SidebarGroup>
+        </Sidebar>,
+      ),
+    ).toThrow('<SidebarGroup> only accepts <SidebarGroupLink> children.');
+  });
+
+  it('renders top-level items in order without list wrappers', () => {
+    render(
+      <SidebarBody>
+        <SidebarSection text="General" />
+        <SidebarLink href="/dashboard" icon={LayoutDashboard} text="Dashboard" />
+      </SidebarBody>,
+    );
+
+    const navigation = screen.getByRole('navigation', { name: /sidebar/i });
+    const children = Array.from(navigation.children);
+
+    expect(children).toHaveLength(2);
+    expect(children[0]).toHaveTextContent('General');
     expect(screen.getByRole('link', { name: /dashboard/i })).toBeInTheDocument();
   });
 
-  it('renders link children inside li wrappers', () => {
+  it('renders links directly inside SidebarBody', () => {
     render(
-      <ul className="flex flex-col gap-2">
-        <li>
-          <SidebarLink href="/orders" icon={ShoppingCart} text="Orders" />
-        </li>
-      </ul>,
+      <SidebarBody>
+        <SidebarLink href="/orders" icon={ShoppingCart} text="Orders" />
+      </SidebarBody>,
     );
 
-    const list = screen.getByRole('list');
-    const listItems = list.querySelectorAll(':scope > li');
+    const navigation = screen.getByRole('navigation', { name: /sidebar/i });
 
-    expect(listItems).toHaveLength(1);
+    expect(navigation.children).toHaveLength(1);
     expect(screen.queryByText('General')).not.toBeInTheDocument();
     expect(screen.getByRole('link', { name: /orders/i })).toBeInTheDocument();
   });

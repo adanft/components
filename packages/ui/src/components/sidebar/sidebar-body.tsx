@@ -1,18 +1,17 @@
-import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 import { cn } from '../../helpers/cn';
 
-type SidebarBodyProps = ComponentPropsWithoutRef<'div'> & {
-  children: ReactNode;
-};
+type SidebarBodyProps = ComponentPropsWithoutRef<'div'>;
 
-function SidebarBody({ children, className }: SidebarBodyProps) {
-  const componentClass = cn('h-full overflow-x-hidden', className);
+function SidebarBody({ children, className, ...props }: SidebarBodyProps) {
   return (
-    <SimpleBar className={componentClass}>
-      <nav className="flex flex-col gap-2">{children}</nav>
+    <SimpleBar {...props} className={cn('h-full overflow-x-hidden', className)}>
+      <nav aria-label="Sidebar" className="flex flex-col gap-2">
+        {children}
+      </nav>
     </SimpleBar>
   );
 }

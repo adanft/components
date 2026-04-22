@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';
 
@@ -23,6 +23,28 @@ describe('docs consumer boundary', () => {
 
     expect(ordersLink).toHaveClass('bg-brand');
     expect(usersLink).not.toHaveClass('bg-brand');
+  });
+
+  it('marks a sidebar group trigger active when one of its children matches the route', () => {
+    const reportHref = docsPath('/financial-report');
+
+    render(
+      <MemoryRouter initialEntries={[reportHref]}>
+        <DocsShell>
+          <div>docs content</div>
+        </DocsShell>
+      </MemoryRouter>,
+    );
+
+    const reportsButton = screen.getByRole('button', { name: /reports/i });
+
+    expect(reportsButton).toHaveClass('text-brand');
+
+    fireEvent.click(reportsButton);
+
+    const financialReportLink = screen.getByRole('link', { name: /financial report/i });
+
+    expect(financialReportLink).toHaveClass('bg-brand');
   });
 
   it('renders docs routes without importing docs-only pages from @adanft/ui', () => {

@@ -3,22 +3,22 @@ import type { LucideIcon } from 'lucide-react';
 import { Link, useMatch, useResolvedPath } from 'react-router';
 
 type RouterSidebarLinkProps = {
+  active?: boolean;
   className?: string;
   href: string;
   icon: LucideIcon;
   text: string;
 };
 
-function RouterSidebarLink({ className, href, icon, text }: RouterSidebarLinkProps) {
+function RouterSidebarLink({ active, className, href, icon, text }: RouterSidebarLinkProps) {
   const resolvedPath = useResolvedPath(href);
   const match = useMatch({ path: resolvedPath.pathname, end: true });
 
   return (
     <SidebarLink
       asChild
-      active={Boolean(match)}
+      active={active ?? Boolean(match)}
       className={className}
-      href={href}
       icon={icon}
       text={text}>
       <Link to={href} />

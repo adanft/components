@@ -1,6 +1,7 @@
 import type { ComponentPropsWithoutRef } from 'react';
 import { cn } from '../../helpers/cn';
 import useOutsideHandler from '../../hooks/use-outside-handler';
+import { SidebarContext } from './context';
 
 type SidebarProps = ComponentPropsWithoutRef<'aside'> & {
   state: boolean;
@@ -19,9 +20,11 @@ function Sidebar({ className, children, state, action, ...props }: SidebarProps)
   );
 
   return (
-    <aside {...props} ref={asideRef} className={sidebarClassName}>
-      {children}
-    </aside>
+    <SidebarContext.Provider value={{ action, collapsed: !state, state }}>
+      <aside {...props} ref={asideRef} className={sidebarClassName}>
+        {children}
+      </aside>
+    </SidebarContext.Provider>
   );
 }
 

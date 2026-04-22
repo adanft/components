@@ -1,46 +1,132 @@
 import { ChevronDown, type LucideIcon } from 'lucide-react';
-import { type ReactNode, useId, useState } from 'react';
+import {
+  Children,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  useId,
+  useState,
+} from 'react';
 
 import { cn } from '../../helpers/cn';
+import Popover from '../popover';
+import { useSidebarContext } from './context';
+import SidebarGroupLink from './sidebar-group-link';
 
 type SidebarGroupProps = {
+  active?: boolean;
   children: ReactNode;
   icon: LucideIcon;
   text: string;
 };
 
-function SidebarGroup({ children, icon, text }: SidebarGroupProps) {
+type SidebarGroupManualOverride = {
+  activeKey: string | null;
+  open: boolean;
+};
+
+type SidebarGroupLinkElement = ReactElement<{ className?: string }> & {
+  props: {
+    active?: boolean;
+    className?: string;
+    href?: string;
+  };
+  type: {
+    __sidebarGroupLink?: boolean;
+  };
+};
+
+function isSidebarGroupLinkElement(child: ReactNode): child is SidebarGroupLinkElement {
+  return (
+    isValidElement(child) &&
+    (child.type === SidebarGroupLink ||
+      Boolean((child as SidebarGroupLinkElement).type.__sidebarGroupLink))
+  );
+}
+
+function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProps) {
   const IconComponent = icon;
-  const [show, setShow] = useState(false);
+  const [floatOpen, setFloatOpen] = useState(false);
   const contentId = useId();
+  const { collapsed } = useSidebarContext('Group');
+  const groupLinks = Children.toArray(children).map((child) => {
+    if (!isSidebarGroupLinkElement(child)) {
+      throw new Error('<SidebarGroup> only accepts <SidebarGroupLink> children.');
+    }
+    return child;
+  });
+  const activeGroupLink = groupLinks.find((child) => child.props.active);
+  const activeKey = activeGroupLink?.props.href ?? null;
+  const hasActiveGroupLink = groupLinks.some((child) => child.props.active);
+  const [manualOverride, setManualOverride] = useState<SidebarGroupManualOverride | null>(null);
+  const groupOpen =
+    manualOverride && manualOverride.activeKey === activeKey
+      ? manualOverride.open
+      : hasActiveGroupLink;
+
+  const trigger = (
+    <button
+      type="button"
+      className={cn(
+        'flex w-full items-center gap-4 rounded-md text-left leading-none text-foreground transition-colors',
+        active && 'text-brand',
+        'px-2',
+      )}
+      onClick={
+        collapsed
+          ? undefined
+          : () =>
+              setManualOverride({
+                activeKey,
+                open: !groupOpen,
+              })
+      }
+      aria-controls={collapsed ? undefined : contentId}
+      aria-expanded={collapsed ? undefined : groupOpen}
+      aria-label={collapsed ? text : undefined}>
+      <span className="flex shrink-0 items-center justify-center p-3.5">
+        <IconComponent aria-hidden="true" className="size-5 stroke-2" />
+      </span>
+      <span className="font-medium whitespace-nowrap">{text}</span>
+      <span className="ml-auto flex shrink-0 items-center justify-center p-3.5">
+        <ChevronDown
+          aria-hidden="true"
+          className={cn('duration-300 size-5 stroke-2', groupOpen && 'rotate-180')}
+        />
+      </span>
+    </button>
+  );
+
+  if (collapsed) {
+    return (
+      <Popover
+        open={floatOpen}
+        onOpenChange={setFloatOpen}
+        placement="right-start"
+        contentRole={null}
+        triggerHasPopup={false}>
+        <Popover.Trigger>{trigger}</Popover.Trigger>
+        <Popover.Content className="z-30 min-w-64 rounded-md border border-border bg-surface p-2 shadow-card">
+          <p className="p-3 font-semibold uppercase text-muted">{text}</p>
+          <div className="flex flex-col gap-2">{groupLinks}</div>
+        </Popover.Content>
+      </Popover>
+    );
+  }
 
   return (
-    <div className={cn(show && 'bg-brand/5')}>
-      <button
-        type="button"
-        className="flex px-2 leading-none items-center text-foreground gap-4 rounded-md w-full"
-        onClick={() => setShow((s) => !s)}
-        aria-expanded={show}
-        aria-controls={contentId}>
-        <span className="flex shrink-0 items-center justify-center p-3.5">
-          <IconComponent aria-hidden="true" className="size-5 stroke-2" />
-        </span>
-        <span className="font-medium whitespace-nowrap">{text}</span>
-        <span className="ml-auto flex shrink-0 items-center justify-center p-3.5">
-          <ChevronDown
-            aria-hidden="true"
-            className={cn('duration-300 size-5 stroke-2', show && 'rotate-180')}
-          />
-        </span>
-      </button>
+    <div>
+      {trigger}
 
       <div
         id={contentId}
         className={cn(
-          'grid gap-2 overflow-hidden transition-all duration-300',
-          show ? 'grid-rows-[1fr] mt-2' : 'grid-rows-[0fr]',
+          'grid overflow-hidden transition-all duration-300',
+          groupOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
         )}>
-        <div className="overflow-hidden">{children}</div>
+        <div className="overflow-hidden mx-7.75">
+          <div className="px-7 border-l-2 border-muted">{groupLinks}</div>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,14 @@
 import * as components from '@adanft/ui';
-import { Accordion, Alert, Button, Modal, Select, SidebarLink, Table } from '@adanft/ui';
+import {
+  Accordion,
+  Alert,
+  Button,
+  Modal,
+  Select,
+  SidebarGroupLink,
+  SidebarLink,
+  Table,
+} from '@adanft/ui';
 import { render, screen } from '@testing-library/react';
 import { ShoppingCart } from 'lucide-react';
 import { describe, expect, it, vi } from 'vitest';
@@ -30,6 +39,7 @@ describe('@adanft/ui public API', () => {
         </Select>
 
         <SidebarLink href="/orders" icon={ShoppingCart} text="Orders" />
+        <SidebarGroupLink href="/orders/history" text="Order history" />
 
         <Table aria-label="Smoke table">
           <Table.Head
@@ -55,6 +65,10 @@ describe('@adanft/ui public API', () => {
 
     const ordersLink = screen.getByRole('link', { name: /orders/i });
     expect(ordersLink).toHaveAttribute('href', '/orders');
+    expect(screen.getByRole('link', { name: /order history/i })).toHaveAttribute(
+      'href',
+      '/orders/history',
+    );
 
     expect(screen.getByRole('columnheader', { name: /name/i })).toBeInTheDocument();
     expect(screen.getByRole('cell', { name: /taylor/i })).toBeInTheDocument();

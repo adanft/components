@@ -8,7 +8,7 @@ type PopoverTriggerProps = {
 };
 
 function PopoverTrigger({ children }: PopoverTriggerProps) {
-  const { open, setReference, getReferenceProps } = usePopoverContext('Trigger');
+  const { getReferenceProps, hasPopup, open, setReference } = usePopoverContext('Trigger');
   const child = Children.only(children) as ReactElement<
     Record<string, unknown> & { ref?: Ref<Element> }
   >;
@@ -26,7 +26,7 @@ function PopoverTrigger({ children }: PopoverTriggerProps) {
     ...getReferenceProps({
       ...child.props,
       'aria-expanded': open,
-      'aria-haspopup': 'dialog',
+      'aria-haspopup': hasPopup ? 'dialog' : undefined,
     }),
     ref: mergedRef,
   });
