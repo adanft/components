@@ -4,21 +4,29 @@ import { useId } from 'react';
 import { AccordionContext } from './context';
 
 type AccordionProps = ComponentPropsWithoutRef<'div'> & {
+  collapsible?: boolean;
   onValueChange: (value: string | null) => void;
   value: string | null;
 };
 
-function Accordion({ children, onValueChange, value, ...props }: AccordionProps) {
+function Accordion({
+  children,
+  collapsible = true,
+  onValueChange,
+  value,
+  ...props
+}: AccordionProps) {
   const baseId = useId();
 
   return (
     <AccordionContext.Provider
       value={{
         baseId,
+        collapsible,
         onValueChange,
         value,
       }}>
-      <div data-accordion-root="true" {...props}>
+      <div {...props} data-accordion-root="true">
         {children}
       </div>
     </AccordionContext.Provider>

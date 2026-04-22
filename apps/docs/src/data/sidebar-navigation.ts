@@ -76,7 +76,9 @@ type DocsSidebarNavigationNode =
   | DocsSidebarNavigationLinkNode;
 
 const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
+  { type: 'heading', text: 'PRIMITIVES' },
   { type: 'link', icon: ChevronRight, text: 'Accordion', href: DOCS_ACCORDION_PATH },
+  { type: 'heading', text: 'COMPONENTS' },
   { type: 'link', icon: Activity, text: 'Alert', href: DOCS_ALERT_PATH },
   { type: 'link', icon: User, text: 'Avatar', href: DOCS_AVATAR_PATH },
   { type: 'link', icon: Bell, text: 'Badge', href: DOCS_BADGE_PATH },

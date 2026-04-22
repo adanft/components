@@ -2,6 +2,7 @@ import { createContext, useContext } from 'react';
 
 type AccordionContextValue = {
   baseId: string;
+  collapsible: boolean;
   onValueChange: (value: string | null) => void;
   value: string | null;
 };

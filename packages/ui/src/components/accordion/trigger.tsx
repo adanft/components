@@ -9,11 +9,10 @@ function AccordionTrigger({ children, onClick, onKeyDown, ...props }: AccordionT
   const itemContext = useAccordionItemContext('Trigger');
 
   function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
+    const root = event.currentTarget.closest('[data-accordion-root="true"]');
     const triggers = Array.from(
-      event.currentTarget
-        .closest('[data-accordion-root="true"]')
-        ?.querySelectorAll<HTMLButtonElement>('[data-accordion-trigger="true"]') ?? [],
-    );
+      root?.querySelectorAll<HTMLButtonElement>('[data-accordion-trigger="true"]') ?? [],
+    ).filter((trigger) => trigger.closest('[data-accordion-root="true"]') === root);
 
     const currentIndex = triggers.indexOf(event.currentTarget);
 
@@ -49,6 +48,7 @@ function AccordionTrigger({ children, onClick, onKeyDown, ...props }: AccordionT
 
   return (
     <button
+      {...props}
       id={itemContext.triggerId}
       type="button"
       aria-expanded={itemContext.open}
@@ -62,10 +62,15 @@ function AccordionTrigger({ children, onClick, onKeyDown, ...props }: AccordionT
           return;
         }
 
-        accordionContext.onValueChange(itemContext.open ? null : itemContext.value);
+        accordionContext.onValueChange(
+          itemContext.open
+            ? accordionContext.collapsible
+              ? null
+              : itemContext.value
+            : itemContext.value,
+        );
       }}
-      onKeyDown={handleKeyDown}
-      {...props}>
+      onKeyDown={handleKeyDown}>
       {children}
     </button>
   );

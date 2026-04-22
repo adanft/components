@@ -9,11 +9,11 @@ function AccordionContent({ children, ...props }: AccordionContentProps) {
 
   return (
     <section
+      {...props}
       id={itemContext.contentId}
       aria-labelledby={itemContext.triggerId}
       data-state={itemContext.open ? 'open' : 'closed'}
-      hidden={!itemContext.open}
-      {...props}>
+      hidden={!itemContext.open}>
       {children}
     </section>
   );

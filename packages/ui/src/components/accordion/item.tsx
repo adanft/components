@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from 'react';
+import { useId } from 'react';
 
 import { AccordionItemContext, useAccordionContext } from './context';
-import { sanitizeAccordionValue } from './helpers';
 
 type AccordionItemProps = ComponentPropsWithoutRef<'div'> & {
   value: string;
@@ -9,9 +9,9 @@ type AccordionItemProps = ComponentPropsWithoutRef<'div'> & {
 
 function AccordionItem({ children, value, ...props }: AccordionItemProps) {
   const context = useAccordionContext('Item');
-  const sanitizedValue = sanitizeAccordionValue(value);
-  const triggerId = `${context.baseId}-trigger-${sanitizedValue}`;
-  const contentId = `${context.baseId}-content-${sanitizedValue}`;
+  const itemId = useId();
+  const triggerId = `${context.baseId}-trigger-${itemId}`;
+  const contentId = `${context.baseId}-content-${itemId}`;
   const open = context.value === value;
 
   return (
@@ -22,7 +22,7 @@ function AccordionItem({ children, value, ...props }: AccordionItemProps) {
         triggerId,
         value,
       }}>
-      <div data-state={open ? 'open' : 'closed'} {...props}>
+      <div {...props} data-state={open ? 'open' : 'closed'}>
         {children}
       </div>
     </AccordionItemContext.Provider>
