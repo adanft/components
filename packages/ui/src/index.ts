@@ -46,6 +46,8 @@ export type {
   FieldSetProps,
 } from './components/field';
 export { default as Field } from './components/field';
+export type { InputProps } from './components/input';
+export { default as Input } from './components/input';
 export type {
   ModalBackdropProps,
   ModalPanelProps,

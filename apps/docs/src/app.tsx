@@ -11,6 +11,7 @@ import {
   DOCS_DROPDOWN_MENU_PATH,
   DOCS_FIELD_PATH,
   DOCS_HOME_PATH,
+  DOCS_INPUT_PATH,
   DOCS_MODAL_PATH,
   DOCS_NOT_FOUND_PATH,
   DOCS_PAGINATION_PATH,
@@ -36,6 +37,7 @@ import CheckboxPage from './pages/checkbox';
 import DropdownMenuPage from './pages/dropdown-menu';
 import FieldPage from './pages/field';
 import Home from './pages/home';
+import InputPage from './pages/input';
 import ModalPage from './pages/modal';
 import PaginationPage from './pages/pagination';
 import PopoverPage from './pages/popover';
@@ -64,6 +66,7 @@ function App() {
         <Route path={DOCS_BOX_PATH} element={<BoxPage />} />
         <Route path={DOCS_DROPDOWN_MENU_PATH} element={<DropdownMenuPage />} />
         <Route path={DOCS_FIELD_PATH} element={<FieldPage />} />
+        <Route path={DOCS_INPUT_PATH} element={<InputPage />} />
         <Route path={DOCS_MODAL_PATH} element={<ModalPage />} />
         <Route path={DOCS_PAGINATION_PATH} element={<PaginationPage />} />
         <Route path={DOCS_POPOVER_PATH} element={<PopoverPage />} />
