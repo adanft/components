@@ -1,194 +1,215 @@
-import { Field, RadioGroup, Select } from '@adanft/ui';
+import {
+  Box,
+  Field,
+  RadioGroup,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui';
 import { CodeBlock } from '../code-block';
+import { Code } from '../components/code';
 
 const importSnippet = `import { Field } from '@adanft/ui';`;
 
 const usageSnippet = `<Field id="email" invalid required>
   <Field.Label>Email</Field.Label>
-
   <Field.Control asChild>
     <input type="email" />
   </Field.Control>
-
   <Field.Description>We never share your email.</Field.Description>
   <Field.Error>Email is required.</Field.Error>
 </Field>`;
 
-const groupSnippet = `<Field.Set invalid>
+const singleControlExampleJsx = `<Field id="email" invalid required>
+  <Field.Label>Email</Field.Label>
+  <Field.Control asChild>
+    <input type="email" />
+  </Field.Control>
+  <Field.Description>We never share your email.</Field.Description>
+  <Field.Error>Email is required.</Field.Error>
+</Field>`;
+
+const groupedExampleJsx = `<Field.Set invalid>
   <Field.Legend>Plan</Field.Legend>
   <Field.Description>Choose one option.</Field.Description>
-
   <RadioGroup value="starter" onValueChange={() => undefined}>
     <RadioGroup.Item value="starter" label="Starter" />
     <RadioGroup.Item value="pro" label="Pro" />
   </RadioGroup>
-
   <Field.Error>You must choose a plan.</Field.Error>
 </Field.Set>`;
-
-const selectSnippet = `<Field id="workspace-plan">
-  <Field.Label>Workspace plan</Field.Label>
-
-  <Field.Control asChild>
-    <Select defaultValue="pro">
-      <option value="starter">Starter</option>
-      <option value="pro">Pro</option>
-      <option value="team">Team</option>
-    </Select>
-  </Field.Control>
-
-  <Field.Description>Choose the current workspace plan.</Field.Description>
-</Field>`;
 
 function FieldPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          components {'>'} Field
-        </p>
         <h1 className="text-3xl font-bold text-brand">Field</h1>
-        <p className="text-foreground">
-          <code>Field</code> provides the shared structure for label, description, error, and
-          control wiring. Use <code>Field.Set</code> and <code>Field.Legend</code> for grouped
-          controls like radio groups.
+        <p className="text-base leading-7 text-foreground">
+          <Code>Field</Code> wires labels, descriptions, errors, and controls into an accessible
+          form structure.
         </p>
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Single control</h2>
-        <p className="text-foreground">
-          Use <code>Field.Control</code> with <code>asChild</code> to inject <code>id</code>,{' '}
-          <code>aria-describedby</code>, and error state into a real form control.
-        </p>
+        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
-        <div className="rounded-xl border border-border bg-surface p-6 shadow-card">
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+
+        <h3 className="text-lg font-semibold text-brand">Single Control</h3>
+        <Box shadow="none" surface="none">
           <Field id="email" invalid required>
             <Field.Label>Email</Field.Label>
             <Field.Control asChild>
-              <input
-                type="email"
-                className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground"
-              />
+              <input type="email" />
             </Field.Control>
             <Field.Description>We never share your email.</Field.Description>
             <Field.Error>Email is required.</Field.Error>
           </Field>
-        </div>
-      </section>
+        </Box>
+        <CodeBlock code={singleControlExampleJsx} />
 
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">What Field.Control wires for you</h2>
-        <ul className="list-disc space-y-2 pl-5 text-foreground">
-          <li>
-            injects a stable <code>id</code> into the child control when it does not have one.
-          </li>
-          <li>
-            merges <code>aria-describedby</code> with the ids of description and error when those
-            pieces actually exist.
-          </li>
-          <li>
-            adds <code>aria-invalid</code> and <code>aria-errormessage</code> when the field is
-            marked invalid.
-          </li>
-          <li>
-            passes <code>required</code> to the control when the control does not already define it.
-          </li>
-        </ul>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Grouped controls</h2>
-        <p className="text-foreground">
-          Use <code>Field.Set</code> and <code>Field.Legend</code> to preserve native semantics for
-          grouped controls like <code>RadioGroup</code>.
-        </p>
-        <CodeBlock code={groupSnippet} />
-        <div className="rounded-xl border border-border bg-surface p-6 shadow-card">
+        <h3 className="text-lg font-semibold text-brand">Grouped</h3>
+        <Box shadow="none" surface="none">
           <Field.Set invalid>
             <Field.Legend>Plan</Field.Legend>
             <Field.Description>Choose one option.</Field.Description>
-            <RadioGroup value="starter" onValueChange={() => undefined} className="flex-col gap-3">
+            <RadioGroup value="starter" onValueChange={() => undefined}>
               <RadioGroup.Item value="starter" label="Starter" />
               <RadioGroup.Item value="pro" label="Pro" />
             </RadioGroup>
             <Field.Error>You must choose a plan.</Field.Error>
           </Field.Set>
-        </div>
+        </Box>
+        <CodeBlock code={groupedExampleJsx} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">With Select</h2>
-        <p className="text-foreground">
-          <code>Field</code> also works with the native <code>Select</code> wrapper through{' '}
-          <code>Field.Control</code>.
-        </p>
-        <CodeBlock code={selectSnippet} />
-        <div className="rounded-xl border border-border bg-surface p-6 shadow-card">
-          <Field id="workspace-plan">
-            <Field.Label>Workspace plan</Field.Label>
-            <Field.Control asChild>
-              <Select defaultValue="pro">
-                <option value="starter">Starter</option>
-                <option value="pro">Pro</option>
-                <option value="team">Team</option>
-              </Select>
-            </Field.Control>
-            <Field.Description>Choose the current workspace plan.</Field.Description>
-          </Field>
-        </div>
-      </section>
+        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
 
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">How it fits the current library</h2>
-        <ul className="list-disc space-y-2 pl-5 text-foreground">
-          <li>
-            <code>Select</code> can already be composed with <code>Field.Control</code>.
-          </li>
-          <li>
-            <code>RadioGroup</code> benefits from the new <code>Field.Set</code> and{' '}
-            <code>Field.Legend</code> story immediately.
-          </li>
-        </ul>
-        <div className="rounded-xl border border-border bg-surface p-6 shadow-card">
-          <div className="space-y-3">
-            <p className="text-sm font-semibold text-foreground">Select with Field</p>
-            <Field id="workspace-plan">
-              <Field.Label>Workspace plan</Field.Label>
-              <Field.Control asChild>
-                <Select defaultValue="pro">
-                  <option value="starter">Starter</option>
-                  <option value="pro">Pro</option>
-                  <option value="team">Team</option>
-                </Select>
-              </Field.Control>
-              <Field.Description>Choose the current workspace plan.</Field.Description>
-            </Field>
-          </div>
-        </div>
-      </section>
+        <h3 className="text-lg font-semibold text-brand">Field</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>id</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>auto</TableCell>
+              <TableCell>
+                Optional control id used to wire the label, description, and error state.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>invalid</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>Marks the field as invalid and enables error wiring.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>required</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Marks the field as required and appends the required indicator to labels.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the root field wrapper.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">What this v1 includes</h2>
-        <ul className="list-disc space-y-2 pl-5 text-foreground">
-          <li>
-            <code>Field</code>, <code>Field.Label</code>, <code>Field.Description</code>,{' '}
-            <code>Field.Error</code>, and <code>Field.Control</code> for single controls.
-          </li>
-          <li>
-            <code>Field.Set</code> and <code>Field.Legend</code> for grouped semantics with native{' '}
-            <code>fieldset</code> / <code>legend</code>.
-          </li>
-          <li>
-            automatic wiring of <code>id</code>, <code>aria-describedby</code>,{' '}
-            <code>aria-invalid</code>, and <code>aria-errormessage</code>.
-          </li>
-          <li>
-            required and invalid state reflected through <code>data-required</code> and{' '}
-            <code>data-invalid</code>.
-          </li>
-        </ul>
+        <h3 className="text-lg font-semibold text-brand">Field.Control</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>asChild</Code>
+              </TableCell>
+              <TableCell>
+                <Code>true</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Injects field wiring into the child form control.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>children</Code>
+              </TableCell>
+              <TableCell>
+                <Code>ReactElement</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Expects a single valid form control element.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-brand">Field.Set and Field.Legend</h3>
+        <div className="space-y-3 text-base leading-7 text-foreground">
+          <p>
+            Use <Code>Field.Set</Code> and <Code>Field.Legend</Code> for grouped controls such as
+            radio groups.
+          </p>
+        </div>
+
+        <h3 className="text-lg font-semibold text-brand">
+          Field.Label, Field.Description and Field.Error
+        </h3>
+        <div className="space-y-3 text-base leading-7 text-foreground">
+          <p>
+            Use <Code>Field.Label</Code> for single controls, <Code>Field.Description</Code> for
+            helper text, and <Code>Field.Error</Code> for validation feedback.
+          </p>
+          <p>
+            Inside <Code>Field.Set</Code>, use <Code>Field.Legend</Code> instead of{' '}
+            <Code>Field.Label</Code>.
+          </p>
+        </div>
       </section>
     </article>
   );
