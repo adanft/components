@@ -47,7 +47,7 @@ function SkeletonPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Skeleton</h1>
+        <h1 className="text-3xl font-bold text-heading">Skeleton</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Skeleton</Code> provides loading placeholders for content that has not been rendered
           yet.
@@ -55,15 +55,15 @@ function SkeletonPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Animated</h3>
+        <h3 className="text-lg font-semibold text-heading">Animated</h3>
         <Box className="p-8" shadow="none" surface="none">
           <div
             aria-busy="true"
@@ -83,7 +83,7 @@ function SkeletonPage() {
         </Box>
         <CodeBlock code={animatedExampleSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">Without animation</h3>
+        <h3 className="text-lg font-semibold text-heading">Without animation</h3>
         <Box className="p-8" shadow="none" surface="none">
           <div
             aria-busy="true"
@@ -105,7 +105,7 @@ function SkeletonPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <Table>
           <TableHeader>
             <TableRow>

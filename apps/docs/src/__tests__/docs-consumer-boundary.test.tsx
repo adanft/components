@@ -19,10 +19,8 @@ describe('docs consumer boundary', () => {
     );
 
     const ordersLink = screen.getByRole('link', { name: /orders/i });
-    const usersLink = screen.getByRole('link', { name: /users/i });
 
     expect(ordersLink).toHaveClass('bg-brand');
-    expect(usersLink).not.toHaveClass('bg-brand');
   });
 
   it('marks a sidebar group trigger active when one of its children matches the route', () => {

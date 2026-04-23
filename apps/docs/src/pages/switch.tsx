@@ -34,28 +34,28 @@ function SwitchPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Switch</h1>
+        <h1 className="text-3xl font-bold text-heading">Switch</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Switch</Code> is a controlled input used to toggle an on or off state.
         </p>
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Default</h3>
+        <h3 className="text-lg font-semibold text-heading">Default</h3>
         <Box shadow="none" surface="none">
           <Switch checked={darkMode} onCheckedChange={setDarkMode} label="Dark mode" />
         </Box>
         <CodeBlock code={usageSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">Label positions</h3>
+        <h3 className="text-lg font-semibold text-heading">Label positions</h3>
         <Box className="flex flex-wrap gap-8" shadow="none" surface="none">
           <Switch
             checked={false}
@@ -84,7 +84,7 @@ function SwitchPage() {
         </Box>
         <CodeBlock code={positionsSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">Disabled</h3>
+        <h3 className="text-lg font-semibold text-heading">Disabled</h3>
         <Box shadow="none" surface="none">
           <Switch checked={false} disabled onCheckedChange={() => undefined} label="Disabled" />
         </Box>
@@ -92,7 +92,7 @@ function SwitchPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <Table>
           <TableHeader>
             <TableRow>

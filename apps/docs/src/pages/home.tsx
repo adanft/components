@@ -58,7 +58,7 @@ function Home() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
             components {'>'} Home
           </p>
-          <h1 className="text-3xl font-bold text-brand md:text-4xl">React Components</h1>
+          <h1 className="text-3xl font-bold text-heading md:text-4xl">React Components</h1>
           <p className="max-w-3xl text-foreground">
             A library-first component system with semantic tokens, theme helpers, and a live docs
             app. Use this page as your starting point to install, explore primitives, and verify
@@ -81,10 +81,10 @@ function Home() {
       </header>
 
       <section id="quickstart" className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Quickstart</h2>
+        <h2 className="text-2xl font-semibold text-heading">Quickstart</h2>
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="bg-surface shadow-card border border-border rounded-md p-4 space-y-3">
-            <h3 className="text-lg font-semibold text-brand">Run docs locally</h3>
+            <h3 className="text-lg font-semibold text-heading">Run docs locally</h3>
             <p className="text-foreground">Install dependencies and start the Vite docs app.</p>
             <pre className="bg-background border-border overflow-x-auto rounded-md border p-3 text-sm text-foreground">
               <code>{QUICKSTART_COMMANDS}</code>
@@ -92,7 +92,7 @@ function Home() {
           </div>
 
           <div className="bg-surface shadow-card border border-border rounded-md p-4 space-y-3">
-            <h3 className="text-lg font-semibold text-brand">Theme bootstrap</h3>
+            <h3 className="text-lg font-semibold text-heading">Theme bootstrap</h3>
             <p className="text-foreground">
               In consumer apps, load library styles once and initialize theme at startup.
             </p>
@@ -104,7 +104,7 @@ function Home() {
       </section>
 
       <section id="catalog" className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Component catalog</h2>
+        <h2 className="text-2xl font-semibold text-heading">Component catalog</h2>
         <p className="text-foreground">Each page includes usage notes and a working example.</p>
         <ul className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {COMPONENT_CARDS.map((component) => (
@@ -113,7 +113,7 @@ function Home() {
                 href={component.href}
                 className="bg-surface shadow-card p-4 border-border block h-full rounded-md border transition-transform duration-150 hover:-translate-y-0.5">
                 <div className="flex items-center justify-between gap-3">
-                  <h3 className="text-lg font-semibold text-brand">{component.name}</h3>
+                  <h3 className="text-lg font-semibold text-heading">{component.name}</h3>
                   <span className="rounded-full bg-brand px-2 py-1 text-xs font-semibold text-white">
                     stable
                   </span>
@@ -127,7 +127,7 @@ function Home() {
 
       <section className="grid gap-4 lg:grid-cols-2">
         <div className="bg-surface shadow-card border border-border rounded-md p-4 space-y-4">
-          <h2 className="text-2xl font-semibold text-brand">Quality gates</h2>
+          <h2 className="text-2xl font-semibold text-heading">Quality gates</h2>
           <p className="text-foreground">Run these commands before merging changes.</p>
           <ul className="space-y-2">
             {QUALITY_COMMANDS.map((item) => (
@@ -142,7 +142,7 @@ function Home() {
         </div>
 
         <div className="bg-surface shadow-card border border-border rounded-md p-4 space-y-4">
-          <h2 className="text-2xl font-semibold text-brand">Project notes</h2>
+          <h2 className="text-2xl font-semibold text-heading">Project notes</h2>
           <ul className="space-y-3 text-foreground">
             <li>Public API import boundary: use only @adanft/ui exports.</li>
             <li>Theme contract: semantic --color-* tokens via Tailwind @theme inline.</li>

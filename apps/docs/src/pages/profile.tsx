@@ -55,22 +55,22 @@ function ProfilePage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Profile</h1>
+        <h1 className="text-3xl font-bold text-heading">Profile</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Profile</Code> shows a user avatar trigger that opens a compact account panel.
         </p>
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={textUsageSnippet} />
         <CodeBlock code={imageUsageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
-        <h3 className="text-lg font-semibold text-brand">Start</h3>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
+        <h3 className="text-lg font-semibold text-heading">Start</h3>
         <Box className="relative flex justify-start p-6" shadow="none" surface="none">
           <Profile
             username="@adan"
@@ -83,7 +83,7 @@ function ProfilePage() {
         </Box>
         <CodeBlock code={startExampleSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">End</h3>
+        <h3 className="text-lg font-semibold text-heading">End</h3>
         <Box className="relative flex justify-end p-6" shadow="none" surface="none">
           <Profile
             username="@taylor"
@@ -99,7 +99,7 @@ function ProfilePage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <Table>
           <TableHeader>
             <TableRow>

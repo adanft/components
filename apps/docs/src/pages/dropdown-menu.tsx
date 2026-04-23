@@ -88,7 +88,7 @@ function DropdownMenuPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">DropdownMenu</h1>
+        <h1 className="text-3xl font-bold text-heading">DropdownMenu</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>DropdownMenu</Code> is a controlled actions menu with compound parts for the
           trigger, floating content, items, labels, and separators.
@@ -96,15 +96,15 @@ function DropdownMenuPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Simple</h3>
+        <h3 className="text-lg font-semibold text-heading">Simple</h3>
         <Box shadow="none" surface="none" className="overflow-visible p-8">
           <DropdownMenu open={simpleOpen} onOpenChange={setSimpleOpen}>
             <DropdownMenu.Trigger>
@@ -131,7 +131,7 @@ function DropdownMenuPage() {
         </Box>
         <CodeBlock code={simpleExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-brand">Advanced</h3>
+        <h3 className="text-lg font-semibold text-heading">Advanced</h3>
         <Box shadow="none" surface="none" className="overflow-visible p-8">
           <DropdownMenu open={advancedOpen} onOpenChange={setAdvancedOpen} placement="bottom-end">
             <DropdownMenu.Trigger>
@@ -150,9 +150,9 @@ function DropdownMenuPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
 
-        <h3 className="text-lg font-semibold text-brand">DropdownMenu</h3>
+        <h3 className="text-lg font-semibold text-heading">DropdownMenu</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -212,7 +212,7 @@ function DropdownMenuPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">DropdownMenu.Trigger</h3>
+        <h3 className="text-lg font-semibold text-heading">DropdownMenu.Trigger</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -239,7 +239,7 @@ function DropdownMenuPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">DropdownMenu.Content</h3>
+        <h3 className="text-lg font-semibold text-heading">DropdownMenu.Content</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -285,7 +285,7 @@ function DropdownMenuPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">DropdownMenu.Item</h3>
+        <h3 className="text-lg font-semibold text-heading">DropdownMenu.Item</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -341,7 +341,7 @@ function DropdownMenuPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">
+        <h3 className="text-lg font-semibold text-heading">
           DropdownMenu.Label and DropdownMenu.Separator
         </h3>
         <div className="space-y-3 text-base leading-7 text-foreground">

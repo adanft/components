@@ -48,7 +48,7 @@ function SelectPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Select</h1>
+        <h1 className="text-3xl font-bold text-heading">Select</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Select</Code> is a styled native <Code>{'<select>'}</Code> control for choosing one
           option from a list.
@@ -56,15 +56,15 @@ function SelectPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Default</h3>
+        <h3 className="text-lg font-semibold text-heading">Default</h3>
         <Box shadow="none" surface="none">
           <Select aria-label="Choose plan" defaultValue="starter">
             <option value="starter">Starter</option>
@@ -74,7 +74,7 @@ function SelectPage() {
         </Box>
         <CodeBlock code={defaultExampleSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">Controlled</h3>
+        <h3 className="text-lg font-semibold text-heading">Controlled</h3>
         <Box shadow="none" surface="none">
           <Select
             aria-label="Choose billing plan"
@@ -95,7 +95,7 @@ function SelectPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <Table>
           <TableHeader>
             <TableRow>

@@ -61,7 +61,7 @@ function PopoverPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           components {'>'} Popover
         </p>
-        <h1 className="text-3xl font-bold text-brand">Popover</h1>
+        <h1 className="text-3xl font-bold text-heading">Popover</h1>
         <p className="text-foreground">
           <code>Popover</code> provides a controlled, anchored floating surface. Use{' '}
           <code>Popover.Trigger</code> with any single child element and render the floating content
@@ -70,7 +70,7 @@ function PopoverPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-xl font-semibold text-heading">Usage</h2>
         <p className="text-foreground">
           Import <code>Popover</code> from the public entrypoint and control the <code>open</code>{' '}
           state yourself.
@@ -80,7 +80,7 @@ function PopoverPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Button trigger</h2>
+        <h2 className="text-xl font-semibold text-heading">Button trigger</h2>
         <Box className="flex min-h-44 items-start justify-center overflow-visible p-8">
           <Popover open={buttonOpen} onOpenChange={setButtonOpen}>
             <Popover.Trigger>
@@ -102,7 +102,7 @@ function PopoverPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Text trigger</h2>
+        <h2 className="text-xl font-semibold text-heading">Text trigger</h2>
         <Box className="flex min-h-44 items-start justify-center overflow-visible p-8">
           <Popover open={textOpen} onOpenChange={setTextOpen} placement="bottom-start">
             <Popover.Trigger>

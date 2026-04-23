@@ -30,28 +30,28 @@ function CheckboxPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Checkbox</h1>
+        <h1 className="text-3xl font-bold text-heading">Checkbox</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Checkbox</Code> is a form control used to toggle a checked or unchecked state.
         </p>
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Default</h3>
+        <h3 className="text-lg font-semibold text-heading">Default</h3>
         <Box className="flex items-center gap-4" shadow="none" surface="none">
           <Checkbox label="Accept terms" onChange={() => {}} />
         </Box>
         <CodeBlock code={usageSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">States</h3>
+        <h3 className="text-lg font-semibold text-heading">States</h3>
         <Box className="flex flex-wrap items-center gap-6" shadow="none" surface="none">
           <Checkbox label="Unchecked" onChange={() => {}} />
           <Checkbox label="Checked" defaultChecked onChange={() => {}} />
@@ -59,7 +59,7 @@ function CheckboxPage() {
         </Box>
         <CodeBlock code={statesSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">Label position</h3>
+        <h3 className="text-lg font-semibold text-heading">Label position</h3>
         <Box className="flex flex-wrap items-center gap-8" shadow="none" surface="none">
           <Checkbox label="Right (default)" labelPosition="right" onChange={() => {}} />
           <Checkbox label="Left" labelPosition="left" onChange={() => {}} />
@@ -68,7 +68,7 @@ function CheckboxPage() {
         </Box>
         <CodeBlock code={labelPositionSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">Without label</h3>
+        <h3 className="text-lg font-semibold text-heading">Without label</h3>
         <p className="text-foreground">
           When no <Code>label</Code> prop is provided, make sure the control still has an accessible
           name through <Code>aria-label</Code> or <Code>aria-labelledby</Code>.
@@ -80,7 +80,7 @@ function CheckboxPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <Table>
           <TableHeader>
             <TableRow>

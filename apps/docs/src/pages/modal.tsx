@@ -65,7 +65,7 @@ function ModalPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           components {'>'} Modal
         </p>
-        <h1 className="text-3xl font-bold text-brand">Modal</h1>
+        <h1 className="text-3xl font-bold text-heading">Modal</h1>
         <p className="text-foreground">
           <code>Modal</code> provides a controlled, headless compound API for focused dialog
           content. Use <code>Modal</code> as the root with <code>open</code> and{' '}
@@ -76,7 +76,7 @@ function ModalPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-xl font-semibold text-heading">Usage</h2>
         <p className="text-foreground">
           Import <code>Modal</code> from the public library entrypoint.
         </p>
@@ -101,7 +101,7 @@ function ModalPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Example</h2>
+        <h2 className="text-xl font-semibold text-heading">Example</h2>
         <Box className="flex items-center">
           <button type="button" onClick={() => setExampleOpen(true)}>
             Review publish checklist
@@ -126,7 +126,7 @@ function ModalPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Initial focus</h2>
+        <h2 className="text-xl font-semibold text-heading">Initial focus</h2>
         <p className="text-foreground">
           Add <code>data-autofocus</code> to the element that should receive focus when the modal
           opens — typically the first interactive input. If no element has{' '}
@@ -163,7 +163,7 @@ function ModalPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Basic</h2>
+        <h2 className="text-xl font-semibold text-heading">Basic</h2>
         <Box className="flex items-center">
           <button type="button" onClick={() => setBasicOpen(true)}>
             Open basic modal
@@ -183,7 +183,7 @@ function ModalPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Composition</h2>
+        <h2 className="text-xl font-semibold text-heading">Composition</h2>
         <p className="text-foreground">
           Keep the structure small. Put the main content inside <code>Modal.Panel</code> and use a
           standard <code>{'<button>'}</code> with <code>onClick</code> for dismiss actions.

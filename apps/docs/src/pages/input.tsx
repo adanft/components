@@ -23,7 +23,7 @@ function InputPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Input</h1>
+        <h1 className="text-3xl font-bold text-heading">Input</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Input</Code> is a simple text field primitive with base styles for common form
           entry.
@@ -31,21 +31,21 @@ function InputPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Default</h3>
+        <h3 className="text-lg font-semibold text-heading">Default</h3>
         <Box shadow="none" surface="none">
           <Input type="email" placeholder="name@example.com" />
         </Box>
         <CodeBlock code={defaultExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-brand">Disabled</h3>
+        <h3 className="text-lg font-semibold text-heading">Disabled</h3>
         <Box shadow="none" surface="none">
           <Input type="email" placeholder="name@example.com" disabled />
         </Box>
@@ -53,7 +53,7 @@ function InputPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <Table>
           <TableHeader>
             <TableRow>

@@ -3,14 +3,14 @@ import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
 const defaultExampleJsx = `<Box className="space-y-2">
-  <h3 className="text-lg font-semibold text-brand">Default box</h3>
+  <h3 className="text-lg font-semibold text-heading">Default box</h3>
   <p className="text-foreground">
     Use the default Box when you want a standard bordered surface.
   </p>
 </Box>`;
 
 const transparentExampleJsx = `<Box surface="none" shadow="none" className="space-y-2">
-  <h3 className="text-lg font-semibold text-brand">Release notes</h3>
+  <h3 className="text-lg font-semibold text-heading">Release notes</h3>
   <p className="text-foreground">
     Version 2.4 ships improved card spacing and keyboard focus styles.
   </p>
@@ -26,7 +26,7 @@ function BoxPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Box</h1>
+        <h1 className="text-3xl font-bold text-heading">Box</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Box</Code> is a simple container component used to group related content with a
           consistent visual wrapper.
@@ -34,17 +34,17 @@ function BoxPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
-        <h3 className="text-lg font-semibold text-brand">Default</h3>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
+        <h3 className="text-lg font-semibold text-heading">Default</h3>
         <Box shadow="none" surface="none">
           <Box className="space-y-2">
-            <h3 className="text-lg font-semibold text-brand">Default box</h3>
+            <h3 className="text-lg font-semibold text-heading">Default box</h3>
             <p className="text-foreground">
               Use the default Box when you want a standard bordered surface.
             </p>
@@ -52,10 +52,10 @@ function BoxPage() {
         </Box>
         <CodeBlock code={defaultExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-brand">Transparent</h3>
+        <h3 className="text-lg font-semibold text-heading">Transparent</h3>
         <Box shadow="none" surface="none">
           <Box surface="none" shadow="none" className="space-y-2">
-            <h3 className="text-lg font-semibold text-brand">Release notes</h3>
+            <h3 className="text-lg font-semibold text-heading">Release notes</h3>
             <p className="text-foreground">
               Version 2.4 ships improved card spacing and keyboard focus styles.
             </p>
@@ -65,7 +65,7 @@ function BoxPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <Table>
           <TableHeader>
             <TableRow>

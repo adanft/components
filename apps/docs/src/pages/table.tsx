@@ -130,7 +130,7 @@ function TablePage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Table</h1>
+        <h1 className="text-3xl font-bold text-heading">Table</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Table</Code> displays structured tabular data with consistent base styles and
           semantic HTML.
@@ -138,15 +138,15 @@ function TablePage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Simple</h3>
+        <h3 className="text-lg font-semibold text-heading">Simple</h3>
         <Box shadow="none" surface="none">
           <Table aria-label="Deals">
             <TableCaption>Pipeline by owner</TableCaption>
@@ -172,7 +172,7 @@ function TablePage() {
         </Box>
         <CodeBlock code={simpleExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-brand">Footer</h3>
+        <h3 className="text-lg font-semibold text-heading">Footer</h3>
         <Box shadow="none" surface="none">
           <Table aria-label="Deals summary">
             <TableHeader>
@@ -206,9 +206,9 @@ function TablePage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Table</h3>
+        <h3 className="text-lg font-semibold text-heading">Table</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -240,14 +240,14 @@ function TablePage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">TableCaption</h3>
+        <h3 className="text-lg font-semibold text-heading">TableCaption</h3>
         <div className="space-y-3 text-base leading-7 text-foreground">
           <p>
             Use <Code>TableCaption</Code> when the table needs a short textual label or summary.
           </p>
         </div>
 
-        <h3 className="text-lg font-semibold text-brand">TableHeader, TableBody and TableFooter</h3>
+        <h3 className="text-lg font-semibold text-heading">TableHeader, TableBody and TableFooter</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -277,7 +277,7 @@ function TablePage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">TableRow, TableHead and TableCell</h3>
+        <h3 className="text-lg font-semibold text-heading">TableRow, TableHead and TableCell</h3>
         <Table>
           <TableHeader>
             <TableRow>

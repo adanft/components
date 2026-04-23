@@ -44,28 +44,28 @@ function AvatarPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Avatar</h1>
+        <h1 className="text-3xl font-bold text-heading">Avatar</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Avatar</Code> displays a user identity as either text initials or an image.
         </p>
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Text</h3>
+        <h3 className="text-lg font-semibold text-heading">Text</h3>
         <Box className="flex items-center gap-4" shadow="none" surface="none">
           <Avatar type="text" size="md" text="AF" />
         </Box>
         <CodeBlock code={textExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-brand">Sizes</h3>
+        <h3 className="text-lg font-semibold text-heading">Sizes</h3>
         <Box className="flex items-center gap-4" shadow="none" surface="none">
           <Avatar type="text" size="sm" text="AF" />
           <Avatar type="text" size="md" text="TB" />
@@ -73,7 +73,7 @@ function AvatarPage() {
         </Box>
         <CodeBlock code={sizesExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-brand">Image</h3>
+        <h3 className="text-lg font-semibold text-heading">Image</h3>
         <Box className="flex items-center gap-4" shadow="none" surface="none">
           <Avatar
             type="image"
@@ -98,7 +98,7 @@ function AvatarPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <Table>
           <TableHeader>
             <TableRow>

@@ -28,7 +28,7 @@ function ButtonPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Button</h1>
+        <h1 className="text-3xl font-bold text-heading">Button</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Button</Code> is an action component used to trigger user interactions with a
           consistent visual style.
@@ -36,19 +36,19 @@ function ButtonPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
-        <h3 className="text-lg font-semibold text-brand">Default</h3>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
+        <h3 className="text-lg font-semibold text-heading">Default</h3>
         <Box className="flex items-center" shadow="none" surface="none">
           <Button>Deploy now</Button>
         </Box>
         <CodeBlock code={exampleJsx} />
-        <h3 className="text-lg font-semibold text-brand">Variants</h3>
+        <h3 className="text-lg font-semibold text-heading">Variants</h3>
         <p className="text-base leading-7 text-foreground">
           Use the <Code>variant</Code> prop to change the visual style. Defaults to{' '}
           <Code>primary</Code>.
@@ -58,7 +58,7 @@ function ButtonPage() {
           <Button variant="secondary">Secondary</Button>
         </Box>
         <CodeBlock code={variantsSnippet} />
-        <h3 className="text-lg font-semibold text-brand">Sizes</h3>
+        <h3 className="text-lg font-semibold text-heading">Sizes</h3>
         <p className="text-base leading-7 text-foreground">
           Use the <Code>size</Code> prop to control the button dimensions. Defaults to{' '}
           <Code>md</Code>.
@@ -72,7 +72,7 @@ function ButtonPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <Table>
           <TableHeader>
             <TableRow>

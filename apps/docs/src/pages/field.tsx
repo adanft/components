@@ -46,7 +46,7 @@ function FieldPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Field</h1>
+        <h1 className="text-3xl font-bold text-heading">Field</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Field</Code> wires labels, descriptions, errors, and controls into an accessible
           form structure.
@@ -54,15 +54,15 @@ function FieldPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Single Control</h3>
+        <h3 className="text-lg font-semibold text-heading">Single Control</h3>
         <Box shadow="none" surface="none">
           <Field id="email" invalid required>
             <Field.Label>Email</Field.Label>
@@ -75,7 +75,7 @@ function FieldPage() {
         </Box>
         <CodeBlock code={singleControlExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-brand">Grouped</h3>
+        <h3 className="text-lg font-semibold text-heading">Grouped</h3>
         <Box shadow="none" surface="none">
           <Field.Set invalid>
             <Field.Legend>Plan</Field.Legend>
@@ -91,9 +91,9 @@ function FieldPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Field</h3>
+        <h3 className="text-lg font-semibold text-heading">Field</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -155,7 +155,7 @@ function FieldPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">Field.Control</h3>
+        <h3 className="text-lg font-semibold text-heading">Field.Control</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -189,7 +189,7 @@ function FieldPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">Field.Set and Field.Legend</h3>
+        <h3 className="text-lg font-semibold text-heading">Field.Set and Field.Legend</h3>
         <div className="space-y-3 text-base leading-7 text-foreground">
           <p>
             Use <Code>Field.Set</Code> and <Code>Field.Legend</Code> for grouped controls such as
@@ -197,7 +197,7 @@ function FieldPage() {
           </p>
         </div>
 
-        <h3 className="text-lg font-semibold text-brand">
+        <h3 className="text-lg font-semibold text-heading">
           Field.Label, Field.Description and Field.Error
         </h3>
         <div className="space-y-3 text-base leading-7 text-foreground">

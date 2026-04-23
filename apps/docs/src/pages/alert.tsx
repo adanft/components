@@ -53,7 +53,7 @@ function AlertPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Alert</h1>
+        <h1 className="text-3xl font-bold text-heading">Alert</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Alert</Code> displays inline contextual feedback for information, success, warning,
           or danger states.
@@ -61,15 +61,15 @@ function AlertPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Info</h3>
+        <h3 className="text-lg font-semibold text-heading">Info</h3>
         <Box shadow="none" surface="none">
           <Alert variant="info" icon={<Info size={18} aria-hidden="true" />}>
             <Alert.Title>Heads up</Alert.Title>
@@ -80,7 +80,7 @@ function AlertPage() {
         </Box>
         <CodeBlock code={infoSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">Success</h3>
+        <h3 className="text-lg font-semibold text-heading">Success</h3>
         <Box shadow="none" surface="none">
           <Alert variant="success" icon={<CheckCircle2 size={18} aria-hidden="true" />}>
             <Alert.Title>Saved</Alert.Title>
@@ -91,7 +91,7 @@ function AlertPage() {
         </Box>
         <CodeBlock code={successSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">Warning</h3>
+        <h3 className="text-lg font-semibold text-heading">Warning</h3>
         <Box shadow="none" surface="none">
           <Alert variant="warning" icon={<TriangleAlert size={18} aria-hidden="true" />}>
             <Alert.Title>Attention</Alert.Title>
@@ -102,7 +102,7 @@ function AlertPage() {
         </Box>
         <CodeBlock code={warningSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">Danger</h3>
+        <h3 className="text-lg font-semibold text-heading">Danger</h3>
         <Box shadow="none" surface="none">
           <Alert variant="danger" icon={<AlertCircle size={18} aria-hidden="true" />}>
             <Alert.Title>Connection issue</Alert.Title>
@@ -115,7 +115,7 @@ function AlertPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <Table>
           <TableHeader>
             <TableRow>

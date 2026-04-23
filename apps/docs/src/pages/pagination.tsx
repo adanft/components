@@ -60,7 +60,7 @@ function PaginationPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Pagination</h1>
+        <h1 className="text-3xl font-bold text-heading">Pagination</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>PaginationHead</Code> and <Code>PaginationFoot</Code> are presentational primitives
           for page-size controls, page navigation, and visible range feedback.
@@ -68,15 +68,15 @@ function PaginationPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Head</h3>
+        <h3 className="text-lg font-semibold text-heading">Head</h3>
         <Box shadow="none" surface="none">
           <PaginationHead
             pageSize={headPageSize}
@@ -88,7 +88,7 @@ function PaginationPage() {
         </Box>
         <CodeBlock code={headSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">Foot</h3>
+        <h3 className="text-lg font-semibold text-heading">Foot</h3>
         <Box shadow="none" surface="none">
           <PaginationFoot
             pageIndex={footPageIndex}
@@ -102,8 +102,8 @@ function PaginationPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
-        <h3 className="text-lg font-semibold text-brand">PaginationHead</h3>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <h3 className="text-lg font-semibold text-heading">PaginationHead</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -186,7 +186,7 @@ function PaginationPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">PaginationFoot</h3>
+        <h3 className="text-lg font-semibold text-heading">PaginationFoot</h3>
         <Table>
           <TableHeader>
             <TableRow>

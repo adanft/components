@@ -2,28 +2,30 @@
 
 @theme {
   --color-brand: #6747c8;
-  --color-accent: #0bb4c0;
   --color-danger: #ff004c;
   --color-info: #00a9ec;
   --color-success: #00e091;
   --color-warning: #f4d58d;
   --color-background: #ffffff;
   --color-surface: #ffffff;
-  --color-subtle: #ffffff;
-  --color-foreground: #727587;
-  --color-muted: #aaabb7;
-  --color-border: #f0eff5;
-  --shadow-card: 0 0 8px #9d99aa42;
+  --color-foreground: #34303D;
+  --color-heading: #251A44;
+  --color-muted: #9B98A3;
+  --color-border: #d4dee8;
+  --color-separator: #ebeef1;
+  --color-shadow: oklch(0.85 0 0 / 0.5);
+  --shadow-card: 0 0 8px var(--color-shadow);
 }
 
 :root.dark {
   --color-background: #19171d;
   --color-surface: #25232b;
-  --color-subtle: #25232b;
   --color-foreground: #8b8ea0;
   --color-muted: #686a77;
   --color-border: #231e2c;
-  --shadow-card: 0 0 8px #322f3b42;
+  --color-separator: #221E2C;
+  --color-shadow: oklch(0.6 0 0 / 0.1);
+
 }
 
 body {
@@ -39,3 +41,4 @@ input::placeholder {
   /* biome-ignore lint/complexity/noImportantStyles: required to override simplebar's inline styles */
   background: var(--color-muted) !important;
 }
+

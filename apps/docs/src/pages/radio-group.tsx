@@ -32,7 +32,7 @@ function RadioGroupPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           components {'>'} RadioGroup
         </p>
-        <h1 className="text-3xl font-bold text-brand">RadioGroup</h1>
+        <h1 className="text-3xl font-bold text-heading">RadioGroup</h1>
         <p className="text-foreground">
           <code>RadioGroup</code> provides a controlled set of mutually exclusive options. Use it
           when the user must choose exactly one option from a list.
@@ -40,7 +40,7 @@ function RadioGroupPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-xl font-semibold text-heading">Usage</h2>
         <p className="text-foreground">
           <code>RadioGroup</code> is controlled through <code>value</code> and{' '}
           <code>onValueChange</code>.
@@ -50,7 +50,7 @@ function RadioGroupPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Example</h2>
+        <h2 className="text-xl font-semibold text-heading">Example</h2>
         <Box className="p-6">
           <div className="rounded-lg border border-border bg-surface p-4">
             <p className="mb-4 font-medium text-foreground">Choose a billing plan</p>

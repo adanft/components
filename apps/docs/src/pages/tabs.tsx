@@ -66,7 +66,7 @@ function TabsPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           components {'>'} Tabs
         </p>
-        <h1 className="text-3xl font-bold text-brand">Tabs</h1>
+        <h1 className="text-3xl font-bold text-heading">Tabs</h1>
         <p className="text-foreground">
           <code>Tabs</code> provides a controlled compound API for switching between related panels.
           Use <code>Tabs.List</code> for the tablist, <code>Tabs.Trigger</code> for each tab button,
@@ -75,7 +75,7 @@ function TabsPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-xl font-semibold text-heading">Usage</h2>
         <p className="text-foreground">
           <code>Tabs</code> is controlled. Keep the active <code>value</code> in state and update it
           through <code>onValueChange</code>.
@@ -85,7 +85,7 @@ function TabsPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Example</h2>
+        <h2 className="text-xl font-semibold text-heading">Example</h2>
         <Box className="overflow-visible p-6">
           <Tabs value={value} onValueChange={setValue}>
             <Tabs.List className="inline-flex rounded-lg border border-border bg-surface p-1">

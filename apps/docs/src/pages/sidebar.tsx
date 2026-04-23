@@ -108,7 +108,7 @@ function SidebarPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Sidebar</h1>
+        <h1 className="text-3xl font-bold text-heading">Sidebar</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Sidebar</Code> is a composition-based navigation shell with controlled expanded
           state, top-level links, grouped nested links, and flyout behavior when collapsed.
@@ -116,15 +116,15 @@ function SidebarPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Simple</h3>
+        <h3 className="text-lg font-semibold text-heading">Simple</h3>
         <Box className="relative" shadow="none" surface="none">
           <Sidebar
             state={simpleSidebarOpen}
@@ -169,7 +169,7 @@ function SidebarPage() {
         </Box>
         <CodeBlock code={simpleExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-brand">Advanced</h3>
+        <h3 className="text-lg font-semibold text-heading">Advanced</h3>
         <Box className="relative" shadow="none" surface="none">
           <Sidebar
             state={advancedSidebarOpen}
@@ -260,9 +260,9 @@ function SidebarPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Sidebar</h3>
+        <h3 className="text-lg font-semibold text-heading">Sidebar</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -298,7 +298,7 @@ function SidebarPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">SidebarHead</h3>
+        <h3 className="text-lg font-semibold text-heading">SidebarHead</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -356,7 +356,7 @@ function SidebarPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">SidebarLink</h3>
+        <h3 className="text-lg font-semibold text-heading">SidebarLink</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -427,7 +427,7 @@ function SidebarPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">SidebarGroup</h3>
+        <h3 className="text-lg font-semibold text-heading">SidebarGroup</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -488,7 +488,7 @@ function SidebarPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">SidebarGroupLink</h3>
+        <h3 className="text-lg font-semibold text-heading">SidebarGroupLink</h3>
         <Table>
           <TableHeader>
             <TableRow>
@@ -551,7 +551,7 @@ function SidebarPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-brand">SidebarBody and SidebarSection</h3>
+        <h3 className="text-lg font-semibold text-heading">SidebarBody and SidebarSection</h3>
         <div className="space-y-3 text-base leading-7 text-foreground">
           <p>
             <Code>SidebarBody</Code> wraps the navigation content area and is the place where the

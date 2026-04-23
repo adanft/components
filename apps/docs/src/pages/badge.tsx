@@ -25,7 +25,7 @@ function BadgePage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-brand">Badge</h1>
+        <h1 className="text-3xl font-bold text-heading">Badge</h1>
         <p className="text-base leading-7 text-foreground">
           <Code>Badge</Code> is a compact label used to display short metadata, states, or
           categories.
@@ -33,21 +33,21 @@ function BadgePage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">Examples</h2>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-        <h3 className="text-lg font-semibold text-brand">Default</h3>
+        <h3 className="text-lg font-semibold text-heading">Default</h3>
         <Box className="flex items-center gap-3" shadow="none" surface="none">
           <Badge>Beta</Badge>
         </Box>
         <CodeBlock code={usageSnippet} />
 
-        <h3 className="text-lg font-semibold text-brand">Variants</h3>
+        <h3 className="text-lg font-semibold text-heading">Variants</h3>
         <Box className="flex flex-wrap items-center gap-3" shadow="none" surface="none">
           <Badge variant="primary">New</Badge>
           <Badge>Beta</Badge>
@@ -59,7 +59,7 @@ function BadgePage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-brand">API Reference</h2>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <Table>
           <TableHeader>
             <TableRow>

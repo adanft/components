@@ -4,7 +4,7 @@ import type { TableHeadProps } from './types';
 function TableHead({ className, ...props }: TableHeadProps) {
   return (
     <th
-      className={cn('h-10 px-4 text-left align-middle font-medium text-muted', className)}
+      className={cn('h-10 px-4 text-left align-middle font-medium text-heading', className)}
       {...props}
     />
   );

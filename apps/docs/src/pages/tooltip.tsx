@@ -63,7 +63,7 @@ function TooltipPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           components {'>'} Tooltip
         </p>
-        <h1 className="text-3xl font-bold text-brand">Tooltip</h1>
+        <h1 className="text-3xl font-bold text-heading">Tooltip</h1>
         <p className="text-foreground">
           <code>Tooltip</code> shows short contextual text on hover or focus. It should stay
           non-interactive and should not be used as a popover replacement.
@@ -71,7 +71,7 @@ function TooltipPage() {
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Usage</h2>
+        <h2 className="text-xl font-semibold text-heading">Usage</h2>
         <p className="text-foreground">
           Keep tooltips short, descriptive, and attached to a single trigger element.
         </p>
@@ -80,7 +80,7 @@ function TooltipPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Button trigger</h2>
+        <h2 className="text-xl font-semibold text-heading">Button trigger</h2>
         <Box className="flex min-h-44 items-center justify-center overflow-visible p-8">
           <Tooltip open={buttonOpen} onOpenChange={setButtonOpen}>
             <Tooltip.Trigger>
@@ -99,7 +99,7 @@ function TooltipPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-brand">Icon trigger</h2>
+        <h2 className="text-xl font-semibold text-heading">Icon trigger</h2>
         <Box className="flex min-h-44 items-center justify-center overflow-visible p-8">
           <Tooltip open={iconOpen} onOpenChange={setIconOpen} placement="right">
             <Tooltip.Trigger>
