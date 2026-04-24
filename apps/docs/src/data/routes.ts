@@ -24,6 +24,7 @@ const DOCS_BOX_PATH = '/components/box';
 const DOCS_DROPDOWN_MENU_PATH = '/components/dropdown-menu';
 const DOCS_FIELD_PATH = '/components/field';
 const DOCS_INPUT_PATH = '/components/input';
+const DOCS_LABEL_PATH = '/components/label';
 const DOCS_MODAL_PATH = '/components/modal';
 const DOCS_PAGINATION_PATH = '/components/pagination';
 const DOCS_POPOVER_PATH = '/components/popover';
@@ -53,6 +54,7 @@ export {
   DOCS_FIELD_PATH,
   DOCS_HOME_PATH,
   DOCS_INPUT_PATH,
+  DOCS_LABEL_PATH,
   DOCS_MODAL_PATH,
   DOCS_NOT_FOUND_PATH,
   DOCS_PAGINATION_PATH,

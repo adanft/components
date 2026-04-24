@@ -48,6 +48,8 @@ export type {
 export { default as Field } from './components/field';
 export type { InputProps } from './components/input';
 export { default as Input } from './components/input';
+export type { LabelProps } from './components/label';
+export { default as Label } from './components/label';
 export type {
   ModalBackdropProps,
   ModalPanelProps,

@@ -47,11 +47,11 @@ describe('docs consumer boundary', () => {
 
   it('renders docs routes without importing docs-only pages from @adanft/ui', () => {
     render(
-      <MemoryRouter initialEntries={[docsPath('/components/button')]}>
+      <MemoryRouter initialEntries={[docsPath('/components/label')]}>
         <App />
       </MemoryRouter>,
     );
 
-    expect(screen.getByRole('heading', { name: /button/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /label/i })).toBeInTheDocument();
   });
 });
