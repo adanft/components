@@ -2,7 +2,7 @@ import {
   type ComponentPropsWithoutRef,
   type KeyboardEvent,
   type MouseEvent,
-  useEffect,
+  useLayoutEffect,
   useRef,
 } from 'react';
 
@@ -36,13 +36,24 @@ function getFocusableElements(container: HTMLElement | null): HTMLElement[] {
     );
 }
 
-function ModalPanel({ onClick, onKeyDown, className, ...props }: ModalPanelProps) {
-  const { titleId, onClose } = useModalContext('Panel');
+function ModalPanel({
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  onClick,
+  onKeyDown,
+  className,
+  ...props
+}: ModalPanelProps) {
+  const { titleId, onClose, previousActiveElementRef } = useModalContext('Panel');
   const panelRef = useRef<HTMLDivElement>(null);
+  const accessibleNameProps = ariaLabelledBy
+    ? { 'aria-labelledby': ariaLabelledBy }
+    : { 'aria-labelledby': ariaLabel ? undefined : titleId, 'aria-label': ariaLabel };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    previousActiveElementRef.current ??= document.activeElement as HTMLElement | null;
     (panelRef.current?.querySelector<HTMLElement>('[data-autofocus]') ?? panelRef.current)?.focus();
-  }, []);
+  }, [previousActiveElementRef]);
 
   function handleClick(e: MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
@@ -81,7 +92,7 @@ function ModalPanel({ onClick, onKeyDown, className, ...props }: ModalPanelProps
       ref={panelRef}
       role="dialog"
       aria-modal="true"
-      aria-labelledby={titleId}
+      {...accessibleNameProps}
       tabIndex={-1}
       className={cn('z-50 pointer-events-auto outline-none', className)}
       onClick={handleClick}

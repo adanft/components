@@ -13,10 +13,6 @@ function Modal({ open, onClose, children }: ModalProps) {
   const titleId = `modal-title-${useId()}`;
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
 
-  if (open) {
-    previousActiveElementRef.current ??= document.activeElement as HTMLElement | null;
-  }
-
   useEffect(() => {
     if (!open) return;
 
@@ -41,7 +37,7 @@ function Modal({ open, onClose, children }: ModalProps) {
   if (!open) return null;
 
   return createPortal(
-    <ModalContext.Provider value={{ onClose, titleId }}>
+    <ModalContext.Provider value={{ onClose, previousActiveElementRef, titleId }}>
       <div
         data-modal-portal
         className="fixed inset-0 z-40 flex items-center justify-center pointer-events-none px-4">

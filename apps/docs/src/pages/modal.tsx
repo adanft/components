@@ -1,113 +1,99 @@
-import { Box, Modal } from '@adanft/ui';
+import {
+  Box,
+  Button,
+  Field,
+  Input,
+  Label,
+  Modal,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui';
 import { useState } from 'react';
 import { CodeBlock } from '../code-block';
+import { Code } from '../components/code';
 
 const importSnippet = `import { Modal } from '@adanft/ui';`;
 
-const usageSnippet = `import { useState } from 'react';
-import { Modal } from '@adanft/ui';
+const usageSnippet = `const [open, setOpen] = useState(false);
 
-const [isOpen, setIsOpen] = useState(false);
+<Button onClick={() => setOpen(true)}>Open modal</Button>
 
-<button type="button" onClick={() => setIsOpen(true)}>Open modal</button>
-
-<Modal open={isOpen} onClose={() => setIsOpen(false)}>
+<Modal open={open} onClose={() => setOpen(false)}>
   <Modal.Backdrop />
-  <Modal.Panel className="max-h-[80vh] overflow-auto">
-    <Modal.Title>Share project</Modal.Title>
-    <p>Share the project with a teammate.</p>
-    <button type="button" onClick={() => setIsOpen(false)}>Close</button>
+  <Modal.Panel className="space-y-4">
+    <Modal.Title>Confirm action</Modal.Title>
+    <p>This action needs confirmation before continuing.</p>
+    <Button onClick={() => setOpen(false)}>Done</Button>
   </Modal.Panel>
 </Modal>`;
 
-const exampleSnippet = `const [isOpen, setIsOpen] = useState(false);
-
-<button type="button" onClick={() => setIsOpen(true)}>
-  Review publish checklist
-</button>
-
-<Modal open={isOpen} onClose={() => setIsOpen(false)}>
+const defaultExampleJsx = `<Modal open={open} onClose={() => setOpen(false)}>
   <Modal.Backdrop />
-  <Modal.Panel className="max-h-[80vh] overflow-auto">
-    <Modal.Title>Share project</Modal.Title>
-    <p>Share the project with a teammate.</p>
-    <button type="button" onClick={() => setIsOpen(false)}>Close</button>
-  </Modal.Panel>
-</Modal>`;
-
-const autofocusSnippet = `const [isOpen, setIsOpen] = useState(false);
-
-<button type="button" onClick={() => setIsOpen(true)}>
-  Rename project
-</button>
-
-<Modal open={isOpen} onClose={() => setIsOpen(false)}>
-  <Modal.Backdrop />
-  <Modal.Panel className="max-h-[80vh] space-y-4 overflow-auto">
+  <Modal.Panel className="space-y-4">
     <Modal.Title>Publish checklist</Modal.Title>
     <p>Confirm the release notes, docs links, and migration steps before publishing.</p>
     <div className="flex justify-end">
-      <button type="button" onClick={() => setIsOpen(false)}>
-        Keep editing
-      </button>
+      <Button onClick={() => setOpen(false)}>Keep editing</Button>
     </div>
   </Modal.Panel>
 </Modal>`;
 
+const initialFocusExampleJsx = `<Modal open={open} onClose={() => setOpen(false)}>
+  <Modal.Backdrop />
+  <Modal.Panel className="space-y-4">
+    <Modal.Title>Rename project</Modal.Title>
+    <Field>
+      <Label htmlFor="project-name">Project name</Label>
+      <Input id="project-name" data-autofocus defaultValue="components" />
+    </Field>
+    <div className="flex justify-end gap-2">
+      <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
+      <Button onClick={() => setOpen(false)}>Save</Button>
+    </div>
+  </Modal.Panel>
+</Modal>`;
+
+const labelledExampleJsx = `<Modal open={open} onClose={() => setOpen(false)}>
+  <Modal.Backdrop />
+  <Modal.Panel aria-label="Quick settings" className="space-y-4">
+    <p>Use aria-label when the modal does not render a visible title.</p>
+    <Button onClick={() => setOpen(false)}>Close</Button>
+  </Modal.Panel>
+</Modal>`;
+
 function ModalPage() {
-  const [basicOpen, setBasicOpen] = useState(false);
-  const [exampleOpen, setExampleOpen] = useState(false);
-  const [autofocusOpen, setAutofocusOpen] = useState(false);
+  const [defaultOpen, setDefaultOpen] = useState(false);
+  const [initialFocusOpen, setInitialFocusOpen] = useState(false);
+  const [labelledOpen, setLabelledOpen] = useState(false);
 
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          components {'>'} Modal
-        </p>
         <h1 className="text-3xl font-bold text-heading">Modal</h1>
-        <p className="text-foreground">
-          <code>Modal</code> provides a controlled, headless compound API for focused dialog
-          content. Use <code>Modal</code> as the root with <code>open</code> and{' '}
-          <code>onClose</code> props, <code>Modal.Backdrop</code> for the overlay,{' '}
-          <code>Modal.Panel</code> for the dialog container, and <code>Modal.Title</code> for the
-          accessible heading.
+        <p className="text-base leading-7 text-foreground">
+          <Code>Modal</Code> renders controlled dialog content in a portal with backdrop dismiss,
+          escape dismiss, focus trapping, and focus restoration.
         </p>
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-heading">Usage</h2>
-        <p className="text-foreground">
-          Import <code>Modal</code> from the public library entrypoint.
-        </p>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
-        <p className="text-foreground">
-          <code>Modal</code> is fully controlled — manage the <code>open</code> state yourself and
-          pass <code>onClose</code> to react to dismiss actions (backdrop click, escape key).
-        </p>
-        <p className="text-foreground">
-          <code>Modal.Backdrop</code> renders the visual overlay and calls <code>onClose</code> on
-          click. <code>Modal.Panel</code> stops click propagation and holds the dialog content.
-        </p>
-        <p className="text-foreground">
-          <code>Modal.Title</code> renders an <code>{'<h2>'}</code> and automatically links to{' '}
-          <code>Modal.Panel</code> via <code>aria-labelledby</code>.
-        </p>
-        <p className="text-foreground">
-          If the content needs internal scroll, add a width or height limit together with{' '}
-          <code>overflow-auto</code> so the scroll stays inside the panel.
-        </p>
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-heading">Example</h2>
-        <Box className="flex items-center">
-          <button type="button" onClick={() => setExampleOpen(true)}>
-            Review publish checklist
-          </button>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
 
-          <Modal open={exampleOpen} onClose={() => setExampleOpen(false)}>
+        <h3 className="text-lg font-semibold text-heading">Default</h3>
+        <Box className="flex items-center" shadow="none" surface="none">
+          <Button onClick={() => setDefaultOpen(true)}>Review publish checklist</Button>
+
+          <Modal open={defaultOpen} onClose={() => setDefaultOpen(false)}>
             <Modal.Backdrop />
             <Modal.Panel className="max-h-[80vh] space-y-4 overflow-auto">
               <Modal.Title>Publish checklist</Modal.Title>
@@ -115,93 +101,179 @@ function ModalPage() {
                 Confirm the release notes, docs links, and migration steps before publishing.
               </p>
               <div className="flex justify-end">
-                <button type="button" onClick={() => setExampleOpen(false)}>
-                  Keep editing
-                </button>
+                <Button onClick={() => setDefaultOpen(false)}>Keep editing</Button>
               </div>
             </Modal.Panel>
           </Modal>
         </Box>
-        <CodeBlock code={exampleSnippet} />
-      </section>
+        <CodeBlock code={defaultExampleJsx} />
 
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-heading">Initial focus</h2>
-        <p className="text-foreground">
-          Add <code>data-autofocus</code> to the element that should receive focus when the modal
-          opens — typically the first interactive input. If no element has{' '}
-          <code>data-autofocus</code>, <code>Modal.Panel</code> itself receives focus as a fallback.
-        </p>
-        <Box className="flex items-center">
-          <button type="button" onClick={() => setAutofocusOpen(true)}>
-            Rename project
-          </button>
+        <h3 className="text-lg font-semibold text-heading">Initial focus</h3>
+        <Box className="flex items-center" shadow="none" surface="none">
+          <Button onClick={() => setInitialFocusOpen(true)}>Rename project</Button>
 
-          <Modal open={autofocusOpen} onClose={() => setAutofocusOpen(false)}>
+          <Modal open={initialFocusOpen} onClose={() => setInitialFocusOpen(false)}>
             <Modal.Backdrop />
             <Modal.Panel className="space-y-4">
               <Modal.Title>Rename project</Modal.Title>
-              <input
-                data-autofocus
-                type="text"
-                placeholder="Project name"
-                defaultValue="my-app"
-                className="w-full rounded border px-2 py-1"
-              />
+              <Field>
+                <Label htmlFor="project-name">Project name</Label>
+                <Input id="project-name" data-autofocus defaultValue="components" />
+              </Field>
               <div className="flex justify-end gap-2">
-                <button type="button" onClick={() => setAutofocusOpen(false)}>
+                <Button variant="secondary" onClick={() => setInitialFocusOpen(false)}>
                   Cancel
-                </button>
-                <button type="button" onClick={() => setAutofocusOpen(false)}>
-                  Save
-                </button>
+                </Button>
+                <Button onClick={() => setInitialFocusOpen(false)}>Save</Button>
               </div>
             </Modal.Panel>
           </Modal>
         </Box>
-        <CodeBlock code={autofocusSnippet} />
-      </section>
+        <CodeBlock code={initialFocusExampleJsx} />
 
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-heading">Basic</h2>
-        <Box className="flex items-center">
-          <button type="button" onClick={() => setBasicOpen(true)}>
-            Open basic modal
-          </button>
+        <h3 className="text-lg font-semibold text-heading">Accessible name without title</h3>
+        <Box className="flex items-center" shadow="none" surface="none">
+          <Button onClick={() => setLabelledOpen(true)}>Open quick settings</Button>
 
-          <Modal open={basicOpen} onClose={() => setBasicOpen(false)}>
+          <Modal open={labelledOpen} onClose={() => setLabelledOpen(false)}>
             <Modal.Backdrop />
-            <Modal.Panel>
-              <Modal.Title>Confirm</Modal.Title>
-              <p className="text-foreground">Are you sure you want to continue?</p>
-              <button type="button" onClick={() => setBasicOpen(false)}>
-                Done
-              </button>
+            <Modal.Panel aria-label="Quick settings" className="space-y-4">
+              <p className="text-foreground">
+                Use <Code>aria-label</Code> when the modal does not render a visible title.
+              </p>
+              <div className="flex justify-end">
+                <Button onClick={() => setLabelledOpen(false)}>Close</Button>
+              </div>
             </Modal.Panel>
           </Modal>
         </Box>
+        <CodeBlock code={labelledExampleJsx} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-heading">Composition</h2>
-        <p className="text-foreground">
-          Keep the structure small. Put the main content inside <code>Modal.Panel</code> and use a
-          standard <code>{'<button>'}</code> with <code>onClick</code> for dismiss actions.
-        </p>
-        <p className="text-foreground">
-          <code>Modal.Backdrop</code> handles the overlay click automatically. Style it with
-          Tailwind classes like <code>bg-black/50</code> — positioning is built in.
-        </p>
-        <p className="text-foreground">
-          <code>Modal.Panel</code> renders with <code>role=&quot;dialog&quot;</code> and{' '}
-          <code>aria-modal=&quot;true&quot;</code>. It auto-links to <code>Modal.Title</code> via{' '}
-          <code>aria-labelledby</code>.
-        </p>
-        <p className="text-foreground">
-          Internal scrolling only appears when <code>Modal.Panel</code> has a defined width or
-          height limit, such as <code>max-w-lg</code> or <code>max-h-[80vh]</code>, together with{' '}
-          <code>overflow-auto</code>.
-        </p>
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+
+        <h3 className="text-lg font-semibold text-heading">Modal</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>open</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Controls whether the modal is rendered.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>onClose</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`() => void`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Runs when the backdrop is clicked or Escape is pressed.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>children</Code>
+              </TableCell>
+              <TableCell>
+                <Code>ReactNode</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Modal compound parts rendered inside the portal.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Modal.Backdrop and Modal.Panel</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop / Part</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>Modal.Backdrop</Code>
+              </TableCell>
+              <TableCell>native div props</TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Renders the overlay and calls the root close handler on click.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>Modal.Panel</Code>
+              </TableCell>
+              <TableCell>native div props</TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Wraps the modal content and accepts layout/spacing classes.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-label</Code> / <Code>aria-labelledby</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Names <Code>Modal.Panel</Code> when no <Code>Modal.Title</Code> is rendered.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Modal.Title and focus</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop / Part</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>Modal.Title</Code>
+              </TableCell>
+              <TableCell>native h2 props</TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Renders the visible title and names the panel when no manual name is provided.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>data-autofocus</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Add it to the element that should receive focus when the modal opens.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );

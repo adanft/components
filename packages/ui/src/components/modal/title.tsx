@@ -1,13 +1,14 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
+import { cn } from '../../helpers/cn';
 import { useModalContext } from './context';
 
 type ModalTitleProps = ComponentPropsWithoutRef<'h2'>;
 
-function ModalTitle(props: ModalTitleProps) {
+function ModalTitle({ className, ...props }: ModalTitleProps) {
   const { titleId } = useModalContext('Title');
 
-  return <h2 {...props} id={titleId} />;
+  return <h2 className={cn('text-heading font-medium', className)} {...props} id={titleId} />;
 }
 
 export default ModalTitle;

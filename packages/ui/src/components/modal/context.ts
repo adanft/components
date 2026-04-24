@@ -1,7 +1,8 @@
-import { createContext, useContext } from 'react';
+import { createContext, type RefObject, useContext } from 'react';
 
 type ModalContextValue = {
   onClose: () => void;
+  previousActiveElementRef: RefObject<HTMLElement | null>;
   titleId: string;
 };
 

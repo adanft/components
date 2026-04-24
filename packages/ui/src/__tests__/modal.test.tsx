@@ -96,6 +96,39 @@ describe('Modal', () => {
     expect(title).toHaveAttribute('id', panel.getAttribute('aria-labelledby'));
   });
 
+  it('allows Panel to use aria-label without Modal.Title', () => {
+    render(
+      <Modal open={true} onClose={vi.fn()}>
+        <Modal.Backdrop />
+        <Modal.Panel aria-label="Settings" data-testid="panel">
+          <p>Settings content</p>
+        </Modal.Panel>
+      </Modal>,
+    );
+
+    const panel = screen.getByRole('dialog', { name: 'Settings' });
+
+    expect(panel).toHaveAttribute('aria-label', 'Settings');
+    expect(panel).not.toHaveAttribute('aria-labelledby');
+  });
+
+  it('allows Panel to use consumer-provided aria-labelledby', () => {
+    render(
+      <Modal open={true} onClose={vi.fn()}>
+        <Modal.Backdrop />
+        <Modal.Panel aria-labelledby="custom-title" data-testid="panel">
+          <h2 id="custom-title">Custom title</h2>
+          <p>Dialog content</p>
+        </Modal.Panel>
+      </Modal>,
+    );
+
+    expect(screen.getByRole('dialog', { name: 'Custom title' })).toHaveAttribute(
+      'aria-labelledby',
+      'custom-title',
+    );
+  });
+
   it('Title renders as h2', () => {
     renderModal();
 
