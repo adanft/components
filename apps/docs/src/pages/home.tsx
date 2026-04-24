@@ -1,4 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
+import { Link } from 'react-router';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 import { docsSidebarNavigation } from '../data/sidebar-navigation';
@@ -156,8 +157,8 @@ function Home() {
 
                 return (
                   <li key={component.name}>
-                    <a
-                      href={component.href}
+                    <Link
+                      to={component.href}
                       className="block h-full rounded-md border border-border bg-surface p-4 shadow-card transition-transform duration-150 hover:-translate-y-0.5">
                       <div className="flex items-start gap-3">
                         <span className="rounded-md border border-border bg-background p-2 text-brand">
@@ -170,7 +171,7 @@ function Home() {
                           </p>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 );
               })}

@@ -24,7 +24,7 @@ Useful commands:
 - `pnpm validate:boundaries` — enforce public API boundaries
 - `pnpm validate:pack-contract` — verify the publish manifest/export/workflow contract for `@adanft/ui`
 - `pnpm validate:semantic-tokens` — enforce token usage rules
-- `pnpm release:beta` — validate, build, and publish `@adanft/ui` with the `beta` npm tag
+- `pnpm release:latest` — validate, build, and publish `@adanft/ui` with the `latest` npm tag
 
 ## Package contract
 
@@ -42,6 +42,7 @@ This workspace publishes beta versions of `@adanft/ui` to npm.
 - Current beta version: `0.1.0-beta.2`
 - Stable `1.0.0` is **not** the current target yet
 - Beta publish guardrail: `pnpm validate:pack-contract`
+- While releases are beta-only, the newest beta is published as npm `latest`
 - Default branch: `main`
 
 GitHub Actions handles validation, docs deployment, and package release workflows from `main`.

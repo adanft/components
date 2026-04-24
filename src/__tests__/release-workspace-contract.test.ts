@@ -26,8 +26,8 @@ describe('release workspace contract', () => {
     expect(packageJson.scripts?.['changeset:version']).toBeDefined();
     expect(packageJson.scripts?.['validate:pack-contract']).toBeDefined();
     expect(packageJson.scripts?.validate).toContain('validate:pack-contract');
-    expect(packageJson.scripts?.release).toContain('changeset publish --tag beta');
-    expect(packageJson.scripts?.['release:beta']).toContain('packages/ui');
+    expect(packageJson.scripts?.release).toContain('changeset publish --tag latest');
+    expect(packageJson.scripts?.['release:latest']).toContain('packages/ui');
   });
 
   it('splits validation and release workflows', () => {

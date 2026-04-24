@@ -56,11 +56,11 @@ export function verifyPackContract({ rootDir = process.cwd() } = {}) {
     ),
     createCheck(
       'release workflow runs the pack contract guardrail before publish',
-      releaseWorkflow.includes('pnpm release:beta') &&
-        typeof scripts['release:beta'] === 'string' &&
-        scripts['release:beta'].includes('validate:pack-contract') &&
-        scripts['release:beta'].includes('packages/ui') &&
-        scripts.release === 'changeset publish --tag beta',
+      releaseWorkflow.includes('pnpm release:latest') &&
+        typeof scripts['release:latest'] === 'string' &&
+        scripts['release:latest'].includes('validate:pack-contract') &&
+        scripts['release:latest'].includes('packages/ui') &&
+        scripts.release === 'changeset publish --tag latest',
       releaseWorkflow,
     ),
     createCheck(
