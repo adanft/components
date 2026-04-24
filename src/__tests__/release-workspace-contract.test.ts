@@ -13,7 +13,7 @@ describe('release workspace contract', () => {
   it('reads the legacy alias policy version from the publishable ui package manifest', async () => {
     const { readPackageVersion } = await import('../../scripts/legacy-alias-policy.mjs');
 
-    await expect(readPackageVersion()).resolves.toBe('0.1.0-beta.1');
+    await expect(readPackageVersion()).resolves.toBe('0.1.0-beta.2');
   });
 
   it('configures changesets and release scripts for the ui package only', () => {
