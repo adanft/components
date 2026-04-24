@@ -29,7 +29,7 @@ function Tooltip({ children, open, onOpenChange, placement = 'top' }: TooltipPro
       onOpenChange(nextOpen);
     },
     placement,
-    middleware: [offset(8), flip(), shift({ padding: 8 })],
+    middleware: [offset(16), flip(), shift({ padding: 16 })],
     whileElementsMounted: autoUpdate,
   });
 
