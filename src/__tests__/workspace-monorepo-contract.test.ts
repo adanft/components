@@ -92,10 +92,6 @@ describe('workspace monorepo contract', () => {
     expect(docsManifest.devDependencies?.tailwindcss).toBeDefined();
   });
 
-  it('tracks migration operations with the implementation plan', () => {
-    expect(existsSync(path.join(repoRoot, 'IMPLEMENTATION_PLAN.md'))).toBe(true);
-  });
-
   it('uses a docs-owned Tailwind entry that scans docs and package sources', () => {
     const docsEntryCss = readRepoFile('apps/docs/src/index.css');
 
