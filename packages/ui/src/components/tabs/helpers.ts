@@ -1,5 +1,9 @@
-function sanitizeTabsValue(value: string) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+function createTabsValueId(value: string) {
+  const encodedValue = Array.from(value, (character) =>
+    character.codePointAt(0)?.toString(36),
+  ).join('-');
+
+  return encodedValue || 'empty';
 }
 
-export { sanitizeTabsValue };
+export { createTabsValueId };

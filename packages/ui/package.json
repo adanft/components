@@ -1,6 +1,6 @@
 {
   "name": "@adanft/ui",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.0-beta.3",
   "description": "Reusable React UI components with a Tailwind-driven design system contract.",
   "license": "MIT",
   "homepage": "https://adanft.github.io/components",
@@ -50,7 +50,7 @@
     }
   },
   "scripts": {
-    "build": "pnpm typecheck && pnpm exec tsc -p tsconfig.build.json && pnpm exec vite build",
+    "build": "pnpm typecheck && pnpm exec vite build && pnpm exec tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
     "prepack": "pnpm build",
     "test": "pnpm exec vitest run --config vitest.config.ts",
     "typecheck": "pnpm exec tsc -b tsconfig.json --pretty false"

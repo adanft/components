@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react';
 
 import { useTabsContext } from './context';
-import { sanitizeTabsValue } from './helpers';
+import { createTabsValueId } from './helpers';
 
 type TabsTriggerProps = ButtonHTMLAttributes<HTMLButtonElement> & { value: string };
 
@@ -16,8 +16,9 @@ function TabsTrigger({
   const context = useTabsContext('Trigger');
   const isSelected = context.value === value;
   const isDisabled = disabled || ariaDisabled === true || ariaDisabled === 'true';
-  const triggerId = `${context.baseId}-trigger-${sanitizeTabsValue(value)}`;
-  const contentId = `${context.baseId}-content-${sanitizeTabsValue(value)}`;
+  const valueId = createTabsValueId(value);
+  const triggerId = `${context.baseId}-trigger-${valueId}`;
+  const contentId = `${context.baseId}-content-${valueId}`;
 
   return (
     <button

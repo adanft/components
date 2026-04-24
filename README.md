@@ -39,7 +39,7 @@ The reusable library lives in `packages/ui` and is consumed as `@adanft/ui`.
 
 This workspace publishes beta versions of `@adanft/ui` to npm.
 
-- Current beta version: `0.1.0-beta.2`
+- Current beta version: `0.1.0-beta.3`
 - Stable `1.0.0` is **not** the current target yet
 - Beta publish guardrail: `pnpm validate:pack-contract`
 - While releases are beta-only, the newest beta is published as npm `latest`

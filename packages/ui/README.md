@@ -6,7 +6,7 @@ Reusable React UI components from the adanft design system.
 
 This package is currently published as a **beta** release.
 
-Current beta version: `0.1.0-beta.2`.
+Current beta version: `0.1.0-beta.3`.
 
 Before any beta release publish, run `pnpm validate:pack-contract` from the workspace root to verify the package manifest, publish exports, workflow guardrail, and stylesheet subpath contract.
 
@@ -24,9 +24,20 @@ The docs app in this repo (`apps/docs`) is the reference consumer implementation
 
 ## Usage
 
+Add the package stylesheet and register the compiled package entry as a Tailwind source in your app
+stylesheet:
+
+```css
+@import "tailwindcss";
+@import "@adanft/ui/styles.css";
+
+@source "../node_modules/@adanft/ui/dist/index.js";
+```
+
+Then import components from the package root:
+
 ```tsx
 import { Button, initializeTheme } from '@adanft/ui';
-import '@adanft/ui/styles.css';
 
 initializeTheme();
 ```

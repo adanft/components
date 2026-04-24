@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
 import { useTabsContext } from './context';
-import { sanitizeTabsValue } from './helpers';
+import { createTabsValueId } from './helpers';
 
 type TabsContentProps = ComponentPropsWithoutRef<'div'> & {
   value: string;
@@ -10,8 +10,9 @@ type TabsContentProps = ComponentPropsWithoutRef<'div'> & {
 function TabsContent({ children, value, ...props }: TabsContentProps) {
   const context = useTabsContext('Content');
   const isSelected = context.value === value;
-  const triggerId = `${context.baseId}-trigger-${sanitizeTabsValue(value)}`;
-  const contentId = `${context.baseId}-content-${sanitizeTabsValue(value)}`;
+  const valueId = createTabsValueId(value);
+  const triggerId = `${context.baseId}-trigger-${valueId}`;
+  const contentId = `${context.baseId}-content-${valueId}`;
 
   return (
     <div
