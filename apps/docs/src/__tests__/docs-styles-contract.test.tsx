@@ -30,7 +30,9 @@ describe('docs bootstrap package contract', () => {
 
     await import('../main');
 
-    expect(await screen.findByRole('heading', { name: /react components/i })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { level: 1, name: 'Components' }),
+    ).toBeInTheDocument();
     expect(document.documentElement).toHaveClass('dark');
 
     const hasInjectedDocsStyles = Array.from(document.head.querySelectorAll('style')).some(
