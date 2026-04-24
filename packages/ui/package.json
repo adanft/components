@@ -50,7 +50,7 @@
     }
   },
   "scripts": {
-    "build": "pnpm typecheck && pnpm exec tsc -p tsconfig.build.json && pnpm exec vite build && node scripts/copy-styles.mjs",
+    "build": "pnpm typecheck && pnpm exec vite build && pnpm exec tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
     "prepack": "pnpm build",
     "test": "pnpm exec vitest run --config vitest.config.ts",
     "typecheck": "pnpm exec tsc -b tsconfig.json --pretty false"

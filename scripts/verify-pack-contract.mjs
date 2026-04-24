@@ -16,8 +16,10 @@ export function verifyPackContract({ rootDir = process.cwd() } = {}) {
   const packageReadmePath = path.join(rootDir, 'packages/ui/README.md');
   const packageStylesPath = path.join(rootDir, 'packages/ui/styles.css');
   const packageSourceStylesPath = path.join(rootDir, 'packages/ui/src/styles.css');
+  const packageBuildConfigPath = path.join(rootDir, 'packages/ui/tsconfig.build.json');
 
   const packageManifest = readJson(packageManifestPath);
+  const packageBuildConfig = readJson(packageBuildConfigPath);
   const rootManifest = readJson(rootManifestPath);
   const releaseWorkflow = readFileSync(releaseWorkflowPath, 'utf8');
   const packageReadme = readFileSync(packageReadmePath, 'utf8');
@@ -44,6 +46,16 @@ export function verifyPackContract({ rootDir = process.cwd() } = {}) {
         exportsMap['.']?.import === './dist/index.js' &&
         exportsMap['./styles.css'] === './dist/styles.css',
       JSON.stringify(exportsMap),
+    ),
+    createCheck(
+      'package build emits declarations after vite clears dist',
+      packageManifest.scripts?.build?.includes('pnpm exec vite build && pnpm exec tsc') === true &&
+        packageBuildConfig.compilerOptions?.declaration === true &&
+        packageBuildConfig.compilerOptions?.emitDeclarationOnly === true &&
+        packageBuildConfig.compilerOptions?.outDir === './dist',
+      `build=${packageManifest.scripts?.build}; tsconfig=${JSON.stringify(
+        packageBuildConfig.compilerOptions,
+      )}`,
     ),
     createCheck(
       'package stylesheet proxy exists for the published styles subpath',
