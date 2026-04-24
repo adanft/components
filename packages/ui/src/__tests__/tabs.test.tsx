@@ -132,4 +132,34 @@ describe('Tabs', () => {
     expect(screen.getByRole('tab', { name: 'Overview' })).toHaveAttribute('aria-selected', 'true');
     expect(screen.getByRole('tabpanel', { name: 'Overview' })).toBeVisible();
   });
+
+  it('creates unique aria relationships for values that sanitize to the same slug', () => {
+    const { container } = render(
+      <Tabs value="foo bar" onValueChange={() => undefined}>
+        <Tabs.List>
+          <Tabs.Trigger value="foo bar">Foo bar</Tabs.Trigger>
+          <Tabs.Trigger value="foo-bar">Foo dash bar</Tabs.Trigger>
+          <Tabs.Trigger value="foo@bar">Foo at bar</Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="foo bar">Foo bar content</Tabs.Content>
+        <Tabs.Content value="foo-bar">Foo dash bar content</Tabs.Content>
+        <Tabs.Content value="foo@bar">Foo at bar content</Tabs.Content>
+      </Tabs>,
+    );
+
+    const tabs = screen.getAllByRole('tab');
+    const panels = Array.from(container.querySelectorAll('[role="tabpanel"]'));
+    const tabIds = tabs.map((tab) => tab.id);
+    const panelIds = panels.map((panel) => panel.id);
+
+    expect(new Set(tabIds).size).toBe(tabs.length);
+    expect(new Set(panelIds).size).toBe(panels.length);
+
+    for (const [index, tab] of tabs.entries()) {
+      const panel = panels[index];
+
+      expect(tab).toHaveAttribute('aria-controls', panel.id);
+      expect(panel).toHaveAttribute('aria-labelledby', tab.id);
+    }
+  });
 });
