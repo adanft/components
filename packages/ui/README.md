@@ -6,7 +6,7 @@ Reusable React UI components from the adanft design system.
 
 This package is currently published as a **beta** release.
 
-Current beta version: `0.1.0-beta.2`.
+Current beta version: `0.1.0-beta.3`.
 
 Before any beta release publish, run `pnpm validate:pack-contract` from the workspace root to verify the package manifest, publish exports, workflow guardrail, and stylesheet subpath contract.
 
