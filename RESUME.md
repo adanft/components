@@ -337,7 +337,7 @@ The package release flow uses Changesets.
 - Keep `.changeset/config.json`.
 - `packages/ui` is the only publishable package.
 - `apps/docs` is private and ignored by Changesets.
-- Releases publish `@adanft/ui` with the npm `beta` tag.
+- While releases are beta-only, releases publish `@adanft/ui` with the npm `latest` tag.
 - Current beta package version is `0.1.0-beta.2`.
 - Stable `1.0.0` is not the current target.
 
@@ -345,7 +345,7 @@ Release-related commands:
 
 ```bash
 pnpm validate:pack-contract
-pnpm release:beta
+pnpm release:latest
 ```
 
 GitHub workflows:

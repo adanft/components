@@ -1,0 +1,26 @@
+name: NPM dist-tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to tag
+        required: true
+        default: 0.1.0-beta.2
+      tag:
+        description: Dist tag to move
+        required: true
+        default: latest
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org
+      - name: Move npm dist-tag
+        run: npm dist-tag add @adanft/ui@${{ inputs.version }} ${{ inputs.tag }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

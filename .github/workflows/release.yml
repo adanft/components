@@ -26,7 +26,7 @@ jobs:
         uses: changesets/action@v1
         with:
           version: pnpm changeset:version
-          publish: pnpm release:beta
+          publish: pnpm release:latest
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
         env:
