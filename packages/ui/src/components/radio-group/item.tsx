@@ -52,7 +52,7 @@ function RadioGroupItem({ className, disabled, id, label, value, ...props }: Rad
           aria-hidden="true"
           className={cn(
             'inline-flex h-4 w-4 rounded-full border border-muted bg-background transition-colors duration-150',
-            'peer-checked:border-brand peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-brand peer-focus-visible:ring-offset-2',
+            'peer-checked:border-brand peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-brand peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background',
             className,
           )}
         />
