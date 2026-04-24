@@ -1,33 +1,39 @@
 import type { ComponentPropsWithoutRef } from 'react';
-import { useEffect } from 'react';
 
 import { cn } from '../../helpers/cn';
-import { useFieldContext } from './context';
 
-type FieldErrorProps = ComponentPropsWithoutRef<'div'>;
+type FieldErrorItem = {
+  message?: string;
+};
 
-function FieldError({ children, className, ...props }: FieldErrorProps) {
-  const { errorId, setHasErrorMessage } = useFieldContext('Error');
+type FieldErrorProps = ComponentPropsWithoutRef<'div'> & {
+  errors?: Array<FieldErrorItem | undefined>;
+};
 
-  useEffect(() => {
-    if (!children) {
-      return;
-    }
+function FieldError({ children, className, errors, role = 'alert', ...props }: FieldErrorProps) {
+  const uniqueErrors = errors
+    ? [...new Map(errors.map((error) => [error?.message, error])).values()]
+    : [];
+  const messages = uniqueErrors
+    .map((error) => error?.message)
+    .filter((message): message is string => Boolean(message));
+  const content = children || messages[0];
 
-    setHasErrorMessage(true);
-
-    return () => {
-      setHasErrorMessage(false);
-    };
-  }, [children, setHasErrorMessage]);
-
-  if (!children) {
+  if (!content && messages.length === 0) {
     return null;
   }
 
   return (
-    <div id={errorId} className={cn('text-sm text-danger', className)} {...props}>
-      {children}
+    <div role={role} className={cn('text-sm text-danger', className)} {...props}>
+      {children || messages.length <= 1 ? (
+        content
+      ) : (
+        <ul className="ml-4 flex list-disc flex-col gap-1">
+          {messages.map((message) => (
+            <li key={message}>{message}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

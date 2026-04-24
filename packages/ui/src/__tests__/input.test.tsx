@@ -27,4 +27,13 @@ describe('Input', () => {
 
     expect(screen.getByLabelText('Name')).toHaveClass('custom-input', 'w-full', 'rounded-md');
   });
+
+  it('includes invalid state classes for aria-invalid inputs', () => {
+    render(<Input aria-invalid="true" aria-label="Email" />);
+
+    expect(screen.getByLabelText('Email')).toHaveClass(
+      'aria-invalid:border-danger',
+      'aria-invalid:focus-visible:outline-danger',
+    );
+  });
 });

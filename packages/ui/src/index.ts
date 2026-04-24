@@ -37,7 +37,6 @@ export type {
 } from './components/dropdown-menu';
 export { default as DropdownMenu } from './components/dropdown-menu';
 export type {
-  FieldControlProps,
   FieldDescriptionProps,
   FieldErrorProps,
   FieldLabelProps,
