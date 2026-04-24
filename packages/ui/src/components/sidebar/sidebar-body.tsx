@@ -1,7 +1,6 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
 import SimpleBar from 'simplebar-react';
-import 'simplebar-react/dist/simplebar.min.css';
 import { cn } from '../../helpers/cn';
 
 type SidebarBodyProps = ComponentPropsWithoutRef<'div'>;

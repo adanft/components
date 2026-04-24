@@ -24,9 +24,20 @@ The docs app in this repo (`apps/docs`) is the reference consumer implementation
 
 ## Usage
 
+Add the package stylesheet and register the compiled package entry as a Tailwind source in your app
+stylesheet:
+
+```css
+@import "tailwindcss";
+@import "@adanft/ui/styles.css";
+
+@source "../node_modules/@adanft/ui/dist/index.js";
+```
+
+Then import components from the package root:
+
 ```tsx
 import { Button, initializeTheme } from '@adanft/ui';
-import '@adanft/ui/styles.css';
 
 initializeTheme();
 ```

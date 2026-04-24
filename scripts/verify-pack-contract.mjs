@@ -15,11 +15,13 @@ export function verifyPackContract({ rootDir = process.cwd() } = {}) {
   const releaseWorkflowPath = path.join(rootDir, '.github/workflows/release.yml');
   const packageReadmePath = path.join(rootDir, 'packages/ui/README.md');
   const packageStylesPath = path.join(rootDir, 'packages/ui/styles.css');
+  const packageSourceStylesPath = path.join(rootDir, 'packages/ui/src/styles.css');
 
   const packageManifest = readJson(packageManifestPath);
   const rootManifest = readJson(rootManifestPath);
   const releaseWorkflow = readFileSync(releaseWorkflowPath, 'utf8');
   const packageReadme = readFileSync(packageReadmePath, 'utf8');
+  const packageSourceStyles = readFileSync(packageSourceStylesPath, 'utf8');
 
   const files = Array.isArray(packageManifest.files) ? packageManifest.files : [];
   const exportsMap = packageManifest.publishConfig?.exports ?? {};
@@ -47,6 +49,20 @@ export function verifyPackContract({ rootDir = process.cwd() } = {}) {
       'package stylesheet proxy exists for the published styles subpath',
       existsSync(packageStylesPath),
       packageStylesPath,
+    ),
+    createCheck(
+      'package build copies the public stylesheet contract into dist',
+      packageManifest.scripts?.build?.includes('scripts/copy-styles.mjs') === true &&
+        existsSync(path.join(rootDir, 'packages/ui/scripts/copy-styles.mjs')),
+      `build=${packageManifest.scripts?.build}`,
+    ),
+    createCheck(
+      'public package stylesheet carries dependency CSS and theme sources',
+      packageSourceStyles.includes('@import "simplebar-react/dist/simplebar.min.css";') &&
+        packageSourceStyles.includes('@import "./theme/utilities.css";') &&
+        packageSourceStyles.includes('@theme {') &&
+        !packageSourceStyles.includes('@import "tailwindcss";'),
+      packageSourceStyles,
     ),
     createCheck(
       'workspace exposes a dedicated pack contract validator',
