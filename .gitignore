@@ -9,8 +9,25 @@ lerna-debug.log*
 
 node_modules
 dist
+dist-lib
+**/dist
 dist-ssr
+storybook-static
+.cache
+coverage
+.coverage
+test-results
+playwright-report
 *.local
+*.tsbuildinfo
+.eslintcache
+.pnpm-store
+.npm
+
+# Environment files
+.env
+.env.*
+!.env.example
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +39,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.docs
+.atl

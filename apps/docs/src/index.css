@@ -1,0 +1,5 @@
+@import "tailwindcss" source(none);
+@import "@adanft/ui/styles.css";
+
+@source "./";
+@source "../../../packages/ui/src";

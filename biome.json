@@ -1,0 +1,84 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": [
+      "**",
+      "!**/dist",
+      "!**/dist-lib",
+      "!**/dist-ssr",
+      "!**/node_modules",
+      "!**/coverage"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "lineEnding": "lf"
+  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn"
+      }
+    }
+  },
+  "css": {
+    "parser": {
+      "cssModules": true,
+      "tailwindDirectives": true
+    },
+    "formatter": {
+      "quoteStyle": "double"
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "bracketSameLine": true,
+      "jsxQuoteStyle": "double"
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["apps/docs/src/**/*.{ts,tsx}"],
+      "linter": {
+        "rules": {
+          "correctness": {},
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "paths": {
+                  "../../components": "Docs app chrome must stay inside apps/docs; import local docs modules or @adanft/ui instead.",
+                  "../../../src/lib": "Docs must consume the publishable contract from @adanft/ui instead of legacy root sources.",
+                  "../../../../src/lib": "Docs must consume the publishable contract from @adanft/ui instead of legacy root sources.",
+                  "../../../packages/ui/src": "Docs must consume the publishable contract from @adanft/ui instead of package internals.",
+                  "../../../../packages/ui/src": "Docs must consume the publishable contract from @adanft/ui instead of package internals.",
+                  "@adanft/ui/src": "Docs must consume the public package root @adanft/ui instead of package internals."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

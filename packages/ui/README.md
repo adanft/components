@@ -1,0 +1,42 @@
+# @adanft/ui
+
+Reusable React UI components from the adanft design system.
+
+## Status
+
+This package is currently published as a **beta** release.
+
+Current beta version: `0.1.0-beta.2`.
+
+Before any beta release publish, run `pnpm validate:pack-contract` from the workspace root to verify the package manifest, publish exports, workflow guardrail, and stylesheet subpath contract.
+
+## Current package model
+
+`@adanft/ui` is currently designed as a **Tailwind-dependent consumer model**.
+
+That means consumers should:
+
+1. install Tailwind CSS
+2. import the package stylesheet contract
+3. ensure their Tailwind entry scans both app sources and the package sources they consume
+
+The docs app in this repo (`apps/docs`) is the reference consumer implementation.
+
+## Usage
+
+```tsx
+import { Button, initializeTheme } from '@adanft/ui';
+import '@adanft/ui/styles.css';
+
+initializeTheme();
+```
+
+## Notes
+
+- The public API is exported from the package root only.
+- Do not deep-import internal files.
+- Router-specific behavior belongs in the consumer app, not in this package.
+
+## Repository
+
+Source: https://github.com/adanft/components

@@ -1,0 +1,30 @@
+name: Workspace validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Typecheck workspace
+        run: pnpm typecheck
+      - name: Test workspace
+        run: pnpm test
+      - name: Validate boundaries
+        run: pnpm validate:boundaries && pnpm validate:semantic-tokens
+      - name: Build workspace
+        run: pnpm build

@@ -1,0 +1,45 @@
+@import "./theme/utilities.css";
+
+@theme {
+  --color-brand: #6747c8;
+  --color-danger: #ff004c;
+  --color-info: #00a9ec;
+  --color-success: #00e091;
+  --color-warning: #f4d58d;
+  --color-background: #ffffff;
+  --color-surface: #ffffff;
+  --color-foreground: #34303D;
+  --color-heading: #251A44;
+  --color-muted: #9B98A3;
+  --color-border: #d4dee8;
+  --color-separator: #ebeef1;
+  --color-shadow: oklch(0.85 0 0 / 0.5);
+  --shadow-card: 0 0 8px var(--color-shadow);
+}
+
+:root.dark {
+  --color-background: #16141A;
+  --color-surface: #1F1D24;
+  --color-foreground: #9E99AD;
+  --color-heading: #BFB8D1;
+  --color-muted: #6C6877;
+  --color-border: #292436;
+  --color-separator: #221E2C;
+  --color-shadow: oklch(0.6 0 0 / 0.15);
+
+}
+
+body {
+  background-color: var(--color-background);
+}
+
+input::placeholder {
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.simplebar-scrollbar:before {
+  /* biome-ignore lint/complexity/noImportantStyles: required to override simplebar's inline styles */
+  background: var(--color-muted) !important;
+}
+

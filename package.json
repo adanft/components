@@ -1,38 +1,35 @@
 {
   "homepage": "https://adanft.github.io/components",
-  "name": "components",
+  "name": "components-workspace",
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.1.18",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-router": "^7.11.0",
-    "simplebar-react": "^3.3.2",
-    "tailwindcss": "^4.1.18"
+    "dev": "pnpm --dir apps/docs dev",
+    "build": "pnpm typecheck && pnpm build:packages && pnpm build:docs",
+    "build:packages": "pnpm --dir packages/ui build",
+    "build:docs": "pnpm --dir apps/docs build",
+    "lint": "biome lint --write .",
+    "format": "biome format --write .",
+    "check": "biome check --write .",
+    "preview": "pnpm --dir apps/docs preview",
+    "test": "pnpm exec vitest run src/__tests__ && pnpm --recursive --if-present test",
+    "typecheck": "tsc -b --pretty false",
+    "validate:boundaries": "node scripts/validate-docs-imports.mjs",
+    "validate:pack-contract": "node scripts/verify-pack-contract.mjs",
+    "validate:semantic-tokens": "node scripts/validate-semantic-tokens.mjs",
+    "validate": "pnpm check && pnpm typecheck && pnpm test && pnpm validate:boundaries && pnpm validate:pack-contract && pnpm validate:semantic-tokens && pnpm build",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "release": "changeset publish --tag beta",
+    "release:beta": "pnpm validate:pack-contract && pnpm --dir packages/ui build && pnpm release"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@types/node": "^24.10.1",
-    "@types/react": "^19.2.5",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
-    "eslint": "^9.39.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^16.5.0",
-    "prettier": "^3.7.4",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "@biomejs/biome": "^2.4.12",
+    "@changesets/cli": "^2.31.0",
+    "@types/node": "^25.6.0",
+    "typescript": "~6.0.3",
+    "vitest": "^4.1.4"
   }
 }

@@ -1,36 +1,51 @@
-# React Components
+# Components
 
-A reusable component library built with React, TypeScript, and Tailwind CSS. This project includes essential components for creating modern and responsive user interfaces.
+Monorepo for the `@adanft/ui` React component library and its docs consumer app.
 
-## Features
+## Workspace layout
 
-- **Sidebar** - Navigable sidebar with nested menus and collapsible design
-- **Navbar** - Top navigation bar with search and user profile
-- **Theme** - Switch between light and dark themes
-- **Profile Component** - Component to display user information
+- `packages/ui` — publishable UI package (`@adanft/ui`)
+- `apps/docs` — Vite docs app and first real consumer of the package
+- `scripts` — workspace validators
+- `.changeset` — versioning and release metadata
 
-## Technologies
-
-- **React**
-- **TypeScript**
-- **Tailwind CSS**
-- **Vite**
-- **React Router**
-- **SimpleBar**
-
-## Installation
+## Local development
 
 ```bash
-# Clone the repository
-git clone https://github.com/adanft/components.git
-
-# Install dependencies
 pnpm install
-
-# Start development server
 pnpm dev
 ```
 
-## Demo
+Useful commands:
 
-Components [PREVIEW](https://adanft.github.io/components)
+- `pnpm dev` — run the docs app locally
+- `pnpm test` — run workspace tests
+- `pnpm typecheck` — run workspace type checking
+- `pnpm validate:boundaries` — enforce public API boundaries
+- `pnpm validate:pack-contract` — verify the publish manifest/export/workflow contract for `@adanft/ui`
+- `pnpm validate:semantic-tokens` — enforce token usage rules
+- `pnpm release:beta` — validate, build, and publish `@adanft/ui` with the `beta` npm tag
+
+## Package contract
+
+The reusable library lives in `packages/ui` and is consumed as `@adanft/ui`.
+
+- Docs must import from `@adanft/ui`
+- Docs must not deep-import package internals
+- `@adanft/ui` is currently a **Tailwind-dependent** package model
+- `apps/docs/src/index.css` is the consumer-owned Tailwind entrypoint for the docs app
+
+## Release status
+
+This workspace publishes beta versions of `@adanft/ui` to npm.
+
+- Current beta version: `0.1.0-beta.2`
+- Stable `1.0.0` is **not** the current target yet
+- Beta publish guardrail: `pnpm validate:pack-contract`
+- Default branch: `main`
+
+GitHub Actions handles validation, docs deployment, and package release workflows from `main`.
+
+## Docs preview
+
+https://adanft.github.io/components
