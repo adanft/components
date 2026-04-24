@@ -1,181 +1,414 @@
-# RESUME
+# Components — Project Context
 
-## 1. Repository Identity
+This document describes the current state of the project. Treat it as stable project context, not as
+a session changelog.
 
-- **Project type**: pnpm workspace monorepo
-- **Primary product**: publishable React UI package in `packages/ui` published as `@adanft/ui`
-- **Consumer app**: Vite docs app in `apps/docs`, which exercises the package as a real consumer
-- **Tech base**: React 19, TypeScript 6, Vite 8, Vitest 4, Tailwind CSS 4, React Router 7, Biome, Changesets
-- **Deployment**: docs app publishes to GitHub Pages under `/components/`
+## Project Overview
 
-## 2. Mental Model Agents Should Use
+`components` is a pnpm workspace monorepo for a React UI component library and its documentation
+site.
 
-This repo has TWO explicit workspace boundaries:
+- **Library package**: `@adanft/ui`
+- **Package location**: `packages/ui`
+- **Docs app**: `apps/docs`
+- **Docs URL**: <https://adanft.github.io/components>
+- **Docs base path**: `/components/`
+- **Default branch**: `main`
+- **Current beta package version**: `0.1.0-beta.2`
 
-1. **`packages/ui`** — the product contract that external consumers install
-2. **`apps/docs`** — the first-party consumer that must use `@adanft/ui` exactly like an external app
+The docs app is intentionally a real consumer of the package. It must import from `@adanft/ui`, not
+from package internals.
 
-If docs need something from the library, the correct default is the public package contract:
+## Tech Stack
+
+- React 19
+- TypeScript 6
+- Vite 8
+- Vitest 4
+- Tailwind CSS 4
+- React Router 7
+- Biome
+- Changesets
+- pnpm workspace
+
+## Workspace Layout
+
+```txt
+.
+├── apps/
+│   └── docs/              # Vite docs app, real consumer of @adanft/ui
+├── packages/
+│   └── ui/                # Publishable @adanft/ui package
+├── scripts/               # Validation and release guardrails
+├── src/__tests__/         # Root workspace/release/repository contract tests
+├── .changeset/            # Changesets config for npm beta releases
+├── .github/workflows/     # CI, release, and docs deploy workflows
+├── package.json           # Workspace scripts
+├── pnpm-workspace.yaml
+└── RESUME.md              # This project context file
+```
+
+## Package Boundary Model
+
+There are two core boundaries:
+
+### `packages/ui`
+
+This is the product. It contains the publishable component library.
+
+Important files:
+
+- `packages/ui/package.json` — npm package metadata, exports, peer dependencies, publish config
+- `packages/ui/src/index.ts` — public API surface
+- `packages/ui/src/styles.css` — package theme/base styles
+- `packages/ui/styles.css` — public stylesheet export bridge
+- `packages/ui/src/components/**` — component implementations
+- `packages/ui/src/__tests__/**` — package tests
+
+If a component/helper is not exported from `packages/ui/src/index.ts`, it is not public API.
+
+### `apps/docs`
+
+This is the documentation site and first-party consumer app. It should behave like an external app.
+
+Important files:
+
+- `apps/docs/src/main.tsx` — docs bootstrap
+- `apps/docs/src/app.tsx` — route registration
+- `apps/docs/src/shell.tsx` — docs shell/chrome
+- `apps/docs/src/data/routes.ts` — route and base path constants
+- `apps/docs/src/data/branding.ts` — docs branding and home link
+- `apps/docs/src/data/sidebar-navigation.ts` — sidebar navigation and home catalog source
+- `apps/docs/src/pages/**` — documentation pages
+- `apps/docs/src/adapters/router-sidebar-link.tsx` — React Router adapter for sidebar links
+- `apps/docs/src/index.css` — docs-owned Tailwind entrypoint
+
+Docs must use public package imports:
 
 ```ts
 import { Button, initializeTheme } from '@adanft/ui';
 import '@adanft/ui/styles.css';
 ```
 
-Deep-importing `packages/ui/src/**` from docs is architecturally WRONG unless the package contract itself changes.
+Docs must not deep-import package internals:
 
-## 3. Runtime Bootstrap and Entrypoints
+```ts
+// Wrong
+import Button from '../../../packages/ui/src/components/button';
+```
 
-### Docs runtime path
+## Runtime Flow
 
-- `apps/docs/index.html` mounts `apps/docs/src/main.tsx`
-- `apps/docs/src/main.tsx`
-  - imports `./index.css`
-  - calls `initializeTheme()` from `@adanft/ui` before render
-  - renders `./app`
+### Docs App Startup
 
-### Docs app runtime
+1. `apps/docs/index.html` mounts the app.
+2. `apps/docs/src/main.tsx` imports docs CSS, calls `initializeTheme()`, and renders `App`.
+3. `apps/docs/src/app.tsx` renders `DocsShell` and registers routes.
+4. `DocsShell` renders sidebar/navigation using public components from `@adanft/ui`.
 
-- `apps/docs/src/app.tsx`
-  - uses `BrowserRouter`
-  - registers docs routes and renders docs-owned pages
-- `apps/docs/src/shell.tsx`
-  - composes docs navigation chrome
-  - consumes `Sidebar*` primitives from `@adanft/ui`
-  - keeps router-specific behavior inside docs adapters
+### Docs Routing
 
-### Package runtime contract
+- The docs app uses React Router.
+- The Vite public base is `/components/`.
+- `DOCS_HOME_PATH` must preserve the trailing slash through `docsPath('/')`.
+- Brand/home links should use `DOCS_HOME_PATH`, not a manually trimmed base path.
 
-- `packages/ui/src/index.ts` is the package PUBLIC API
-- `packages/ui/styles.css` is the public stylesheet subpath proxy
-- `packages/ui/src/styles.css` holds shared theme/base styling only
-- `apps/docs/src/index.css` is the docs-owned Tailwind entry that scans both docs and package sources
+## Styling Model
 
-## 4. Repository Map
+`@adanft/ui` currently uses a Tailwind-dependent consumer model.
 
-### Workspace directories
+- Consumers import `@adanft/ui/styles.css`.
+- Consumers own the Tailwind source registration.
+- In this repo, `apps/docs/src/index.css` scans both docs and package sources.
+- `packages/ui/src/styles.css` contains shared theme/base styling.
 
-- `packages/ui` — publishable package manifest, source, tests, Vite/Vitest config, public README
-- `apps/docs` — docs app source, adapters, pages, data, tests, Vite/Vitest config
-- `scripts` — workspace validation and release guardrails
-- `src/__tests__` — root contract tests for workspace/release/documentation rules
-- `.changeset` — versioning metadata for `@adanft/ui`
-- `.github/workflows` — validation, release, and docs deploy workflows
+Do not move Tailwind scanning ownership into the package unless the package distribution model is
+intentionally changed.
 
-### High-value files
+### Token Rules
 
-- `package.json` — workspace scripts, validation chain, release entrypoints
-- `biome.json` — repo lint rules plus docs boundary restrictions
-- `packages/ui/package.json` — publish contract, exports, peer dependencies, prepack behavior
-- `packages/ui/src/index.ts` — public package surface
-- `packages/ui/styles.css` — exported stylesheet subpath bridge
-- `apps/docs/src/main.tsx` — consumer bootstrap
-- `apps/docs/src/index.css` — docs-owned Tailwind entry
-- `apps/docs/src/app.tsx` — docs route registration
-- `apps/docs/src/adapters/router-sidebar-link.tsx` — docs-only router adapter for package primitives
-- `scripts/validate-docs-imports.mjs` — docs boundary validator
-- `scripts/validate-semantic-tokens.mjs` — semantic token validator
-- `scripts/legacy-alias-policy.mjs` — legacy alias deprecation policy keyed off `packages/ui` version
-- `scripts/verify-pack-contract.mjs` — beta publish guardrail for manifest/export/workflow contract
+Use semantic tokens/classes. Avoid hardcoded visual values when a semantic token exists.
 
-## 5. Public API Contract
+Prefer:
 
-The public contract lives in `packages/ui/src/index.ts` and is published as `@adanft/ui`.
+- `bg-surface`
+- `bg-background`
+- `text-foreground`
+- `text-heading`
+- `text-muted`
+- `border-border`
+- `border-danger`
+- `shadow-card`
 
-If a symbol is not exported there, it is NOT part of the supported package surface.
+Avoid reintroducing legacy aliases or random one-off colors unless there is a deliberate design
+decision.
 
-### Public package groups
+## Component Catalog
 
-- **Layout / navigation primitives**
-  - `Sidebar`, `SidebarBody`, `SidebarGroup`, `SidebarHead`, `SidebarLink`, `SidebarSection`
-- **Display / feedback**
-  - `Accordion`, `Alert`, `Avatar`, `Badge`, `Box`, `Profile`, `Skeleton`, `Tooltip`
-- **Inputs / actions**
-  - `Button`, `Checkbox`, `Field`, `RadioGroup`, `Select`, `Switch`, `ThemeSwitch`
-- **Overlays / interaction**
-  - `DropdownMenu`, `Modal`, `Popover`, `Tabs`
-- **Data display**
-  - `PaginationHead`, `PaginationFoot`, `Table`
-- **Theme helpers**
-  - `initializeTheme`, `toggleTheme`
+The docs sidebar is the source of truth for the docs catalog. The home page derives its catalog from
+`apps/docs/src/data/sidebar-navigation.ts`.
 
-### Explicitly docs-only concerns
+Only include entries that have real docs pages.
 
-These stay in `apps/docs` and MUST NOT re-enter the package contract:
+### Primitives
 
-- docs `Home`
-- docs `NotFound`
-- docs `Navbar`
-- router adapters like `RouterSidebarLink`
-- route data, branding, and docs navigation content
+Primitives provide behavior/structure and generally leave styling to consumers.
 
-## 6. Styling and Tailwind Model
+- `Accordion`
+- `Popover`
+- `Tabs`
+- `Tooltip`
 
-- `@adanft/ui` is currently a **Tailwind-dependent consumer model**
-- Consumers import `@adanft/ui/styles.css`
-- Consumers own Tailwind source registration in their app entry stylesheet
-- In this repo, `apps/docs/src/index.css` scans:
-  - `apps/docs/src`
-  - `packages/ui/src`
+### Components
 
-Important boundary:
+- `Alert`
+- `Avatar`
+- `Badge`
+- `Box`
+- `Button`
+- `Checkbox`
+- `DropdownMenu`
+- `Field`
+- `Input`
+- `Label`
+- `Modal`
+- `Pagination`
+- `Profile`
+- `RadioGroup`
+- `Select`
+- `Sidebar`
+- `Skeleton`
+- `Switch`
+- `Table`
+- `ThemeSwitch`
 
-- `apps/docs/src/index.css` owns Tailwind scanning
-- `packages/ui/src/styles.css` owns shared theme/base styling
+Do not add fake/demo sidebar entries like Orders, Reports, Analytics, Backup, or Settings unless real
+docs pages exist for them.
 
-Do NOT move Tailwind source ownership back into the package unless the package model changes.
+## Public API Overview
 
-## 7. Testing Strategy
+Public exports live in `packages/ui/src/index.ts`.
 
-### Layers in use
+Current public API includes:
 
-- `packages/ui/src/__tests__/**` — package component and contract coverage
-- `apps/docs/src/__tests__/**` — docs consumer integration coverage
-- `src/__tests__/**` — workspace, release, and repository contract coverage
+- Components/primitives: `Accordion`, `Alert`, `Avatar`, `Badge`, `Box`, `Button`, `Checkbox`,
+  `DropdownMenu`, `Field`, `Input`, `Label`, `Modal`, `PaginationFoot`, `PaginationHead`, `Popover`,
+  `Profile`, `RadioGroup`, `Select`, `Sidebar`, `SidebarBody`, `SidebarGroup`, `SidebarGroupLink`,
+  `SidebarHead`, `SidebarLink`, `SidebarSection`, `Skeleton`, `Switch`, `Table`, `Tabs`,
+  `ThemeSwitch`, `Tooltip`
+- Theme helpers: `initializeTheme`, `toggleTheme`
+- Public stylesheet: `@adanft/ui/styles.css`
 
-### High-value tests
+When adding a new public component:
 
-- `src/__tests__/workspace-monorepo-contract.test.ts` — workspace structure, Tailwind consumer contract, docs boundary rules
-- `src/__tests__/release-workspace-contract.test.ts` — release scripts, workflow contract, publish guardrails
-- `src/__tests__/repository-docs-contract.test.ts` — repository docs stay aligned with the monorepo reality
-- `packages/ui/src/__tests__/public-api-smoke.test.tsx` — behavioral coverage for the exported package API
-- `packages/ui/src/__tests__/sidebar-router-boundary.test.tsx` — proves package sidebar primitives stay router-agnostic
-- `apps/docs/src/__tests__/docs-consumer-boundary.test.tsx` — proves docs consume `@adanft/ui` rather than package internals
-- `apps/docs/src/__tests__/docs-styles-contract.test.tsx` — proves docs bootstrap owns the stylesheet entrypoint contract
+1. Implement it under `packages/ui/src/components`.
+2. Export it from `packages/ui/src/index.ts`.
+3. Add package tests in `packages/ui/src/__tests__`.
+4. Add docs page under `apps/docs/src/pages`.
+5. Register route in `apps/docs/src/app.tsx` and route constant in `apps/docs/src/data/routes.ts`.
+6. Add sidebar entry in `apps/docs/src/data/sidebar-navigation.ts`.
+7. Keep docs imports through `@adanft/ui`.
 
-## 8. Build, Validation, and Release
+## Component Design Conventions
 
-### Main scripts
+### General
 
-- `pnpm dev` — run the docs app locally from `apps/docs`
-- `pnpm test` — run root contract tests plus workspace tests
-- `pnpm typecheck` — run TypeScript project references
-- `pnpm validate:boundaries` — enforce docs import boundaries
-- `pnpm validate:pack-contract` — verify beta publish contract for `@adanft/ui`
-- `pnpm validate:semantic-tokens` — enforce semantic token restrictions
-- `pnpm validate` — full workspace gate including build
-- `pnpm release` — validate pack contract, build `packages/ui`, then publish through Changesets
+- Prefer small composable primitives over large opinionated widgets.
+- Preserve native HTML semantics when possible.
+- Use controlled APIs for interactive primitives where state needs to be explicit.
+- Protect internal ARIA contracts from accidental consumer prop overrides.
+- Visual styles should be token-based and easy to override.
 
-### Release model
+### React / TypeScript
 
-- Changesets drives version intent and publish orchestration
-- `packages/ui` is the ONLY publishable package today
-- beta publish must pass `pnpm validate:pack-contract` before the workflow publishes
+- Use React 19 named imports.
+- Do not use manual memoization by default.
+- Avoid `any`; use precise types or `unknown`.
+- Prefer const object + derived type for reusable string unions.
+- Keep interfaces/types flat and readable.
 
-## 9. Agent Guardrails
+### Docs Pages
 
-1. Do not break `packages/ui/src/index.ts` — that is the public contract.
-2. Do not let `apps/docs` deep-import `packages/ui/src/**`.
-3. Keep router behavior in docs adapters, not in `packages/ui`.
-4. Keep docs pages/docs chrome/docs branding inside `apps/docs`.
-5. Keep `apps/docs/src/index.css` as the docs-owned Tailwind entrypoint.
-6. Keep `packages/ui/styles.css` and `@adanft/ui/styles.css` as supported public contract.
-7. Do not trust stale single-package assumptions — this repo is already a workspace monorepo.
+Docs pages should be concise and useful to consumers.
 
-## 10. Short Operational Summary
+Preferred structure:
 
-- The product is `@adanft/ui` in `packages/ui`.
-- `apps/docs` is the first real consumer and must behave like one.
-- Public imports go through `@adanft/ui` and `@adanft/ui/styles.css`.
-- Root tests and scripts enforce workspace, release, and documentation contracts.
-- Beta publish readiness is guarded by `pnpm validate:pack-contract`.
+1. Title and short purpose-focused description
+2. Usage section with import/snippet
+3. Examples section
+4. API Reference section when useful
+
+Avoid old breadcrumbs like `components > Tabs`.
+
+Use docs helpers/components:
+
+- `CodeBlock` for snippets
+- `Code` for inline code
+- `Box`, `Table`, `TableHeader`, `TableBody`, etc. from `@adanft/ui` when appropriate
+
+## Notable Component Contracts
+
+### Field
+
+- Explicit composition API.
+- No hidden auto-wiring form controller behavior.
+- Consumers pass native IDs/ARIA explicitly.
+- `Field.Error` supports `children` and `errors?: Array<{ message?: string } | undefined>`.
+
+### Modal
+
+- `Modal.Title` is optional when `aria-label` or `aria-labelledby` is provided.
+- Accessible name precedence: consumer `aria-labelledby` → `aria-label` → generated `Modal.Title` id.
+- Focus handling should avoid render-time DOM side effects.
+
+### Popover
+
+- Primitive for interactive floating content.
+- Consumers style content explicitly.
+
+### Tooltip
+
+- Primitive for short non-interactive hints.
+- Not a replacement for Popover.
+- Uses Floating UI with increased spacing/collision padding.
+
+### Tabs
+
+- Controlled compound primitive.
+- `Tabs.List` supports `orientation?: 'horizontal' | 'vertical'`.
+- Horizontal navigation uses left/right arrows.
+- Vertical navigation uses up/down arrows.
+- Home/End move to first/last enabled tab.
+- Disabled tabs are skipped by keyboard navigation.
+
+### RadioGroup
+
+- `RadioGroup.Item` owns the native radio input.
+- Do not use text `Input` for radio items.
+- Use `Field.Set`/`Field.Legend` around groups when form semantics matter.
+
+## Validation and Tests
+
+### Main Commands
+
+```bash
+pnpm dev
+pnpm test
+pnpm typecheck
+pnpm validate:boundaries
+pnpm validate:pack-contract
+pnpm validate:semantic-tokens
+pnpm validate
+```
+
+### Targeted Test Commands
+
+Package component tests:
+
+```bash
+pnpm --dir packages/ui exec vitest run --config vitest.config.ts src/__tests__/tabs.test.tsx
+```
+
+Docs boundary tests:
+
+```bash
+pnpm --dir apps/docs exec vitest run --config vitest.config.ts src/__tests__/docs-consumer-boundary.test.tsx
+```
+
+Release contract test:
+
+```bash
+pnpm exec vitest run src/__tests__/release-workspace-contract.test.ts
+```
+
+### Test Layers
+
+- `packages/ui/src/__tests__/**` — package component tests
+- `apps/docs/src/__tests__/**` — docs consumer integration tests
+- `src/__tests__/**` — root workspace/release/repository contract tests
+
+Docs tests may print jsdom warnings about pseudo-element `getComputedStyle()`. Existing passing tests
+can still emit that warning.
+
+## Release Model
+
+The package release flow uses Changesets.
+
+- Keep `.changeset/config.json`.
+- `packages/ui` is the only publishable package.
+- `apps/docs` is private and ignored by Changesets.
+- Releases publish `@adanft/ui` with the npm `beta` tag.
+- Current beta package version is `0.1.0-beta.2`.
+- Stable `1.0.0` is not the current target.
+
+Release-related commands:
+
+```bash
+pnpm validate:pack-contract
+pnpm release:beta
+```
+
+GitHub workflows:
+
+- `.github/workflows/validate.yml` — validation for `main`
+- `.github/workflows/docs-deploy.yml` — docs deploy from `main`
+- `.github/workflows/release.yml` — manual package release workflow
+
+## Branching and Git
+
+- The GitHub default branch is `main`.
+- Use focused conventional commits.
+- Do not add attribution footers to commits.
+- Do not force-push unless explicitly requested.
+- Do not push unless explicitly requested.
+- Do not merge `develop` into `main` until cleanup/release state is intentional.
+
+## Cleanup / Ignore Expectations
+
+Generated artifacts should not be committed:
+
+- `coverage/`
+- `.coverage/`
+- app/package coverage folders
+- build outputs like `dist/`
+
+Project context/documentation that should remain:
+
+- `README.md` — public repo overview
+- `RESUME.md` — stable project context
+- `.changeset/config.json` — release config
+
+Planning/session artifacts should not remain in the public repo unless intentionally promoted to
+product documentation.
+
+## Working Rules
+
+Before changing code:
+
+1. Check branch/status.
+2. Read only the relevant files.
+3. Keep package and docs boundaries intact.
+4. Prefer targeted checks/tests over full builds unless release validation is needed.
+5. Keep commits focused.
+
+Useful first command:
+
+```bash
+git status --short --branch
+```
+
+If working on a component:
+
+1. Inspect its implementation under `packages/ui/src/components/<component>`.
+2. Inspect its tests under `packages/ui/src/__tests__`.
+3. Inspect its docs page under `apps/docs/src/pages`.
+4. Update public exports only if the package surface changes.
+5. Run component-specific tests and Biome checks.
+
+If working on docs navigation:
+
+1. Update `apps/docs/src/data/routes.ts` when adding/removing routes.
+2. Update `apps/docs/src/app.tsx` route registration.
+3. Update `apps/docs/src/data/sidebar-navigation.ts`.
+4. Remember that the home catalog derives from sidebar navigation.
+5. Run docs boundary tests.
