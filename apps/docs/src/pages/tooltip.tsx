@@ -1,26 +1,34 @@
-import { Box, Button, Tooltip } from '@adanft/ui';
+import {
+  Box,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tooltip,
+} from '@adanft/ui';
 import { Info, Save } from 'lucide-react';
 import { useState } from 'react';
 import { CodeBlock } from '../code-block';
+import { Code } from '../components/code';
 
 const importSnippet = `import { Tooltip } from '@adanft/ui';`;
 
-const usageSnippet = `import { useState } from 'react';
-import { Tooltip } from '@adanft/ui';
-
-const [open, setOpen] = useState(false);
+const usageSnippet = `const [open, setOpen] = useState(false);
 
 <Tooltip open={open} onOpenChange={setOpen}>
   <Tooltip.Trigger>
-    <button type="button">Hover or focus me</button>
+    <Button>Hover or focus me</Button>
   </Tooltip.Trigger>
 
-  <Tooltip.Content>
+  <Tooltip.Content className="rounded-md border border-border bg-surface px-3 py-2 text-sm text-foreground shadow-card">
     Helpful tooltip text
   </Tooltip.Content>
 </Tooltip>`;
 
-const buttonExampleSnippet = `const [open, setOpen] = useState(false);
+const defaultExampleSnippet = `const [open, setOpen] = useState(false);
 
 <Tooltip open={open} onOpenChange={setOpen}>
   <Tooltip.Trigger>
@@ -54,35 +62,34 @@ const iconExampleSnippet = `const [open, setOpen] = useState(false);
 </Tooltip>`;
 
 function TooltipPage() {
-  const [buttonOpen, setButtonOpen] = useState(false);
+  const [defaultOpen, setDefaultOpen] = useState(false);
   const [iconOpen, setIconOpen] = useState(false);
 
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          components {'>'} Tooltip
-        </p>
         <h1 className="text-3xl font-bold text-heading">Tooltip</h1>
-        <p className="text-foreground">
-          <code>Tooltip</code> shows short contextual text on hover or focus. It should stay
-          non-interactive and should not be used as a popover replacement.
+        <p className="text-base leading-7 text-foreground">
+          <Code>Tooltip</Code> shows short contextual text on hover or focus. It is a primitive for
+          non-interactive hints, not a replacement for <Code>Popover</Code>.
         </p>
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-heading">Usage</h2>
-        <p className="text-foreground">
-          Keep tooltips short, descriptive, and attached to a single trigger element.
-        </p>
+        <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-heading">Button trigger</h2>
-        <Box className="flex min-h-44 items-center justify-center overflow-visible p-8">
-          <Tooltip open={buttonOpen} onOpenChange={setButtonOpen}>
+        <h2 className="text-2xl font-semibold text-heading">Examples</h2>
+
+        <h3 className="text-lg font-semibold text-heading">Default</h3>
+        <Box
+          className="flex min-h-44 items-center justify-center overflow-visible p-8"
+          shadow="none"
+          surface="none">
+          <Tooltip open={defaultOpen} onOpenChange={setDefaultOpen}>
             <Tooltip.Trigger>
               <Button>
                 <Save size={16} />
@@ -95,12 +102,13 @@ function TooltipPage() {
             </Tooltip.Content>
           </Tooltip>
         </Box>
-        <CodeBlock code={buttonExampleSnippet} />
-      </section>
+        <CodeBlock code={defaultExampleSnippet} />
 
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-heading">Icon trigger</h2>
-        <Box className="flex min-h-44 items-center justify-center overflow-visible p-8">
+        <h3 className="text-lg font-semibold text-heading">Icon trigger</h3>
+        <Box
+          className="flex min-h-44 items-center justify-center overflow-visible p-8"
+          shadow="none"
+          surface="none">
           <Tooltip open={iconOpen} onOpenChange={setIconOpen} placement="right">
             <Tooltip.Trigger>
               <button
@@ -117,6 +125,94 @@ function TooltipPage() {
           </Tooltip>
         </Box>
         <CodeBlock code={iconExampleSnippet} />
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+
+        <h3 className="text-lg font-semibold text-heading">Tooltip</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>open</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Controls whether the tooltip is rendered.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>onOpenChange</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`(open: boolean) => void`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Runs when hover, focus, blur, or Escape requests a state change.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>placement</Code>
+              </TableCell>
+              <TableCell>
+                <Code>Placement</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"top"`}</Code>
+              </TableCell>
+              <TableCell>Sets the preferred Floating UI placement for the tooltip.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Tooltip.Trigger and Tooltip.Content</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Part</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>Tooltip.Trigger</Code>
+              </TableCell>
+              <TableCell>single React element</TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Clones one interactive child and wires hover/focus handlers. Prefer a native button
+                or the library <Code>Button</Code> component.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>Tooltip.Content</Code>
+              </TableCell>
+              <TableCell>native div props</TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Renders short, non-interactive text while open. Pass visual classes explicitly
+                because the primitive has no default surface styles.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );

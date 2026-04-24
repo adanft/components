@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';
 
@@ -8,41 +8,33 @@ import DocsShell from '../shell';
 
 describe('docs consumer boundary', () => {
   it('renders docs shell navigation using the router adapter', () => {
-    const ordersHref = docsPath('/orders');
+    const tooltipHref = docsPath('/components/tooltip');
 
     render(
-      <MemoryRouter initialEntries={[ordersHref]}>
+      <MemoryRouter initialEntries={[tooltipHref]}>
         <DocsShell>
           <div>docs content</div>
         </DocsShell>
       </MemoryRouter>,
     );
 
-    const ordersLink = screen.getByRole('link', { name: /orders/i });
+    const tooltipLink = screen.getByRole('link', { name: /tooltip/i });
 
-    expect(ordersLink).toHaveClass('bg-brand');
+    expect(tooltipLink).toHaveClass('bg-brand');
   });
 
-  it('marks a sidebar group trigger active when one of its children matches the route', () => {
-    const reportHref = docsPath('/financial-report');
-
+  it('does not render demo navigation entries without docs pages', () => {
     render(
-      <MemoryRouter initialEntries={[reportHref]}>
+      <MemoryRouter initialEntries={[docsPath('/components/button')]}>
         <DocsShell>
           <div>docs content</div>
         </DocsShell>
       </MemoryRouter>,
     );
 
-    const reportsButton = screen.getByRole('button', { name: /reports/i });
-
-    expect(reportsButton).toHaveClass('text-brand');
-
-    fireEvent.click(reportsButton);
-
-    const financialReportLink = screen.getByRole('link', { name: /financial report/i });
-
-    expect(financialReportLink).toHaveClass('bg-brand');
+    expect(screen.queryByRole('link', { name: /orders/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /reports/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /analytics/i })).not.toBeInTheDocument();
   });
 
   it('renders docs routes without importing docs-only pages from @adanft/ui', () => {

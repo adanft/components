@@ -2,14 +2,10 @@ import type { LucideIcon } from 'lucide-react';
 import {
   Activity,
   Archive,
-  BarChart3,
   Bell,
   Box,
-  Calendar,
-  Camera,
   CheckSquare,
   ChevronRight,
-  Cpu,
   FileText,
   Hand,
   Info,
@@ -17,9 +13,6 @@ import {
   LayoutGrid,
   MoreHorizontal,
   PanelLeft,
-  RefreshCcw,
-  Settings,
-  ShoppingCart,
   SunMoon,
   Table,
   ToggleLeft,
@@ -51,7 +44,6 @@ import {
   DOCS_TABS_PATH,
   DOCS_THEME_SWITCH_PATH,
   DOCS_TOOLTIP_PATH,
-  docsPath,
 } from './routes';
 
 type DocsSidebarNavigationLinkNode = {
@@ -82,6 +74,7 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'heading', text: 'PRIMITIVES' },
   { type: 'link', icon: ChevronRight, text: 'Accordion', href: DOCS_ACCORDION_PATH },
   { type: 'link', icon: Box, text: 'Popover', href: DOCS_POPOVER_PATH },
+  { type: 'link', icon: Info, text: 'Tooltip', href: DOCS_TOOLTIP_PATH },
   { type: 'heading', text: 'COMPONENTS' },
   { type: 'link', icon: Activity, text: 'Alert', href: DOCS_ALERT_PATH },
   { type: 'link', icon: User, text: 'Avatar', href: DOCS_AVATAR_PATH },
@@ -104,76 +97,6 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'link', icon: LayoutGrid, text: 'Tabs', href: DOCS_TABS_PATH },
   { type: 'link', icon: Table, text: 'Table', href: DOCS_TABLE_PATH },
   { type: 'link', icon: SunMoon, text: 'ThemeSwitch', href: DOCS_THEME_SWITCH_PATH },
-  { type: 'link', icon: Info, text: 'Tooltip', href: DOCS_TOOLTIP_PATH },
-  { type: 'link', icon: ShoppingCart, text: 'Orders', href: docsPath('/orders') },
-  { type: 'heading', text: 'CONTENT MANAGEMENT' },
-  {
-    type: 'group',
-    icon: FileText,
-    text: 'Reports',
-    items: [
-      {
-        text: 'Financial Report',
-        href: docsPath('/financial-report'),
-      },
-      {
-        text: 'User Activity',
-        href: docsPath('/user-activity'),
-      },
-      {
-        text: 'User Growth',
-        href: docsPath('/user-growth'),
-      },
-      {
-        text: 'System Reports',
-        href: docsPath('/system-reports'),
-      },
-    ],
-  },
-  {
-    type: 'link',
-    icon: Cpu,
-    text: 'Integrations',
-    href: docsPath('/integrations'),
-  },
-  {
-    type: 'link',
-    icon: Bell,
-    text: 'Notifications',
-    href: docsPath('/notifications'),
-  },
-  {
-    type: 'link',
-    icon: BarChart3,
-    text: 'Analytics',
-    href: docsPath('/analytics'),
-  },
-  { type: 'heading', text: 'BACKUP & RESTORE' },
-  {
-    type: 'link',
-    icon: Archive,
-    text: 'Backup',
-    href: docsPath('/backup'),
-  },
-  {
-    type: 'link',
-    icon: RefreshCcw,
-    text: 'Restore',
-    href: docsPath('/restore'),
-  },
-  {
-    type: 'link',
-    icon: Camera,
-    text: 'Snapshots',
-    href: docsPath('/snapshots'),
-  },
-  { type: 'link', icon: Calendar, text: 'Schedule', href: docsPath('/schedule') },
-  {
-    type: 'link',
-    icon: Settings,
-    text: 'Settings',
-    href: docsPath('/settings'),
-  },
 ];
 
 export type { DocsSidebarNavigationNode };
