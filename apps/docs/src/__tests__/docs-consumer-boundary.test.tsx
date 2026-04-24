@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';
 
@@ -45,5 +45,20 @@ describe('docs consumer boundary', () => {
     );
 
     expect(screen.getByRole('heading', { name: /label/i })).toBeInTheDocument();
+  });
+
+  it('navigates catalog cards through the router instead of document reloads', () => {
+    render(
+      <MemoryRouter initialEntries={[docsPath('/')]}>
+        <App />
+      </MemoryRouter>,
+    );
+
+    const main = screen.getByRole('main');
+    const alertCardLink = within(main).getByRole('link', { name: /alert/i });
+
+    fireEvent.click(alertCardLink);
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Alert' })).toBeInTheDocument();
   });
 });
