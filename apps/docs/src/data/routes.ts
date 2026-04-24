@@ -14,7 +14,7 @@ function docsPath(path: string) {
   return `${DOCS_BASE_PATH}${normalizedPath}`;
 }
 
-const DOCS_HOME_PATH = DOCS_BASE_PATH || '/';
+const DOCS_HOME_PATH = docsPath('/');
 const DOCS_ACCORDION_PATH = '/components/accordion';
 const DOCS_ALERT_PATH = '/components/alert';
 const DOCS_AVATAR_PATH = '/components/avatar';

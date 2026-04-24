@@ -1,7 +1,7 @@
-import { DOCS_BASE_PATH } from './routes';
+import { DOCS_BASE_PATH, DOCS_HOME_PATH } from './routes';
 
 const docsBranding = {
-  href: DOCS_BASE_PATH,
+  href: DOCS_HOME_PATH,
   logoSrc: `${DOCS_BASE_PATH}/logo.png`,
   title: 'Components',
 };
