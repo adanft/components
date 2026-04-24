@@ -81,6 +81,7 @@ type DocsSidebarNavigationNode =
 const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'heading', text: 'PRIMITIVES' },
   { type: 'link', icon: ChevronRight, text: 'Accordion', href: DOCS_ACCORDION_PATH },
+  { type: 'link', icon: Box, text: 'Popover', href: DOCS_POPOVER_PATH },
   { type: 'heading', text: 'COMPONENTS' },
   { type: 'link', icon: Activity, text: 'Alert', href: DOCS_ALERT_PATH },
   { type: 'link', icon: User, text: 'Avatar', href: DOCS_AVATAR_PATH },
@@ -94,7 +95,6 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'link', icon: FileText, text: 'Label', href: DOCS_LABEL_PATH },
   { type: 'link', icon: LayoutGrid, text: 'Modal', href: DOCS_MODAL_PATH },
   { type: 'link', icon: ChevronRight, text: 'Pagination', href: DOCS_PAGINATION_PATH },
-  { type: 'link', icon: Box, text: 'Popover', href: DOCS_POPOVER_PATH },
   { type: 'link', icon: User, text: 'Profile', href: DOCS_PROFILE_PATH },
   { type: 'link', icon: CheckSquare, text: 'RadioGroup', href: DOCS_RADIO_GROUP_PATH },
   { type: 'link', icon: ChevronRight, text: 'Select', href: DOCS_SELECT_PATH },
