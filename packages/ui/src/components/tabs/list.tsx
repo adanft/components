@@ -1,17 +1,42 @@
 import type { ComponentPropsWithoutRef, KeyboardEvent } from 'react';
 
-type TabsListProps = ComponentPropsWithoutRef<'div'>;
+const TABS_LIST_ORIENTATION = {
+  HORIZONTAL: 'horizontal',
+  VERTICAL: 'vertical',
+} as const;
 
-function TabsList({ children, onKeyDown, ...props }: TabsListProps) {
+type TabsListOrientation = (typeof TABS_LIST_ORIENTATION)[keyof typeof TABS_LIST_ORIENTATION];
+
+type TabsListProps = ComponentPropsWithoutRef<'div'> & {
+  orientation?: TabsListOrientation;
+};
+
+function getEnabledTabs(element: HTMLDivElement) {
+  return Array.from(
+    element.querySelectorAll<HTMLButtonElement>(
+      '[role="tab"]:not(:disabled):not([aria-disabled="true"])',
+    ),
+  );
+}
+
+function TabsList({
+  children,
+  onKeyDown,
+  orientation = TABS_LIST_ORIENTATION.HORIZONTAL,
+  ...props
+}: TabsListProps) {
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    const tabs = Array.from(
-      event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]'),
-    );
+    onKeyDown?.(event);
+
+    if (event.defaultPrevented) {
+      return;
+    }
+
+    const tabs = getEnabledTabs(event.currentTarget);
 
     const currentIndex = tabs.indexOf(document.activeElement as HTMLButtonElement);
 
     if (currentIndex === -1) {
-      onKeyDown?.(event);
       return;
     }
 
@@ -19,9 +44,31 @@ function TabsList({ children, onKeyDown, ...props }: TabsListProps) {
 
     switch (event.key) {
       case 'ArrowRight':
+        if (orientation === TABS_LIST_ORIENTATION.VERTICAL) {
+          return;
+        }
+
         nextIndex = (currentIndex + 1) % tabs.length;
         break;
       case 'ArrowLeft':
+        if (orientation === TABS_LIST_ORIENTATION.VERTICAL) {
+          return;
+        }
+
+        nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+        break;
+      case 'ArrowDown':
+        if (orientation === TABS_LIST_ORIENTATION.HORIZONTAL) {
+          return;
+        }
+
+        nextIndex = (currentIndex + 1) % tabs.length;
+        break;
+      case 'ArrowUp':
+        if (orientation === TABS_LIST_ORIENTATION.HORIZONTAL) {
+          return;
+        }
+
         nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
         break;
       case 'Home':
@@ -31,22 +78,21 @@ function TabsList({ children, onKeyDown, ...props }: TabsListProps) {
         nextIndex = tabs.length - 1;
         break;
       default:
-        onKeyDown?.(event);
         return;
     }
 
     event.preventDefault();
     tabs[nextIndex]?.focus();
     tabs[nextIndex]?.click();
-    onKeyDown?.(event);
   }
 
   return (
-    <div role="tablist" onKeyDown={handleKeyDown} {...props}>
+    <div {...props} role="tablist" aria-orientation={orientation} onKeyDown={handleKeyDown}>
       {children}
     </div>
   );
 }
 
 export default TabsList;
-export type { TabsListProps };
+export type { TabsListOrientation, TabsListProps };
+export { TABS_LIST_ORIENTATION };

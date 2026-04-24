@@ -15,12 +15,12 @@ function TabsContent({ children, value, ...props }: TabsContentProps) {
 
   return (
     <div
+      {...props}
       id={contentId}
       role="tabpanel"
       aria-labelledby={triggerId}
       data-state={isSelected ? 'active' : 'inactive'}
-      hidden={!isSelected}
-      {...props}>
+      hidden={!isSelected}>
       {children}
     </div>
   );

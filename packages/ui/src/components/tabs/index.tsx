@@ -11,6 +11,6 @@ const Tabs = Object.assign(TabsRoot, {
 
 export default Tabs;
 export type { TabsContentProps } from './content';
-export type { TabsListProps } from './list';
+export type { TabsListOrientation, TabsListProps } from './list';
 export type { TabsProps } from './tabs';
 export type { TabsTriggerProps } from './trigger';

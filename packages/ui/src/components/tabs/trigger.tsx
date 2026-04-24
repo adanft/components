@@ -5,31 +5,41 @@ import { sanitizeTabsValue } from './helpers';
 
 type TabsTriggerProps = ButtonHTMLAttributes<HTMLButtonElement> & { value: string };
 
-function TabsTrigger({ children, onClick, value, ...props }: TabsTriggerProps) {
+function TabsTrigger({
+  'aria-disabled': ariaDisabled,
+  children,
+  disabled,
+  onClick,
+  value,
+  ...props
+}: TabsTriggerProps) {
   const context = useTabsContext('Trigger');
   const isSelected = context.value === value;
+  const isDisabled = disabled || ariaDisabled === true || ariaDisabled === 'true';
   const triggerId = `${context.baseId}-trigger-${sanitizeTabsValue(value)}`;
   const contentId = `${context.baseId}-content-${sanitizeTabsValue(value)}`;
 
   return (
     <button
+      {...props}
       id={triggerId}
       type="button"
       role="tab"
       aria-selected={isSelected}
       aria-controls={contentId}
+      aria-disabled={ariaDisabled}
+      disabled={disabled}
       tabIndex={isSelected ? 0 : -1}
       data-state={isSelected ? 'active' : 'inactive'}
       onClick={(event) => {
         onClick?.(event);
 
-        if (event.defaultPrevented) {
+        if (event.defaultPrevented || isDisabled) {
           return;
         }
 
         context.onValueChange(value);
-      }}
-      {...props}>
+      }}>
       {children}
     </button>
   );

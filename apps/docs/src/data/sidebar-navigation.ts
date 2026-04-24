@@ -81,6 +81,7 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'heading', text: 'PRIMITIVES' },
   { type: 'link', icon: ListCollapse, text: 'Accordion', href: DOCS_ACCORDION_PATH },
   { type: 'link', icon: PanelTopOpen, text: 'Popover', href: DOCS_POPOVER_PATH },
+  { type: 'link', icon: NotebookTabs, text: 'Tabs', href: DOCS_TABS_PATH },
   { type: 'link', icon: MessageCircleMore, text: 'Tooltip', href: DOCS_TOOLTIP_PATH },
   { type: 'heading', text: 'COMPONENTS' },
   { type: 'link', icon: CircleAlert, text: 'Alert', href: DOCS_ALERT_PATH },
@@ -101,7 +102,6 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'link', icon: PanelLeft, text: 'Sidebar', href: DOCS_SIDEBAR_PATH },
   { type: 'link', icon: SquareStack, text: 'Skeleton', href: DOCS_SKELETON_PATH },
   { type: 'link', icon: ToggleLeft, text: 'Switch', href: DOCS_SWITCH_PATH },
-  { type: 'link', icon: NotebookTabs, text: 'Tabs', href: DOCS_TABS_PATH },
   { type: 'link', icon: Table, text: 'Table', href: DOCS_TABLE_PATH },
   { type: 'link', icon: SunMoon, text: 'ThemeSwitch', href: DOCS_THEME_SWITCH_PATH },
 ];
