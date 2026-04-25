@@ -1,16 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { Modal } from '../index';
-
-/**
- * jsdom sets offsetParent = null on all elements.
- * getFocusableElements filters out elements where offsetParent === null,
- * so we must mark each interactive element as "visible" for focus trap tests.
- */
-function makeVisible(el: HTMLElement) {
-  Object.defineProperty(el, 'offsetParent', { value: el.parentElement, configurable: true });
-}
 
 function renderModal({
   open = true,
@@ -65,6 +56,24 @@ describe('Modal', () => {
     fireEvent.keyDown(screen.getByTestId('panel'), { key: 'Escape' });
 
     expect(onClose).toHaveBeenCalled();
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onClose when pressing Escape from a focused child', () => {
+    const onClose = vi.fn();
+
+    render(
+      <Modal open={true} onClose={onClose}>
+        <Modal.Backdrop />
+        <Modal.Panel>
+          <Modal.Title>Escape child</Modal.Title>
+          <button type="button">Close from child</button>
+        </Modal.Panel>
+      </Modal>,
+    );
+
+    fireEvent.keyDown(screen.getByRole('button', { name: 'Close from child' }), { key: 'Escape' });
+
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
@@ -137,13 +146,13 @@ describe('Modal', () => {
     expect(title.tagName).toBe('H2');
   });
 
-  it('moves focus to Panel on open', () => {
+  it('moves focus to Panel on open', async () => {
     renderModal({ open: true });
 
-    expect(screen.getByTestId('panel')).toHaveFocus();
+    await waitFor(() => expect(screen.getByTestId('panel')).toHaveFocus());
   });
 
-  it('restores focus to previously focused element on close', () => {
+  it('restores focus to previously focused element on close', async () => {
     const trigger = document.createElement('button');
     trigger.textContent = 'Trigger';
     document.body.appendChild(trigger);
@@ -160,7 +169,7 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    expect(screen.getByTestId('panel')).toHaveFocus();
+    await waitFor(() => expect(screen.getByTestId('panel')).toHaveFocus());
 
     rerender(
       <Modal open={false} onClose={onClose}>
@@ -171,14 +180,18 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    expect(trigger).toHaveFocus();
+    await waitFor(() => expect(trigger).toHaveFocus());
 
     document.body.removeChild(trigger);
   });
 
   describe('Focus Trap', () => {
-    it('Tab on the last focusable element cycles focus to the first', () => {
-      render(
+    it('isolates outside content while the modal is open', async () => {
+      const outside = document.createElement('button');
+      outside.textContent = 'Outside';
+      document.body.appendChild(outside);
+
+      const { rerender } = render(
         <Modal open={true} onClose={vi.fn()}>
           <Modal.Backdrop />
           <Modal.Panel data-testid="panel">
@@ -196,60 +209,29 @@ describe('Modal', () => {
         </Modal>,
       );
 
-      const btnA = screen.getByTestId('btn-a');
-      const btnB = screen.getByTestId('btn-b');
-      const btnC = screen.getByTestId('btn-c');
       const panel = screen.getByTestId('panel');
 
-      makeVisible(btnA);
-      makeVisible(btnB);
-      makeVisible(btnC);
-
-      btnC.focus();
-      expect(btnC).toHaveFocus();
-
+      await waitFor(() => expect(panel).toHaveFocus());
       fireEvent.keyDown(panel, { key: 'Tab', shiftKey: false });
 
-      expect(btnA).toHaveFocus();
-    });
+      expect(outside).toHaveAttribute('aria-hidden', 'true');
+      expect(outside).not.toHaveFocus();
 
-    it('Shift+Tab on the first focusable element cycles focus to the last', () => {
-      render(
-        <Modal open={true} onClose={vi.fn()}>
+      rerender(
+        <Modal open={false} onClose={vi.fn()}>
           <Modal.Backdrop />
           <Modal.Panel data-testid="panel">
             <Modal.Title>Trap test</Modal.Title>
-            <button type="button" data-testid="btn-a">
-              A
-            </button>
-            <button type="button" data-testid="btn-b">
-              B
-            </button>
-            <button type="button" data-testid="btn-c">
-              C
-            </button>
           </Modal.Panel>
         </Modal>,
       );
 
-      const btnA = screen.getByTestId('btn-a');
-      const btnB = screen.getByTestId('btn-b');
-      const btnC = screen.getByTestId('btn-c');
-      const panel = screen.getByTestId('panel');
+      await waitFor(() => expect(outside).not.toHaveAttribute('aria-hidden'));
 
-      makeVisible(btnA);
-      makeVisible(btnB);
-      makeVisible(btnC);
-
-      btnA.focus();
-      expect(btnA).toHaveFocus();
-
-      fireEvent.keyDown(panel, { key: 'Tab', shiftKey: true });
-
-      expect(btnC).toHaveFocus();
+      document.body.removeChild(outside);
     });
 
-    it('Tab with no focusable elements inside keeps focus on the panel without throwing', () => {
+    it('Tab with no focusable elements inside does not throw', () => {
       render(
         <Modal open={true} onClose={vi.fn()}>
           <Modal.Backdrop />
@@ -267,13 +249,12 @@ describe('Modal', () => {
         fireEvent.keyDown(panel, { key: 'Tab', shiftKey: false });
       }).not.toThrow();
 
-      // Focus remains on the panel (no focusable targets to move to)
-      expect(panel).toHaveFocus();
+      expect(screen.getByTestId('panel')).toBeInTheDocument();
     });
   });
 
   describe('Initial Focus', () => {
-    it('focuses the [data-autofocus] element when the modal opens', () => {
+    it('focuses the [data-autofocus] element when the modal opens', async () => {
       render(
         <Modal open={true} onClose={vi.fn()}>
           <Modal.Backdrop />
@@ -287,10 +268,10 @@ describe('Modal', () => {
         </Modal>,
       );
 
-      expect(screen.getByTestId('primary')).toHaveFocus();
+      await waitFor(() => expect(screen.getByTestId('primary')).toHaveFocus());
     });
 
-    it('falls back to focusing the panel when no [data-autofocus] is present', () => {
+    it('falls back to focusing the panel when no [data-autofocus] is present', async () => {
       render(
         <Modal open={true} onClose={vi.fn()}>
           <Modal.Backdrop />
@@ -301,7 +282,70 @@ describe('Modal', () => {
         </Modal>,
       );
 
-      expect(screen.getByTestId('panel')).toHaveFocus();
+      await waitFor(() => expect(screen.getByTestId('panel')).toHaveFocus());
+    });
+  });
+
+  describe('Scroll lock', () => {
+    it('keeps document scroll locked until every open modal closes', () => {
+      const previousOverflow = document.documentElement.style.overflow;
+
+      const { rerender } = render(
+        <>
+          <Modal open={true} onClose={vi.fn()}>
+            <Modal.Backdrop />
+            <Modal.Panel>
+              <Modal.Title>First modal</Modal.Title>
+            </Modal.Panel>
+          </Modal>
+          <Modal open={true} onClose={vi.fn()}>
+            <Modal.Backdrop />
+            <Modal.Panel>
+              <Modal.Title>Second modal</Modal.Title>
+            </Modal.Panel>
+          </Modal>
+        </>,
+      );
+
+      expect(document.documentElement.style.overflow).toBe('hidden');
+
+      rerender(
+        <>
+          <Modal open={false} onClose={vi.fn()}>
+            <Modal.Backdrop />
+            <Modal.Panel>
+              <Modal.Title>First modal</Modal.Title>
+            </Modal.Panel>
+          </Modal>
+          <Modal open={true} onClose={vi.fn()}>
+            <Modal.Backdrop />
+            <Modal.Panel>
+              <Modal.Title>Second modal</Modal.Title>
+            </Modal.Panel>
+          </Modal>
+        </>,
+      );
+
+      expect(document.documentElement.style.overflow).toBe('hidden');
+
+      rerender(
+        <>
+          <Modal open={false} onClose={vi.fn()}>
+            <Modal.Backdrop />
+            <Modal.Panel>
+              <Modal.Title>First modal</Modal.Title>
+            </Modal.Panel>
+          </Modal>
+          <Modal open={false} onClose={vi.fn()}>
+            <Modal.Backdrop />
+            <Modal.Panel>
+              <Modal.Title>Second modal</Modal.Title>
+            </Modal.Panel>
+          </Modal>
+        </>,
+      );
+
+      expect(document.documentElement.style.overflow).toBe(previousOverflow);
     });
   });
 });

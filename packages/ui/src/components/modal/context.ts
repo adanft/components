@@ -1,8 +1,8 @@
 import { createContext, type RefObject, useContext } from 'react';
 
 type ModalContextValue = {
+  initialFocusRef: RefObject<HTMLElement | null>;
   onClose: () => void;
-  previousActiveElementRef: RefObject<HTMLElement | null>;
   titleId: string;
 };
 
