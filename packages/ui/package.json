@@ -33,6 +33,131 @@
       "import": "./src/index.ts",
       "default": "./src/index.ts"
     },
+    "./accordion": {
+      "types": "./src/components/accordion/index.tsx",
+      "import": "./src/components/accordion/index.tsx",
+      "default": "./src/components/accordion/index.tsx"
+    },
+    "./alert": {
+      "types": "./src/components/alert/index.tsx",
+      "import": "./src/components/alert/index.tsx",
+      "default": "./src/components/alert/index.tsx"
+    },
+    "./avatar": {
+      "types": "./src/components/avatar.tsx",
+      "import": "./src/components/avatar.tsx",
+      "default": "./src/components/avatar.tsx"
+    },
+    "./badge": {
+      "types": "./src/components/badge.tsx",
+      "import": "./src/components/badge.tsx",
+      "default": "./src/components/badge.tsx"
+    },
+    "./box": {
+      "types": "./src/components/box.tsx",
+      "import": "./src/components/box.tsx",
+      "default": "./src/components/box.tsx"
+    },
+    "./button": {
+      "types": "./src/components/button.tsx",
+      "import": "./src/components/button.tsx",
+      "default": "./src/components/button.tsx"
+    },
+    "./checkbox": {
+      "types": "./src/components/checkbox.tsx",
+      "import": "./src/components/checkbox.tsx",
+      "default": "./src/components/checkbox.tsx"
+    },
+    "./dropdown-menu": {
+      "types": "./src/components/dropdown-menu/index.tsx",
+      "import": "./src/components/dropdown-menu/index.tsx",
+      "default": "./src/components/dropdown-menu/index.tsx"
+    },
+    "./field": {
+      "types": "./src/components/field/index.tsx",
+      "import": "./src/components/field/index.tsx",
+      "default": "./src/components/field/index.tsx"
+    },
+    "./input": {
+      "types": "./src/components/input.tsx",
+      "import": "./src/components/input.tsx",
+      "default": "./src/components/input.tsx"
+    },
+    "./label": {
+      "types": "./src/components/label.tsx",
+      "import": "./src/components/label.tsx",
+      "default": "./src/components/label.tsx"
+    },
+    "./modal": {
+      "types": "./src/components/modal/index.tsx",
+      "import": "./src/components/modal/index.tsx",
+      "default": "./src/components/modal/index.tsx"
+    },
+    "./pagination-foot": {
+      "types": "./src/components/pagination/foot.tsx",
+      "import": "./src/components/pagination/foot.tsx",
+      "default": "./src/components/pagination/foot.tsx"
+    },
+    "./pagination-head": {
+      "types": "./src/components/pagination/head.tsx",
+      "import": "./src/components/pagination/head.tsx",
+      "default": "./src/components/pagination/head.tsx"
+    },
+    "./popover": {
+      "types": "./src/components/popover/index.tsx",
+      "import": "./src/components/popover/index.tsx",
+      "default": "./src/components/popover/index.tsx"
+    },
+    "./profile": {
+      "types": "./src/components/profile.tsx",
+      "import": "./src/components/profile.tsx",
+      "default": "./src/components/profile.tsx"
+    },
+    "./radio-group": {
+      "types": "./src/components/radio-group/index.tsx",
+      "import": "./src/components/radio-group/index.tsx",
+      "default": "./src/components/radio-group/index.tsx"
+    },
+    "./select": {
+      "types": "./src/components/select.tsx",
+      "import": "./src/components/select.tsx",
+      "default": "./src/components/select.tsx"
+    },
+    "./sidebar": {
+      "types": "./src/components/sidebar/index.tsx",
+      "import": "./src/components/sidebar/index.tsx",
+      "default": "./src/components/sidebar/index.tsx"
+    },
+    "./skeleton": {
+      "types": "./src/components/skeleton.tsx",
+      "import": "./src/components/skeleton.tsx",
+      "default": "./src/components/skeleton.tsx"
+    },
+    "./switch": {
+      "types": "./src/components/switch.tsx",
+      "import": "./src/components/switch.tsx",
+      "default": "./src/components/switch.tsx"
+    },
+    "./table": {
+      "types": "./src/components/table/index.tsx",
+      "import": "./src/components/table/index.tsx",
+      "default": "./src/components/table/index.tsx"
+    },
+    "./tabs": {
+      "types": "./src/components/tabs/index.tsx",
+      "import": "./src/components/tabs/index.tsx",
+      "default": "./src/components/tabs/index.tsx"
+    },
+    "./theme-switch": {
+      "types": "./src/components/theme-switch.tsx",
+      "import": "./src/components/theme-switch.tsx",
+      "default": "./src/components/theme-switch.tsx"
+    },
+    "./tooltip": {
+      "types": "./src/components/tooltip/index.tsx",
+      "import": "./src/components/tooltip/index.tsx",
+      "default": "./src/components/tooltip/index.tsx"
+    },
     "./styles.css": "./styles.css"
   },
   "publishConfig": {
@@ -46,11 +171,137 @@
         "import": "./dist/index.js",
         "default": "./dist/index.js"
       },
+      "./accordion": {
+        "types": "./dist/components/accordion/index.d.ts",
+        "import": "./dist/components/accordion/index.js",
+        "default": "./dist/components/accordion/index.js"
+      },
+      "./alert": {
+        "types": "./dist/components/alert/index.d.ts",
+        "import": "./dist/components/alert/index.js",
+        "default": "./dist/components/alert/index.js"
+      },
+      "./avatar": {
+        "types": "./dist/components/avatar.d.ts",
+        "import": "./dist/components/avatar/index.js",
+        "default": "./dist/components/avatar/index.js"
+      },
+      "./badge": {
+        "types": "./dist/components/badge.d.ts",
+        "import": "./dist/components/badge/index.js",
+        "default": "./dist/components/badge/index.js"
+      },
+      "./box": {
+        "types": "./dist/components/box.d.ts",
+        "import": "./dist/components/box/index.js",
+        "default": "./dist/components/box/index.js"
+      },
+      "./button": {
+        "types": "./dist/components/button.d.ts",
+        "import": "./dist/components/button/index.js",
+        "default": "./dist/components/button/index.js"
+      },
+      "./checkbox": {
+        "types": "./dist/components/checkbox.d.ts",
+        "import": "./dist/components/checkbox/index.js",
+        "default": "./dist/components/checkbox/index.js"
+      },
+      "./dropdown-menu": {
+        "types": "./dist/components/dropdown-menu/index.d.ts",
+        "import": "./dist/components/dropdown-menu/index.js",
+        "default": "./dist/components/dropdown-menu/index.js"
+      },
+      "./field": {
+        "types": "./dist/components/field/index.d.ts",
+        "import": "./dist/components/field/index.js",
+        "default": "./dist/components/field/index.js"
+      },
+      "./input": {
+        "types": "./dist/components/input.d.ts",
+        "import": "./dist/components/input/index.js",
+        "default": "./dist/components/input/index.js"
+      },
+      "./label": {
+        "types": "./dist/components/label.d.ts",
+        "import": "./dist/components/label/index.js",
+        "default": "./dist/components/label/index.js"
+      },
+      "./modal": {
+        "types": "./dist/components/modal/index.d.ts",
+        "import": "./dist/components/modal/index.js",
+        "default": "./dist/components/modal/index.js"
+      },
+      "./pagination-foot": {
+        "types": "./dist/components/pagination/foot.d.ts",
+        "import": "./dist/components/pagination-foot/index.js",
+        "default": "./dist/components/pagination-foot/index.js"
+      },
+      "./pagination-head": {
+        "types": "./dist/components/pagination/head.d.ts",
+        "import": "./dist/components/pagination-head/index.js",
+        "default": "./dist/components/pagination-head/index.js"
+      },
+      "./popover": {
+        "types": "./dist/components/popover/index.d.ts",
+        "import": "./dist/components/popover/index.js",
+        "default": "./dist/components/popover/index.js"
+      },
+      "./profile": {
+        "types": "./dist/components/profile.d.ts",
+        "import": "./dist/components/profile/index.js",
+        "default": "./dist/components/profile/index.js"
+      },
+      "./radio-group": {
+        "types": "./dist/components/radio-group/index.d.ts",
+        "import": "./dist/components/radio-group/index.js",
+        "default": "./dist/components/radio-group/index.js"
+      },
+      "./select": {
+        "types": "./dist/components/select.d.ts",
+        "import": "./dist/components/select/index.js",
+        "default": "./dist/components/select/index.js"
+      },
+      "./sidebar": {
+        "types": "./dist/components/sidebar/index.d.ts",
+        "import": "./dist/components/sidebar/index.js",
+        "default": "./dist/components/sidebar/index.js"
+      },
+      "./skeleton": {
+        "types": "./dist/components/skeleton.d.ts",
+        "import": "./dist/components/skeleton/index.js",
+        "default": "./dist/components/skeleton/index.js"
+      },
+      "./switch": {
+        "types": "./dist/components/switch.d.ts",
+        "import": "./dist/components/switch/index.js",
+        "default": "./dist/components/switch/index.js"
+      },
+      "./table": {
+        "types": "./dist/components/table/index.d.ts",
+        "import": "./dist/components/table/index.js",
+        "default": "./dist/components/table/index.js"
+      },
+      "./tabs": {
+        "types": "./dist/components/tabs/index.d.ts",
+        "import": "./dist/components/tabs/index.js",
+        "default": "./dist/components/tabs/index.js"
+      },
+      "./theme-switch": {
+        "types": "./dist/components/theme-switch.d.ts",
+        "import": "./dist/components/theme-switch/index.js",
+        "default": "./dist/components/theme-switch/index.js"
+      },
+      "./tooltip": {
+        "types": "./dist/components/tooltip/index.d.ts",
+        "import": "./dist/components/tooltip/index.js",
+        "default": "./dist/components/tooltip/index.js"
+      },
       "./styles.css": "./dist/styles.css"
     }
   },
   "scripts": {
-    "build": "pnpm typecheck && pnpm exec vite build && pnpm exec tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
+    "sync:exports": "node scripts/sync-package-exports.mjs",
+    "build": "pnpm sync:exports && pnpm typecheck && pnpm exec vite build && pnpm exec tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
     "prepack": "pnpm build",
     "test": "pnpm exec vitest run --config vitest.config.ts",
     "typecheck": "pnpm exec tsc -b tsconfig.json --pretty false"
