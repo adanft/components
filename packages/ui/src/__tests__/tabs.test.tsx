@@ -68,7 +68,24 @@ describe('Tabs', () => {
     expect(screen.getByRole('tabpanel', { name: 'Analytics' })).toHaveTextContent(
       'Analytics content',
     );
-    expect(screen.queryByText('Overview content')).not.toBeVisible();
+    expect(screen.queryByText('Overview content')).not.toBeInTheDocument();
+  });
+
+  it('keeps inactive panels mounted when keepMounted is true', () => {
+    render(
+      <Tabs value="overview" onValueChange={() => undefined}>
+        <Tabs.List>
+          <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
+          <Tabs.Trigger value="analytics">Analytics</Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="overview">Overview content</Tabs.Content>
+        <Tabs.Content value="analytics" keepMounted>
+          Analytics content
+        </Tabs.Content>
+      </Tabs>,
+    );
+
+    expect(screen.getByText('Analytics content')).not.toBeVisible();
   });
 
   it('moves between tabs with arrow keys', () => {
@@ -141,9 +158,15 @@ describe('Tabs', () => {
           <Tabs.Trigger value="foo-bar">Foo dash bar</Tabs.Trigger>
           <Tabs.Trigger value="foo@bar">Foo at bar</Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content value="foo bar">Foo bar content</Tabs.Content>
-        <Tabs.Content value="foo-bar">Foo dash bar content</Tabs.Content>
-        <Tabs.Content value="foo@bar">Foo at bar content</Tabs.Content>
+        <Tabs.Content value="foo bar" keepMounted>
+          Foo bar content
+        </Tabs.Content>
+        <Tabs.Content value="foo-bar" keepMounted>
+          Foo dash bar content
+        </Tabs.Content>
+        <Tabs.Content value="foo@bar" keepMounted>
+          Foo at bar content
+        </Tabs.Content>
       </Tabs>,
     );
 

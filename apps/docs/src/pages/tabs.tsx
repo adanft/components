@@ -287,11 +287,51 @@ function TabsPage() {
                 <Code>Tabs.Content</Code>
               </TableCell>
               <TableCell>
-                <Code>value: string</Code>
+                <Code>value: string; keepMounted?: boolean</Code>
               </TableCell>
               <TableCell>
-                Renders a tabpanel linked to its trigger and hides inactive panels with the native{' '}
+                Renders a tabpanel linked to its trigger. Inactive panels unmount by default; use{' '}
+                <Code>keepMounted</Code> to keep inactive content in the DOM with the native{' '}
                 <Code>hidden</Code> attribute.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Tabs.Content</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>value</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Matches the trigger value that activates this panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>keepMounted</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Keeps inactive content mounted and hidden with the native <Code>hidden</Code>{' '}
+                attribute. By default, inactive panels unmount to avoid rendering hidden work.
               </TableCell>
             </TableRow>
           </TableBody>
