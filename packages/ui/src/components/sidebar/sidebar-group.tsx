@@ -1,22 +1,26 @@
-import { ChevronDown, type LucideIcon } from 'lucide-react';
 import {
   Children,
+  type ComponentType,
   isValidElement,
   type ReactElement,
   type ReactNode,
+  type SVGProps,
   useId,
   useState,
 } from 'react';
 
 import { cn } from '../../helpers/cn';
+import { ChevronDownIcon } from '../../icons';
 import Popover from '../popover';
 import { useSidebarContext } from './context';
 import SidebarGroupLink from './sidebar-group-link';
 
+type SidebarIcon = ComponentType<SVGProps<SVGSVGElement>>;
+
 type SidebarGroupProps = {
   active?: boolean;
   children: ReactNode;
-  icon: LucideIcon;
+  icon: SidebarIcon;
   text: string;
 };
 
@@ -45,7 +49,7 @@ function isSidebarGroupLinkElement(child: ReactNode): child is SidebarGroupLinkE
 }
 
 function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProps) {
-  const IconComponent = icon;
+  const Icon = icon;
   const [floatOpen, setFloatOpen] = useState(false);
   const contentId = useId();
   const { collapsed } = useSidebarContext('Group');
@@ -85,11 +89,11 @@ function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProp
       aria-expanded={collapsed ? undefined : groupOpen}
       aria-label={collapsed ? text : undefined}>
       <span className="flex shrink-0 items-center justify-center p-3.5">
-        <IconComponent aria-hidden="true" className="size-5 stroke-2" />
+        <Icon aria-hidden="true" className="size-5 stroke-2" />
       </span>
       <span className="font-medium whitespace-nowrap">{text}</span>
       <span className="ml-auto flex shrink-0 items-center justify-center p-3.5">
-        <ChevronDown
+        <ChevronDownIcon
           aria-hidden="true"
           className={cn('duration-300 size-5 stroke-2', groupOpen && 'rotate-180')}
         />

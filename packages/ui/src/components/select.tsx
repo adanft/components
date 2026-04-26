@@ -1,7 +1,7 @@
-import { ChevronDown } from 'lucide-react';
 import type { ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '../helpers/cn';
+import { ChevronDownIcon } from '../icons';
 
 type SelectProps = Omit<ComponentPropsWithoutRef<'select'>, 'size'> & {
   placeholder?: string;
@@ -40,10 +40,9 @@ function Select({
         ) : null}
         {children}
       </select>
-      <ChevronDown
+      <ChevronDownIcon
         aria-hidden="true"
-        size={16}
-        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted"
+        className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted"
       />
     </div>
   );

@@ -1,8 +1,4 @@
-import {
-  type ComponentPropsWithoutRef,
-  type KeyboardEvent,
-  type MouseEvent,
-} from 'react';
+import type { ComponentPropsWithoutRef, KeyboardEvent, MouseEvent } from 'react';
 
 import { cn } from '../../helpers/cn';
 import Box from '../box';

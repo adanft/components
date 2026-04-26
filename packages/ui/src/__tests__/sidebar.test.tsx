@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { FolderOpen, Home, LayoutDashboard, ShoppingCart } from 'lucide-react';
-import { useState } from 'react';
+import { type SVGProps, useState } from 'react';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -12,6 +11,19 @@ import {
   SidebarLink,
   SidebarSection,
 } from '../index';
+
+function TestIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path d="M4 4h16v16H4z" />
+    </svg>
+  );
+}
+
+const FolderOpen = TestIcon;
+const Home = TestIcon;
+const LayoutDashboard = TestIcon;
+const ShoppingCart = TestIcon;
 
 function StatefulSidebar() {
   const [state, action] = useState(false);

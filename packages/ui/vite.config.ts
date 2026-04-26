@@ -28,7 +28,6 @@ export default defineConfig({
     rollupOptions: {
       external: [
         '@floating-ui/react',
-        'lucide-react',
         'react',
         'react-dom',
         'react/jsx-runtime',

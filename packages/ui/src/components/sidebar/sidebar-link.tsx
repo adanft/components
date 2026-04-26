@@ -1,19 +1,22 @@
-import type { LucideIcon } from 'lucide-react';
 import {
   type AnchorHTMLAttributes,
   Children,
+  type ComponentType,
   cloneElement,
   isValidElement,
   type ReactElement,
   type ReactNode,
+  type SVGProps,
 } from 'react';
 
 import { cn } from '../../helpers/cn';
 
+type SidebarIcon = ComponentType<SVGProps<SVGSVGElement>>;
+
 type SidebarLinkBaseProps = {
   active?: boolean;
   className?: string;
-  icon: LucideIcon;
+  icon: SidebarIcon;
   text: string;
 };
 
@@ -37,7 +40,7 @@ type SidebarLinkChildElementProps = {
 };
 
 function SidebarLink({ active = false, className, href, icon, text, ...props }: SidebarLinkProps) {
-  const IconComponent = icon;
+  const Icon = icon;
   const linkClassName = cn(
     'flex leading-none items-center text-foreground gap-4 rounded-md',
     active ? 'bg-brand text-white mx-2' : 'px-2',
@@ -46,7 +49,7 @@ function SidebarLink({ active = false, className, href, icon, text, ...props }: 
   const content = (
     <>
       <span className="flex shrink-0 items-center justify-center p-3.5">
-        <IconComponent aria-hidden="true" className="size-5 stroke-2" />
+        <Icon aria-hidden="true" className="size-5 stroke-2" />
       </span>
       <span className="min-w-0 truncate font-medium">{text}</span>
     </>
@@ -81,4 +84,4 @@ function SidebarLink({ active = false, className, href, icon, text, ...props }: 
 }
 
 export default SidebarLink;
-export type { SidebarLinkProps };
+export type { SidebarIcon, SidebarLinkProps };

@@ -160,4 +160,4 @@ function createViteEntries({ resolveSource }) {
   );
 }
 
-export { PUBLIC_COMPONENT_EXPORTS, createPublishExports, createRootExports, createViteEntries };
+export { createPublishExports, createRootExports, createViteEntries, PUBLIC_COMPONENT_EXPORTS };

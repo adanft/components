@@ -1,8 +1,18 @@
 import { Sidebar, SidebarGroup, SidebarGroupLink, SidebarLink } from '@adanft/ui';
 import { render, screen } from '@testing-library/react';
-import { FolderOpen, ShoppingCart } from 'lucide-react';
-import type { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef, SVGProps } from 'react';
 import { describe, expect, it } from 'vitest';
+
+function TestIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path d="M4 4h16v16H4z" />
+    </svg>
+  );
+}
+
+const FolderOpen = TestIcon;
+const ShoppingCart = TestIcon;
 
 function CustomLink(props: ComponentPropsWithoutRef<'a'>) {
   return <a {...props} />;
