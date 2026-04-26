@@ -49,6 +49,47 @@ describe('Modal', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
+  it('keeps closing Backdrop when consumer onClick is provided', () => {
+    const onClose = vi.fn();
+    const onClick = vi.fn();
+
+    render(
+      <Modal open={true} onClose={onClose}>
+        <Modal.Backdrop data-testid="backdrop" onClick={onClick} />
+        <Modal.Panel>
+          <Modal.Title>Dialog heading</Modal.Title>
+        </Modal.Panel>
+      </Modal>,
+    );
+
+    fireEvent.click(screen.getByTestId('backdrop'));
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not close Backdrop when consumer onClick prevents default', () => {
+    const onClose = vi.fn();
+
+    render(
+      <Modal open={true} onClose={onClose}>
+        <Modal.Backdrop
+          data-testid="backdrop"
+          onClick={(event) => {
+            event.preventDefault();
+          }}
+        />
+        <Modal.Panel>
+          <Modal.Title>Dialog heading</Modal.Title>
+        </Modal.Panel>
+      </Modal>,
+    );
+
+    fireEvent.click(screen.getByTestId('backdrop'));
+
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
   it('calls onClose when pressing Escape', () => {
     const onClose = vi.fn();
     renderModal({ onClose });
@@ -57,6 +98,29 @@ describe('Modal', () => {
 
     expect(onClose).toHaveBeenCalled();
     expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not close when Panel onKeyDown prevents Escape default', () => {
+    const onClose = vi.fn();
+
+    render(
+      <Modal open={true} onClose={onClose}>
+        <Modal.Backdrop />
+        <Modal.Panel
+          data-testid="panel"
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') {
+              event.preventDefault();
+            }
+          }}>
+          <Modal.Title>Dialog heading</Modal.Title>
+        </Modal.Panel>
+      </Modal>,
+    );
+
+    fireEvent.keyDown(screen.getByTestId('panel'), { key: 'Escape' });
+
+    expect(onClose).not.toHaveBeenCalled();
   });
 
   it('calls onClose when pressing Escape from a focused child', () => {
@@ -93,6 +157,23 @@ describe('Modal', () => {
 
     expect(panel).toHaveAttribute('role', 'dialog');
     expect(panel).toHaveAttribute('aria-modal', 'true');
+  });
+
+  it('protects Panel structural dialog attributes from consumer props', () => {
+    render(
+      <Modal open={true} onClose={vi.fn()}>
+        <Modal.Backdrop />
+        <Modal.Panel role="region" aria-modal={false} tabIndex={0} data-testid="panel">
+          <Modal.Title>Dialog heading</Modal.Title>
+        </Modal.Panel>
+      </Modal>,
+    );
+
+    const panel = screen.getByTestId('panel');
+
+    expect(panel).toHaveAttribute('role', 'dialog');
+    expect(panel).toHaveAttribute('aria-modal', 'true');
+    expect(panel).toHaveAttribute('tabIndex', '-1');
   });
 
   it('Panel has aria-labelledby that matches Title id', () => {

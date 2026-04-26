@@ -33,15 +33,20 @@ function ModalPanel({
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    onKeyDown?.(e);
+
+    if (e.defaultPrevented) {
+      return;
+    }
+
     if (e.key === 'Escape') {
       onClose();
     }
-
-    onKeyDown?.(e);
   }
 
   return (
     <Box
+      {...props}
       ref={setInitialFocus}
       role="dialog"
       aria-modal="true"
@@ -50,7 +55,6 @@ function ModalPanel({
       className={cn('z-50 pointer-events-auto outline-none', className)}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      {...props}
     />
   );
 }
