@@ -1,7 +1,7 @@
-import { Moon, Sun } from 'lucide-react';
 import { type ComponentPropsWithoutRef, useSyncExternalStore } from 'react';
 import { cn } from '../helpers/cn';
 import { readTheme, subscribeTheme } from '../helpers/theme';
+import { MoonIcon, SunIcon } from '../icons';
 import { toggleTheme } from '../theme';
 
 type ThemeSwitchSize = 'sm' | 'md' | 'lg';
@@ -52,7 +52,7 @@ function ThemeSwitch({ className, size = 'md', ...props }: ThemeSwitchProps) {
       )}>
       <span className="sr-only">Toggle theme</span>
 
-      <Sun
+      <SunIcon
         aria-hidden="true"
         className={cn(
           'absolute right-1 z-1 text-white animate-[spin_15s_linear_infinite]',
@@ -60,7 +60,7 @@ function ThemeSwitch({ className, size = 'md', ...props }: ThemeSwitchProps) {
         )}
       />
 
-      <Moon
+      <MoonIcon
         aria-hidden="true"
         className={cn(
           'absolute left-1 z-1 text-white animate-[tilt_5s_linear_infinite]',

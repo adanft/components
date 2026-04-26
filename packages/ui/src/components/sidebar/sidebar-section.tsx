@@ -1,7 +1,7 @@
-import { Minus } from 'lucide-react';
 import { type ComponentPropsWithoutRef, useContext } from 'react';
 
 import { cn } from '../../helpers/cn';
+import { MinusIcon } from '../../icons';
 import { SidebarContext } from './context';
 
 type SidebarSectionProps = ComponentPropsWithoutRef<'h5'> & {
@@ -19,7 +19,7 @@ function SidebarSection({ text, className, ...props }: SidebarSectionProps) {
         className,
       )}
       {...props}>
-      <Minus aria-hidden="true" className="inline size-4 stroke-2" />
+      <MinusIcon aria-hidden="true" className="inline size-4 stroke-2" />
       <span className="ml-6">{text}</span>
     </h5>
   );

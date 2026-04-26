@@ -1,6 +1,8 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
+import { createPublishExports, createRootExports } from '../packages/ui/scripts/public-exports.mjs';
+
 function readJson(filePath) {
   return JSON.parse(readFileSync(filePath, 'utf8'));
 }
@@ -9,7 +11,36 @@ function createCheck(name, ok, details) {
   return { name, ok, details };
 }
 
-export function verifyPackContract({ rootDir = process.cwd() } = {}) {
+function verifySubpathExports(exportsMap, rootDir, { requireBuiltArtifacts }) {
+  return Object.entries(createPublishExports())
+    .filter(([subpath]) => subpath !== '.' && subpath !== './styles.css')
+    .flatMap(([subpath, expected]) => {
+      const actual = exportsMap[subpath];
+      const manifestMatches =
+        actual?.types === expected.types &&
+        actual?.import === expected.import &&
+        actual?.default === expected.default;
+      const artifactPaths = [expected.types, expected.import].map((artifactPath) =>
+        path.join(rootDir, 'packages/ui', artifactPath),
+      );
+      const artifactsExist = artifactPaths.every((artifactPath) => existsSync(artifactPath));
+
+      return [
+        createCheck(
+          `publishConfig exposes ${subpath} built artifacts`,
+          manifestMatches,
+          `expected=${JSON.stringify(expected)}; actual=${JSON.stringify(actual)}`,
+        ),
+        createCheck(
+          `built artifacts exist for ${subpath}`,
+          requireBuiltArtifacts ? artifactsExist : true,
+          artifactPaths.join(', '),
+        ),
+      ];
+    });
+}
+
+export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = process.cwd() } = {}) {
   const packageManifestPath = path.join(rootDir, 'packages/ui/package.json');
   const rootManifestPath = path.join(rootDir, 'package.json');
   const releaseWorkflowPath = path.join(rootDir, '.github/workflows/release.yml');
@@ -27,6 +58,8 @@ export function verifyPackContract({ rootDir = process.cwd() } = {}) {
 
   const files = Array.isArray(packageManifest.files) ? packageManifest.files : [];
   const exportsMap = packageManifest.publishConfig?.exports ?? {};
+  const expectedRootExports = createRootExports();
+  const expectedPublishExports = createPublishExports();
   const scripts = rootManifest.scripts ?? {};
 
   const checks = [
@@ -42,10 +75,13 @@ export function verifyPackContract({ rootDir = process.cwd() } = {}) {
     ),
     createCheck(
       'publishConfig exports point at built dist artifacts',
-      exportsMap['.']?.types === './dist/index.d.ts' &&
-        exportsMap['.']?.import === './dist/index.js' &&
-        exportsMap['./styles.css'] === './dist/styles.css',
+      JSON.stringify(exportsMap) === JSON.stringify(expectedPublishExports),
       JSON.stringify(exportsMap),
+    ),
+    createCheck(
+      'local exports are synchronized from the public export contract',
+      JSON.stringify(packageManifest.exports) === JSON.stringify(expectedRootExports),
+      JSON.stringify(packageManifest.exports),
     ),
     createCheck(
       'package build emits declarations after vite clears dist',
@@ -97,6 +133,7 @@ export function verifyPackContract({ rootDir = process.cwd() } = {}) {
         packageReadme.includes('beta release'),
       packageReadme,
     ),
+    ...verifySubpathExports(exportsMap, rootDir, { requireBuiltArtifacts }),
   ];
 
   return {

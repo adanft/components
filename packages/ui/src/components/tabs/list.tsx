@@ -19,6 +19,18 @@ function getEnabledTabs(element: HTMLDivElement) {
   );
 }
 
+function isTabsNavigationKey(key: string, orientation: TabsListOrientation) {
+  if (key === 'Home' || key === 'End') {
+    return true;
+  }
+
+  if (orientation === TABS_LIST_ORIENTATION.HORIZONTAL) {
+    return key === 'ArrowRight' || key === 'ArrowLeft';
+  }
+
+  return key === 'ArrowDown' || key === 'ArrowUp';
+}
+
 function TabsList({
   children,
   onKeyDown,
@@ -29,6 +41,10 @@ function TabsList({
     onKeyDown?.(event);
 
     if (event.defaultPrevented) {
+      return;
+    }
+
+    if (!isTabsNavigationKey(event.key, orientation)) {
       return;
     }
 
@@ -44,31 +60,15 @@ function TabsList({
 
     switch (event.key) {
       case 'ArrowRight':
-        if (orientation === TABS_LIST_ORIENTATION.VERTICAL) {
-          return;
-        }
-
         nextIndex = (currentIndex + 1) % tabs.length;
         break;
       case 'ArrowLeft':
-        if (orientation === TABS_LIST_ORIENTATION.VERTICAL) {
-          return;
-        }
-
         nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
         break;
       case 'ArrowDown':
-        if (orientation === TABS_LIST_ORIENTATION.HORIZONTAL) {
-          return;
-        }
-
         nextIndex = (currentIndex + 1) % tabs.length;
         break;
       case 'ArrowUp':
-        if (orientation === TABS_LIST_ORIENTATION.HORIZONTAL) {
-          return;
-        }
-
         nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
         break;
       case 'Home':

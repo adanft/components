@@ -247,7 +247,9 @@ function TablePage() {
           </p>
         </div>
 
-        <h3 className="text-lg font-semibold text-heading">TableHeader, TableBody and TableFooter</h3>
+        <h3 className="text-lg font-semibold text-heading">
+          TableHeader, TableBody and TableFooter
+        </h3>
         <Table>
           <TableHeader>
             <TableRow>

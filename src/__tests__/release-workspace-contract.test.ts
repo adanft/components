@@ -13,7 +13,7 @@ describe('release workspace contract', () => {
   it('reads the legacy alias policy version from the publishable ui package manifest', async () => {
     const { readPackageVersion } = await import('../../scripts/legacy-alias-policy.mjs');
 
-    await expect(readPackageVersion()).resolves.toBe('0.1.0-beta.3');
+    await expect(readPackageVersion()).resolves.toBe('0.2.0-beta.0');
   });
 
   it('configures changesets and release scripts for the ui package only', () => {
@@ -48,7 +48,7 @@ describe('release workspace contract', () => {
     // @ts-expect-error Node ESM script imported for contract verification in tests.
     const { verifyPackContract } = await import('../../scripts/verify-pack-contract.mjs');
 
-    const verification = verifyPackContract({ rootDir: repoRoot });
+    const verification = verifyPackContract({ requireBuiltArtifacts: false, rootDir: repoRoot });
 
     expect(verification.ok).toBe(true);
     expect(verification.checks.every((check: { ok: boolean }) => check.ok)).toBe(true);

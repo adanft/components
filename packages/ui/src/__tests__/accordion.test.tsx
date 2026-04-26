@@ -46,11 +46,32 @@ describe('Accordion', () => {
     expect(screen.getByRole('region', { name: 'Analytics' })).toHaveTextContent(
       'Analytics content',
     );
-    expect(screen.queryByText('Overview content')).not.toBeVisible();
+    expect(screen.queryByText('Overview content')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'Analytics' }));
 
     expect(screen.queryByRole('region', { name: 'Analytics' })).not.toBeInTheDocument();
+  });
+
+  it('keeps closed content mounted when keepMounted is true', () => {
+    render(
+      <Accordion value="overview" onValueChange={() => undefined}>
+        <Accordion.Item value="overview">
+          <Accordion.Header>
+            <Accordion.Trigger>Overview</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>Overview content</Accordion.Content>
+        </Accordion.Item>
+        <Accordion.Item value="analytics">
+          <Accordion.Header>
+            <Accordion.Trigger>Analytics</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content keepMounted>Analytics content</Accordion.Content>
+        </Accordion.Item>
+      </Accordion>,
+    );
+
+    expect(screen.getByText('Analytics content')).not.toBeVisible();
   });
 
   it('moves focus between triggers with keyboard', () => {
@@ -132,13 +153,13 @@ describe('Accordion', () => {
           <Accordion.Header>
             <Accordion.Trigger>First item</Accordion.Trigger>
           </Accordion.Header>
-          <Accordion.Content>First content</Accordion.Content>
+          <Accordion.Content keepMounted>First content</Accordion.Content>
         </Accordion.Item>
         <Accordion.Item value="item-a">
           <Accordion.Header>
             <Accordion.Trigger>Second item</Accordion.Trigger>
           </Accordion.Header>
-          <Accordion.Content>Second content</Accordion.Content>
+          <Accordion.Content keepMounted>Second content</Accordion.Content>
         </Accordion.Item>
       </Accordion>,
     );

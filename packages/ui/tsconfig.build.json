@@ -4,9 +4,9 @@
     "noEmit": false,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "rootDir": "./src",
     "outDir": "./dist"
   },
-  "exclude": ["src/**/*.test.*", "src/**/__tests__/**"]
+  "exclude": ["src/**/*.test.*", "src/**/__tests__/**", "src/test/**"]
 }

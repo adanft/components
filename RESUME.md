@@ -14,7 +14,7 @@ site.
 - **Docs URL**: <https://adanft.github.io/components>
 - **Docs base path**: `/components/`
 - **Default branch**: `main`
-- **Current beta package version**: `0.1.0-beta.3`
+- **Current beta package version**: `0.2.0-beta.0`
 
 The docs app is intentionally a real consumer of the package. It must import from `@adanft/ui`, not
 from package internals.
@@ -338,7 +338,7 @@ The package release flow uses Changesets.
 - `packages/ui` is the only publishable package.
 - `apps/docs` is private and ignored by Changesets.
 - While releases are beta-only, releases publish `@adanft/ui` with the npm `latest` tag.
-- Current beta package version is `0.1.0-beta.3`.
+- Current beta package version is `0.2.0-beta.0`.
 - Stable `1.0.0` is not the current target.
 
 Release-related commands:

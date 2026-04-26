@@ -1,7 +1,7 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '../../helpers/cn';
+import { ChevronLeftIcon, ChevronRightIcon } from '../../icons';
 
 export type PaginationFootProps = ComponentPropsWithoutRef<'div'> & {
   pageIndex: number;
@@ -83,7 +83,7 @@ function PaginationFoot({
               disabled={!canPrev}
               onClick={() => onPageChange(pageIndex - 1)}
               className={arrowButtonClasses}>
-              <ChevronLeft className="size-4" aria-hidden="true" />
+              <ChevronLeftIcon className="size-4" aria-hidden="true" />
             </button>
           </li>
           {pages.map((page, idx) => (
@@ -114,7 +114,7 @@ function PaginationFoot({
               disabled={!canNext}
               onClick={() => onPageChange(pageIndex + 1)}
               className={arrowButtonClasses}>
-              <ChevronRight className="size-4" aria-hidden="true" />
+              <ChevronRightIcon className="size-4" aria-hidden="true" />
             </button>
           </li>
         </ul>

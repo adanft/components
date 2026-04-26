@@ -1,7 +1,7 @@
-import { Check } from 'lucide-react';
 import { type ComponentPropsWithoutRef, useId } from 'react';
 
 import { cn } from '../helpers/cn';
+import { CheckIcon } from '../icons';
 
 type CheckboxProps = Omit<ComponentPropsWithoutRef<'input'>, 'type'> & {
   label?: string;
@@ -43,7 +43,7 @@ function Checkbox({
         disabled={disabled}
         className={inputClassName}
       />
-      <Check
+      <CheckIcon
         aria-hidden="true"
         className="pointer-events-none absolute hidden h-3 w-3 text-white peer-checked:block"
         strokeWidth={3}

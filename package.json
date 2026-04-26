@@ -19,11 +19,11 @@
     "validate:boundaries": "node scripts/validate-docs-imports.mjs",
     "validate:pack-contract": "node scripts/verify-pack-contract.mjs",
     "validate:semantic-tokens": "node scripts/validate-semantic-tokens.mjs",
-    "validate": "pnpm check && pnpm typecheck && pnpm test && pnpm validate:boundaries && pnpm validate:pack-contract && pnpm validate:semantic-tokens && pnpm build",
+    "validate": "pnpm check && pnpm typecheck && pnpm test && pnpm validate:boundaries && pnpm validate:semantic-tokens && pnpm build && pnpm validate:pack-contract",
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "release": "changeset publish --tag latest",
-    "release:latest": "pnpm validate:pack-contract && pnpm --dir packages/ui build && pnpm release",
+    "release:latest": "pnpm --dir packages/ui build && pnpm validate:pack-contract && pnpm release",
     "release:beta": "pnpm release:latest"
   },
   "devDependencies": {

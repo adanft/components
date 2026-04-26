@@ -2,10 +2,16 @@ import type { ComponentPropsWithoutRef } from 'react';
 
 import { useAccordionItemContext } from './context';
 
-type AccordionContentProps = ComponentPropsWithoutRef<'section'>;
+type AccordionContentProps = ComponentPropsWithoutRef<'section'> & {
+  keepMounted?: boolean;
+};
 
-function AccordionContent({ children, ...props }: AccordionContentProps) {
+function AccordionContent({ children, keepMounted = false, ...props }: AccordionContentProps) {
   const itemContext = useAccordionItemContext('Content');
+
+  if (!keepMounted && !itemContext.open) {
+    return null;
+  }
 
   return (
     <section

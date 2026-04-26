@@ -6,7 +6,7 @@ Reusable React UI components from the adanft design system.
 
 This package is currently published as a **beta** release.
 
-Current beta version: `0.1.0-beta.3`.
+Current beta version: `0.2.0-beta.0`.
 
 Before any beta release publish, run `pnpm validate:pack-contract` from the workspace root to verify the package manifest, publish exports, workflow guardrail, and stylesheet subpath contract.
 
@@ -18,23 +18,23 @@ That means consumers should:
 
 1. install Tailwind CSS
 2. import the package stylesheet contract
-3. ensure their Tailwind entry scans both app sources and the package sources they consume
+3. ensure their Tailwind entry scans both app sources and the compiled package output
 
 The docs app in this repo (`apps/docs`) is the reference consumer implementation.
 
 ## Usage
 
-Add the package stylesheet and register the compiled package entry as a Tailwind source in your app
+Add the package stylesheet and register the compiled package output as a Tailwind source in your app
 stylesheet:
 
 ```css
 @import "tailwindcss";
 @import "@adanft/ui/styles.css";
 
-@source "../node_modules/@adanft/ui/dist/index.js";
+@source "../node_modules/@adanft/ui/dist";
 ```
 
-Then import components from the package root:
+Then import components from the package root for convenience:
 
 ```tsx
 import { Button, initializeTheme } from '@adanft/ui';
@@ -42,10 +42,18 @@ import { Button, initializeTheme } from '@adanft/ui';
 initializeTheme();
 ```
 
+You can also import documented public component subpaths when you want narrower entrypoints:
+
+```tsx
+import Button from '@adanft/ui/button';
+import Modal from '@adanft/ui/modal';
+import Tabs from '@adanft/ui/tabs';
+```
+
 ## Notes
 
-- The public API is exported from the package root only.
-- Do not deep-import internal files.
+- The public API is exported from the package root and documented public subpaths.
+- Do not deep-import internal files like `@adanft/ui/src/components/...`.
 - Router-specific behavior belongs in the consumer app, not in this package.
 
 ## Repository

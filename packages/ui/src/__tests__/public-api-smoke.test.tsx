@@ -15,8 +15,16 @@ import {
   TableRow,
 } from '@adanft/ui';
 import { render, screen } from '@testing-library/react';
-import { ShoppingCart } from 'lucide-react';
+import type { SVGProps } from 'react';
 import { describe, expect, it, vi } from 'vitest';
+
+function ShoppingCartIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path d="M4 4h2l2 12h10l2-8H7" />
+    </svg>
+  );
+}
 
 describe('@adanft/ui public API', () => {
   it('re-exports representative component behavior without deep imports or router context', () => {
@@ -43,7 +51,7 @@ describe('@adanft/ui public API', () => {
           <option value="pro">Pro</option>
         </Select>
 
-        <SidebarLink href="/orders" icon={ShoppingCart} text="Orders" />
+        <SidebarLink href="/orders" icon={ShoppingCartIcon} text="Orders" />
         <SidebarGroupLink href="/orders/history" text="Order history" />
 
         <Table aria-label="Smoke table">

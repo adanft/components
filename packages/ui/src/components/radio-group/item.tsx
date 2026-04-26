@@ -1,8 +1,8 @@
-import { Circle } from 'lucide-react';
 import type { ComponentPropsWithoutRef } from 'react';
 import { useId } from 'react';
 
 import { cn } from '../../helpers/cn';
+import { CircleIcon } from '../../icons';
 import { useRadioGroupContext } from './context';
 
 type RadioGroupItemProps = Omit<
@@ -56,7 +56,7 @@ function RadioGroupItem({ className, disabled, id, label, value, ...props }: Rad
             className,
           )}
         />
-        <Circle
+        <CircleIcon
           aria-hidden="true"
           className="pointer-events-none absolute hidden h-2.5 w-2.5 fill-brand text-brand peer-checked:block"
           strokeWidth={0}

@@ -1,7 +1,7 @@
-import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import type { ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '../../helpers/cn';
+import { SidebarClosedIcon, SidebarOpenIcon } from '../../icons';
 import { useSidebarContext } from './context';
 
 type SidebarHeadProps = ComponentPropsWithoutRef<'header'> & {
@@ -12,7 +12,7 @@ type SidebarHeadProps = ComponentPropsWithoutRef<'header'> & {
 
 function SidebarHead({ className, href = '/', logoSrc, title, ...props }: SidebarHeadProps) {
   const { action, state } = useSidebarContext('Head');
-  const ToggleIcon = state ? PanelLeftClose : PanelLeftOpen;
+  const ToggleIcon = state ? SidebarOpenIcon : SidebarClosedIcon;
 
   return (
     <header {...props} className={cn('relative flex items-center h-24 p-2', className)}>

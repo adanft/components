@@ -1,40 +1,10 @@
-import {
-  type ComponentPropsWithoutRef,
-  type KeyboardEvent,
-  type MouseEvent,
-  useLayoutEffect,
-  useRef,
-} from 'react';
+import type { ComponentPropsWithoutRef, KeyboardEvent, MouseEvent } from 'react';
 
 import { cn } from '../../helpers/cn';
 import Box from '../box';
 import { useModalContext } from './context';
 
 type ModalPanelProps = ComponentPropsWithoutRef<'div'>;
-
-const focusableSelector = [
-  '[contentEditable=true]',
-  '[tabindex]',
-  'a[href]',
-  'area[href]',
-  'button:not([disabled])',
-  'iframe',
-  'input:not([disabled])',
-  'select:not([disabled])',
-  'details>summary',
-  'textarea:not([disabled])',
-]
-  .map((selector) => `${selector}:not([tabindex='-1'])`)
-  .join(',');
-
-function getFocusableElements(container: HTMLElement | null): HTMLElement[] {
-  if (!container) return [];
-  return Array.from(container.querySelectorAll<HTMLElement>(focusableSelector))
-    .filter((el) => !el.closest('[hidden]') && el.offsetParent !== null)
-    .sort((a, z) =>
-      Math.sign((a.tabIndex || Number.MAX_SAFE_INTEGER) - (z.tabIndex || Number.MAX_SAFE_INTEGER)),
-    );
-}
 
 function ModalPanel({
   'aria-label': ariaLabel,
@@ -44,16 +14,14 @@ function ModalPanel({
   className,
   ...props
 }: ModalPanelProps) {
-  const { titleId, onClose, previousActiveElementRef } = useModalContext('Panel');
-  const panelRef = useRef<HTMLDivElement>(null);
+  const { initialFocusRef, titleId, onClose } = useModalContext('Panel');
   const accessibleNameProps = ariaLabelledBy
     ? { 'aria-labelledby': ariaLabelledBy }
     : { 'aria-labelledby': ariaLabel ? undefined : titleId, 'aria-label': ariaLabel };
 
-  useLayoutEffect(() => {
-    previousActiveElementRef.current ??= document.activeElement as HTMLElement | null;
-    (panelRef.current?.querySelector<HTMLElement>('[data-autofocus]') ?? panelRef.current)?.focus();
-  }, [previousActiveElementRef]);
+  function setInitialFocus(node: HTMLDivElement | null) {
+    initialFocusRef.current = node?.querySelector<HTMLElement>('[data-autofocus]') ?? node;
+  }
 
   function handleClick(e: MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
@@ -61,35 +29,21 @@ function ModalPanel({
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
-    if (e.key === 'Escape') {
-      onClose();
-      onKeyDown?.(e);
+    onKeyDown?.(e);
+
+    if (e.defaultPrevented) {
       return;
     }
 
-    if (e.key === 'Tab') {
-      const focusable = getFocusableElements(panelRef.current);
-      const active = document.activeElement;
-      const first = focusable[0];
-      const last = focusable.at(-1);
-
-      if (focusable.length === 0) {
-        e.preventDefault();
-      } else if (e.shiftKey && (active === first || active === panelRef.current)) {
-        e.preventDefault();
-        last?.focus();
-      } else if (!e.shiftKey && (active === last || active === panelRef.current)) {
-        e.preventDefault();
-        first?.focus();
-      }
+    if (e.key === 'Escape') {
+      onClose();
     }
-
-    onKeyDown?.(e);
   }
 
   return (
     <Box
-      ref={panelRef}
+      {...props}
+      ref={setInitialFocus}
       role="dialog"
       aria-modal="true"
       {...accessibleNameProps}
@@ -97,7 +51,6 @@ function ModalPanel({
       className={cn('z-50 pointer-events-auto outline-none', className)}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      {...props}
     />
   );
 }

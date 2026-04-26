@@ -1,8 +1,16 @@
 import { render, screen } from '@testing-library/react';
-import { AlertCircle } from 'lucide-react';
+import type { SVGProps } from 'react';
 import { describe, expect, it } from 'vitest';
 
 import { Alert } from '../index';
+
+function AlertCircleIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <circle cx="12" cy="12" r="10" />
+    </svg>
+  );
+}
 
 describe('Alert', () => {
   it('renders root, title and description', () => {
@@ -46,7 +54,9 @@ describe('Alert', () => {
 
   it('renders an optional icon', () => {
     render(
-      <Alert icon={<AlertCircle data-testid="alert-icon" size={18} />}>Connection issue</Alert>,
+      <Alert icon={<AlertCircleIcon data-testid="alert-icon" width={18} height={18} />}>
+        Connection issue
+      </Alert>,
     );
 
     expect(screen.getByTestId('alert-icon')).toBeInTheDocument();

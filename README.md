@@ -31,6 +31,7 @@ Useful commands:
 The reusable library lives in `packages/ui` and is consumed as `@adanft/ui`.
 
 - Docs must import from `@adanft/ui`
+- Public package imports are available from `@adanft/ui` and documented subpaths like `@adanft/ui/tabs`
 - Docs must not deep-import package internals
 - `@adanft/ui` is currently a **Tailwind-dependent** package model
 - `apps/docs/src/index.css` is the consumer-owned Tailwind entrypoint for the docs app
@@ -39,7 +40,7 @@ The reusable library lives in `packages/ui` and is consumed as `@adanft/ui`.
 
 This workspace publishes beta versions of `@adanft/ui` to npm.
 
-- Current beta version: `0.1.0-beta.3`
+- Current beta version: `0.2.0-beta.0`
 - Stable `1.0.0` is **not** the current target yet
 - Beta publish guardrail: `pnpm validate:pack-contract`
 - While releases are beta-only, the newest beta is published as npm `latest`

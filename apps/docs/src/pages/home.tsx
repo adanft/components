@@ -46,12 +46,19 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
 
 const INSTALL_SNIPPET = `pnpm add @adanft/ui`;
 
-const THEME_BOOTSTRAP_SNIPPET = `import '@adanft/ui/styles.css';
-import { initializeTheme } from '@adanft/ui';
+const STYLE_SETUP_SNIPPET = `@import "tailwindcss";
+@import "@adanft/ui/styles.css";
+
+@source "../node_modules/@adanft/ui/dist";`;
+
+const THEME_BOOTSTRAP_SNIPPET = `import { initializeTheme } from '@adanft/ui';
 
 initializeTheme();`;
 
 const USAGE_SNIPPET = `import { Button } from '@adanft/ui';
+
+// Or use a documented public subpath for a narrower entrypoint.
+// import Button from '@adanft/ui/button';
 
 function Example() {
   return <Button>Save changes</Button>;
@@ -111,8 +118,9 @@ function Home() {
       <section id="installation" className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">Installation</h2>
         <p className="max-w-3xl text-foreground">
-          Install the package, load the stylesheet once, and initialize the theme before rendering
-          components. That is the foundation; skip it and your app is a house without plumbing.
+          Install the package, register the compiled output in your Tailwind entry, load the
+          stylesheet once, and initialize the theme before rendering components. That is the
+          foundation; skip it and your app is a house without plumbing.
         </p>
 
         <div className="grid gap-4 lg:grid-cols-2">
@@ -122,7 +130,12 @@ function Home() {
           </div>
 
           <div className="space-y-3 rounded-md border border-border bg-surface p-4 shadow-card">
-            <h3 className="text-lg font-semibold text-heading">Bootstrap styles and theme</h3>
+            <h3 className="text-lg font-semibold text-heading">Register styles in Tailwind</h3>
+            <CodeBlock code={STYLE_SETUP_SNIPPET} />
+          </div>
+
+          <div className="space-y-3 rounded-md border border-border bg-surface p-4 shadow-card lg:col-span-2">
+            <h3 className="text-lg font-semibold text-heading">Bootstrap theme</h3>
             <CodeBlock code={THEME_BOOTSTRAP_SNIPPET} />
           </div>
         </div>
@@ -131,8 +144,10 @@ function Home() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">Basic usage</h2>
         <p className="max-w-3xl text-foreground">
-          Import components from <Code>@adanft/ui</Code>. The docs pages show composition patterns,
-          accessibility notes, and API references for each component.
+          Import components from <Code>@adanft/ui</Code> for convenience, or use documented public
+          subpaths like <Code>@adanft/ui/button</Code> when you want narrower entrypoints. The docs
+          pages show composition patterns, accessibility notes, and API references for each
+          component.
         </p>
         <CodeBlock code={USAGE_SNIPPET} />
       </section>

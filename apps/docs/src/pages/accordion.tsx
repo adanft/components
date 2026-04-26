@@ -267,6 +267,35 @@ function AccordionPage() {
           </TableBody>
         </Table>
 
+        <h3 className="text-lg font-semibold text-heading">Accordion.Content</h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>keepMounted</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Keeps closed content mounted and hidden with the native <Code>hidden</Code>{' '}
+                attribute. By default, closed panels unmount to avoid rendering hidden work.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
         <h3 className="text-lg font-semibold text-heading">Accordion.Header</h3>
         <div className="space-y-3 text-base leading-7 text-foreground">
           <p>
