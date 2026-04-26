@@ -31,6 +31,7 @@ Useful commands:
 The reusable library lives in `packages/ui` and is consumed as `@adanft/ui`.
 
 - Docs must import from `@adanft/ui`
+- Public package imports are available from `@adanft/ui` and documented subpaths like `@adanft/ui/tabs`
 - Docs must not deep-import package internals
 - `@adanft/ui` is currently a **Tailwind-dependent** package model
 - `apps/docs/src/index.css` is the consumer-owned Tailwind entrypoint for the docs app
