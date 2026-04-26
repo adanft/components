@@ -22,7 +22,6 @@ export default defineConfig({
       },
       fileName: (_format, entryName) => `${entryName}.js`,
       formats: ['es'],
-      name: 'AdanftUi',
     },
     outDir: 'dist',
     rollupOptions: {
