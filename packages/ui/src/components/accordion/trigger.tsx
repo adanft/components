@@ -4,11 +4,20 @@ import { useAccordionContext, useAccordionItemContext } from './context';
 
 type AccordionTriggerProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
+function isAccordionNavigationKey(key: string) {
+  return key === 'ArrowDown' || key === 'ArrowUp' || key === 'Home' || key === 'End';
+}
+
 function AccordionTrigger({ children, onClick, onKeyDown, ...props }: AccordionTriggerProps) {
   const accordionContext = useAccordionContext('Trigger');
   const itemContext = useAccordionItemContext('Trigger');
 
   function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
+    if (!isAccordionNavigationKey(event.key)) {
+      onKeyDown?.(event);
+      return;
+    }
+
     const root = event.currentTarget.closest('[data-accordion-root="true"]');
     const triggers = Array.from(
       root?.querySelectorAll<HTMLButtonElement>('[data-accordion-trigger="true"]') ?? [],
