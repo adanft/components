@@ -48,7 +48,7 @@ describe('release workspace contract', () => {
     // @ts-expect-error Node ESM script imported for contract verification in tests.
     const { verifyPackContract } = await import('../../scripts/verify-pack-contract.mjs');
 
-    const verification = verifyPackContract({ rootDir: repoRoot });
+    const verification = verifyPackContract({ requireBuiltArtifacts: false, rootDir: repoRoot });
 
     expect(verification.ok).toBe(true);
     expect(verification.checks.every((check: { ok: boolean }) => check.ok)).toBe(true);

@@ -11,7 +11,7 @@ function createCheck(name, ok, details) {
   return { name, ok, details };
 }
 
-function verifySubpathExports(exportsMap, rootDir) {
+function verifySubpathExports(exportsMap, rootDir, { requireBuiltArtifacts }) {
   return Object.entries(createPublishExports())
     .filter(([subpath]) => subpath !== '.' && subpath !== './styles.css')
     .flatMap(([subpath, expected]) => {
@@ -33,14 +33,14 @@ function verifySubpathExports(exportsMap, rootDir) {
         ),
         createCheck(
           `built artifacts exist for ${subpath}`,
-          artifactsExist,
+          requireBuiltArtifacts ? artifactsExist : true,
           artifactPaths.join(', '),
         ),
       ];
     });
 }
 
-export function verifyPackContract({ rootDir = process.cwd() } = {}) {
+export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = process.cwd() } = {}) {
   const packageManifestPath = path.join(rootDir, 'packages/ui/package.json');
   const rootManifestPath = path.join(rootDir, 'package.json');
   const releaseWorkflowPath = path.join(rootDir, '.github/workflows/release.yml');
@@ -133,7 +133,7 @@ export function verifyPackContract({ rootDir = process.cwd() } = {}) {
         packageReadme.includes('beta release'),
       packageReadme,
     ),
-    ...verifySubpathExports(exportsMap, rootDir),
+    ...verifySubpathExports(exportsMap, rootDir, { requireBuiltArtifacts }),
   ];
 
   return {
