@@ -50,6 +50,7 @@ const INSTALL_SNIPPET = `pnpm add @adanft/ui`;
 const STYLE_SETUP_SNIPPET = `@import "tailwindcss";
 @import "@adanft/ui/styles.css";
 
+/* Adjust the relative path from this stylesheet to node_modules. */
 @source "../node_modules/@adanft/ui/dist";`;
 
 const THEME_BOOTSTRAP_SNIPPET = `import { initializeTheme } from '@adanft/ui';
@@ -119,8 +120,8 @@ function Home() {
       <section id="installation" className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">Installation</h2>
         <p className="max-w-3xl text-foreground">
-          Install the package, register the compiled output in your Tailwind entry, load the
-          stylesheet once, and initialize the theme before rendering components. That is the
+          Install the package, load the stylesheet once, register the package output in your
+          Tailwind entry, and initialize the theme before rendering components. That is the
           foundation; skip it and your app is a house without plumbing.
         </p>
 
