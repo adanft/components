@@ -6,7 +6,7 @@ Reusable React UI components from the adanft design system.
 
 This package is currently published as a **beta** release.
 
-Current beta version: `0.2.0-beta.0`.
+Current beta version: `0.2.0-beta.1`.
 
 Before any beta release publish, run `pnpm validate:pack-contract` from the workspace root to verify the package manifest, publish exports, workflow guardrail, and stylesheet subpath contract.
 
@@ -31,6 +31,7 @@ stylesheet:
 @import "tailwindcss";
 @import "@adanft/ui/styles.css";
 
+/* Adjust the relative path from this stylesheet to node_modules. */
 @source "../node_modules/@adanft/ui/dist";
 ```
 

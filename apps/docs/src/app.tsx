@@ -6,6 +6,7 @@ import {
   DOCS_AVATAR_PATH,
   DOCS_BADGE_PATH,
   DOCS_BOX_PATH,
+  DOCS_BREADCRUMBS_PATH,
   DOCS_BUTTON_PATH,
   DOCS_CHECKBOX_PATH,
   DOCS_DROPDOWN_MENU_PATH,
@@ -33,6 +34,7 @@ import AlertPage from './pages/alert';
 import AvatarPage from './pages/avatar';
 import BadgePage from './pages/badge';
 import BoxPage from './pages/box';
+import BreadcrumbsPage from './pages/breadcrumbs';
 import ButtonPage from './pages/button';
 import CheckboxPage from './pages/checkbox';
 import DropdownMenuPage from './pages/dropdown-menu';
@@ -66,6 +68,7 @@ function App() {
         <Route path={DOCS_BADGE_PATH} element={<BadgePage />} />
         <Route path={DOCS_BUTTON_PATH} element={<ButtonPage />} />
         <Route path={DOCS_BOX_PATH} element={<BoxPage />} />
+        <Route path={DOCS_BREADCRUMBS_PATH} element={<BreadcrumbsPage />} />
         <Route path={DOCS_DROPDOWN_MENU_PATH} element={<DropdownMenuPage />} />
         <Route path={DOCS_FIELD_PATH} element={<FieldPage />} />
         <Route path={DOCS_INPUT_PATH} element={<InputPage />} />

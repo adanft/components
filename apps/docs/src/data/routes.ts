@@ -21,6 +21,7 @@ const DOCS_AVATAR_PATH = '/components/avatar';
 const DOCS_BADGE_PATH = '/components/badge';
 const DOCS_BUTTON_PATH = '/components/button';
 const DOCS_BOX_PATH = '/components/box';
+const DOCS_BREADCRUMBS_PATH = '/components/breadcrumbs';
 const DOCS_DROPDOWN_MENU_PATH = '/components/dropdown-menu';
 const DOCS_FIELD_PATH = '/components/field';
 const DOCS_INPUT_PATH = '/components/input';
@@ -48,6 +49,7 @@ export {
   DOCS_BADGE_PATH,
   DOCS_BASE_PATH,
   DOCS_BOX_PATH,
+  DOCS_BREADCRUMBS_PATH,
   DOCS_BUTTON_PATH,
   DOCS_CHECKBOX_PATH,
   DOCS_DROPDOWN_MENU_PATH,

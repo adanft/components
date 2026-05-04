@@ -1,10 +1,11 @@
-import type { ComponentPropsWithoutRef } from 'react';
+import { cloneElement, isValidElement, type ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '../helpers/cn';
 
 type ButtonVariant = 'primary' | 'secondary';
 type ButtonSize = 'sm' | 'md' | 'lg';
 type ButtonProps = ComponentPropsWithoutRef<'button'> & {
+  asChild?: boolean;
   variant?: ButtonVariant;
   size?: ButtonSize;
 };
@@ -21,8 +22,10 @@ const sizeStyles: Record<ButtonSize, string> = {
 };
 
 function Button({
+  asChild,
   children,
   className,
+  disabled,
   type = 'button',
   variant = 'primary',
   size = 'md',
@@ -36,8 +39,15 @@ function Button({
     className,
   );
 
+  if (asChild && isValidElement<{ className?: string }>(children)) {
+    return cloneElement(children, {
+      ...props,
+      className: cn(buttonClassName, children.props.className),
+    });
+  }
+
   return (
-    <button {...props} type={type} className={buttonClassName}>
+    <button {...props} disabled={disabled} type={type} className={buttonClassName}>
       {children}
     </button>
   );
