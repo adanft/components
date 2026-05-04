@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@adanft/ui';
+import { Link } from 'react-router';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
@@ -23,6 +24,12 @@ const variantsSnippet = `<Button variant="primary">Primary</Button>
 const sizesSnippet = `<Button size="sm">Small</Button>
 <Button size="md">Medium</Button>
 <Button size="lg">Large</Button>`;
+
+const linkSnippet = `import { Link } from 'react-router';
+
+<Button asChild>
+  <Link to="/components">Go to</Link>
+</Button>`;
 
 function ButtonPage() {
   return (
@@ -69,6 +76,17 @@ function ButtonPage() {
           <Button size="lg">Large</Button>
         </Box>
         <CodeBlock code={sizesSnippet} />
+        <h3 className="text-lg font-semibold text-heading">Links</h3>
+        <p className="text-base leading-7 text-foreground">
+          Use <Code>asChild</Code> when React Router, Next.js, or another link component owns
+          navigation. Native <Code>disabled</Code> behavior remains button-only.
+        </p>
+        <Box className="flex items-center" shadow="none" surface="none">
+          <Button asChild>
+            <Link to="/components">Go to</Link>
+          </Button>
+        </Box>
+        <CodeBlock code={linkSnippet} />
       </section>
 
       <section className="space-y-4">
@@ -106,6 +124,20 @@ function ButtonPage() {
                 <Code>{`"md"`}</Code>
               </TableCell>
               <TableCell>Controls the height and horizontal spacing of the button.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>asChild</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Applies Button styling to a child element, such as React Router or Next.js links.
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>

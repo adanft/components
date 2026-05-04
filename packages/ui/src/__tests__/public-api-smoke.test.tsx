@@ -16,8 +16,16 @@ import {
   TableRow,
 } from '@adanft/ui';
 import { render, screen } from '@testing-library/react';
-import type { SVGProps } from 'react';
+import type { ComponentPropsWithoutRef, SVGProps } from 'react';
 import { describe, expect, it, vi } from 'vitest';
+
+type RouterLinkProps = Omit<ComponentPropsWithoutRef<'a'>, 'href'> & {
+  to: string;
+};
+
+function RouterLink({ to, ...props }: RouterLinkProps) {
+  return <a href={to} {...props} />;
+}
 
 function ShoppingCartIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -46,6 +54,9 @@ describe('@adanft/ui public API', () => {
         </Alert>
 
         <Button disabled={true}>Save changes</Button>
+        <Button asChild>
+          <RouterLink to="/checkout">Checkout</RouterLink>
+        </Button>
 
         <Breadcrumbs>
           <Breadcrumbs.List>
@@ -86,6 +97,7 @@ describe('@adanft/ui public API', () => {
     expect(screen.getByText('Heads up')).toBeInTheDocument();
     expect(screen.getByText(/review the latest changes/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /save changes/i })).toBeDisabled();
+    expect(screen.getByRole('link', { name: /checkout/i })).toHaveAttribute('href', '/checkout');
     expect(screen.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument();
     expect(screen.getByText('Current page')).toHaveAttribute('aria-current', 'page');
     expect(screen.getByRole('combobox', { name: /select plan/i })).toHaveValue('starter');

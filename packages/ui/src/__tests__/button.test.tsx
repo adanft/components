@@ -1,7 +1,16 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import type { ComponentPropsWithoutRef } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { Button } from '../index';
+
+type RouterLinkProps = Omit<ComponentPropsWithoutRef<'a'>, 'href'> & {
+  to: string;
+};
+
+function RouterLink({ to, ...props }: RouterLinkProps) {
+  return <a href={to} {...props} />;
+}
 
 describe('Button', () => {
   it('renders children content', () => {
@@ -98,5 +107,33 @@ describe('Button', () => {
 
     expect(button).toHaveClass('bg-green-500');
     expect(button).not.toHaveClass('bg-brand');
+  });
+
+  it('composes router-like links with asChild while preserving variant and size styles', () => {
+    render(
+      <Button asChild variant="secondary" size="sm">
+        <RouterLink to="/docs">Open docs</RouterLink>
+      </Button>,
+    );
+
+    const link = screen.getByRole('link', { name: 'Open docs' });
+
+    expect(link).toHaveAttribute('href', '/docs');
+    expect(link).toHaveClass('bg-muted', 'text-white', 'text-sm', 'h-8', 'px-4');
+    expect(link).not.toHaveAttribute('type');
+  });
+
+  it('merges child className with Button className when asChild is enabled', () => {
+    render(
+      <Button asChild className="ui-class">
+        <RouterLink to="/account" className="router-class">
+          Account
+        </RouterLink>
+      </Button>,
+    );
+
+    const link = screen.getByRole('link', { name: 'Account' });
+
+    expect(link).toHaveClass('ui-class', 'router-class', 'rounded-full');
   });
 });
