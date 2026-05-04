@@ -20,6 +20,15 @@ export { default as Badge } from './components/badge';
 export type { BoxProps } from './components/box';
 export { default as Box } from './components/box';
 export type {
+  BreadcrumbsItemProps,
+  BreadcrumbsLinkProps,
+  BreadcrumbsListProps,
+  BreadcrumbsPageProps,
+  BreadcrumbsProps,
+  BreadcrumbsSeparatorProps,
+} from './components/breadcrumbs';
+export { default as Breadcrumbs } from './components/breadcrumbs';
+export type {
   ButtonProps,
   ButtonSize,
   ButtonVariant,

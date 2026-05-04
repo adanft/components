@@ -22,6 +22,7 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   Avatar: 'User image fallback pattern for profiles, authors, and account surfaces.',
   Badge: 'Compact label for status, metadata, counts, and small categorical hints.',
   Box: 'Semantic surface container for composing cards, panels, and content blocks.',
+  Breadcrumbs: 'Location trail primitive that composes with anchors or consumer-owned router links.',
   Button: 'Accessible action trigger with consistent sizing, variants, and interaction states.',
   Checkbox: 'Boolean form control for toggles that belong inside forms or option lists.',
   DropdownMenu: 'Menu pattern for grouped actions attached to a trigger.',

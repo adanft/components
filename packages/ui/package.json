@@ -58,6 +58,11 @@
       "import": "./src/components/box.tsx",
       "default": "./src/components/box.tsx"
     },
+    "./breadcrumbs": {
+      "types": "./src/components/breadcrumbs/index.tsx",
+      "import": "./src/components/breadcrumbs/index.tsx",
+      "default": "./src/components/breadcrumbs/index.tsx"
+    },
     "./button": {
       "types": "./src/components/button.tsx",
       "import": "./src/components/button.tsx",
@@ -195,6 +200,11 @@
         "types": "./dist/components/box.d.ts",
         "import": "./dist/components/box/index.js",
         "default": "./dist/components/box/index.js"
+      },
+      "./breadcrumbs": {
+        "types": "./dist/components/breadcrumbs/index.d.ts",
+        "import": "./dist/components/breadcrumbs/index.js",
+        "default": "./dist/components/breadcrumbs/index.js"
       },
       "./button": {
         "types": "./dist/components/button.d.ts",

@@ -2,6 +2,7 @@ import * as components from '@adanft/ui';
 import {
   Accordion,
   Alert,
+  Breadcrumbs,
   Button,
   Modal,
   Select,
@@ -46,6 +47,18 @@ describe('@adanft/ui public API', () => {
 
         <Button disabled={true}>Save changes</Button>
 
+        <Breadcrumbs>
+          <Breadcrumbs.List>
+            <Breadcrumbs.Item>
+              <Breadcrumbs.Link href="/docs">Docs</Breadcrumbs.Link>
+            </Breadcrumbs.Item>
+            <Breadcrumbs.Separator />
+            <Breadcrumbs.Item>
+              <Breadcrumbs.Page>Current page</Breadcrumbs.Page>
+            </Breadcrumbs.Item>
+          </Breadcrumbs.List>
+        </Breadcrumbs>
+
         <Select aria-label="Select plan" defaultValue="starter" placeholder="Choose plan">
           <option value="starter">Starter</option>
           <option value="pro">Pro</option>
@@ -73,6 +86,8 @@ describe('@adanft/ui public API', () => {
     expect(screen.getByText('Heads up')).toBeInTheDocument();
     expect(screen.getByText(/review the latest changes/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /save changes/i })).toBeDisabled();
+    expect(screen.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument();
+    expect(screen.getByText('Current page')).toHaveAttribute('aria-current', 'page');
     expect(screen.getByRole('combobox', { name: /select plan/i })).toHaveValue('starter');
 
     const ordersLink = screen.getByRole('link', { name: /orders/i });
@@ -112,5 +127,14 @@ describe('@adanft/ui public API', () => {
     expect('Navbar' in components).toBe(false);
     expect('NotFound' in components).toBe(false);
     expect('RouterSidebarLink' in components).toBe(false);
+  });
+
+  it('exposes final Breadcrumbs compound parts', () => {
+    expect('List' in Breadcrumbs).toBe(true);
+    expect('Item' in Breadcrumbs).toBe(true);
+    expect('Link' in Breadcrumbs).toBe(true);
+    expect('Page' in Breadcrumbs).toBe(true);
+    expect('Separator' in Breadcrumbs).toBe(true);
+    expect('Ellipsis' in Breadcrumbs).toBe(false);
   });
 });

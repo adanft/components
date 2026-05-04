@@ -19,6 +19,10 @@ const PUBLIC_COMPONENT_EXPORTS = {
     source: 'components/box',
     types: 'components/box.d.ts',
   },
+  breadcrumbs: {
+    source: 'components/breadcrumbs/index',
+    types: 'components/breadcrumbs/index.d.ts',
+  },
   button: {
     source: 'components/button',
     types: 'components/button.d.ts',
