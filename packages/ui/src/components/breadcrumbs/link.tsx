@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement, type ComponentPropsWithoutRef } from 'react';
+import { type ComponentPropsWithoutRef, cloneElement, isValidElement } from 'react';
 
 import { cn } from '../../helpers/cn';
 

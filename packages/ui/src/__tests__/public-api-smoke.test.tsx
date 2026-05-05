@@ -141,6 +141,16 @@ describe('@adanft/ui public API', () => {
     expect('RouterSidebarLink' in components).toBe(false);
   });
 
+  it('keeps theme public exports available from the package root', () => {
+    localStorage.clear();
+    document.documentElement.classList.remove('dark');
+    document.cookie = 'theme=; path=/; max-age=0; SameSite=Lax';
+
+    expect(components.initializeTheme()).toBe(false);
+    expect(components.toggleTheme()).toBe(true);
+    expect(components.ThemeSwitch).toBeTypeOf('function');
+  });
+
   it('exposes final Breadcrumbs compound parts', () => {
     expect('List' in Breadcrumbs).toBe(true);
     expect('Item' in Breadcrumbs).toBe(true);

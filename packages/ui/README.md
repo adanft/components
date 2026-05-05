@@ -43,6 +43,12 @@ import { Button, initializeTheme } from '@adanft/ui';
 initializeTheme();
 ```
 
+Theme helpers keep CSR simple: `initializeTheme()` is browser-only and reads
+`localStorage`; do not use it to decide the initial SSR theme. `toggleTheme()` updates
+`localStorage`, the `theme=dark` cookie, and the `<html>` class. In Next/SSR, read the
+cookie server-side, render `<html className="dark">`, and pass
+`<ThemeSwitch initialDark={isDark} />` to avoid hydration mismatch.
+
 You can also import documented public component subpaths when you want narrower entrypoints:
 
 ```tsx

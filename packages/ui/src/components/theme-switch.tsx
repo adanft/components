@@ -1,12 +1,13 @@
-import { type ComponentPropsWithoutRef, useSyncExternalStore } from 'react';
+import { type ComponentPropsWithoutRef, useState } from 'react';
 import { cn } from '../helpers/cn';
-import { readTheme, subscribeTheme } from '../helpers/theme';
 import { MoonIcon, SunIcon } from '../icons';
 import { toggleTheme } from '../theme';
 
 type ThemeSwitchSize = 'sm' | 'md' | 'lg';
 
 type ThemeSwitchProps = Omit<ComponentPropsWithoutRef<'label'>, 'onChange'> & {
+  initialDark: boolean;
+  onCheckedChange?: (isDark: boolean) => void;
   size?: ThemeSwitchSize;
 };
 
@@ -34,12 +35,21 @@ const sizeClassNames: Record<
   },
 } as const;
 
-function ThemeSwitch({ className, size = 'md', ...props }: ThemeSwitchProps) {
-  const theme = useSyncExternalStore(subscribeTheme, readTheme, readTheme);
+function ThemeSwitch({
+  className,
+  initialDark,
+  onCheckedChange,
+  size = 'md',
+  ...props
+}: ThemeSwitchProps) {
+  const [isDark, setIsDark] = useState(initialDark);
   const sizeClasses = sizeClassNames[size];
 
   const handleChange = () => {
-    toggleTheme();
+    const nextIsDark = onCheckedChange ? !isDark : toggleTheme();
+
+    setIsDark(nextIsDark);
+    onCheckedChange?.(nextIsDark);
   };
 
   return (
@@ -71,10 +81,10 @@ function ThemeSwitch({ className, size = 'md', ...props }: ThemeSwitchProps) {
       <input
         type="checkbox"
         role="switch"
-        aria-checked={theme === 'dark'}
+        aria-checked={isDark}
         className="peer sr-only"
         onChange={handleChange}
-        checked={theme === 'dark'}
+        checked={isDark}
       />
 
       <span

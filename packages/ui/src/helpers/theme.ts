@@ -1,106 +1,48 @@
-type ThemeMode = 'light' | 'dark';
+const THEME_STORAGE_KEY = 'theme';
+const DARK_THEME_VALUE = 'dark';
+const DARK_THEME_COOKIE = 'theme=dark; path=/; max-age=31536000; SameSite=Lax';
+const EXPIRED_THEME_COOKIE = 'theme=; path=/; max-age=0; SameSite=Lax';
 
-type ThemeListener = () => void;
-
-type ThemeOptions = {
-  storageKey?: string;
-  className?: string;
-  target?: HTMLElement;
-};
-
-const DEFAULT_STORAGE_KEY = 'theme';
-const DEFAULT_CLASS_NAME = 'dark';
-
-const themeListeners = new Set<ThemeListener>();
-
-function getThemeTarget(target?: HTMLElement): HTMLElement | null {
-  if (target) {
-    return target;
-  }
-
-  if (typeof document === 'undefined') {
-    return null;
-  }
-
-  return document.documentElement;
+function hasBrowserGlobals(): boolean {
+  return typeof document !== 'undefined' && typeof localStorage !== 'undefined';
 }
 
-function normalizeTheme(value: string | null): ThemeMode | null {
-  if (value === 'dark') {
-    return 'dark';
-  }
-
-  if (value === 'light') {
-    return 'light';
-  }
-
-  return null;
-}
-
-function getStoredTheme(storageKey = DEFAULT_STORAGE_KEY): ThemeMode | null {
-  if (typeof localStorage === 'undefined') {
-    return null;
-  }
-
-  return normalizeTheme(localStorage.getItem(storageKey));
-}
-
-function readTheme(storageKey = DEFAULT_STORAGE_KEY): ThemeMode {
-  return getStoredTheme(storageKey) ?? 'light';
-}
-
-function notifyThemeListeners(): void {
-  for (const listener of themeListeners) {
-    listener();
-  }
-}
-
-function subscribeTheme(listener: ThemeListener): () => void {
-  themeListeners.add(listener);
-
-  return () => {
-    themeListeners.delete(listener);
-  };
-}
-
-function dispatchThemeChange(): void {
-  notifyThemeListeners();
-}
-
-function setStoredTheme(theme: ThemeMode, storageKey = DEFAULT_STORAGE_KEY): void {
-  if (typeof localStorage === 'undefined') {
+function persistTheme(isDark: boolean): void {
+  if (isDark) {
+    localStorage.setItem(THEME_STORAGE_KEY, DARK_THEME_VALUE);
+    // biome-ignore lint/suspicious/noDocumentCookie: broad browser support for SSR-readable theme cookie.
+    document.cookie = DARK_THEME_COOKIE;
     return;
   }
 
-  localStorage.setItem(storageKey, theme);
+  localStorage.removeItem(THEME_STORAGE_KEY);
+  // biome-ignore lint/suspicious/noDocumentCookie: broad browser support for expiring SSR-readable theme cookie.
+  document.cookie = EXPIRED_THEME_COOKIE;
 }
 
-function applyTheme(theme: ThemeMode, options: ThemeOptions = {}): ThemeMode {
-  const target = getThemeTarget(options.target);
-
-  if (!target) {
-    return theme;
+function initializeTheme(): boolean {
+  if (!hasBrowserGlobals()) {
+    return false;
   }
 
-  target.classList.toggle(options.className ?? DEFAULT_CLASS_NAME, theme === 'dark');
-  return theme;
+  const isDark = localStorage.getItem(THEME_STORAGE_KEY) === DARK_THEME_VALUE;
+
+  document.documentElement.classList.toggle('dark', isDark);
+
+  return isDark;
 }
 
-function initializeTheme(options: ThemeOptions = {}): ThemeMode {
-  const theme = readTheme(options.storageKey);
-  const appliedTheme = applyTheme(theme, options);
-  dispatchThemeChange();
-  return appliedTheme;
+function toggleTheme(): boolean {
+  if (!hasBrowserGlobals()) {
+    return false;
+  }
+
+  const isDark = !document.documentElement.classList.contains('dark');
+
+  document.documentElement.classList.toggle('dark', isDark);
+  persistTheme(isDark);
+
+  return isDark;
 }
 
-function toggleTheme(options: ThemeOptions = {}): ThemeMode {
-  const currentTheme = readTheme(options.storageKey);
-  const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  setStoredTheme(nextTheme, options.storageKey);
-  const appliedTheme = applyTheme(nextTheme, options);
-  dispatchThemeChange();
-  return appliedTheme;
-}
-
-export type { ThemeMode, ThemeOptions };
-export { initializeTheme, readTheme, subscribeTheme, toggleTheme };
+export { initializeTheme, toggleTheme };

@@ -19,7 +19,7 @@ function Navbar({ profileProps, searchPlaceholder = 'Search' }: NavbarProps) {
         />
       </div>
       <div className="flex gap-4 items-center">
-        <ThemeSwitch />
+        <ThemeSwitch initialDark={document.documentElement.classList.contains('dark')} />
         <button
           type="button"
           className="p-2 bg-background rounded-full leading-none border border-brand">

@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ThemeSwitch } from '../index';
 
@@ -7,10 +7,11 @@ describe('ThemeSwitch', () => {
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.classList.remove('dark');
+    document.cookie = 'theme=; path=/; max-age=0; SameSite=Lax';
   });
 
   it('renders a switch input', () => {
-    render(<ThemeSwitch />);
+    render(<ThemeSwitch initialDark={false} />);
 
     const input = screen.getByRole('switch');
 
@@ -19,13 +20,33 @@ describe('ThemeSwitch', () => {
   });
 
   it('has accessible label text via sr-only span', () => {
-    render(<ThemeSwitch />);
+    render(<ThemeSwitch initialDark={false} />);
 
     expect(screen.getByText('Toggle theme')).toBeInTheDocument();
   });
 
-  it('toggles checked state on click', () => {
-    render(<ThemeSwitch />);
+  it('initializes checked state from initialDark', () => {
+    document.documentElement.classList.add('dark');
+
+    render(<ThemeSwitch initialDark={false} />);
+
+    const input = screen.getByRole('switch');
+
+    expect(input).not.toBeChecked();
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
+  });
+
+  it('uses initialDark without relying on the document theme class', () => {
+    render(<ThemeSwitch initialDark={true} />);
+
+    const input = screen.getByRole('switch');
+
+    expect(input).toBeChecked();
+    expect(document.documentElement.classList.contains('dark')).toBe(false);
+  });
+
+  it('toggles checked state, storage, and document class on click', () => {
+    render(<ThemeSwitch initialDark={false} />);
 
     const input = screen.getByRole('switch');
 
@@ -34,29 +55,31 @@ describe('ThemeSwitch', () => {
     fireEvent.click(input);
 
     expect(input).toBeChecked();
+    expect(localStorage.getItem('theme')).toBe('dark');
+    expect(document.cookie).toContain('theme=dark');
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
   });
 
-  it('keeps multiple mounted switches in sync', () => {
-    render(
-      <>
-        <ThemeSwitch />
-        <ThemeSwitch />
-      </>,
-    );
+  it('uses onCheckedChange without changing the document theme', () => {
+    const onCheckedChange = vi.fn();
 
-    const [firstSwitch, secondSwitch] = screen.getAllByRole('switch');
+    render(<ThemeSwitch initialDark={false} onCheckedChange={onCheckedChange} />);
 
-    expect(firstSwitch).not.toBeChecked();
-    expect(secondSwitch).not.toBeChecked();
+    const input = screen.getByRole('switch');
 
-    fireEvent.click(firstSwitch);
+    fireEvent.click(input);
 
-    expect(firstSwitch).toBeChecked();
-    expect(secondSwitch).toBeChecked();
+    expect(input).toBeChecked();
+    expect(onCheckedChange).toHaveBeenCalledWith(true);
+    expect(localStorage.getItem('theme')).toBeNull();
+    expect(document.cookie).not.toContain('theme=dark');
+    expect(document.documentElement.classList.contains('dark')).toBe(false);
   });
 
   it('merges custom className with base styles', () => {
-    render(<ThemeSwitch className="my-custom-class" data-testid="switch-label" />);
+    render(
+      <ThemeSwitch initialDark={false} className="my-custom-class" data-testid="switch-label" />,
+    );
 
     const label = screen.getByTestId('switch-label');
 
@@ -64,7 +87,7 @@ describe('ThemeSwitch', () => {
   });
 
   it('applies md size classes by default', () => {
-    render(<ThemeSwitch data-testid="switch-label" />);
+    render(<ThemeSwitch initialDark={false} data-testid="switch-label" />);
 
     const label = screen.getByTestId('switch-label');
 
@@ -72,7 +95,7 @@ describe('ThemeSwitch', () => {
   });
 
   it('applies sm size classes', () => {
-    render(<ThemeSwitch size="sm" data-testid="switch-label" />);
+    render(<ThemeSwitch initialDark={false} size="sm" data-testid="switch-label" />);
 
     const label = screen.getByTestId('switch-label');
 
@@ -80,7 +103,7 @@ describe('ThemeSwitch', () => {
   });
 
   it('applies lg size classes', () => {
-    render(<ThemeSwitch size="lg" data-testid="switch-label" />);
+    render(<ThemeSwitch initialDark={false} size="lg" data-testid="switch-label" />);
 
     const label = screen.getByTestId('switch-label');
 
@@ -88,7 +111,7 @@ describe('ThemeSwitch', () => {
   });
 
   it('forwards extra props to the label element', () => {
-    render(<ThemeSwitch data-testid="switch-label" aria-describedby="help" />);
+    render(<ThemeSwitch initialDark={false} data-testid="switch-label" aria-describedby="help" />);
 
     const label = screen.getByTestId('switch-label');
 

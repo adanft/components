@@ -134,5 +134,4 @@ export type {
   TooltipTriggerProps,
 } from './components/tooltip';
 export { default as Tooltip } from './components/tooltip';
-export type { ThemeMode, ThemeOptions } from './theme';
 export { initializeTheme, toggleTheme } from './theme';
