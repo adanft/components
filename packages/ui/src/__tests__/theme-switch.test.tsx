@@ -7,6 +7,7 @@ describe('ThemeSwitch', () => {
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.classList.remove('dark');
+    // biome-ignore lint/suspicious/noDocumentCookie: tests need to reset the SSR-readable theme cookie.
     document.cookie = 'theme=; path=/; max-age=0; SameSite=Lax';
   });
 

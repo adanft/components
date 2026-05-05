@@ -6,6 +6,7 @@ describe('theme helper transitions', () => {
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.className = '';
+    // biome-ignore lint/suspicious/noDocumentCookie: tests need to reset the SSR-readable theme cookie.
     document.cookie = 'theme=; path=/; max-age=0; SameSite=Lax';
   });
 
@@ -17,6 +18,7 @@ describe('theme helper transitions', () => {
   });
 
   it('does not initialize from cookie in CSR mode', () => {
+    // biome-ignore lint/suspicious/noDocumentCookie: tests need to seed the SSR-readable theme cookie.
     document.cookie = 'theme=dark; path=/; max-age=31536000; SameSite=Lax';
 
     expect(initializeTheme()).toBe(false);
@@ -43,6 +45,7 @@ describe('theme helper transitions', () => {
   it('toggles back to default, clears localStorage, and expires cookie', () => {
     document.documentElement.classList.add('dark');
     localStorage.setItem('theme', 'dark');
+    // biome-ignore lint/suspicious/noDocumentCookie: tests need to seed the SSR-readable theme cookie.
     document.cookie = 'theme=dark; path=/; max-age=31536000; SameSite=Lax';
 
     const isDark = toggleTheme();
