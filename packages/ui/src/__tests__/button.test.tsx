@@ -60,6 +60,43 @@ describe('Button', () => {
     expect(button).not.toHaveClass('bg-brand');
   });
 
+  it.each([
+    ['danger', 'bg-danger', 'text-white'],
+    ['info', 'bg-info', 'text-white'],
+    ['success', 'bg-success', 'text-white'],
+  ] as const)('applies %s variant styles', (variant, backgroundClass, textClass) => {
+    render(
+      <Button variant={variant} data-testid="button">
+        {variant}
+      </Button>,
+    );
+
+    const button = screen.getByTestId('button');
+
+    expect(button).toHaveClass(backgroundClass, textClass);
+    expect(button).not.toHaveClass('bg-brand');
+  });
+
+  it.each([
+    ['primary', 'border-brand', 'text-brand'],
+    ['secondary', 'border-muted', 'text-muted'],
+    ['danger', 'border-danger', 'text-danger'],
+    ['info', 'border-info', 'text-info'],
+    ['success', 'border-success', 'text-success'],
+    ['theme', 'border-heading', 'text-heading'],
+  ] as const)('applies %s outline variant styles', (variant, borderClass, textClass) => {
+    render(
+      <Button outline variant={variant} data-testid="button">
+        {variant}
+      </Button>,
+    );
+
+    const button = screen.getByTestId('button');
+
+    expect(button).toHaveClass('border', 'bg-transparent', borderClass, textClass);
+    expect(button).not.toHaveClass('bg-brand', 'text-white');
+  });
+
   it('applies sm size styles', () => {
     render(
       <Button size="sm" data-testid="button">
@@ -121,6 +158,19 @@ describe('Button', () => {
     expect(link).toHaveAttribute('href', '/docs');
     expect(link).toHaveClass('bg-muted', 'text-white', 'text-sm', 'h-8', 'px-4');
     expect(link).not.toHaveAttribute('type');
+  });
+
+  it('composes outline styles with asChild links', () => {
+    render(
+      <Button asChild outline variant="danger">
+        <RouterLink to="/docs">Delete docs</RouterLink>
+      </Button>,
+    );
+
+    const link = screen.getByRole('link', { name: 'Delete docs' });
+
+    expect(link).toHaveAttribute('href', '/docs');
+    expect(link).toHaveClass('border', 'border-danger', 'text-danger', 'bg-transparent');
   });
 
   it('merges child className with Button className when asChild is enabled', () => {

@@ -19,7 +19,17 @@ const usageSnippet = `<Button>Save changes</Button>`;
 const exampleJsx = `<Button>Deploy now</Button>`;
 
 const variantsSnippet = `<Button variant="primary">Primary</Button>
-<Button variant="secondary">Secondary</Button>`;
+<Button variant="secondary">Secondary</Button>
+<Button variant="danger">Danger</Button>
+<Button variant="info">Info</Button>
+<Button variant="success">Success</Button>`;
+
+const outlineSnippet = `<Button outline variant="primary">Primary</Button>
+<Button outline variant="secondary">Secondary</Button>
+<Button outline variant="danger">Danger</Button>
+<Button outline variant="info">Info</Button>
+<Button outline variant="success">Success</Button>
+<Button outline variant="theme">Theme</Button>`;
 
 const sizesSnippet = `<Button size="sm">Small</Button>
 <Button size="md">Medium</Button>
@@ -63,8 +73,37 @@ function ButtonPage() {
         <Box className="flex flex-wrap items-center gap-3" shadow="none" surface="none">
           <Button variant="primary">Primary</Button>
           <Button variant="secondary">Secondary</Button>
+          <Button variant="danger">Danger</Button>
+          <Button variant="info">Info</Button>
+          <Button variant="success">Success</Button>
         </Box>
         <CodeBlock code={variantsSnippet} />
+        <h3 className="text-lg font-semibold text-heading">Outline variants</h3>
+        <p className="text-base leading-7 text-foreground">
+          Add <Code>outline</Code> to render a transparent button with a border. The text color
+          matches the border color for each variant.
+        </p>
+        <Box className="flex flex-wrap items-center gap-3" shadow="none" surface="none">
+          <Button outline variant="primary">
+            Primary
+          </Button>
+          <Button outline variant="secondary">
+            Secondary
+          </Button>
+          <Button outline variant="danger">
+            Danger
+          </Button>
+          <Button outline variant="info">
+            Info
+          </Button>
+          <Button outline variant="success">
+            Success
+          </Button>
+          <Button outline variant="theme">
+            Theme
+          </Button>
+        </Box>
+        <CodeBlock code={outlineSnippet} />
         <h3 className="text-lg font-semibold text-heading">Sizes</h3>
         <p className="text-base leading-7 text-foreground">
           Use the <Code>size</Code> prop to control the button dimensions. Defaults to{' '}
@@ -106,12 +145,29 @@ function ButtonPage() {
                 <Code>variant</Code>
               </TableCell>
               <TableCell>
-                <Code>{`"primary" | "secondary"`}</Code>
+                <Code>{`"primary" | "secondary" | "danger" | "info" | "success"`}</Code>
               </TableCell>
               <TableCell>
                 <Code>{`"primary"`}</Code>
               </TableCell>
-              <TableCell>Controls the visual treatment of the button.</TableCell>
+              <TableCell>
+                Controls the filled visual treatment. <Code>theme</Code> is only available with{' '}
+                <Code>outline</Code>.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>outline</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Renders a transparent button with a variant-colored border and matching text.
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
