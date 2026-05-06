@@ -75,6 +75,56 @@ describe('Sidebar', () => {
     expect(screen.getByTestId('sidebar-head')).toHaveClass('bg-brand');
   });
 
+  it('lets consumers control header height while keeping the toggle centered', () => {
+    render(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarHead
+          href="/"
+          logoSrc="/logo.png"
+          title="Docs"
+          className="h-20"
+          data-testid="sidebar-head"
+        />
+      </Sidebar>,
+    );
+
+    expect(screen.getByTestId('sidebar-head')).toHaveClass('h-20');
+    expect(screen.getByRole('button', { name: /collapse sidebar/i })).toHaveClass(
+      'top-1/2',
+      '-translate-y-1/2',
+    );
+  });
+
+  it('positions the toggle button with explicit open and closed offsets', () => {
+    const { rerender } = render(
+      <Sidebar state={true} action={() => undefined} className="static">
+        <SidebarHead href="/" logoSrc="/logo.png" title="Docs" />
+      </Sidebar>,
+    );
+
+    expect(screen.getByRole('button', { name: /collapse sidebar/i })).toHaveClass(
+      'top-1/2',
+      '-translate-y-1/2',
+      'left-[calc(100%-44px)]',
+      'h-9',
+      'w-9',
+    );
+
+    rerender(
+      <Sidebar state={false} action={() => undefined} className="static">
+        <SidebarHead href="/" logoSrc="/logo.png" title="Docs" />
+      </Sidebar>,
+    );
+
+    expect(screen.getByRole('button', { name: /expand sidebar/i })).toHaveClass(
+      'top-1/2',
+      '-translate-y-1/2',
+      'left-[calc(100%+8px)]',
+      'h-9',
+      'w-9',
+    );
+  });
+
   it('supports direct composition inside SidebarBody', () => {
     const [state, action] = [true, () => undefined];
 
