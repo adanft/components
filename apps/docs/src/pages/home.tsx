@@ -22,7 +22,8 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   Avatar: 'User image fallback pattern for profiles, authors, and account surfaces.',
   Badge: 'Compact label for status, metadata, counts, and small categorical hints.',
   Box: 'Semantic surface container for composing cards, panels, and content blocks.',
-  Breadcrumbs: 'Location trail primitive that composes with anchors or consumer-owned router links.',
+  Breadcrumbs:
+    'Location trail primitive that composes with anchors or consumer-owned router links.',
   Button: 'Accessible action trigger with consistent sizing, variants, and interaction states.',
   Checkbox: 'Boolean form control for toggles that belong inside forms or option lists.',
   DropdownMenu: 'Menu pattern for grouped actions attached to a trigger.',
@@ -53,9 +54,27 @@ const STYLE_SETUP_SNIPPET = `@import "tailwindcss";
 /* Adjust the relative path from this stylesheet to node_modules. */
 @source "../node_modules/@adanft/ui/dist";`;
 
-const THEME_BOOTSTRAP_SNIPPET = `import { initializeTheme } from '@adanft/ui';
+const CSR_THEME_BOOTSTRAP_SNIPPET = `import { initializeTheme } from '@adanft/ui';
 
+// CSR only: reads localStorage and toggles html.dark in the browser.
 initializeTheme();`;
+
+const SSR_THEME_BOOTSTRAP_SNIPPET = `import { cookies } from 'next/headers';
+import { ThemeSwitch } from '@adanft/ui';
+
+// Next/SSR: resolve the initial theme on the server.
+export default async function RootLayout({ children }) {
+  const isDark = (await cookies()).get('theme')?.value === 'dark';
+
+  return (
+    <html className={isDark ? 'dark' : ''}>
+      <body>
+        <ThemeSwitch initialDark={isDark} />
+        {children}
+      </body>
+    </html>
+  );
+}`;
 
 const USAGE_SNIPPET = `import { Button } from '@adanft/ui';
 
@@ -120,9 +139,9 @@ function Home() {
       <section id="installation" className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">Installation</h2>
         <p className="max-w-3xl text-foreground">
-          Install the package, load the stylesheet once, register the package output in your
-          Tailwind entry, and initialize the theme before rendering components. That is the
-          foundation; skip it and your app is a house without plumbing.
+          Install the package, load the stylesheet once, and register the package output in your
+          Tailwind entry. Then choose the correct theme bootstrap: CSR reads browser storage; SSR
+          resolves the first paint on the server. Mix those up and you earn a hydration bug.
         </p>
 
         <div className="grid gap-4 lg:grid-cols-2">
@@ -138,7 +157,15 @@ function Home() {
 
           <div className="space-y-3 rounded-md border border-border bg-surface p-4 shadow-card lg:col-span-2">
             <h3 className="text-lg font-semibold text-heading">Bootstrap theme</h3>
-            <CodeBlock code={THEME_BOOTSTRAP_SNIPPET} />
+            <p className="text-sm leading-6 text-foreground">
+              <Code>initializeTheme()</Code> is a CSR helper: it reads <Code>localStorage</Code> and
+              applies <Code>html.dark</Code> in the browser. In SSR, read the{' '}
+              <Code>theme=dark</Code>
+              cookie server-side and pass that boolean to <Code>ThemeSwitch initialDark</Code> so
+              the server markup and client hydration agree.
+            </p>
+            <CodeBlock code={CSR_THEME_BOOTSTRAP_SNIPPET} />
+            <CodeBlock code={SSR_THEME_BOOTSTRAP_SNIPPET} />
           </div>
         </div>
       </section>

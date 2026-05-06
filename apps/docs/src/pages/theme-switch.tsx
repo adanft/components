@@ -8,6 +8,7 @@ import {
   TableRow,
   ThemeSwitch,
 } from '@adanft/ui';
+import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
@@ -15,15 +16,35 @@ const importSnippet = `import { ThemeSwitch } from '@adanft/ui';`;
 
 const setupSnippet = `import { initializeTheme } from '@adanft/ui';
 
+// CSR only: call this in the browser before your app renders.
 initializeTheme();`;
 
-const usageSnippet = `<ThemeSwitch />`;
+const ssrSnippet = `import { cookies } from 'next/headers';
+import { ThemeSwitch } from '@adanft/ui';
 
-const sizesSnippet = `<ThemeSwitch size="sm" />
-<ThemeSwitch size="md" />
-<ThemeSwitch size="lg" />`;
+// Next/SSR: read the cookie on the server and pass the value in.
+export default async function RootLayout({ children }) {
+  const isDark = (await cookies()).get('theme')?.value === 'dark';
+
+  return (
+    <html className={isDark ? 'dark' : ''}>
+      <body>
+        <ThemeSwitch initialDark={isDark} />
+        {children}
+      </body>
+    </html>
+  );
+}`;
+
+const usageSnippet = `<ThemeSwitch initialDark={isDark} />`;
+
+const sizesSnippet = `<ThemeSwitch initialDark={false} onCheckedChange={() => {}} size="sm" />
+<ThemeSwitch initialDark={false} onCheckedChange={() => {}} size="md" />
+<ThemeSwitch initialDark={false} onCheckedChange={() => {}} size="lg" />`;
 
 function ThemeSwitchPage() {
+  const [demoIsDark, setDemoIsDark] = useState(false);
+
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
@@ -35,7 +56,12 @@ function ThemeSwitchPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">Setup</h2>
+        <p className="text-base leading-7 text-foreground">
+          Use <Code>initializeTheme()</Code> only for CSR apps. For SSR, read the theme cookie on
+          the server and pass that value to <Code>initialDark</Code> instead.
+        </p>
         <CodeBlock code={setupSnippet} />
+        <CodeBlock code={ssrSnippet} />
       </section>
 
       <section className="space-y-4">
@@ -49,15 +75,15 @@ function ThemeSwitchPage() {
 
         <h3 className="text-lg font-semibold text-heading">Default</h3>
         <Box shadow="none" surface="none">
-          <ThemeSwitch />
+          <ThemeSwitch initialDark={demoIsDark} onCheckedChange={setDemoIsDark} />
         </Box>
         <CodeBlock code={usageSnippet} />
 
         <h3 className="text-lg font-semibold text-heading">Sizes</h3>
         <Box className="flex flex-wrap items-center gap-6" shadow="none" surface="none">
-          <ThemeSwitch size="sm" />
-          <ThemeSwitch size="md" />
-          <ThemeSwitch size="lg" />
+          <ThemeSwitch initialDark={false} onCheckedChange={() => {}} size="sm" />
+          <ThemeSwitch initialDark={false} onCheckedChange={() => {}} size="md" />
+          <ThemeSwitch initialDark={false} onCheckedChange={() => {}} size="lg" />
         </Box>
         <CodeBlock code={sizesSnippet} />
       </section>
@@ -74,6 +100,29 @@ function ThemeSwitchPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>initialDark</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Sets the initial switch state from your app theme source.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>onCheckedChange</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`(isDark: boolean) => void`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>
+                Handles switch state without changing the document theme, useful for controlled
+                demos.
+              </TableCell>
+            </TableRow>
             <TableRow>
               <TableCell>
                 <Code>size</Code>

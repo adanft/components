@@ -61,6 +61,7 @@ function DocsShell({
           href={docsBranding.href}
           logoSrc={docsBranding.logoSrc}
           title={docsBranding.title}
+          className="h-24"
         />
         <SidebarBody>
           {navigation.map((node) =>

@@ -80,10 +80,7 @@ const apiSections: ApiSectionProps[] = [
   {
     title: 'Breadcrumbs',
     description: 'Root navigation element that wraps the breadcrumb list.',
-    props: [
-      classNameProp,
-      { name: 'aria-label', type: 'string', defaultValue: 'Breadcrumb' },
-    ],
+    props: [classNameProp, { name: 'aria-label', type: 'string', defaultValue: 'Breadcrumb' }],
   },
   {
     title: 'Breadcrumbs.List',
@@ -108,10 +105,7 @@ const apiSections: ApiSectionProps[] = [
   {
     title: 'Breadcrumbs.Separator',
     description: 'Separator between breadcrumb items. Pass children to replace the default icon.',
-    props: [
-      { name: 'children', type: 'React.ReactNode', defaultValue: '-' },
-      classNameProp,
-    ],
+    props: [{ name: 'children', type: 'React.ReactNode', defaultValue: '-' }, classNameProp],
   },
 ];
 

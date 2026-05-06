@@ -164,6 +164,30 @@ function ProfilePage() {
             </TableRow>
             <TableRow>
               <TableCell>
+                <Code>avatarSize</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"sm" | "md" | "lg"`}</Code>
+              </TableCell>
+              <TableCell>
+                <Code>"md"</Code>
+              </TableCell>
+              <TableCell>Size used by the trigger avatar.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>panelAvatarSize</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"sm" | "md" | "lg"`}</Code>
+              </TableCell>
+              <TableCell>
+                <Code>"md"</Code>
+              </TableCell>
+              <TableCell>Size used by the avatar inside the profile panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
                 <Code>avatarSrc</Code>
               </TableCell>
               <TableCell>
