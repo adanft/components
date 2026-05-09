@@ -26,6 +26,7 @@ import {
   DOCS_SWITCH_PATH,
   DOCS_TABLE_PATH,
   DOCS_TABS_PATH,
+  DOCS_TEXTAREA_PATH,
   DOCS_THEME_SWITCH_PATH,
   DOCS_TOOLTIP_PATH,
 } from './data/routes';
@@ -53,6 +54,7 @@ import SkeletonPage from './pages/skeleton';
 import SwitchPage from './pages/switch';
 import TablePage from './pages/table';
 import TabsPage from './pages/tabs';
+import TextareaPage from './pages/textarea';
 import ThemeSwitchPage from './pages/theme-switch';
 import TooltipPage from './pages/tooltip';
 import DocsShell from './shell';
@@ -84,6 +86,7 @@ function App() {
         <Route path={DOCS_SWITCH_PATH} element={<SwitchPage />} />
         <Route path={DOCS_TABS_PATH} element={<TabsPage />} />
         <Route path={DOCS_TABLE_PATH} element={<TablePage />} />
+        <Route path={DOCS_TEXTAREA_PATH} element={<TextareaPage />} />
         <Route path={DOCS_CHECKBOX_PATH} element={<CheckboxPage />} />
         <Route path={DOCS_THEME_SWITCH_PATH} element={<ThemeSwitchPage />} />
         <Route path={DOCS_TOOLTIP_PATH} element={<TooltipPage />} />

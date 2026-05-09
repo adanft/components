@@ -126,6 +126,8 @@ export type {
   TabsTriggerProps,
 } from './components/tabs';
 export { default as Tabs } from './components/tabs';
+export type { TextareaProps } from './components/textarea';
+export { default as Textarea } from './components/textarea';
 export type { ThemeSwitchProps, ThemeSwitchSize } from './components/theme-switch';
 export { default as ThemeSwitch } from './components/theme-switch';
 export type {

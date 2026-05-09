@@ -42,6 +42,7 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   Switch: 'Binary setting control for immediate on/off preferences.',
   Table: 'Semantic table primitives for structured data and API reference content.',
   Tabs: 'Section switcher for related panels that share the same page context.',
+  Textarea: 'Multi-line text entry primitive with token-based form control styling.',
   ThemeSwitch: 'Theme control wired to the library theme helpers.',
   Tooltip: 'Non-interactive floating hint for short contextual help on hover or focus.',
 };

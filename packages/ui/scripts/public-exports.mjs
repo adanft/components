@@ -75,6 +75,10 @@ const PUBLIC_COMPONENT_EXPORTS = {
     source: 'components/select',
     types: 'components/select.d.ts',
   },
+  textarea: {
+    source: 'components/textarea',
+    types: 'components/textarea.d.ts',
+  },
   sidebar: {
     source: 'components/sidebar/index',
     types: 'components/sidebar/index.d.ts',

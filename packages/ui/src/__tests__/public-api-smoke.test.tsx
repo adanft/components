@@ -14,6 +14,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Textarea,
 } from '@adanft/ui';
 import { render, screen } from '@testing-library/react';
 import type { ComponentPropsWithoutRef, SVGProps } from 'react';
@@ -75,6 +76,8 @@ describe('@adanft/ui public API', () => {
           <option value="pro">Pro</option>
         </Select>
 
+        <Textarea aria-label="Smoke textarea" placeholder="Write details" />
+
         <SidebarLink href="/orders" icon={ShoppingCartIcon} text="Orders" />
         <SidebarGroupLink href="/orders/history" text="Order history" />
 
@@ -101,6 +104,10 @@ describe('@adanft/ui public API', () => {
     expect(screen.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument();
     expect(screen.getByText('Current page')).toHaveAttribute('aria-current', 'page');
     expect(screen.getByRole('combobox', { name: /select plan/i })).toHaveValue('starter');
+    expect(screen.getByRole('textbox', { name: /smoke textarea/i })).toHaveAttribute(
+      'placeholder',
+      'Write details',
+    );
 
     const ordersLink = screen.getByRole('link', { name: /orders/i });
     expect(ordersLink).toHaveAttribute('href', '/orders');

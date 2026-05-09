@@ -128,6 +128,11 @@
       "import": "./src/components/select.tsx",
       "default": "./src/components/select.tsx"
     },
+    "./textarea": {
+      "types": "./src/components/textarea.tsx",
+      "import": "./src/components/textarea.tsx",
+      "default": "./src/components/textarea.tsx"
+    },
     "./sidebar": {
       "types": "./src/components/sidebar/index.tsx",
       "import": "./src/components/sidebar/index.tsx",
@@ -270,6 +275,11 @@
         "types": "./dist/components/select.d.ts",
         "import": "./dist/components/select/index.js",
         "default": "./dist/components/select/index.js"
+      },
+      "./textarea": {
+        "types": "./dist/components/textarea.d.ts",
+        "import": "./dist/components/textarea/index.js",
+        "default": "./dist/components/textarea/index.js"
       },
       "./sidebar": {
         "types": "./dist/components/sidebar/index.d.ts",
