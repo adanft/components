@@ -16,6 +16,7 @@ import {
 } from '@adanft/ui';
 import { Archive, Box as BoxIcon, FileText, Hand, PanelLeft, Settings } from 'lucide-react';
 import { type MouseEvent, useState } from 'react';
+import { Link } from 'react-router';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
@@ -56,10 +57,11 @@ const usageSnippet = `function ExampleSidebar() {
 
 const composedExampleJsx = `<Sidebar state={sidebarOpen} action={setSidebarOpen} className="static z-auto max-h-[560px]">
   <SidebarHead
-    href="/"
+    asChild
     logoSrc="https://raw.githubusercontent.com/uditkumar01/ReactComponentGeneratorExtension/main/assets/logo.png"
-    title="Comps Docs"
-  />
+    title="Comps Docs">
+    <Link to="/" />
+  </SidebarHead>
   <SidebarBody>
     <SidebarSection text="Core" />
     <SidebarLink href="/docs/button" icon={Hand} text="Button" />
@@ -89,11 +91,6 @@ const simpleExampleJsx = `<Sidebar state={sidebarOpen} action={setSidebarOpen} c
     <SidebarLink href="/docs/box" icon={BoxIcon} text="Box" />
   </SidebarBody>
 </Sidebar>`;
-
-const sidebarHeadAsChildSnippet = `// Use your router's Link component.
-<SidebarHead asChild logoSrc="/logo.png" title="Comps Docs">
-  <Link to="/" />
-</SidebarHead>`;
 
 function SidebarPage() {
   const [simpleSidebarOpen, setSimpleSidebarOpen] = useState(true);
@@ -174,13 +171,6 @@ function SidebarPage() {
         </Box>
         <CodeBlock code={simpleExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-heading">Router link head</h3>
-        <p className="text-foreground">
-          Use <Code>asChild</Code> when your app needs the brand link to be rendered by a router
-          component.
-        </p>
-        <CodeBlock code={sidebarHeadAsChildSnippet} />
-
         <h3 className="text-lg font-semibold text-heading">Advanced</h3>
         <Box className="relative" shadow="none" surface="none">
           <Sidebar
@@ -188,10 +178,11 @@ function SidebarPage() {
             action={setAdvancedSidebarOpen}
             className="static z-auto max-h-[560px]">
             <SidebarHead
-              href="/"
+              asChild
               logoSrc="https://raw.githubusercontent.com/uditkumar01/ReactComponentGeneratorExtension/main/assets/logo.png"
-              title="Comps Docs"
-            />
+              title="Comps Docs">
+              <Link to="/" />
+            </SidebarHead>
             <SidebarBody>
               <SidebarSection text="Core" />
               <SidebarLink
