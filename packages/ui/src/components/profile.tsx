@@ -62,7 +62,7 @@ function Profile({
         <Box className="w-72">
           <div className="flex items-center gap-2">
             {renderAvatar(panelAvatarSize)}
-            <div className="flex flex-col gap-2 text-foreground">
+            <div className="flex flex-col gap-1 text-foreground">
               <span>{name}</span>
               <span className="text-sm font-semibold">{username}</span>
             </div>

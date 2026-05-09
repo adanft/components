@@ -54,8 +54,9 @@ function Switch({
         <span
           aria-hidden="true"
           className={cn(
-            'inline-flex h-6 w-11 rounded-full bg-muted',
+            'inline-flex h-6 w-11 rounded-full border border-border bg-muted',
             'peer-checked:bg-brand peer-focus-visible:outline-2 peer-focus-visible:outline-brand peer-focus-visible:outline-offset-2',
+            'peer-aria-invalid:border-danger peer-aria-invalid:peer-focus-visible:outline-danger',
             className,
           )}
         />
