@@ -143,6 +143,11 @@
       "import": "./src/components/skeleton.tsx",
       "default": "./src/components/skeleton.tsx"
     },
+    "./spinner": {
+      "types": "./src/components/spinner.tsx",
+      "import": "./src/components/spinner.tsx",
+      "default": "./src/components/spinner.tsx"
+    },
     "./switch": {
       "types": "./src/components/switch.tsx",
       "import": "./src/components/switch.tsx",
@@ -290,6 +295,11 @@
         "types": "./dist/components/skeleton.d.ts",
         "import": "./dist/components/skeleton/index.js",
         "default": "./dist/components/skeleton/index.js"
+      },
+      "./spinner": {
+        "types": "./dist/components/spinner.d.ts",
+        "import": "./dist/components/spinner/index.js",
+        "default": "./dist/components/spinner/index.js"
       },
       "./switch": {
         "types": "./dist/components/switch.d.ts",

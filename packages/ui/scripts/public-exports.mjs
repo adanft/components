@@ -87,6 +87,10 @@ const PUBLIC_COMPONENT_EXPORTS = {
     source: 'components/skeleton',
     types: 'components/skeleton.d.ts',
   },
+  spinner: {
+    source: 'components/spinner',
+    types: 'components/spinner.d.ts',
+  },
   switch: {
     source: 'components/switch',
     types: 'components/switch.d.ts',

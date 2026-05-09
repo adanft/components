@@ -97,6 +97,8 @@ export type { SidebarSectionProps } from './components/sidebar/sidebar-section';
 export { default as SidebarSection } from './components/sidebar/sidebar-section';
 export type { SkeletonAnimation, SkeletonProps } from './components/skeleton';
 export { default as Skeleton } from './components/skeleton';
+export type { SpinnerProps, SpinnerSpeed } from './components/spinner';
+export { default as Spinner } from './components/spinner';
 export type { SwitchProps } from './components/switch';
 export { default as Switch } from './components/switch';
 export type {

@@ -39,6 +39,7 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   Select: 'Selection control for choosing one option from a compact list.',
   Sidebar: 'Application navigation shell for dense side menus and nested navigation.',
   Skeleton: 'Loading placeholder for preserving layout while async content resolves.',
+  Spinner: 'Indeterminate loading indicator for process feedback and inline pending states.',
   Switch: 'Binary setting control for immediate on/off preferences.',
   Table: 'Semantic table primitives for structured data and API reference content.',
   Tabs: 'Section switcher for related panels that share the same page context.',

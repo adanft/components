@@ -23,6 +23,7 @@ import {
   DOCS_SELECT_PATH,
   DOCS_SIDEBAR_PATH,
   DOCS_SKELETON_PATH,
+  DOCS_SPINNER_PATH,
   DOCS_SWITCH_PATH,
   DOCS_TABLE_PATH,
   DOCS_TABS_PATH,
@@ -51,6 +52,7 @@ import RadioGroupPage from './pages/radio-group';
 import SelectPage from './pages/select';
 import SidebarPage from './pages/sidebar';
 import SkeletonPage from './pages/skeleton';
+import SpinnerPage from './pages/spinner';
 import SwitchPage from './pages/switch';
 import TablePage from './pages/table';
 import TabsPage from './pages/tabs';
@@ -83,6 +85,7 @@ function App() {
         <Route path={DOCS_SELECT_PATH} element={<SelectPage />} />
         <Route path={DOCS_SIDEBAR_PATH} element={<SidebarPage />} />
         <Route path={DOCS_SKELETON_PATH} element={<SkeletonPage />} />
+        <Route path={DOCS_SPINNER_PATH} element={<SpinnerPage />} />
         <Route path={DOCS_SWITCH_PATH} element={<SwitchPage />} />
         <Route path={DOCS_TABS_PATH} element={<TabsPage />} />
         <Route path={DOCS_TABLE_PATH} element={<TablePage />} />

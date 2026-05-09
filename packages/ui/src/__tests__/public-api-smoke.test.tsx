@@ -8,6 +8,7 @@ import {
   Select,
   SidebarGroupLink,
   SidebarLink,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -77,6 +78,7 @@ describe('@adanft/ui public API', () => {
         </Select>
 
         <Textarea aria-label="Smoke textarea" placeholder="Write details" />
+        <Spinner aria-label="Smoke loading" />
 
         <SidebarLink href="/orders" icon={ShoppingCartIcon} text="Orders" />
         <SidebarGroupLink href="/orders/history" text="Order history" />
@@ -108,6 +110,7 @@ describe('@adanft/ui public API', () => {
       'placeholder',
       'Write details',
     );
+    expect(screen.getByRole('status', { name: /smoke loading/i })).toBeInTheDocument();
 
     const ordersLink = screen.getByRole('link', { name: /orders/i });
     expect(ordersLink).toHaveAttribute('href', '/orders');
