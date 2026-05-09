@@ -14,7 +14,7 @@ function Sidebar({ className, children, state, action, ...props }: SidebarProps)
   });
 
   const sidebarClassName = cn(
-    'transition-all duration-300 fixed h-screen min-h-0 z-20 top-0 left-0 border-r border-separator shadow-card bg-surface flex flex-col',
+    'fixed top-0 left-0 z-20 flex h-screen min-h-0 flex-col border-r border-separator bg-surface shadow-card transition-[width] duration-300',
     state ? 'w-75.25' : 'w-16.25',
     className,
   );

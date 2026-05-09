@@ -75,6 +75,25 @@ describe('Sidebar', () => {
     expect(screen.getByTestId('sidebar-head')).toHaveClass('bg-brand');
   });
 
+  it('lets SidebarHead compose custom link components', () => {
+    render(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarHead asChild logoSrc="/logo.png" title="Docs">
+          <a href="/custom" className="custom-link" data-testid="sidebar-head-link">
+            Custom docs link
+          </a>
+        </SidebarHead>
+      </Sidebar>,
+    );
+
+    const link = screen.getByTestId('sidebar-head-link');
+
+    expect(link).toHaveAttribute('href', '/custom');
+    expect(link).toHaveClass('custom-link', 'flex', 'items-center', 'gap-2', 'overflow-hidden');
+    expect(screen.getByAltText('Docs logo')).toBeInTheDocument();
+    expect(screen.getByText('Docs')).toBeInTheDocument();
+  });
+
   it('lets consumers control header height while keeping the toggle centered', () => {
     render(
       <Sidebar state action={() => undefined} className="static">
