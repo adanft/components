@@ -17,7 +17,8 @@ const usageSnippet = `<Checkbox label="Accept terms" onChange={() => {}} />`;
 
 const statesSnippet = `<Checkbox label="Unchecked" onChange={() => {}} />
 <Checkbox label="Checked" checked onChange={() => {}} />
-<Checkbox label="Disabled" disabled onChange={() => {}} />`;
+<Checkbox label="Disabled" disabled onChange={() => {}} />
+<Checkbox aria-invalid label="Invalid" onChange={() => {}} />`;
 
 const labelPositionSnippet = `<Checkbox label="Label on the right (default)" labelPosition="right" onChange={() => {}} />
 <Checkbox label="Label on the left" labelPosition="left" onChange={() => {}} />
@@ -56,6 +57,7 @@ function CheckboxPage() {
           <Checkbox label="Unchecked" onChange={() => {}} />
           <Checkbox label="Checked" defaultChecked onChange={() => {}} />
           <Checkbox label="Disabled" disabled onChange={() => {}} />
+          <Checkbox aria-invalid label="Invalid" onChange={() => {}} />
         </Box>
         <CodeBlock code={statesSnippet} />
 
@@ -142,6 +144,16 @@ function CheckboxPage() {
               </TableCell>
               <TableCell>—</TableCell>
               <TableCell>Disables interaction and applies the disabled visual state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-invalid</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`boolean | "true" | "false"`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Marks the input invalid and applies the invalid visual state.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>

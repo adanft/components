@@ -28,6 +28,13 @@ const positionsSnippet = `<Switch checked={false} onCheckedChange={() => undefin
 
 const disabledSnippet = `<Switch checked={false} disabled onCheckedChange={() => undefined} label="Disabled" />`;
 
+const invalidSnippet = `<Switch
+  aria-invalid
+  checked={false}
+  onCheckedChange={() => undefined}
+  label="Invalid"
+/>`;
+
 function SwitchPage() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -89,6 +96,12 @@ function SwitchPage() {
           <Switch checked={false} disabled onCheckedChange={() => undefined} label="Disabled" />
         </Box>
         <CodeBlock code={disabledSnippet} />
+
+        <h3 className="text-lg font-semibold text-heading">Invalid</h3>
+        <Box shadow="none" surface="none">
+          <Switch aria-invalid checked={false} onCheckedChange={() => undefined} label="Invalid" />
+        </Box>
+        <CodeBlock code={invalidSnippet} />
       </section>
 
       <section className="space-y-4">
@@ -154,6 +167,16 @@ function SwitchPage() {
               </TableCell>
               <TableCell>—</TableCell>
               <TableCell>Disables interaction and applies the disabled visual state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-invalid</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`boolean | "true" | "false"`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Marks the input invalid and applies the invalid visual state.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>

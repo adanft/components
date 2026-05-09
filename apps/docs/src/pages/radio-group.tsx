@@ -61,6 +61,11 @@ const disabledExampleSnippet = `<RadioGroup
   <RadioGroup.Item value="pro" label="Pro" />
 </RadioGroup>`;
 
+const invalidExampleSnippet = `<RadioGroup value={plan} onValueChange={setPlan} aria-label="Billing plan">
+  <RadioGroup.Item aria-invalid value="starter" label="Starter" />
+  <RadioGroup.Item value="pro" label="Pro" />
+</RadioGroup>`;
+
 function RadioGroupPage() {
   const [plan, setPlan] = useState('starter');
   const [billing, setBilling] = useState('monthly');
@@ -129,6 +134,15 @@ function RadioGroupPage() {
           </RadioGroup>
         </Box>
         <CodeBlock code={disabledExampleSnippet} />
+
+        <h3 className="text-lg font-semibold text-heading">Invalid item</h3>
+        <Box shadow="none" surface="none">
+          <RadioGroup value={plan} onValueChange={setPlan} aria-label="Billing plan">
+            <RadioGroup.Item aria-invalid value="starter" label="Starter" />
+            <RadioGroup.Item value="pro" label="Pro" />
+          </RadioGroup>
+        </Box>
+        <CodeBlock code={invalidExampleSnippet} />
       </section>
 
       <section className="space-y-4">
@@ -256,6 +270,16 @@ function RadioGroupPage() {
                 <Code>false</Code>
               </TableCell>
               <TableCell>Disables only this item.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-invalid</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`boolean | "true" | "false"`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Marks the item invalid and applies the invalid visual state.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>

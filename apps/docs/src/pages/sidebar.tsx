@@ -90,6 +90,11 @@ const simpleExampleJsx = `<Sidebar state={sidebarOpen} action={setSidebarOpen} c
   </SidebarBody>
 </Sidebar>`;
 
+const sidebarHeadAsChildSnippet = `// Use your router's Link component.
+<SidebarHead asChild logoSrc="/logo.png" title="Comps Docs">
+  <Link to="/" />
+</SidebarHead>`;
+
 function SidebarPage() {
   const [simpleSidebarOpen, setSimpleSidebarOpen] = useState(true);
   const [advancedSidebarOpen, setAdvancedSidebarOpen] = useState(true);
@@ -168,6 +173,13 @@ function SidebarPage() {
           </Sidebar>
         </Box>
         <CodeBlock code={simpleExampleJsx} />
+
+        <h3 className="text-lg font-semibold text-heading">Router link head</h3>
+        <p className="text-foreground">
+          Use <Code>asChild</Code> when your app needs the brand link to be rendered by a router
+          component.
+        </p>
+        <CodeBlock code={sidebarHeadAsChildSnippet} />
 
         <h3 className="text-lg font-semibold text-heading">Advanced</h3>
         <Box className="relative" shadow="none" surface="none">
@@ -340,6 +352,20 @@ function SidebarPage() {
                 <Code>"/"</Code>
               </TableCell>
               <TableCell>Optional destination for the brand link.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>asChild</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Delegates the brand link to a custom child such as a router link.
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>

@@ -26,6 +26,12 @@ const defaultExampleSnippet = `<Select aria-label="Choose plan" defaultValue="st
   <option value="team">Team</option>
 </Select>`;
 
+const invalidExampleSnippet = `<Select aria-invalid aria-label="Choose plan" defaultValue="">
+  <option value="">Choose a plan</option>
+  <option value="starter">Starter</option>
+  <option value="pro">Pro</option>
+</Select>`;
+
 const exampleSnippet = `const [value, setValue] = useState('pro');
 
 <Select
@@ -73,6 +79,16 @@ function SelectPage() {
           </Select>
         </Box>
         <CodeBlock code={defaultExampleSnippet} />
+
+        <h3 className="text-lg font-semibold text-heading">Invalid</h3>
+        <Box shadow="none" surface="none">
+          <Select aria-invalid aria-label="Choose plan" defaultValue="">
+            <option value="">Choose a plan</option>
+            <option value="starter">Starter</option>
+            <option value="pro">Pro</option>
+          </Select>
+        </Box>
+        <CodeBlock code={invalidExampleSnippet} />
 
         <h3 className="text-lg font-semibold text-heading">Controlled</h3>
         <Box shadow="none" surface="none">
@@ -147,6 +163,16 @@ function SelectPage() {
               </TableCell>
               <TableCell>—</TableCell>
               <TableCell>Disables interaction and applies the disabled visual state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-invalid</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`boolean | "true" | "false"`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Marks the control invalid and applies the invalid visual state.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
