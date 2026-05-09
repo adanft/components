@@ -62,6 +62,9 @@ function TextareaPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<textarea>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -91,14 +94,6 @@ function TextareaPage() {
               </TableCell>
               <TableCell>—</TableCell>
               <TableCell>Marks the control invalid and applies the invalid visual state.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>native textarea props</TableCell>
-              <TableCell>textarea attributes</TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>
-                Supports native attributes like placeholder, disabled, value, rows, and name.
-              </TableCell>
             </TableRow>
           </TableBody>
         </Table>

@@ -53,12 +53,9 @@ function LabelPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
-        <div className="space-y-3 text-base leading-7 text-foreground">
-          <p>
-            <Code>Label</Code> accepts native <Code>{'<label>'}</Code> attributes and adds base text
-            styles for form labels. Use <Code>children</Code> for the label content.
-          </p>
-        </div>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<label>`}</Code> element.
+        </p>
       </section>
     </article>
   );

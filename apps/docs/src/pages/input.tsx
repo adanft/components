@@ -54,6 +54,9 @@ function InputPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<input>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -85,14 +88,6 @@ function InputPage() {
               </TableCell>
               <TableCell>—</TableCell>
               <TableCell>Extends the base input styles.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>native input props</TableCell>
-              <TableCell>input attributes</TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>
-                Supports native attributes like placeholder, disabled, value, and name.
-              </TableCell>
             </TableRow>
           </TableBody>
         </Table>

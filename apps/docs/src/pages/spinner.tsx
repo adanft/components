@@ -85,7 +85,7 @@ function SpinnerPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <p className="text-foreground">
-          Spinner extends the underlying <Code>{`<svg>`}</Code> element.
+          A thin wrapper around the native <Code>{`<svg>`}</Code> element.
         </p>
         <Table>
           <TableHeader>
