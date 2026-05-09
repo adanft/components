@@ -106,6 +106,10 @@ function SwitchPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<input>`}</Code> element with{' '}
+          <Code>{`type="checkbox"`}</Code>.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -160,35 +164,48 @@ function SwitchPage() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>disabled</Code>
-              </TableCell>
-              <TableCell>
-                <Code>boolean</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Disables interaction and applies the disabled visual state.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>aria-invalid</Code>
-              </TableCell>
-              <TableCell>
-                <Code>{`boolean | "true" | "false"`}</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Marks the input invalid and applies the invalid visual state.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
                 <Code>className</Code>
               </TableCell>
               <TableCell>
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Extends the component styles and can override default values when needed.
+                <Code>aria-checked</Code>
               </TableCell>
+              <TableCell>Reflects the checked switch state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>Identifies the input as a switch.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-invalid</Code>
+              </TableCell>
+              <TableCell>Applies the invalid visual state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-hidden</Code>
+              </TableCell>
+              <TableCell>Hides decorative switch visuals from assistive technology.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

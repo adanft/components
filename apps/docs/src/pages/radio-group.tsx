@@ -73,10 +73,9 @@ function RadioGroupPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-heading">RadioGroup</h1>
+        <h1 className="text-3xl font-bold text-heading">Radio Group</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>RadioGroup</Code> renders a controlled group of native radio inputs for mutually
-          exclusive choices.
+          Radio Group lets users choose one option from a set of related choices.
         </p>
       </header>
 
@@ -149,6 +148,9 @@ function RadioGroupPage() {
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
 
         <h3 className="text-lg font-semibold text-heading">RadioGroup</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -216,17 +218,40 @@ function RadioGroupPage() {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>native div props</TableCell>
-              <TableCell>div attributes</TableCell>
-              <TableCell>—</TableCell>
               <TableCell>
-                Pass <Code>aria-label</Code> or <Code>aria-labelledby</Code> to name the group.
+                <Code>className</Code>
               </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>Identifies the group as a radio group.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
         <h3 className="text-lg font-semibold text-heading">RadioGroup.Item</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<input>`}</Code> element with{' '}
+          <Code>{`type="radio"`}</Code>.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -273,32 +298,36 @@ function RadioGroupPage() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>aria-invalid</Code>
-              </TableCell>
-              <TableCell>
-                <Code>{`boolean | "true" | "false"`}</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Marks the item invalid and applies the invalid visual state.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
                 <Code>className</Code>
               </TableCell>
               <TableCell>
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Extends the visual radio indicator styles.</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>aria-invalid</Code>
+              </TableCell>
+              <TableCell>Applies the invalid visual state.</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>native input props</TableCell>
-              <TableCell>input attributes</TableCell>
-              <TableCell>—</TableCell>
               <TableCell>
-                If no <Code>label</Code> is rendered, pass <Code>aria-label</Code> for an accessible
-                name.
+                <Code>aria-hidden</Code>
               </TableCell>
+              <TableCell>Hides decorative radio indicator elements.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

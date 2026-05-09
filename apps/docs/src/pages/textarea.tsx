@@ -27,8 +27,7 @@ function TextareaPage() {
       <header className="space-y-4 pb-6">
         <h1 className="text-3xl font-bold text-heading">Textarea</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>Textarea</Code> is a styled native <Code>{'<textarea>'}</Code> primitive for
-          multi-line form entry.
+          <Code>Textarea</Code> is a multi-line text field for longer form content.
         </p>
       </header>
 
@@ -83,17 +82,24 @@ function TextareaPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Extends the base textarea styles.</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             <TableRow>
               <TableCell>
                 <Code>aria-invalid</Code>
               </TableCell>
-              <TableCell>
-                <Code>{`boolean | "true" | "false"`}</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Marks the control invalid and applies the invalid visual state.</TableCell>
+              <TableCell>Applies the invalid visual state.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

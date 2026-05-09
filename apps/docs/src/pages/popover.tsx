@@ -68,9 +68,7 @@ function PopoverPage() {
       <header className="space-y-4 pb-6">
         <h1 className="text-3xl font-bold text-heading">Popover</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>Popover</Code> is a controlled primitive for anchored floating content. It provides
-          positioning, trigger state attributes, dismiss behavior, and ARIA hooks without adding
-          visual styling.
+          <Code>Popover</Code> shows interactive floating content anchored to a trigger.
         </p>
       </header>
 
@@ -217,11 +215,41 @@ function PopoverPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">Popover.Trigger and Popover.Content</h3>
+        <h3 className="text-lg font-semibold text-heading">Popover.Trigger</h3>
+        <p className="text-foreground">
+          Accepts a single child element and attaches the trigger behavior to it.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead scope="col">Part</TableHead>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>aria-expanded</Code>
+              </TableCell>
+              <TableCell>Reflects whether the popover is open.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-haspopup</Code>
+              </TableCell>
+              <TableCell>Identifies the trigger as opening a dialog when enabled.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Popover.Content</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
               <TableHead scope="col">Type</TableHead>
               <TableHead scope="col">Default</TableHead>
               <TableHead scope="col">Description</TableHead>
@@ -230,26 +258,23 @@ function PopoverPage() {
           <TableBody>
             <TableRow>
               <TableCell>
-                <Code>Popover.Trigger</Code>
+                <Code>className</Code>
               </TableCell>
-              <TableCell>single React element</TableCell>
-              <TableCell>—</TableCell>
               <TableCell>
-                Clones one interactive child and wires trigger handlers plus{' '}
-                <Code>aria-expanded</Code>. Prefer a native button or the library{' '}
-                <Code>Button</Code> component.
+                <Code>string</Code>
               </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>Popover.Content</Code>
+                <Code>style</Code>
               </TableCell>
-              <TableCell>native div props</TableCell>
-              <TableCell>—</TableCell>
               <TableCell>
-                Renders in a portal only while open. Pass layout, surface, border, and shadow
-                classes explicitly because the primitive has no default visual styling.
+                <Code>CSSProperties</Code>
               </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Merges with the computed floating styles from the root.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

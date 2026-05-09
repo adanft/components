@@ -169,6 +169,9 @@ function AccordionPage() {
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
 
         <h3 className="text-lg font-semibold text-heading">Accordion</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -224,14 +227,32 @@ function AccordionPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Extends the root wrapper when you need consumer-owned spacing or layout.
+                <Code>data-accordion-root</Code>
               </TableCell>
+              <TableCell>Identifies the root used for trigger keyboard navigation.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
         <h3 className="text-lg font-semibold text-heading">Accordion.Item</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -260,14 +281,32 @@ function AccordionPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Extends the item wrapper when consumer composition needs custom styling.
+                <Code>data-state</Code>
               </TableCell>
+              <TableCell>Reflects the open or closed item state.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
         <h3 className="text-lg font-semibold text-heading">Accordion.Content</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<section>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -296,25 +335,141 @@ function AccordionPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">Accordion.Header</h3>
-        <div className="space-y-3 text-base leading-7 text-foreground">
-          <p>
-            Use <Code>Accordion.Header</Code> to wrap the trigger with heading semantics.
-          </p>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>id</Code>
+              </TableCell>
+              <TableCell>Connects the content panel to its trigger.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-labelledby</Code>
+              </TableCell>
+              <TableCell>References the trigger that labels the content panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>data-state</Code>
+              </TableCell>
+              <TableCell>Reflects the open or closed content state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>hidden</Code>
+              </TableCell>
+              <TableCell>Hides kept-mounted content when closed.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
-        <h3 className="text-lg font-semibold text-heading">
-          Accordion.Trigger and Accordion.Content
-        </h3>
-        <div className="space-y-3 text-base leading-7 text-foreground">
-          <p>
-            Use <Code>Accordion.Trigger</Code> for the clickable control that opens or closes each
-            section.
-          </p>
-          <p>
-            Use <Code>Accordion.Content</Code> for the content panel that belongs to the trigger.
-          </p>
-        </div>
+        <h3 className="text-lg font-semibold text-heading">Accordion.Header</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<h3>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Accordion.Trigger</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<button>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>id</Code>
+              </TableCell>
+              <TableCell>Connects the trigger to its content panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>type</Code>
+              </TableCell>
+              <TableCell>Sets the trigger button type.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-expanded</Code>
+              </TableCell>
+              <TableCell>Reflects whether the item is open.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-controls</Code>
+              </TableCell>
+              <TableCell>References the controlled content panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>data-accordion-trigger</Code>
+              </TableCell>
+              <TableCell>Identifies triggers used for keyboard navigation.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>data-state</Code>
+              </TableCell>
+              <TableCell>Reflects the open or closed trigger state.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );

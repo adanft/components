@@ -25,6 +25,7 @@ import {
   Table,
   Tag,
   TextCursorInput,
+  TextInitial,
   ToggleLeft,
 } from 'lucide-react';
 
@@ -99,7 +100,7 @@ const docsSidebarNavigation: DocsSidebarNavigationNode[] = [
   { type: 'link', icon: Menu, text: 'DropdownMenu', href: DOCS_DROPDOWN_MENU_PATH },
   { type: 'link', icon: Rows3, text: 'Field', href: DOCS_FIELD_PATH },
   { type: 'link', icon: TextCursorInput, text: 'Input', href: DOCS_INPUT_PATH },
-  { type: 'link', icon: TextCursorInput, text: 'Textarea', href: DOCS_TEXTAREA_PATH },
+  { type: 'link', icon: TextInitial, text: 'Textarea', href: DOCS_TEXTAREA_PATH },
   { type: 'link', icon: Tag, text: 'Label', href: DOCS_LABEL_PATH },
   { type: 'link', icon: AppWindow, text: 'Modal', href: DOCS_MODAL_PATH },
   { type: 'link', icon: ChevronsLeftRight, text: 'Pagination', href: DOCS_PAGINATION_PATH },

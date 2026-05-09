@@ -75,8 +75,7 @@ function ModalPage() {
       <header className="space-y-4 pb-6">
         <h1 className="text-3xl font-bold text-heading">Modal</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>Modal</Code> renders controlled dialog content in a portal with backdrop dismiss,
-          escape dismiss, focus trapping, and focus restoration.
+          <Code>Modal</Code> shows focused dialog content for blocking workflows and confirmations.
         </p>
       </header>
 
@@ -184,24 +183,34 @@ function ModalPage() {
               <TableCell>—</TableCell>
               <TableCell>Runs when the backdrop is clicked or Escape is pressed.</TableCell>
             </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             <TableRow>
               <TableCell>
-                <Code>children</Code>
+                <Code>data-modal-portal</Code>
               </TableCell>
-              <TableCell>
-                <Code>ReactNode</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Modal compound parts rendered inside the portal.</TableCell>
+              <TableCell>Identifies the fixed portal container rendered by Modal.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">Modal.Backdrop and Modal.Panel</h3>
+        <h3 className="text-lg font-semibold text-heading">Modal.Backdrop</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead scope="col">Prop / Part</TableHead>
+              <TableHead scope="col">Prop</TableHead>
               <TableHead scope="col">Type</TableHead>
               <TableHead scope="col">Default</TableHead>
               <TableHead scope="col">Description</TableHead>
@@ -210,40 +219,42 @@ function ModalPage() {
           <TableBody>
             <TableRow>
               <TableCell>
-                <Code>Modal.Backdrop</Code>
-              </TableCell>
-              <TableCell>native div props</TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Renders the overlay and calls the root close handler on click.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>Modal.Panel</Code>
-              </TableCell>
-              <TableCell>native div props</TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Wraps the modal content and accepts layout/spacing classes.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>aria-label</Code> / <Code>aria-labelledby</Code>
+                <Code>className</Code>
               </TableCell>
               <TableCell>
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>
-                Names <Code>Modal.Panel</Code> when no <Code>Modal.Title</Code> is rendered.
-              </TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">Modal.Title and focus</h3>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead scope="col">Prop / Part</TableHead>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>aria-hidden</Code>
+              </TableCell>
+              <TableCell>Hides the backdrop from assistive technology.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Modal.Panel</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
               <TableHead scope="col">Type</TableHead>
               <TableHead scope="col">Default</TableHead>
               <TableHead scope="col">Description</TableHead>
@@ -252,25 +263,106 @@ function ModalPage() {
           <TableBody>
             <TableRow>
               <TableCell>
-                <Code>Modal.Title</Code>
+                <Code>className</Code>
               </TableCell>
-              <TableCell>native h2 props</TableCell>
-              <TableCell>—</TableCell>
               <TableCell>
-                Renders the visible title and names the panel when no manual name is provided.
+                <Code>string</Code>
               </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>Identifies the panel as a dialog.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-modal</Code>
+              </TableCell>
+              <TableCell>Marks the dialog as modal.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-label</Code>
+              </TableCell>
+              <TableCell>Names the panel when no visible title is rendered.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-labelledby</Code>
+              </TableCell>
+              <TableCell>References the element that names the panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>tabIndex</Code>
+              </TableCell>
+              <TableCell>Makes the panel focusable for initial focus management.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
                 <Code>data-autofocus</Code>
               </TableCell>
               <TableCell>
-                <Code>boolean</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>
                 Add it to the element that should receive focus when the modal opens.
               </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Modal.Title</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<h2>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>id</Code>
+              </TableCell>
+              <TableCell>Connects the title to the panel accessible name.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

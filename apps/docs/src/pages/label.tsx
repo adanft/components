@@ -1,4 +1,14 @@
-import { Box, Input, Label } from '@adanft/ui';
+import {
+  Box,
+  Input,
+  Label,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
@@ -56,6 +66,28 @@ function LabelPage() {
         <p className="text-foreground">
           A thin wrapper around the native <Code>{`<label>`}</Code> element.
         </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );

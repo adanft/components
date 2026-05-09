@@ -88,10 +88,9 @@ function DropdownMenuPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-heading">DropdownMenu</h1>
+        <h1 className="text-3xl font-bold text-heading">Dropdown Menu</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>DropdownMenu</Code> is a controlled actions menu with compound parts for the
-          trigger, floating content, items, labels, and separators.
+          Dropdown Menu shows grouped actions from a trigger for menus and command lists.
         </p>
       </header>
 
@@ -197,49 +196,46 @@ function DropdownMenuPage() {
               </TableCell>
               <TableCell>Sets the Floating UI placement used for the menu content.</TableCell>
             </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>children</Code>
-              </TableCell>
-              <TableCell>
-                <Code>ReactNode</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>
-                Composes the trigger and content parts inside the controlled root.
-              </TableCell>
-            </TableRow>
           </TableBody>
         </Table>
 
         <h3 className="text-lg font-semibold text-heading">DropdownMenu.Trigger</h3>
+        <p className="text-foreground">
+          Accepts a single child element and attaches the trigger behavior to it.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead scope="col">Prop</TableHead>
-              <TableHead scope="col">Type</TableHead>
-              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Attribute</TableHead>
               <TableHead scope="col">Description</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
               <TableCell>
-                <Code>children</Code>
+                <Code>aria-expanded</Code>
               </TableCell>
+              <TableCell>Reflects whether the menu is open.</TableCell>
+            </TableRow>
+            <TableRow>
               <TableCell>
-                <Code>ReactElement</Code>
+                <Code>aria-haspopup</Code>
               </TableCell>
-              <TableCell>—</TableCell>
+              <TableCell>Identifies the trigger as opening a menu.</TableCell>
+            </TableRow>
+            <TableRow>
               <TableCell>
-                Expects a single valid element child so the component can attach refs and trigger
-                props.
+                <Code>data-state</Code>
               </TableCell>
+              <TableCell>Reflects the open or closed trigger state.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
         <h3 className="text-lg font-semibold text-heading">DropdownMenu.Content</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -250,16 +246,6 @@ function DropdownMenuPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>
-                <Code>children</Code>
-              </TableCell>
-              <TableCell>
-                <Code>ReactNode</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Renders the floating menu body when the root is open.</TableCell>
-            </TableRow>
             <TableRow>
               <TableCell>
                 <Code>className</Code>
@@ -268,9 +254,7 @@ function DropdownMenuPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>
-                Extends the rendered div for consumer-owned spacing and visuals.
-              </TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -285,7 +269,27 @@ function DropdownMenuPage() {
           </TableBody>
         </Table>
 
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>data-state</Code>
+              </TableCell>
+              <TableCell>Reflects the open or closed content state.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
         <h3 className="text-lg font-semibold text-heading">DropdownMenu.Item</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<button>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -341,17 +345,94 @@ function DropdownMenuPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">
-          DropdownMenu.Label and DropdownMenu.Separator
-        </h3>
-        <div className="space-y-3 text-base leading-7 text-foreground">
-          <p>
-            Use <Code>DropdownMenu.Label</Code> to group related actions with a lightweight heading.
-          </p>
-          <p>
-            Use <Code>DropdownMenu.Separator</Code> to divide action groups inside the menu.
-          </p>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>Identifies the item as a menu item.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-disabled</Code>
+              </TableCell>
+              <TableCell>Reflects the disabled item state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>data-active</Code>
+              </TableCell>
+              <TableCell>Applies the active visual state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>data-disabled</Code>
+              </TableCell>
+              <TableCell>Applies the disabled visual state.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">DropdownMenu.Label</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">DropdownMenu.Separator</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<hr>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );

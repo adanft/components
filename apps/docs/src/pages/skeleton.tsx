@@ -139,9 +139,24 @@ function SkeletonPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Extends the component styles and can override default values when needed.
+                <Code>aria-hidden</Code>
               </TableCell>
+              <TableCell>Hides the placeholder from assistive technology.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

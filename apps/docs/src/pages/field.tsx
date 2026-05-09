@@ -64,8 +64,7 @@ function FieldPage() {
       <header className="space-y-4 pb-6">
         <h1 className="text-3xl font-bold text-heading">Field</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>Field</Code> groups labels, controls, helper text, and validation feedback while
-          leaving native attributes and ARIA associations explicit.
+          <Code>Field</Code> groups form labels, controls, helper text, and validation messages.
         </p>
       </header>
 
@@ -129,6 +128,9 @@ function FieldPage() {
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
 
         <h3 className="text-lg font-semibold text-heading">Field</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -149,9 +151,7 @@ function FieldPage() {
               <TableCell>
                 <Code>false</Code>
               </TableCell>
-              <TableCell>
-                Adds <Code>data-invalid</Code> to the root wrapper for styling hooks.
-              </TableCell>
+              <TableCell>Adds the invalid field state.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -163,9 +163,7 @@ function FieldPage() {
               <TableCell>
                 <Code>false</Code>
               </TableCell>
-              <TableCell>
-                Adds <Code>data-required</Code> to the root wrapper for styling hooks.
-              </TableCell>
+              <TableCell>Adds the required field state.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -175,49 +173,254 @@ function FieldPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Extends the root field wrapper.</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">Field.Set and Field.Legend</h3>
-        <div className="space-y-3 text-base leading-7 text-foreground">
-          <p>
-            <Code>Field.Set</Code> renders a native <Code>{'<fieldset>'}</Code> for grouped
-            controls. It accepts native fieldset attributes plus <Code>invalid</Code> and{' '}
-            <Code>required</Code> styling hooks.
-          </p>
-          <p>
-            <Code>Field.Legend</Code> renders the group title as a native <Code>{'<legend>'}</Code>.
-            Pass attributes like <Code>aria-describedby</Code> directly to <Code>Field.Set</Code>{' '}
-            when helper or error text should describe the group.
-          </p>
-        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>data-invalid</Code>
+              </TableCell>
+              <TableCell>Reflects the invalid field state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>data-required</Code>
+              </TableCell>
+              <TableCell>Reflects the required field state.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
-        <h3 className="text-lg font-semibold text-heading">
-          Field.Label, Field.Description and Field.Error
-        </h3>
-        <div className="space-y-3 text-base leading-7 text-foreground">
-          <p>
-            <Code>Field.Label</Code> renders a styled native <Code>{'<label>'}</Code>. Use{' '}
-            <Code>htmlFor</Code> with the control <Code>id</Code>, and add <Code>data-invalid</Code>{' '}
-            when the label should use the invalid state.
-          </p>
-          <p>
-            <Code>Field.Description</Code> renders helper text as a native paragraph.{' '}
-            <Code>Field.Error</Code> renders validation feedback with <Code>role="alert"</Code> by
-            default.
-          </p>
-          <p>
-            Pass <Code>children</Code> to <Code>Field.Error</Code> for custom content, or pass an{' '}
-            <Code>errors</Code> array with message objects to render one or more unique messages.
-          </p>
-          <p>
-            Use native IDs and ARIA props explicitly, for example <Code>Label htmlFor</Code>,{' '}
-            <Code>Input id</Code>, and <Code>aria-describedby</Code>. The field primitives do not
-            generate IDs or clone controls.
-          </p>
-        </div>
+        <h3 className="text-lg font-semibold text-heading">Field.Set</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<fieldset>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>invalid</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>Adds the invalid field state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>required</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>Adds the required field state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>data-invalid</Code>
+              </TableCell>
+              <TableCell>Reflects the invalid field state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>data-required</Code>
+              </TableCell>
+              <TableCell>Reflects the required field state.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Field.Legend</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<legend>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Field.Label</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<label>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>data-invalid</Code>
+              </TableCell>
+              <TableCell>Applies the invalid visual state.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Field.Description</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<p>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Field.Error</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>errors</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`Array<{ message?: string } | undefined>`}</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Renders one or more unique error messages.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`"alert"`}</Code>
+              </TableCell>
+              <TableCell>Sets the accessibility role for validation feedback.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );

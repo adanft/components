@@ -48,9 +48,9 @@ function ThemeSwitchPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-heading">ThemeSwitch</h1>
+        <h1 className="text-3xl font-bold text-heading">Theme Switch</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>ThemeSwitch</Code> toggles between light and dark themes.
+          Theme Switch lets users toggle between light and dark themes.
         </p>
       </header>
 
@@ -90,6 +90,9 @@ function ThemeSwitchPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<label>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -143,8 +146,37 @@ function ThemeSwitchPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Extends the component styles and can override default values when needed.
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>Identifies the input as a switch.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-checked</Code>
+              </TableCell>
+              <TableCell>Reflects the current theme switch state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-hidden</Code>
+              </TableCell>
+              <TableCell>
+                Hides decorative theme icons and visuals from assistive technology.
               </TableCell>
             </TableRow>
           </TableBody>

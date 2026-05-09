@@ -113,38 +113,48 @@ function SpinnerPage() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>aria-label</Code>
-              </TableCell>
-              <TableCell>
-                <Code>string</Code>
-              </TableCell>
-              <TableCell>
-                <Code>{`"Loading"`}</Code>
-              </TableCell>
-              <TableCell>Names the status when the spinner itself announces loading.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>aria-hidden</Code>
-              </TableCell>
-              <TableCell>
-                <Code>{`boolean | "true" | "false"`}</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Hides decorative spinners from assistive technology.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
                 <Code>className</Code>
               </TableCell>
               <TableCell>
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Adjusts size and color with utilities like <Code>size-24</Code> or{' '}
-                <Code>text-info</Code>.
+                <Code>aria-label</Code>
               </TableCell>
+              <TableCell>Names the loading status.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-hidden</Code>
+              </TableCell>
+              <TableCell>Hides decorative spinners from assistive technology.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>Identifies the spinner as status or presentation.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>focusable</Code>
+              </TableCell>
+              <TableCell>Prevents the SVG from receiving focus.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

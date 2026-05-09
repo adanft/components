@@ -17,35 +17,40 @@ type HomeCatalogSection = {
 };
 
 const COMPONENT_DESCRIPTIONS: Record<string, string> = {
-  Accordion: 'Disclosure primitive for grouping expandable sections with keyboard-friendly state.',
-  Alert: 'Status message component for communicating feedback, warnings, and destructive states.',
-  Avatar: 'User image fallback pattern for profiles, authors, and account surfaces.',
-  Badge: 'Compact label for status, metadata, counts, and small categorical hints.',
-  Box: 'Semantic surface container for composing cards, panels, and content blocks.',
-  Breadcrumbs:
-    'Location trail primitive that composes with anchors or consumer-owned router links.',
-  Button: 'Accessible action trigger with consistent sizing, variants, and interaction states.',
-  Checkbox: 'Boolean form control for toggles that belong inside forms or option lists.',
-  DropdownMenu: 'Menu pattern for grouped actions attached to a trigger.',
-  Field: 'Form composition primitives for labels, descriptions, errors, and grouped controls.',
-  Input: 'Text input primitive with token-based styling and native form semantics.',
-  Label: 'Native label primitive for explicitly connecting text with form controls.',
-  Modal:
-    'Dialog primitive for blocking workflows that need focus management and an accessible name.',
-  Pagination: 'Navigation component for moving across paged collections.',
-  Popover: 'Floating primitive for interactive contextual content anchored to a trigger.',
-  Profile: 'Account menu pattern combining avatar identity and user actions.',
-  RadioGroup: 'Single-choice form control pattern with grouped radio options.',
-  Select: 'Selection control for choosing one option from a compact list.',
-  Sidebar: 'Application navigation shell for dense side menus and nested navigation.',
-  Skeleton: 'Loading placeholder for preserving layout while async content resolves.',
-  Spinner: 'Indeterminate loading indicator for process feedback and inline pending states.',
-  Switch: 'Binary setting control for immediate on/off preferences.',
-  Table: 'Semantic table primitives for structured data and API reference content.',
-  Tabs: 'Section switcher for related panels that share the same page context.',
-  Textarea: 'Multi-line text entry primitive with token-based form control styling.',
-  ThemeSwitch: 'Theme control wired to the library theme helpers.',
-  Tooltip: 'Non-interactive floating hint for short contextual help on hover or focus.',
+  Accordion: 'Accordion shows expandable sections and is used to organize related content.',
+  Alert: 'Alert shows status messages and is used to communicate feedback or warnings.',
+  Avatar: 'Avatar shows a user image or fallback and is used for identity surfaces.',
+  Badge: 'Badge shows a compact label and is used for status, metadata, or counts.',
+  Box: 'Box is a surface container and is used to compose cards, panels, and content blocks.',
+  Breadcrumbs: 'Breadcrumbs show a location trail and are used for hierarchical navigation.',
+  Button: 'Button triggers an action and is used for forms, dialogs, and interactive flows.',
+  Checkbox: 'Checkbox captures a boolean choice and is used in forms or option lists.',
+  DropdownMenu: 'Dropdown Menu shows grouped actions and is used for trigger-based menus.',
+  Field: 'Field groups form copy and controls and is used for labels, help text, and errors.',
+  Input: 'Input captures single-line text and is used for native text entry in forms.',
+  Label: 'Label names a form control and is used to connect text with an input.',
+  Modal: 'Modal shows a focused dialog and is used for workflows that block the page.',
+  Pagination: 'Pagination moves through pages and is used for paged collections.',
+  Popover: 'Popover shows anchored content and is used for interactive contextual panels.',
+  Profile: 'Profile shows account identity and is used for user menus and account actions.',
+  RadioGroup: 'Radio Group captures one choice and is used for grouped radio options.',
+  Select: 'Select lets users choose one option and is used for compact option lists.',
+  Sidebar: 'Sidebar shows app navigation and is used for side menus and nested links.',
+  Skeleton: 'Skeleton reserves loading space and is used while async content is pending.',
+  Spinner: 'Spinner shows indeterminate progress and is used for loading states.',
+  Switch: 'Switch toggles a setting and is used for immediate on/off preferences.',
+  Table: 'Table shows structured data and is used for rows, columns, and API references.',
+  Tabs: 'Tabs switch between panels and are used for related content on the same page.',
+  Textarea: 'Textarea captures multi-line text and is used for longer form content.',
+  ThemeSwitch:
+    'Theme Switch toggles color mode and is used to change between light and dark themes.',
+  Tooltip: 'Tooltip shows a short hint and is used for non-interactive contextual help.',
+};
+
+const COMPONENT_DISPLAY_NAMES: Record<string, string> = {
+  DropdownMenu: 'Dropdown Menu',
+  RadioGroup: 'Radio Group',
+  ThemeSwitch: 'Theme Switch',
 };
 
 const INSTALL_SNIPPET = `pnpm add @adanft/ui`;
@@ -101,7 +106,7 @@ const CATALOG_SECTIONS = docsSidebarNavigation.reduce<HomeCatalogSection[]>((sec
         description: COMPONENT_DESCRIPTIONS[node.text] ?? 'Documented library component.',
         href: node.href,
         icon: node.icon,
-        name: node.text,
+        name: COMPONENT_DISPLAY_NAMES[node.text] ?? node.text,
       });
     }
   }
