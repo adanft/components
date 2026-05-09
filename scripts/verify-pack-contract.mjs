@@ -107,8 +107,9 @@ export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = pro
     createCheck(
       'public package stylesheet carries dependency CSS and theme sources',
       packageSourceStyles.includes('@import "simplebar-react/dist/simplebar.min.css";') &&
-        packageSourceStyles.includes('@import "./theme/utilities.css";') &&
         packageSourceStyles.includes('@theme {') &&
+        packageSourceStyles.includes('@layer base {') &&
+        packageSourceStyles.includes('@keyframes tilt') &&
         !packageSourceStyles.includes('@import "tailwindcss";'),
       packageSourceStyles,
     ),

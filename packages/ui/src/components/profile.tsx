@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import Popover from '../primitives/popover';
 import type { AvatarSize } from './avatar';
 import Avatar from './avatar';
 import Box from './box';
 import Button from './button';
-import Popover from './popover';
 
 type ProfileBaseProps = {
   actionLabel: string;

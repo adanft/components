@@ -1,7 +1,7 @@
 const PUBLIC_COMPONENT_EXPORTS = {
   accordion: {
-    source: 'components/accordion/index',
-    types: 'components/accordion/index.d.ts',
+    source: 'primitives/accordion/index',
+    types: 'primitives/accordion/index.d.ts',
   },
   alert: {
     source: 'components/alert/index',
@@ -60,8 +60,8 @@ const PUBLIC_COMPONENT_EXPORTS = {
     types: 'components/pagination/head.d.ts',
   },
   popover: {
-    source: 'components/popover/index',
-    types: 'components/popover/index.d.ts',
+    source: 'primitives/popover/index',
+    types: 'primitives/popover/index.d.ts',
   },
   profile: {
     source: 'components/profile',
@@ -100,16 +100,16 @@ const PUBLIC_COMPONENT_EXPORTS = {
     types: 'components/table/index.d.ts',
   },
   tabs: {
-    source: 'components/tabs/index',
-    types: 'components/tabs/index.d.ts',
+    source: 'primitives/tabs/index',
+    types: 'primitives/tabs/index.d.ts',
   },
   'theme-switch': {
     source: 'components/theme-switch',
     types: 'components/theme-switch.d.ts',
   },
   tooltip: {
-    source: 'components/tooltip/index',
-    types: 'components/tooltip/index.d.ts',
+    source: 'primitives/tooltip/index',
+    types: 'primitives/tooltip/index.d.ts',
   },
 };
 
@@ -147,7 +147,9 @@ function createPublishExports() {
     },
     ...Object.fromEntries(
       Object.entries(PUBLIC_COMPONENT_EXPORTS).map(([publicName, contract]) => {
-        const importPath = `./dist/components/${publicName}/index.js`;
+        const importPath = contract.source.endsWith('/index')
+          ? `./dist/${contract.source}.js`
+          : `./dist/components/${publicName}/index.js`;
 
         return [
           `./${publicName}`,
@@ -165,10 +167,13 @@ function createPublishExports() {
 
 function createViteEntries({ resolveSource }) {
   return Object.fromEntries(
-    Object.entries(PUBLIC_COMPONENT_EXPORTS).map(([publicName, contract]) => [
-      `components/${publicName}/index`,
-      resolveSource(`${contract.source}.tsx`),
-    ]),
+    Object.entries(PUBLIC_COMPONENT_EXPORTS).map(([publicName, contract]) => {
+      const entryName = contract.source.endsWith('/index')
+        ? contract.source
+        : `components/${publicName}/index`;
+
+      return [entryName, resolveSource(`${contract.source}.tsx`)];
+    }),
   );
 }
 

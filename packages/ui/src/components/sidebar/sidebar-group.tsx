@@ -11,7 +11,7 @@ import {
 
 import { cn } from '../../helpers/cn';
 import { ChevronDownIcon } from '../../icons';
-import Popover from '../popover';
+import Popover from '../../primitives/popover';
 import { useSidebarContext } from './context';
 import SidebarGroupLink from './sidebar-group-link';
 

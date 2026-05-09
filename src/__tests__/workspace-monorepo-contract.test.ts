@@ -119,8 +119,9 @@ describe('workspace monorepo contract', () => {
 
     expect(packageStyles).not.toContain('@import "tailwindcss";');
     expect(packageStyles).toContain('@import "simplebar-react/dist/simplebar.min.css";');
-    expect(packageStyles).toContain('@import "./theme/utilities.css";');
     expect(packageStyles).toContain('@theme {');
+    expect(packageStyles).toContain('@layer base {');
+    expect(packageStyles).toContain('@keyframes tilt');
     expect(sidebarBody).not.toContain('simplebar-react/dist/simplebar.min.css');
   });
 

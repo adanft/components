@@ -9,11 +9,9 @@ export const LEGACY_ALIAS_POLICY = {
   deprecatedSince: '1.0.0',
   internalBlockSince: '1.0.0',
   removalVersion: '2.0.0',
-  allowlistedCompatibilityFiles: new Set([
-    path.join(UI_WORKSPACE, 'src', 'theme', 'utilities.css'),
-  ]),
-  compatibilityBlockStart: 'legacy-compat:start',
-  compatibilityBlockEnd: 'legacy-compat:end',
+  allowlistedCompatibilityFiles: new Set([path.join(UI_WORKSPACE, 'src', 'styles.css')]),
+  semanticTokenExceptionBlockStart: 'semantic-token-exception:start',
+  semanticTokenExceptionBlockEnd: 'semantic-token-exception:end',
 };
 
 function parseSemver(value) {

@@ -17,6 +17,10 @@ import {
   TableRow,
   Textarea,
 } from '@adanft/ui';
+import AccordionSubpath from '@adanft/ui/accordion';
+import PopoverSubpath from '@adanft/ui/popover';
+import TabsSubpath from '@adanft/ui/tabs';
+import TooltipSubpath from '@adanft/ui/tooltip';
 import { render, screen } from '@testing-library/react';
 import type { ComponentPropsWithoutRef, SVGProps } from 'react';
 import { describe, expect, it, vi } from 'vitest';
@@ -149,6 +153,13 @@ describe('@adanft/ui public API', () => {
     expect('Navbar' in components).toBe(false);
     expect('NotFound' in components).toBe(false);
     expect('RouterSidebarLink' in components).toBe(false);
+  });
+
+  it('keeps primitive public subpaths compatible', () => {
+    expect(AccordionSubpath).toBe(Accordion);
+    expect(PopoverSubpath).toBe(components.Popover);
+    expect(TabsSubpath).toBe(components.Tabs);
+    expect(TooltipSubpath).toBe(components.Tooltip);
   });
 
   it('keeps theme public exports available from the package root', () => {

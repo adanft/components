@@ -1,12 +1,4 @@
 export type {
-  AccordionContentProps,
-  AccordionHeaderProps,
-  AccordionItemProps,
-  AccordionProps,
-  AccordionTriggerProps,
-} from './components/accordion';
-export { default as Accordion } from './components/accordion';
-export type {
   AlertDescriptionProps,
   AlertProps,
   AlertTitleProps,
@@ -69,12 +61,6 @@ export type { PaginationFootProps } from './components/pagination/foot';
 export { default as PaginationFoot } from './components/pagination/foot';
 export type { PaginationHeadProps } from './components/pagination/head';
 export { default as PaginationHead } from './components/pagination/head';
-export type {
-  PopoverContentProps,
-  PopoverProps,
-  PopoverTriggerProps,
-} from './components/popover';
-export { default as Popover } from './components/popover';
 export type { ProfileProps } from './components/profile';
 export { default as Profile } from './components/profile';
 export type { RadioGroupItemProps, RadioGroupProps } from './components/radio-group';
@@ -121,21 +107,35 @@ export {
   TableHeader,
   TableRow,
 } from './components/table';
-export type {
-  TabsContentProps,
-  TabsListProps,
-  TabsProps,
-  TabsTriggerProps,
-} from './components/tabs';
-export { default as Tabs } from './components/tabs';
 export type { TextareaProps } from './components/textarea';
 export { default as Textarea } from './components/textarea';
 export type { ThemeSwitchProps, ThemeSwitchSize } from './components/theme-switch';
 export { default as ThemeSwitch } from './components/theme-switch';
 export type {
+  AccordionContentProps,
+  AccordionHeaderProps,
+  AccordionItemProps,
+  AccordionProps,
+  AccordionTriggerProps,
+} from './primitives/accordion';
+export { default as Accordion } from './primitives/accordion';
+export type {
+  PopoverContentProps,
+  PopoverProps,
+  PopoverTriggerProps,
+} from './primitives/popover';
+export { default as Popover } from './primitives/popover';
+export type {
+  TabsContentProps,
+  TabsListProps,
+  TabsProps,
+  TabsTriggerProps,
+} from './primitives/tabs';
+export { default as Tabs } from './primitives/tabs';
+export type {
   TooltipContentProps,
   TooltipProps,
   TooltipTriggerProps,
-} from './components/tooltip';
-export { default as Tooltip } from './components/tooltip';
+} from './primitives/tooltip';
+export { default as Tooltip } from './primitives/tooltip';
 export { initializeTheme, toggleTheme } from './theme';

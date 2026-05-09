@@ -98,40 +98,41 @@ function validateContent(
   const lines = content.split(/\r?\n/);
   const allowlistedCompatibilityFile =
     LEGACY_ALIAS_POLICY.allowlistedCompatibilityFiles.has(relativePath);
-  let isInsideCompatibilityBlock = false;
+  let isInsideSemanticTokenExceptionBlock = false;
 
   for (let index = 0; index < lines.length; index += 1) {
     const line = lines[index];
     const lineNumber = index + 1;
 
-    if (line.includes(LEGACY_ALIAS_POLICY.compatibilityBlockStart)) {
-      if (isInsideCompatibilityBlock) {
+    if (line.includes(LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockStart)) {
+      if (isInsideSemanticTokenExceptionBlock) {
         errors.push({
           line: lineNumber,
-          message: `nested compatibility marker is not allowed: ${LEGACY_ALIAS_POLICY.compatibilityBlockStart}`,
+          message: `nested semantic token exception marker is not allowed: ${LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockStart}`,
         });
       }
 
-      isInsideCompatibilityBlock = true;
+      isInsideSemanticTokenExceptionBlock = true;
       continue;
     }
 
-    if (line.includes(LEGACY_ALIAS_POLICY.compatibilityBlockEnd)) {
-      if (!isInsideCompatibilityBlock) {
+    if (line.includes(LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockEnd)) {
+      if (!isInsideSemanticTokenExceptionBlock) {
         errors.push({
           line: lineNumber,
-          message: `compatibility block end marker appears before a start marker: ${LEGACY_ALIAS_POLICY.compatibilityBlockEnd}`,
+          message: `semantic token exception end marker appears before a start marker: ${LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockEnd}`,
         });
       }
 
-      isInsideCompatibilityBlock = false;
+      isInsideSemanticTokenExceptionBlock = false;
       continue;
     }
 
-    const requiresCompatibilityBlock = !allowlistedCompatibilityFile || !isInsideCompatibilityBlock;
+    const requiresSemanticTokenExceptionBlock =
+      !allowlistedCompatibilityFile || !isInsideSemanticTokenExceptionBlock;
 
     const varMatch = line.match(varRegex);
-    if (varMatch && requiresCompatibilityBlock) {
+    if (varMatch && requiresSemanticTokenExceptionBlock) {
       errors.push({
         line: lineNumber,
         message: `legacy token variable usage detected: ${varMatch[1]}`,
@@ -139,7 +140,7 @@ function validateContent(
     }
 
     const varDeclarationMatch = line.match(varDeclarationRegex);
-    if (varDeclarationMatch && requiresCompatibilityBlock) {
+    if (varDeclarationMatch && requiresSemanticTokenExceptionBlock) {
       errors.push({
         line: lineNumber,
         message: `legacy token variable declaration detected: ${varDeclarationMatch[2]}`,
@@ -151,7 +152,7 @@ function validateContent(
       isCssFile || line.includes('className=') || line.includes('class=')
         ? line.match(isCssFile ? cssClassRegex : sourceClassRegex)
         : null;
-    if (classMatch && requiresCompatibilityBlock) {
+    if (classMatch && requiresSemanticTokenExceptionBlock) {
       errors.push({
         line: lineNumber,
         message: `legacy utility class usage detected: ${classMatch[1]}`,
@@ -159,41 +160,41 @@ function validateContent(
     }
   }
 
-  if (isInsideCompatibilityBlock) {
+  if (isInsideSemanticTokenExceptionBlock) {
     errors.push({
       line: lines.length,
-      message: `missing compatibility block end marker: ${LEGACY_ALIAS_POLICY.compatibilityBlockEnd}`,
+      message: `missing semantic token exception block end marker: ${LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockEnd}`,
     });
   }
 
   if (
     allowlistedCompatibilityFile &&
-    !content.includes(LEGACY_ALIAS_POLICY.compatibilityBlockStart)
+    !content.includes(LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockStart)
   ) {
     errors.push({
       line: 1,
-      message: `allowlisted file is missing compatibility block start marker: ${LEGACY_ALIAS_POLICY.compatibilityBlockStart}`,
+      message: `allowlisted file is missing semantic token exception block start marker: ${LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockStart}`,
     });
   }
 
   if (
     allowlistedCompatibilityFile &&
-    !content.includes(LEGACY_ALIAS_POLICY.compatibilityBlockEnd)
+    !content.includes(LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockEnd)
   ) {
     errors.push({
       line: 1,
-      message: `allowlisted file is missing compatibility block end marker: ${LEGACY_ALIAS_POLICY.compatibilityBlockEnd}`,
+      message: `allowlisted file is missing semantic token exception block end marker: ${LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockEnd}`,
     });
   }
 
   if (
     !allowlistedCompatibilityFile &&
-    (content.includes(LEGACY_ALIAS_POLICY.compatibilityBlockStart) ||
-      content.includes(LEGACY_ALIAS_POLICY.compatibilityBlockEnd))
+    (content.includes(LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockStart) ||
+      content.includes(LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockEnd))
   ) {
     errors.push({
       line: 1,
-      message: 'compatibility block markers are only allowed in policy allowlisted files.',
+      message: 'semantic token exception markers are only allowed in policy allowlisted files.',
     });
   }
 
@@ -224,12 +225,14 @@ async function run() {
     );
 
     if (LEGACY_ALIAS_POLICY.allowlistedCompatibilityFiles.has(relativePath)) {
-      const compatibilityContentRegex = new RegExp(
-        `${escapeRegExp(LEGACY_ALIAS_POLICY.compatibilityBlockStart)}([\\s\\S]*?)${escapeRegExp(LEGACY_ALIAS_POLICY.compatibilityBlockEnd)}`,
+      const semanticTokenExceptionContentRegex = new RegExp(
+        `${escapeRegExp(LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockStart)}([\\s\\S]*?)${escapeRegExp(LEGACY_ALIAS_POLICY.semanticTokenExceptionBlockEnd)}`,
         'g',
       );
-      const compatibilityBlocks = [...content.matchAll(compatibilityContentRegex)];
-      for (const block of compatibilityBlocks) {
+      const semanticTokenExceptionBlocks = [
+        ...content.matchAll(semanticTokenExceptionContentRegex),
+      ];
+      for (const block of semanticTokenExceptionBlocks) {
         const blockText = block[1] ?? '';
         for (const token of LEGACY_TOKEN_VARIABLES) {
           if (blockText.includes(token)) {
