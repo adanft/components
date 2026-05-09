@@ -95,7 +95,10 @@ function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProp
       <span className="ml-auto flex shrink-0 items-center justify-center p-3.5">
         <ChevronDownIcon
           aria-hidden="true"
-          className={cn('duration-300 size-5 stroke-2', groupOpen && 'rotate-180')}
+          className={cn(
+            'size-5 stroke-2 transition-transform duration-300',
+            groupOpen && 'rotate-180',
+          )}
         />
       </span>
     </button>
