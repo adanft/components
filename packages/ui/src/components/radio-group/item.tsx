@@ -21,7 +21,7 @@ function RadioGroupItem({ className, disabled, id, label, value, ...props }: Rad
   const isDisabled = context.disabled || disabled;
 
   const wrapperClassName = cn(
-    'inline-flex gap-2',
+    'inline-flex gap-2 text-heading has-aria-invalid:text-danger',
     context.labelPosition === 'right' && 'flex-row items-center',
     context.labelPosition === 'left' && 'flex-row-reverse items-center',
     context.labelPosition === 'top' && 'flex-col-reverse items-center',
@@ -64,11 +64,7 @@ function RadioGroupItem({ className, disabled, id, label, value, ...props }: Rad
         />
       </span>
       {label ? (
-        <span
-          className={cn(
-            'select-none text-sm font-medium text-foreground',
-            !isDisabled && 'cursor-pointer',
-          )}>
+        <span className={cn('select-none text-sm font-medium', !isDisabled && 'cursor-pointer')}>
           {label}
         </span>
       ) : null}
