@@ -1,32 +1,14 @@
-import type { ComponentPropsWithoutRef } from 'react';
-import { cn } from '../../helpers/cn';
-import useOutsideHandler from '../../hooks/use-outside-handler';
-import { SidebarContext } from './context';
-
-type SidebarProps = ComponentPropsWithoutRef<'aside'> & {
-  state: boolean;
-  action: (state: boolean) => void;
-};
-
-function Sidebar({ className, children, state, action, ...props }: SidebarProps) {
-  const asideRef = useOutsideHandler<HTMLElement>(() => {
-    action(false);
-  });
-
-  const sidebarClassName = cn(
-    'fixed top-0 left-0 z-20 flex h-screen min-h-0 flex-col border-r border-separator bg-surface shadow-card transition-[width] duration-300',
-    state ? 'w-75.25' : 'w-16.25',
-    className,
-  );
-
-  return (
-    <SidebarContext.Provider value={{ action, collapsed: !state, state }}>
-      <aside {...props} ref={asideRef} className={sidebarClassName}>
-        {children}
-      </aside>
-    </SidebarContext.Provider>
-  );
-}
-
-export default Sidebar;
-export type { SidebarProps };
+export type { SidebarBodyProps } from './body';
+export { default as SidebarBody } from './body';
+export type { SidebarGroupProps } from './group';
+export { default as SidebarGroup } from './group';
+export type { SidebarGroupLinkProps } from './group-link';
+export { default as SidebarGroupLink } from './group-link';
+export type { SidebarHeadProps } from './head';
+export { default as SidebarHead } from './head';
+export type { SidebarLinkProps } from './link';
+export { default as SidebarLink } from './link';
+export type { SidebarSectionProps } from './section';
+export { default as SidebarSection } from './section';
+export type { SidebarProps } from './sidebar';
+export { default, Sidebar } from './sidebar';

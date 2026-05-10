@@ -447,10 +447,10 @@ function SidebarPage() {
                 <Code>icon</Code>
               </TableCell>
               <TableCell>
-                <Code>LucideIcon</Code>
+                <Code>{`ComponentType<SVGProps<SVGSVGElement>>`}</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Icon rendered before the top-level link label.</TableCell>
+              <TableCell>SVG icon component rendered before the top-level link label.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -541,10 +541,10 @@ function SidebarPage() {
                 <Code>icon</Code>
               </TableCell>
               <TableCell>
-                <Code>LucideIcon</Code>
+                <Code>{`ComponentType<SVGProps<SVGSVGElement>>`}</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Icon rendered in the group trigger.</TableCell>
+              <TableCell>SVG icon component rendered in the group trigger.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>

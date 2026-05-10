@@ -6,8 +6,15 @@ import {
   Button,
   Modal,
   Select,
+  type SidebarBodyProps,
   SidebarGroupLink,
+  type SidebarGroupLinkProps,
+  type SidebarGroupProps,
+  type SidebarHeadProps,
   SidebarLink,
+  type SidebarLinkProps,
+  type SidebarProps,
+  type SidebarSectionProps,
   Spinner,
   Table,
   TableBody,
@@ -19,11 +26,27 @@ import {
 } from '@adanft/ui';
 import AccordionSubpath from '@adanft/ui/accordion';
 import PopoverSubpath from '@adanft/ui/popover';
+import SidebarSubpath, {
+  SidebarBody as SidebarBodySubpath,
+  type SidebarBodyProps as SidebarBodySubpathProps,
+  SidebarGroupLink as SidebarGroupLinkSubpath,
+  type SidebarGroupLinkProps as SidebarGroupLinkSubpathProps,
+  SidebarGroup as SidebarGroupSubpath,
+  type SidebarGroupProps as SidebarGroupSubpathProps,
+  SidebarHead as SidebarHeadSubpath,
+  type SidebarHeadProps as SidebarHeadSubpathProps,
+  SidebarLink as SidebarLinkSubpath,
+  type SidebarLinkProps as SidebarLinkSubpathProps,
+  Sidebar as SidebarNamedSubpath,
+  SidebarSection as SidebarSectionSubpath,
+  type SidebarSectionProps as SidebarSectionSubpathProps,
+  type SidebarProps as SidebarSubpathProps,
+} from '@adanft/ui/sidebar';
 import TabsSubpath from '@adanft/ui/tabs';
 import TooltipSubpath from '@adanft/ui/tooltip';
 import { render, screen } from '@testing-library/react';
 import type { ComponentPropsWithoutRef, SVGProps } from 'react';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, expectTypeOf, it, vi } from 'vitest';
 
 type RouterLinkProps = Omit<ComponentPropsWithoutRef<'a'>, 'href'> & {
   to: string;
@@ -160,6 +183,25 @@ describe('@adanft/ui public API', () => {
     expect(PopoverSubpath).toBe(components.Popover);
     expect(TabsSubpath).toBe(components.Tabs);
     expect(TooltipSubpath).toBe(components.Tooltip);
+  });
+
+  it('keeps the Sidebar public subpath aligned with the compound root API', () => {
+    expectTypeOf<SidebarSubpathProps>().toEqualTypeOf<SidebarProps>();
+    expectTypeOf<SidebarHeadSubpathProps>().toEqualTypeOf<SidebarHeadProps>();
+    expectTypeOf<SidebarBodySubpathProps>().toEqualTypeOf<SidebarBodyProps>();
+    expectTypeOf<SidebarLinkSubpathProps>().toEqualTypeOf<SidebarLinkProps>();
+    expectTypeOf<SidebarGroupSubpathProps>().toEqualTypeOf<SidebarGroupProps>();
+    expectTypeOf<SidebarGroupLinkSubpathProps>().toEqualTypeOf<SidebarGroupLinkProps>();
+    expectTypeOf<SidebarSectionSubpathProps>().toEqualTypeOf<SidebarSectionProps>();
+
+    expect(SidebarSubpath).toBe(components.Sidebar);
+    expect(SidebarNamedSubpath).toBe(components.Sidebar);
+    expect(SidebarHeadSubpath).toBe(components.SidebarHead);
+    expect(SidebarBodySubpath).toBe(components.SidebarBody);
+    expect(SidebarLinkSubpath).toBe(components.SidebarLink);
+    expect(SidebarGroupSubpath).toBe(components.SidebarGroup);
+    expect(SidebarGroupLinkSubpath).toBe(components.SidebarGroupLink);
+    expect(SidebarSectionSubpath).toBe(components.SidebarSection);
   });
 
   it('keeps supported theme public exports available from the package root', () => {

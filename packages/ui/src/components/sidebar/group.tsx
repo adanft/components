@@ -13,7 +13,7 @@ import { cn } from '../../helpers/cn';
 import { ChevronDownIcon } from '../../icons';
 import Popover from '../../primitives/popover';
 import { useSidebarContext } from './context';
-import SidebarGroupLink from './sidebar-group-link';
+import SidebarGroupLink from './group-link';
 
 type SidebarIcon = ComponentType<SVGProps<SVGSVGElement>>;
 

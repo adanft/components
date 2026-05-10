@@ -23,4 +23,19 @@ describe('repository documentation contract', () => {
   it('removes the stale legacy alias migration matrix during beta stabilization', () => {
     expect(existsSync(path.join(repoRoot, 'docs/migrations/legacy-alias-matrix.md'))).toBe(false);
   });
+
+  it('documents only public theme helpers in the package README', () => {
+    const packageReadme = readRepoFile('packages/ui/README.md');
+
+    expect(packageReadme).toContain('initializeTheme()');
+    expect(packageReadme).not.toContain('toggleTheme()');
+  });
+
+  it('documents Sidebar icon props without a Lucide-specific API contract', () => {
+    const sidebarDocs = readRepoFile('apps/docs/src/pages/sidebar.tsx');
+
+    expect(sidebarDocs).toContain('ComponentType<SVGProps<SVGSVGElement>>');
+    expect(sidebarDocs).toContain('SVG icon component');
+    expect(sidebarDocs).not.toContain('<Code>LucideIcon</Code>');
+  });
 });

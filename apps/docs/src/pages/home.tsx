@@ -79,8 +79,9 @@ export default async function RootLayout({ children }) {
 
 const USAGE_SNIPPET = `import { Button } from '@adanft/ui';
 
-// Or use a documented public subpath for a narrower entrypoint.
+// Use documented public subpaths when you want a narrower entrypoint.
 // import Button from '@adanft/ui/button';
+// import Sidebar, { SidebarBody, SidebarLink } from '@adanft/ui/sidebar';
 
 function Example() {
   return <Button>Save changes</Button>;
@@ -174,10 +175,10 @@ function Home() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">Basic usage</h2>
         <p className="max-w-3xl text-foreground">
-          Import components from <Code>@adanft/ui</Code> for convenience, or use documented public
-          subpaths like <Code>@adanft/ui/button</Code> when you want narrower entrypoints. The docs
-          pages show composition patterns, accessibility notes, and API references for each
-          component.
+          Import from <Code>@adanft/ui</Code> when convenience matters. Use documented public
+          subpaths like <Code>@adanft/ui/button</Code> or <Code>@adanft/ui/sidebar</Code> when you
+          want narrower entrypoints; those subpaths expose the same public component surface needed
+          by their docs examples.
         </p>
         <CodeBlock code={USAGE_SNIPPET} />
       </section>
