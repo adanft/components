@@ -6,7 +6,7 @@ on:
       version:
         description: Version to tag
         required: true
-        default: 0.1.0-beta.2
+        default: 0.2.0-beta.3
       tag:
         description: Dist tag to move
         required: true
