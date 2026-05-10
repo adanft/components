@@ -18,7 +18,7 @@ That means consumers should:
 2. import the package stylesheet contract
 3. ensure their Tailwind entry scans both app sources and the compiled package output
 
-The docs app in this repo (`apps/docs`) is the reference consumer implementation.
+The documentation site is the reference consumer implementation.
 
 ## Usage
 
@@ -36,7 +36,8 @@ stylesheet:
 Then import components from the package root for convenience:
 
 ```tsx
-import { Button, initializeTheme } from '@adanft/ui';
+import { Button } from '@adanft/ui';
+import { initializeTheme } from '@adanft/ui/theme';
 
 initializeTheme();
 ```
@@ -46,12 +47,13 @@ Theme helpers keep CSR simple: `initializeTheme()` is browser-only and reads
 `theme=dark` cookie server-side, render `<html className="dark">`, and pass
 `<ThemeSwitch initialDark={isDark} />` to avoid hydration mismatch.
 
-You can also import documented public component subpaths when you want narrower entrypoints:
+You can also import documented public subpaths when you want narrower entrypoints:
 
 ```tsx
 import Button from '@adanft/ui/button';
 import Modal from '@adanft/ui/modal';
 import Tabs from '@adanft/ui/tabs';
+import { initializeTheme } from '@adanft/ui/theme';
 ```
 
 ## Notes

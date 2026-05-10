@@ -1,4 +1,4 @@
-const PUBLIC_COMPONENT_EXPORTS = {
+const PUBLIC_SUBPATH_EXPORTS = {
   accordion: {
     source: 'primitives/accordion/index',
     types: 'primitives/accordion/index.d.ts',
@@ -103,6 +103,12 @@ const PUBLIC_COMPONENT_EXPORTS = {
     source: 'primitives/tabs/index',
     types: 'primitives/tabs/index.d.ts',
   },
+  theme: {
+    entry: 'theme',
+    source: 'theme',
+    sourceExtension: 'ts',
+    types: 'theme.d.ts',
+  },
   'theme-switch': {
     source: 'components/theme-switch',
     types: 'components/theme-switch.d.ts',
@@ -121,8 +127,8 @@ function createRootExports() {
       default: './src/index.ts',
     },
     ...Object.fromEntries(
-      Object.entries(PUBLIC_COMPONENT_EXPORTS).map(([publicName, contract]) => {
-        const sourcePath = `./src/${contract.source}.tsx`;
+      Object.entries(PUBLIC_SUBPATH_EXPORTS).map(([publicName, contract]) => {
+        const sourcePath = `./src/${contract.source}.${contract.sourceExtension ?? 'tsx'}`;
 
         return [
           `./${publicName}`,
@@ -146,10 +152,10 @@ function createPublishExports() {
       default: './dist/index.js',
     },
     ...Object.fromEntries(
-      Object.entries(PUBLIC_COMPONENT_EXPORTS).map(([publicName, contract]) => {
+      Object.entries(PUBLIC_SUBPATH_EXPORTS).map(([publicName, contract]) => {
         const importPath = contract.source.endsWith('/index')
           ? `./dist/${contract.source}.js`
-          : `./dist/components/${publicName}/index.js`;
+          : `./dist/${contract.entry ?? `components/${publicName}/index`}.js`;
 
         return [
           `./${publicName}`,
@@ -167,14 +173,14 @@ function createPublishExports() {
 
 function createViteEntries({ resolveSource }) {
   return Object.fromEntries(
-    Object.entries(PUBLIC_COMPONENT_EXPORTS).map(([publicName, contract]) => {
+    Object.entries(PUBLIC_SUBPATH_EXPORTS).map(([publicName, contract]) => {
       const entryName = contract.source.endsWith('/index')
         ? contract.source
-        : `components/${publicName}/index`;
+        : (contract.entry ?? `components/${publicName}/index`);
 
-      return [entryName, resolveSource(`${contract.source}.tsx`)];
+      return [entryName, resolveSource(`${contract.source}.${contract.sourceExtension ?? 'tsx'}`)];
     }),
   );
 }
 
-export { createPublishExports, createRootExports, createViteEntries, PUBLIC_COMPONENT_EXPORTS };
+export { createPublishExports, createRootExports, createViteEntries, PUBLIC_SUBPATH_EXPORTS };

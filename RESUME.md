@@ -86,7 +86,8 @@ Important files:
 Docs must use public package imports:
 
 ```ts
-import { Button, initializeTheme } from '@adanft/ui';
+import { Button } from '@adanft/ui';
+import { initializeTheme } from '@adanft/ui/theme';
 import '@adanft/ui/styles.css';
 ```
 
@@ -196,7 +197,7 @@ Current public API includes:
   `Profile`, `RadioGroup`, `Select`, `Sidebar`, `SidebarBody`, `SidebarGroup`, `SidebarGroupLink`,
   `SidebarHead`, `SidebarLink`, `SidebarSection`, `Skeleton`, `Switch`, `Table`, `Tabs`,
   `ThemeSwitch`, `Tooltip`
-- Theme helpers: `initializeTheme`, `toggleTheme`
+- Theme helpers: `initializeTheme` from the root export or the narrower `@adanft/ui/theme` subpath
 - Public stylesheet: `@adanft/ui/styles.css`
 
 When adding a new public component:

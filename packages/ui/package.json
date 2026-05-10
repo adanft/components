@@ -163,6 +163,11 @@
       "import": "./src/primitives/tabs/index.tsx",
       "default": "./src/primitives/tabs/index.tsx"
     },
+    "./theme": {
+      "types": "./src/theme.ts",
+      "import": "./src/theme.ts",
+      "default": "./src/theme.ts"
+    },
     "./theme-switch": {
       "types": "./src/components/theme-switch.tsx",
       "import": "./src/components/theme-switch.tsx",
@@ -315,6 +320,11 @@
         "types": "./dist/primitives/tabs/index.d.ts",
         "import": "./dist/primitives/tabs/index.js",
         "default": "./dist/primitives/tabs/index.js"
+      },
+      "./theme": {
+        "types": "./dist/theme.d.ts",
+        "import": "./dist/theme.js",
+        "default": "./dist/theme.js"
       },
       "./theme-switch": {
         "types": "./dist/components/theme-switch.d.ts",

@@ -50,6 +50,8 @@ import SidebarSubpath, {
 import TabsSubpath, {
   type TabsListOrientation as TabsListOrientationSubpath,
 } from '@adanft/ui/tabs';
+import * as themeSubpath from '@adanft/ui/theme';
+import { initializeTheme as initializeThemeSubpath } from '@adanft/ui/theme';
 import TooltipSubpath from '@adanft/ui/tooltip';
 import { render, screen } from '@testing-library/react';
 import type { ComponentPropsWithoutRef, SVGProps } from 'react';
@@ -217,14 +219,17 @@ describe('@adanft/ui public API', () => {
     expect(SidebarSectionSubpath).toBe(components.SidebarSection);
   });
 
-  it('keeps supported theme public exports available from the package root', () => {
+  it('keeps supported theme public exports available from the package root and theme subpath', () => {
     localStorage.clear();
     document.documentElement.classList.remove('dark');
     // biome-ignore lint/suspicious/noDocumentCookie: tests need to reset the SSR-readable theme cookie.
     document.cookie = 'theme=; path=/; max-age=0; SameSite=Lax';
 
     expect(components.initializeTheme()).toBe(false);
+    expect(initializeThemeSubpath).toBe(components.initializeTheme);
+    expect(themeSubpath.initializeTheme()).toBe(false);
     expect('toggleTheme' in components).toBe(false);
+    expect('toggleTheme' in themeSubpath).toBe(false);
     expect(components.ThemeSwitch).toBeTypeOf('function');
   });
 

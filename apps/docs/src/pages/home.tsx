@@ -55,7 +55,7 @@ const STYLE_SETUP_SNIPPET = `@import "tailwindcss";
 /* Adjust the relative path from this stylesheet to node_modules. */
 @source "../node_modules/@adanft/ui/dist";`;
 
-const CSR_THEME_BOOTSTRAP_SNIPPET = `import { initializeTheme } from '@adanft/ui';
+const CSR_THEME_BOOTSTRAP_SNIPPET = `import { initializeTheme } from '@adanft/ui/theme';
 
 // CSR only: reads localStorage and toggles html.dark in the browser.
 initializeTheme();`;
@@ -176,9 +176,9 @@ function Home() {
         <h2 className="text-2xl font-semibold text-heading">Basic usage</h2>
         <p className="max-w-3xl text-foreground">
           Import from <Code>@adanft/ui</Code> when convenience matters. Use documented public
-          subpaths like <Code>@adanft/ui/button</Code> or <Code>@adanft/ui/sidebar</Code> when you
-          want narrower entrypoints; those subpaths expose the same public component surface needed
-          by their docs examples.
+          subpaths like <Code>@adanft/ui/button</Code>, <Code>@adanft/ui/sidebar</Code>, or{' '}
+          <Code>@adanft/ui/theme</Code> when you want narrower entrypoints; those subpaths expose
+          the same public surface needed by their docs examples.
         </p>
         <CodeBlock code={USAGE_SNIPPET} />
       </section>

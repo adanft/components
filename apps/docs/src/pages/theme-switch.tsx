@@ -14,7 +14,7 @@ import { Code } from '../components/code';
 
 const importSnippet = `import { ThemeSwitch } from '@adanft/ui';`;
 
-const setupSnippet = `import { initializeTheme } from '@adanft/ui';
+const setupSnippet = `import { initializeTheme } from '@adanft/ui/theme';
 
 // CSR only: call this in the browser before your app renders.
 initializeTheme();`;
