@@ -13,7 +13,11 @@ import { Link } from 'react-router';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Breadcrumbs } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Breadcrumbs } from '@adanft/ui';
+
+// Public package subpath import
+import Breadcrumbs from '@adanft/ui/breadcrumbs';`;
 
 const basicExampleSnippet = `<Breadcrumbs>
   <Breadcrumbs.List>

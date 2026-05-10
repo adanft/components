@@ -12,7 +12,11 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Switch } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Switch } from '@adanft/ui';
+
+// Public package subpath import
+import Switch from '@adanft/ui/switch';`;
 
 const usageSnippet = `import { useState } from 'react';
 import { Switch } from '@adanft/ui';

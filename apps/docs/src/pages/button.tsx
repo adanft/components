@@ -12,7 +12,11 @@ import { Link } from 'react-router';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Button } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Button } from '@adanft/ui';
+
+// Public package subpath import
+import Button from '@adanft/ui/button';`;
 
 const usageSnippet = `<Button>Save changes</Button>`;
 

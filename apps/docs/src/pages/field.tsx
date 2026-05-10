@@ -13,7 +13,13 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Field, Input, RadioGroup } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Field, Input, RadioGroup } from '@adanft/ui';
+
+// Public package subpath imports
+import Field from '@adanft/ui/field';
+import Input from '@adanft/ui/input';
+import RadioGroup from '@adanft/ui/radio-group';`;
 
 const usageSnippet = `<Field required>
   <Field.Label htmlFor="email">Email *</Field.Label>

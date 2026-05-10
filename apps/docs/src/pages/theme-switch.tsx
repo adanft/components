@@ -12,9 +12,17 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { ThemeSwitch } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { ThemeSwitch } from '@adanft/ui';
 
-const setupSnippet = `import { initializeTheme } from '@adanft/ui/theme';
+// Public package subpath import
+import ThemeSwitch from '@adanft/ui/theme-switch';`;
+
+const setupSnippet = `// Package root import
+import { initializeTheme } from '@adanft/ui';
+
+// Public package subpath import
+import { initializeTheme } from '@adanft/ui/theme';
 
 // CSR only: call this in the browser before your app renders.
 initializeTheme();`;

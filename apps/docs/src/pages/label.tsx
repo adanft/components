@@ -12,7 +12,12 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Label } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Input, Label } from '@adanft/ui';
+
+// Public package subpath imports
+import Input from '@adanft/ui/input';
+import Label from '@adanft/ui/label';`;
 
 const usageSnippet = `<Label htmlFor="email">Email</Label>
 <Input id="email" type="email" placeholder="name@example.com" />`;

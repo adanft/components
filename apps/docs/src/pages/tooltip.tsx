@@ -14,7 +14,12 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Tooltip } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Button, Tooltip } from '@adanft/ui';
+
+// Public package subpath imports
+import Button from '@adanft/ui/button';
+import Tooltip from '@adanft/ui/tooltip';`;
 
 const usageSnippet = `const [open, setOpen] = useState(false);
 

@@ -11,7 +11,11 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Badge } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Badge } from '@adanft/ui';
+
+// Public package subpath import
+import Badge from '@adanft/ui/badge';`;
 
 const usageSnippet = `<Badge>Beta</Badge>`;
 

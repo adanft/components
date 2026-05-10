@@ -12,7 +12,11 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Select } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Select } from '@adanft/ui';
+
+// Public package subpath import
+import Select from '@adanft/ui/select';`;
 
 const usageSnippet = `<Select placeholder="Choose a plan" defaultValue="starter">
   <option value="starter">Starter</option>

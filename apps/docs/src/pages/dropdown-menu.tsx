@@ -14,7 +14,11 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { DropdownMenu } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { DropdownMenu } from '@adanft/ui';
+
+// Public package subpath import
+import DropdownMenu from '@adanft/ui/dropdown-menu';`;
 
 const usageSnippet = `import { useState } from 'react';
 import { DropdownMenu } from '@adanft/ui';

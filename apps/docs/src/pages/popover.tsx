@@ -13,7 +13,12 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Popover } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Button, Popover } from '@adanft/ui';
+
+// Public package subpath imports
+import Button from '@adanft/ui/button';
+import Popover from '@adanft/ui/popover';`;
 
 const usageSnippet = `const [open, setOpen] = useState(false);
 

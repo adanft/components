@@ -11,7 +11,11 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Profile } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Profile } from '@adanft/ui';
+
+// Public package subpath import
+import Profile from '@adanft/ui/profile';`;
 
 const textUsageSnippet = `<Profile
   username="@adan"

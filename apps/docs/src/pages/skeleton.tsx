@@ -11,7 +11,11 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Skeleton } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Skeleton } from '@adanft/ui';
+
+// Public package subpath import
+import Skeleton from '@adanft/ui/skeleton';`;
 
 const usageSnippet = `<Skeleton className="h-4 w-32 rounded-sm" />`;
 

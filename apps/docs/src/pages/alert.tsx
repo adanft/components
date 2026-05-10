@@ -12,7 +12,11 @@ import { AlertCircle, CheckCircle2, Info, TriangleAlert } from 'lucide-react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Alert } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Alert } from '@adanft/ui';
+
+// Public package subpath import
+import Alert from '@adanft/ui/alert';`;
 
 const usageSnippet = `<Alert variant="warning">
   <Alert.Title>Attention</Alert.Title>

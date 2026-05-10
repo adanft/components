@@ -16,7 +16,12 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Modal } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Button, Modal } from '@adanft/ui';
+
+// Public package subpath imports
+import Button from '@adanft/ui/button';
+import Modal from '@adanft/ui/modal';`;
 
 const usageSnippet = `const [open, setOpen] = useState(false);
 

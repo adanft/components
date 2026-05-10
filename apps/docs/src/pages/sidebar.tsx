@@ -23,6 +23,7 @@ import { Code } from '../components/code';
 const importSnippet = `import { FileText, Hand } from 'lucide-react';
 import { useState } from 'react';
 
+// Package root import
 import {
   Sidebar,
   SidebarBody,
@@ -31,7 +32,17 @@ import {
   SidebarHead,
   SidebarLink,
   SidebarSection,
-} from '@adanft/ui';`;
+} from '@adanft/ui';
+
+// Public package subpath import
+import Sidebar, {
+  SidebarBody,
+  SidebarGroup,
+  SidebarGroupLink,
+  SidebarHead,
+  SidebarLink,
+  SidebarSection,
+} from '@adanft/ui/sidebar';`;
 
 const usageSnippet = `function ExampleSidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(true);

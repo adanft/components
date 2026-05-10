@@ -13,7 +13,11 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Accordion } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Accordion } from '@adanft/ui';
+
+// Public package subpath import
+import Accordion from '@adanft/ui/accordion';`;
 
 const usageSnippet = `import { useState } from 'react';
 import { Accordion } from '@adanft/ui';

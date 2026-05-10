@@ -11,7 +11,11 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Textarea } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Textarea } from '@adanft/ui';
+
+// Public package subpath import
+import Textarea from '@adanft/ui/textarea';`;
 
 const usageSnippet = `<Textarea placeholder="Write a message" />`;
 

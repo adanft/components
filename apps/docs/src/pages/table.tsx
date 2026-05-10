@@ -12,7 +12,8 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import {
+const importSnippet = `// Package root import
+import {
   Table,
   TableBody,
   TableCaption,
@@ -21,7 +22,18 @@ const importSnippet = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@adanft/ui';`;
+} from '@adanft/ui';
+
+// Public package subpath import
+import Table, {
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui/table';`;
 
 const usageSnippet = `<Table aria-label="Deals">
   <TableCaption>Pipeline by owner</TableCaption>

@@ -16,7 +16,11 @@ const withoutSurfaceExampleJsx = `<Box surface="none" shadow="none" className="s
   </p>
 </Box>`;
 
-const importSnippet = `import { Box } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Box } from '@adanft/ui';
+
+// Public package subpath import
+import Box from '@adanft/ui/box';`;
 
 const usageSnippet = `<Box surface="default" padding="default" shadow="default">
   <p className="text-foreground">Content inside the container</p>

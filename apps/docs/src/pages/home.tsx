@@ -9,6 +9,7 @@ type HomeComponentCard = {
   href: string;
   icon: LucideIcon;
   name: string;
+  subpaths: string[];
 };
 
 type HomeCatalogSection = {
@@ -47,6 +48,36 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   Tooltip: 'Tooltip shows a short hint and is used for non-interactive contextual help.',
 };
 
+const COMPONENT_SUBPATHS: Record<string, string[]> = {
+  Accordion: ['@adanft/ui/accordion'],
+  Alert: ['@adanft/ui/alert'],
+  Avatar: ['@adanft/ui/avatar'],
+  Badge: ['@adanft/ui/badge'],
+  Box: ['@adanft/ui/box'],
+  Breadcrumbs: ['@adanft/ui/breadcrumbs'],
+  Button: ['@adanft/ui/button'],
+  Checkbox: ['@adanft/ui/checkbox'],
+  'Dropdown Menu': ['@adanft/ui/dropdown-menu'],
+  Field: ['@adanft/ui/field'],
+  Input: ['@adanft/ui/input'],
+  Label: ['@adanft/ui/label'],
+  Modal: ['@adanft/ui/modal'],
+  Pagination: ['@adanft/ui/pagination-head', '@adanft/ui/pagination-foot'],
+  Popover: ['@adanft/ui/popover'],
+  Profile: ['@adanft/ui/profile'],
+  'Radio Group': ['@adanft/ui/radio-group'],
+  Select: ['@adanft/ui/select'],
+  Sidebar: ['@adanft/ui/sidebar'],
+  Skeleton: ['@adanft/ui/skeleton'],
+  Spinner: ['@adanft/ui/spinner'],
+  Switch: ['@adanft/ui/switch'],
+  Table: ['@adanft/ui/table'],
+  Tabs: ['@adanft/ui/tabs'],
+  Textarea: ['@adanft/ui/textarea'],
+  'Theme Switch': ['@adanft/ui/theme-switch', '@adanft/ui/theme'],
+  Tooltip: ['@adanft/ui/tooltip'],
+};
+
 const INSTALL_SNIPPET = `pnpm add @adanft/ui`;
 
 const STYLE_SETUP_SNIPPET = `@import "tailwindcss";
@@ -77,11 +108,14 @@ export default async function RootLayout({ children }) {
   );
 }`;
 
-const USAGE_SNIPPET = `import { Button } from '@adanft/ui';
+const USAGE_SNIPPET = `// Package root: convenient when you want one public surface.
+import { Button, Sidebar, ThemeSwitch } from '@adanft/ui';
 
-// Use documented public subpaths when you want a narrower entrypoint.
+// Public subpaths: narrower entrypoints for components and helpers.
 // import Button from '@adanft/ui/button';
 // import Sidebar, { SidebarBody, SidebarLink } from '@adanft/ui/sidebar';
+// import ThemeSwitch from '@adanft/ui/theme-switch';
+import { initializeTheme } from '@adanft/ui/theme';
 
 function Example() {
   return <Button>Save changes</Button>;
@@ -102,6 +136,7 @@ const CATALOG_SECTIONS = docsSidebarNavigation.reduce<HomeCatalogSection[]>((sec
         href: node.href,
         icon: node.icon,
         name: node.text,
+        subpaths: COMPONENT_SUBPATHS[node.text] ?? [],
       });
     }
   }
@@ -175,10 +210,8 @@ function Home() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">Basic usage</h2>
         <p className="max-w-3xl text-foreground">
-          Import from <Code>@adanft/ui</Code> when convenience matters. Use documented public
-          subpaths like <Code>@adanft/ui/button</Code>, <Code>@adanft/ui/sidebar</Code>, or{' '}
-          <Code>@adanft/ui/theme</Code> when you want narrower entrypoints; those subpaths expose
-          the same public surface needed by their docs examples.
+          Choose the import shape based on the boundary you want. The package root keeps examples
+          compact; documented public subpaths keep component and helper entrypoints narrower.
         </p>
         <CodeBlock code={USAGE_SNIPPET} />
       </section>
@@ -215,6 +248,23 @@ function Home() {
                           <p className="text-sm leading-6 text-foreground">
                             {component.description}
                           </p>
+                          <div className="space-y-1 text-xs leading-5 text-muted">
+                            <p>
+                              <span className="font-semibold text-foreground">Root:</span>{' '}
+                              <Code>@adanft/ui</Code>
+                            </p>
+                            {component.subpaths.length > 0 ? (
+                              <p>
+                                <span className="font-semibold text-foreground">Subpath:</span>{' '}
+                                {component.subpaths.map((subpath, index) => (
+                                  <span key={subpath}>
+                                    {index > 0 ? ', ' : null}
+                                    <Code>{subpath}</Code>
+                                  </span>
+                                ))}
+                              </p>
+                            ) : null}
+                          </div>
                         </div>
                       </div>
                     </Link>

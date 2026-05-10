@@ -11,7 +11,11 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Input } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Input } from '@adanft/ui';
+
+// Public package subpath import
+import Input from '@adanft/ui/input';`;
 
 const usageSnippet = `<Input type="email" placeholder="name@example.com" />`;
 

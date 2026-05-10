@@ -13,7 +13,11 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Tabs } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Tabs } from '@adanft/ui';
+
+// Public package subpath import
+import Tabs from '@adanft/ui/tabs';`;
 
 const usageSnippet = `const [value, setValue] = useState('overview');
 

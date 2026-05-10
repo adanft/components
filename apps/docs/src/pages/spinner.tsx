@@ -12,7 +12,11 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Spinner } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Spinner } from '@adanft/ui';
+
+// Public package subpath import
+import Spinner from '@adanft/ui/spinner';`;
 
 const usageSnippet = `<Spinner />`;
 

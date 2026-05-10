@@ -11,7 +11,11 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Checkbox } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Checkbox } from '@adanft/ui';
+
+// Public package subpath import
+import Checkbox from '@adanft/ui/checkbox';`;
 
 const usageSnippet = `<Checkbox label="Accept terms" onChange={() => {}} />`;
 

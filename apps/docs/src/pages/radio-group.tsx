@@ -13,7 +13,12 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Field, RadioGroup } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Field, RadioGroup } from '@adanft/ui';
+
+// Public package subpath imports
+import Field from '@adanft/ui/field';
+import RadioGroup from '@adanft/ui/radio-group';`;
 
 const usageSnippet = `const [plan, setPlan] = useState('starter');
 

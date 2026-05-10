@@ -11,7 +11,11 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Avatar } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Avatar } from '@adanft/ui';
+
+// Public package subpath import
+import Avatar from '@adanft/ui/avatar';`;
 
 const usageSnippet = `<Avatar type="text" size="md" text="AF" />`;
 
