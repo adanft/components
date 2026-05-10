@@ -42,13 +42,13 @@ const defaultExampleJsx = `<Modal open={open} onClose={() => setOpen(false)}>
   </Modal.Panel>
 </Modal>`;
 
-const initialFocusExampleJsx = `<Modal open={open} onClose={() => setOpen(false)}>
+const formExampleJsx = `<Modal open={open} onClose={() => setOpen(false)}>
   <Modal.Backdrop />
   <Modal.Panel className="space-y-4">
     <Modal.Title>Rename project</Modal.Title>
     <Field>
       <Label htmlFor="project-name">Project name</Label>
-      <Input id="project-name" data-autofocus defaultValue="components" />
+      <Input id="project-name" defaultValue="components" />
     </Field>
     <div className="flex justify-end gap-2">
       <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
@@ -67,7 +67,7 @@ const labelledExampleJsx = `<Modal open={open} onClose={() => setOpen(false)}>
 
 function ModalPage() {
   const [defaultOpen, setDefaultOpen] = useState(false);
-  const [initialFocusOpen, setInitialFocusOpen] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
   const [labelledOpen, setLabelledOpen] = useState(false);
 
   return (
@@ -107,28 +107,28 @@ function ModalPage() {
         </Box>
         <CodeBlock code={defaultExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-heading">Initial focus</h3>
+        <h3 className="text-lg font-semibold text-heading">Form content</h3>
         <Box className="flex items-center" shadow="none" surface="none">
-          <Button onClick={() => setInitialFocusOpen(true)}>Rename project</Button>
+          <Button onClick={() => setFormOpen(true)}>Rename project</Button>
 
-          <Modal open={initialFocusOpen} onClose={() => setInitialFocusOpen(false)}>
+          <Modal open={formOpen} onClose={() => setFormOpen(false)}>
             <Modal.Backdrop />
             <Modal.Panel className="space-y-4">
               <Modal.Title>Rename project</Modal.Title>
               <Field>
                 <Label htmlFor="project-name">Project name</Label>
-                <Input id="project-name" data-autofocus defaultValue="components" />
+                <Input id="project-name" defaultValue="components" />
               </Field>
               <div className="flex justify-end gap-2">
-                <Button variant="secondary" onClick={() => setInitialFocusOpen(false)}>
+                <Button variant="secondary" onClick={() => setFormOpen(false)}>
                   Cancel
                 </Button>
-                <Button onClick={() => setInitialFocusOpen(false)}>Save</Button>
+                <Button onClick={() => setFormOpen(false)}>Save</Button>
               </div>
             </Modal.Panel>
           </Modal>
         </Box>
-        <CodeBlock code={initialFocusExampleJsx} />
+        <CodeBlock code={formExampleJsx} />
 
         <h3 className="text-lg font-semibold text-heading">Accessible name without title</h3>
         <Box className="flex items-center" shadow="none" surface="none">
@@ -294,14 +294,6 @@ function ModalPage() {
                 <Code>tabIndex</Code>
               </TableCell>
               <TableCell>Makes the panel focusable for initial focus management.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>data-autofocus</Code>
-              </TableCell>
-              <TableCell>
-                Add it to the element that should receive focus when the modal opens.
-              </TableCell>
             </TableRow>
           </TableBody>
         </Table>

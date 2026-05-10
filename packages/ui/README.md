@@ -8,8 +8,6 @@ This package is currently published as a **beta** release.
 
 Current beta version: `0.2.0-beta.2`.
 
-Before any beta release publish, run `pnpm validate:pack-contract` from the workspace root to verify the package manifest, publish exports, workflow guardrail, and stylesheet subpath contract.
-
 ## Current package model
 
 `@adanft/ui` is currently designed as a **Tailwind-dependent consumer model**.
@@ -59,7 +57,7 @@ import Tabs from '@adanft/ui/tabs';
 ## Notes
 
 - The public API is exported from the package root and documented public subpaths.
-- Do not deep-import internal files like `@adanft/ui/src/components/...`.
+- Only import from the package root or documented public subpaths.
 - Router-specific behavior belongs in the consumer app, not in this package.
 
 ## Repository

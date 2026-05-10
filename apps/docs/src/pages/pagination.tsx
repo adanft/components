@@ -15,6 +15,9 @@ import { Code } from '../components/code';
 
 const importSnippet = `import { PaginationFoot, PaginationHead } from '@adanft/ui';`;
 
+const subpathImportSnippet = `import PaginationHead from '@adanft/ui/pagination-head';
+import PaginationFoot from '@adanft/ui/pagination-foot';`;
+
 const usageSnippet = `const totalItems = 125;
 const [pageIndex, setPageIndex] = useState(0);
 const [pageSize, setPageSize] = useState(10);
@@ -69,6 +72,11 @@ function PaginationPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
+        <p className="text-foreground">
+          Use the package root for convenience, or import each pagination part from its documented
+          public subpath when you want narrower entrypoints.
+        </p>
+        <CodeBlock code={subpathImportSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
