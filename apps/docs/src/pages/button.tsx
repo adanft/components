@@ -12,7 +12,11 @@ import { Link } from 'react-router';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Button } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Button } from '@adanft/ui';
+
+// Public package subpath import
+import Button from '@adanft/ui/button';`;
 
 const usageSnippet = `<Button>Save changes</Button>`;
 
@@ -66,10 +70,6 @@ function ButtonPage() {
         </Box>
         <CodeBlock code={exampleJsx} />
         <h3 className="text-lg font-semibold text-heading">Variants</h3>
-        <p className="text-base leading-7 text-foreground">
-          Use the <Code>variant</Code> prop to change the visual style. Defaults to{' '}
-          <Code>primary</Code>.
-        </p>
         <Box className="flex flex-wrap items-center gap-3" shadow="none" surface="none">
           <Button variant="primary">Primary</Button>
           <Button variant="secondary">Secondary</Button>
@@ -79,10 +79,6 @@ function ButtonPage() {
         </Box>
         <CodeBlock code={variantsSnippet} />
         <h3 className="text-lg font-semibold text-heading">Outline variants</h3>
-        <p className="text-base leading-7 text-foreground">
-          Add <Code>outline</Code> to render a transparent button with a border. The text color
-          matches the border color for each variant.
-        </p>
         <Box className="flex flex-wrap items-center gap-3" shadow="none" surface="none">
           <Button outline variant="primary">
             Primary
@@ -105,10 +101,6 @@ function ButtonPage() {
         </Box>
         <CodeBlock code={outlineSnippet} />
         <h3 className="text-lg font-semibold text-heading">Sizes</h3>
-        <p className="text-base leading-7 text-foreground">
-          Use the <Code>size</Code> prop to control the button dimensions. Defaults to{' '}
-          <Code>md</Code>.
-        </p>
         <Box className="flex flex-wrap items-center gap-3" shadow="none" surface="none">
           <Button size="sm">Small</Button>
           <Button size="md">Medium</Button>
@@ -116,10 +108,6 @@ function ButtonPage() {
         </Box>
         <CodeBlock code={sizesSnippet} />
         <h3 className="text-lg font-semibold text-heading">Links</h3>
-        <p className="text-base leading-7 text-foreground">
-          Use <Code>asChild</Code> when React Router, Next.js, or another link component owns
-          navigation. Native <Code>disabled</Code> behavior remains button-only.
-        </p>
         <Box className="flex items-center" shadow="none" surface="none">
           <Button asChild>
             <Link to="/components">Go to</Link>
@@ -130,6 +118,9 @@ function ButtonPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          By default, a thin wrapper around the native <Code>{`<button>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -145,14 +136,14 @@ function ButtonPage() {
                 <Code>variant</Code>
               </TableCell>
               <TableCell>
-                <Code>{`"primary" | "secondary" | "danger" | "info" | "success"`}</Code>
+                <Code>{`"primary" | "secondary" | "danger" | "info" | "success" | "theme"`}</Code>
               </TableCell>
               <TableCell>
                 <Code>{`"primary"`}</Code>
               </TableCell>
               <TableCell>
-                Controls the filled visual treatment. <Code>theme</Code> is only available with{' '}
-                <Code>outline</Code>.
+                Controls the visual treatment. <Code>theme</Code> is only available when{' '}
+                <Code>outline</Code> is <Code>true</Code>.
               </TableCell>
             </TableRow>
             <TableRow>
@@ -215,9 +206,7 @@ function ButtonPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>
-                Extends the component styles and can override default values when needed.
-              </TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

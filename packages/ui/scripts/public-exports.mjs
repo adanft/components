@@ -1,7 +1,7 @@
-const PUBLIC_COMPONENT_EXPORTS = {
+const PUBLIC_SUBPATH_EXPORTS = {
   accordion: {
-    source: 'components/accordion/index',
-    types: 'components/accordion/index.d.ts',
+    source: 'primitives/accordion/index',
+    types: 'primitives/accordion/index.d.ts',
   },
   alert: {
     source: 'components/alert/index',
@@ -60,8 +60,8 @@ const PUBLIC_COMPONENT_EXPORTS = {
     types: 'components/pagination/head.d.ts',
   },
   popover: {
-    source: 'components/popover/index',
-    types: 'components/popover/index.d.ts',
+    source: 'primitives/popover/index',
+    types: 'primitives/popover/index.d.ts',
   },
   profile: {
     source: 'components/profile',
@@ -75,6 +75,10 @@ const PUBLIC_COMPONENT_EXPORTS = {
     source: 'components/select',
     types: 'components/select.d.ts',
   },
+  textarea: {
+    source: 'components/textarea',
+    types: 'components/textarea.d.ts',
+  },
   sidebar: {
     source: 'components/sidebar/index',
     types: 'components/sidebar/index.d.ts',
@@ -82,6 +86,10 @@ const PUBLIC_COMPONENT_EXPORTS = {
   skeleton: {
     source: 'components/skeleton',
     types: 'components/skeleton.d.ts',
+  },
+  spinner: {
+    source: 'components/spinner',
+    types: 'components/spinner.d.ts',
   },
   switch: {
     source: 'components/switch',
@@ -92,16 +100,22 @@ const PUBLIC_COMPONENT_EXPORTS = {
     types: 'components/table/index.d.ts',
   },
   tabs: {
-    source: 'components/tabs/index',
-    types: 'components/tabs/index.d.ts',
+    source: 'primitives/tabs/index',
+    types: 'primitives/tabs/index.d.ts',
+  },
+  theme: {
+    entry: 'theme',
+    source: 'theme',
+    sourceExtension: 'ts',
+    types: 'theme.d.ts',
   },
   'theme-switch': {
     source: 'components/theme-switch',
     types: 'components/theme-switch.d.ts',
   },
   tooltip: {
-    source: 'components/tooltip/index',
-    types: 'components/tooltip/index.d.ts',
+    source: 'primitives/tooltip/index',
+    types: 'primitives/tooltip/index.d.ts',
   },
 };
 
@@ -113,8 +127,8 @@ function createRootExports() {
       default: './src/index.ts',
     },
     ...Object.fromEntries(
-      Object.entries(PUBLIC_COMPONENT_EXPORTS).map(([publicName, contract]) => {
-        const sourcePath = `./src/${contract.source}.tsx`;
+      Object.entries(PUBLIC_SUBPATH_EXPORTS).map(([publicName, contract]) => {
+        const sourcePath = `./src/${contract.source}.${contract.sourceExtension ?? 'tsx'}`;
 
         return [
           `./${publicName}`,
@@ -138,8 +152,10 @@ function createPublishExports() {
       default: './dist/index.js',
     },
     ...Object.fromEntries(
-      Object.entries(PUBLIC_COMPONENT_EXPORTS).map(([publicName, contract]) => {
-        const importPath = `./dist/components/${publicName}/index.js`;
+      Object.entries(PUBLIC_SUBPATH_EXPORTS).map(([publicName, contract]) => {
+        const importPath = contract.source.endsWith('/index')
+          ? `./dist/${contract.source}.js`
+          : `./dist/${contract.entry ?? `components/${publicName}/index`}.js`;
 
         return [
           `./${publicName}`,
@@ -157,11 +173,14 @@ function createPublishExports() {
 
 function createViteEntries({ resolveSource }) {
   return Object.fromEntries(
-    Object.entries(PUBLIC_COMPONENT_EXPORTS).map(([publicName, contract]) => [
-      `components/${publicName}/index`,
-      resolveSource(`${contract.source}.tsx`),
-    ]),
+    Object.entries(PUBLIC_SUBPATH_EXPORTS).map(([publicName, contract]) => {
+      const entryName = contract.source.endsWith('/index')
+        ? contract.source
+        : (contract.entry ?? `components/${publicName}/index`);
+
+      return [entryName, resolveSource(`${contract.source}.${contract.sourceExtension ?? 'tsx'}`)];
+    }),
   );
 }
 
-export { createPublishExports, createRootExports, createViteEntries, PUBLIC_COMPONENT_EXPORTS };
+export { createPublishExports, createRootExports, createViteEntries, PUBLIC_SUBPATH_EXPORTS };

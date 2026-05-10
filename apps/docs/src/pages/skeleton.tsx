@@ -11,7 +11,11 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Skeleton } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Skeleton } from '@adanft/ui';
+
+// Public package subpath import
+import Skeleton from '@adanft/ui/skeleton';`;
 
 const usageSnippet = `<Skeleton className="h-4 w-32 rounded-sm" />`;
 
@@ -106,6 +110,9 @@ function SkeletonPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -136,9 +143,24 @@ function SkeletonPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Extends the component styles and can override default values when needed.
+                <Code>aria-hidden</Code>
               </TableCell>
+              <TableCell>Hides the placeholder from assistive technology.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

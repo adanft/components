@@ -17,10 +17,10 @@ type ViteEntryOptions = {
   resolveSource: (sourcePath: string) => string;
 };
 
-declare const PUBLIC_COMPONENT_EXPORTS: PublicExports;
+declare const PUBLIC_SUBPATH_EXPORTS: PublicExports;
 
 declare function createRootExports(): PackageExports;
 declare function createPublishExports(): PackageExports;
 declare function createViteEntries(options: ViteEntryOptions): Record<string, string>;
 
-export { PUBLIC_COMPONENT_EXPORTS, createPublishExports, createRootExports, createViteEntries };
+export { PUBLIC_SUBPATH_EXPORTS, createPublishExports, createRootExports, createViteEntries };

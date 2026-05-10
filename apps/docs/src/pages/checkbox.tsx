@@ -11,13 +11,18 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Checkbox } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Checkbox } from '@adanft/ui';
+
+// Public package subpath import
+import Checkbox from '@adanft/ui/checkbox';`;
 
 const usageSnippet = `<Checkbox label="Accept terms" onChange={() => {}} />`;
 
 const statesSnippet = `<Checkbox label="Unchecked" onChange={() => {}} />
-<Checkbox label="Checked" checked onChange={() => {}} />
-<Checkbox label="Disabled" disabled onChange={() => {}} />`;
+<Checkbox label="Checked" defaultChecked onChange={() => {}} />
+<Checkbox label="Disabled" disabled onChange={() => {}} />
+<Checkbox aria-invalid label="Invalid" onChange={() => {}} />`;
 
 const labelPositionSnippet = `<Checkbox label="Label on the right (default)" labelPosition="right" onChange={() => {}} />
 <Checkbox label="Label on the left" labelPosition="left" onChange={() => {}} />
@@ -56,6 +61,7 @@ function CheckboxPage() {
           <Checkbox label="Unchecked" onChange={() => {}} />
           <Checkbox label="Checked" defaultChecked onChange={() => {}} />
           <Checkbox label="Disabled" disabled onChange={() => {}} />
+          <Checkbox aria-invalid label="Invalid" onChange={() => {}} />
         </Box>
         <CodeBlock code={statesSnippet} />
 
@@ -81,6 +87,10 @@ function CheckboxPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          Renders a wrapper with a native <Code>{`input[type="checkbox"]`}</Code>. Native checkbox
+          input props are accepted, and <Code>className</Code> styles the input.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -115,45 +125,30 @@ function CheckboxPage() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>checked</Code>
-              </TableCell>
-              <TableCell>
-                <Code>boolean</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Controls the checked state when used as a controlled input.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>defaultChecked</Code>
-              </TableCell>
-              <TableCell>
-                <Code>boolean</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Sets the initial checked state for uncontrolled usage.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>disabled</Code>
-              </TableCell>
-              <TableCell>
-                <Code>boolean</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Disables interaction and applies the disabled visual state.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
                 <Code>className</Code>
               </TableCell>
               <TableCell>
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Extends the component styles and can override default values when needed.
+                <Code>aria-invalid</Code>
               </TableCell>
+              <TableCell>Applies the invalid visual state.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

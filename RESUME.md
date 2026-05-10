@@ -14,7 +14,7 @@ site.
 - **Docs URL**: <https://adanft.github.io/components>
 - **Docs base path**: `/components/`
 - **Default branch**: `main`
-- **Current beta package version**: `0.2.0-beta.2`
+- **Current beta package version**: `0.2.0-beta.3`
 
 The docs app is intentionally a real consumer of the package. It must import from `@adanft/ui`, not
 from package internals.
@@ -60,9 +60,15 @@ Important files:
 
 - `packages/ui/package.json` — npm package metadata, exports, peer dependencies, publish config
 - `packages/ui/src/index.ts` — public API surface
+- `packages/ui/src/theme.ts` — public theme helper subpath (`@adanft/ui/theme`)
 - `packages/ui/src/styles.css` — package theme/base styles
 - `packages/ui/styles.css` — public stylesheet export bridge
+- `packages/ui/scripts/public-exports.mjs` — source of truth for public package subpaths
+- `packages/ui/scripts/sync-package-exports.mjs` — syncs `exports` and `publishConfig.exports`
+- `packages/ui/scripts/copy-styles.mjs` — copies `src/styles.css` into `dist/styles.css`
 - `packages/ui/src/components/**` — component implementations
+- `packages/ui/src/primitives/**` — lower-level interactive primitives (`Accordion`, `Popover`,
+  `Tabs`, `Tooltip`)
 - `packages/ui/src/__tests__/**` — package tests
 
 If a component/helper is not exported from `packages/ui/src/index.ts`, it is not public API.
@@ -86,7 +92,9 @@ Important files:
 Docs must use public package imports:
 
 ```ts
-import { Button, initializeTheme } from '@adanft/ui';
+import { Button } from '@adanft/ui';
+import Button from '@adanft/ui/button';
+import { initializeTheme } from '@adanft/ui/theme';
 import '@adanft/ui/styles.css';
 ```
 
@@ -121,6 +129,8 @@ import Button from '../../../packages/ui/src/components/button';
 - Consumers own the Tailwind source registration.
 - In this repo, `apps/docs/src/index.css` scans both docs and package sources.
 - `packages/ui/src/styles.css` contains shared theme/base styling.
+- `packages/ui/scripts/copy-styles.mjs` should not copy theme files; the theme helper is built from
+  `packages/ui/src/theme.ts` by Vite/TypeScript.
 
 Do not move Tailwind scanning ownership into the package unless the package distribution model is
 intentionally changed.
@@ -165,6 +175,7 @@ Primitives provide behavior/structure and generally leave styling to consumers.
 - `Avatar`
 - `Badge`
 - `Box`
+- `Breadcrumbs`
 - `Button`
 - `Checkbox`
 - `DropdownMenu`
@@ -178,8 +189,10 @@ Primitives provide behavior/structure and generally leave styling to consumers.
 - `Select`
 - `Sidebar`
 - `Skeleton`
+- `Spinner`
 - `Switch`
 - `Table`
+- `Textarea`
 - `ThemeSwitch`
 
 Do not add fake/demo sidebar entries like Orders, Reports, Analytics, Backup, or Settings unless real
@@ -192,22 +205,26 @@ Public exports live in `packages/ui/src/index.ts`.
 Current public API includes:
 
 - Components/primitives: `Accordion`, `Alert`, `Avatar`, `Badge`, `Box`, `Button`, `Checkbox`,
-  `DropdownMenu`, `Field`, `Input`, `Label`, `Modal`, `PaginationFoot`, `PaginationHead`, `Popover`,
-  `Profile`, `RadioGroup`, `Select`, `Sidebar`, `SidebarBody`, `SidebarGroup`, `SidebarGroupLink`,
-  `SidebarHead`, `SidebarLink`, `SidebarSection`, `Skeleton`, `Switch`, `Table`, `Tabs`,
-  `ThemeSwitch`, `Tooltip`
-- Theme helpers: `initializeTheme`, `toggleTheme`
+  `Breadcrumbs`, `DropdownMenu`, `Field`, `Input`, `Label`, `Modal`, `PaginationFoot`,
+  `PaginationHead`, `Popover`, `Profile`, `RadioGroup`, `Select`, `Sidebar`, `SidebarBody`,
+  `SidebarGroup`, `SidebarGroupLink`, `SidebarHead`, `SidebarLink`, `SidebarSection`, `Skeleton`,
+  `Spinner`, `Switch`, `Table`, `TableBody`, `TableCaption`, `TableCell`, `TableFooter`,
+  `TableHead`, `TableHeader`, `TableRow`, `Tabs`, `Textarea`, `ThemeSwitch`, `Tooltip`
+- Theme helpers: `initializeTheme` from the root export or the narrower `@adanft/ui/theme` subpath
 - Public stylesheet: `@adanft/ui/styles.css`
+- Public package subpaths are intentionally documented in the component docs Usage sections and on
+  the docs home catalog.
 
-When adding a new public component:
+When adding a new public component or primitive:
 
-1. Implement it under `packages/ui/src/components`.
+1. Implement it under `packages/ui/src/components` or `packages/ui/src/primitives`.
 2. Export it from `packages/ui/src/index.ts`.
-3. Add package tests in `packages/ui/src/__tests__`.
-4. Add docs page under `apps/docs/src/pages`.
-5. Register route in `apps/docs/src/app.tsx` and route constant in `apps/docs/src/data/routes.ts`.
-6. Add sidebar entry in `apps/docs/src/data/sidebar-navigation.ts`.
-7. Keep docs imports through `@adanft/ui`.
+3. Add/verify its public subpath in `packages/ui/scripts/public-exports.mjs`.
+4. Add package tests in `packages/ui/src/__tests__`.
+5. Add docs page under `apps/docs/src/pages`.
+6. Register route in `apps/docs/src/app.tsx` and route constant in `apps/docs/src/data/routes.ts`.
+7. Add sidebar entry in `apps/docs/src/data/sidebar-navigation.ts`.
+8. Keep docs imports through `@adanft/ui` and documented public subpaths.
 
 ## Component Design Conventions
 
@@ -234,11 +251,18 @@ Docs pages should be concise and useful to consumers.
 Preferred structure:
 
 1. Title and short purpose-focused description
-2. Usage section with import/snippet
+2. Usage section with root import and public subpath import examples
 3. Examples section
 4. API Reference section when useful
 
 Avoid old breadcrumbs like `components > Tabs`.
+
+Usage snippets should show both import forms without exposing internals:
+
+```ts
+import { Button } from '@adanft/ui';
+import Button from '@adanft/ui/button';
+```
 
 Use docs helpers/components:
 
@@ -315,6 +339,12 @@ Docs boundary tests:
 pnpm --dir apps/docs exec vitest run --config vitest.config.ts src/__tests__/docs-consumer-boundary.test.tsx
 ```
 
+Docs usage import contract:
+
+```bash
+pnpm --dir apps/docs exec vitest run --config vitest.config.ts src/__tests__/docs-usage-imports.test.ts
+```
+
 Release contract test:
 
 ```bash
@@ -327,6 +357,9 @@ pnpm exec vitest run src/__tests__/release-workspace-contract.test.ts
 - `apps/docs/src/__tests__/**` — docs consumer integration tests
 - `src/__tests__/**` — root workspace/release/repository contract tests
 
+`apps/docs/src/__tests__/docs-usage-imports.test.ts` enforces root + public subpath Usage examples
+for component docs pages.
+
 Docs tests may print jsdom warnings about pseudo-element `getComputedStyle()`. Existing passing tests
 can still emit that warning.
 
@@ -338,8 +371,10 @@ The package release flow uses Changesets.
 - `packages/ui` is the only publishable package.
 - `apps/docs` is private and ignored by Changesets.
 - While releases are beta-only, releases publish `@adanft/ui` with the npm `latest` tag.
-- Current beta package version is `0.2.0-beta.2`.
+- Current beta package version is `0.2.0-beta.3`.
 - Stable `1.0.0` is not the current target.
+- Clean release validation has passed after deleting `node_modules` and `dist` outputs, reinstalling,
+  and running `pnpm validate`.
 
 Release-related commands:
 

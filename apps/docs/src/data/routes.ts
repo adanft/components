@@ -34,9 +34,11 @@ const DOCS_RADIO_GROUP_PATH = '/components/radio-group';
 const DOCS_SELECT_PATH = '/components/select';
 const DOCS_SIDEBAR_PATH = '/components/sidebar';
 const DOCS_SKELETON_PATH = '/components/skeleton';
+const DOCS_SPINNER_PATH = '/components/spinner';
 const DOCS_SWITCH_PATH = '/components/switch';
 const DOCS_TABLE_PATH = '/components/table';
 const DOCS_TABS_PATH = '/components/tabs';
+const DOCS_TEXTAREA_PATH = '/components/textarea';
 const DOCS_TOOLTIP_PATH = '/components/tooltip';
 const DOCS_CHECKBOX_PATH = '/components/checkbox';
 const DOCS_THEME_SWITCH_PATH = '/components/theme-switch';
@@ -66,9 +68,11 @@ export {
   DOCS_SELECT_PATH,
   DOCS_SIDEBAR_PATH,
   DOCS_SKELETON_PATH,
+  DOCS_SPINNER_PATH,
   DOCS_SWITCH_PATH,
   DOCS_TABLE_PATH,
   DOCS_TABS_PATH,
+  DOCS_TEXTAREA_PATH,
   DOCS_THEME_SWITCH_PATH,
   DOCS_TOOLTIP_PATH,
   docsPath,

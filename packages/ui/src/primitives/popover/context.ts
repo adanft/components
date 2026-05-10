@@ -2,27 +2,27 @@ import type { FloatingContext, UseInteractionsReturn } from '@floating-ui/react'
 import type { CSSProperties } from 'react';
 import { createContext, useContext } from 'react';
 
-type TooltipContextValue = {
+type PopoverContextValue = {
   context: FloatingContext;
   floatingStyles: CSSProperties;
   getFloatingProps: UseInteractionsReturn['getFloatingProps'];
   getReferenceProps: UseInteractionsReturn['getReferenceProps'];
+  hasPopup: boolean;
   open: boolean;
   setFloating: (node: HTMLElement | null) => void;
   setReference: (node: Element | null) => void;
 };
 
-const TooltipContext = createContext<TooltipContextValue | null>(null);
+const PopoverContext = createContext<PopoverContextValue | null>(null);
 
-function useTooltipContext(componentName: string) {
-  const context = useContext(TooltipContext);
+function usePopoverContext(componentName: string) {
+  const context = useContext(PopoverContext);
 
   if (!context) {
-    throw new Error(`<Tooltip.${componentName}> must be used within <Tooltip>.`);
+    throw new Error(`<Popover.${componentName}> must be used within <Popover>.`);
   }
 
   return context;
 }
 
-export type { TooltipContextValue };
-export { TooltipContext, useTooltipContext };
+export { PopoverContext, usePopoverContext };

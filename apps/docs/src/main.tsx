@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 import './index.css';
 
-import { initializeTheme } from '@adanft/ui';
+import { initializeTheme } from '@adanft/ui/theme';
 import App from './app';
 
 initializeTheme();

@@ -11,9 +11,9 @@ import {
 
 import { cn } from '../../helpers/cn';
 import { ChevronDownIcon } from '../../icons';
-import Popover from '../popover';
+import Popover from '../../primitives/popover';
 import { useSidebarContext } from './context';
-import SidebarGroupLink from './sidebar-group-link';
+import SidebarGroupLink from './group-link';
 
 type SidebarIcon = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -72,7 +72,7 @@ function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProp
     <button
       type="button"
       className={cn(
-        'flex w-full items-center gap-4 rounded-md text-left leading-none text-foreground transition-colors',
+        'flex w-full items-center gap-4 rounded-md text-left leading-none text-foreground',
         active && 'text-brand',
         'px-2',
       )}
@@ -95,7 +95,10 @@ function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProp
       <span className="ml-auto flex shrink-0 items-center justify-center p-3.5">
         <ChevronDownIcon
           aria-hidden="true"
-          className={cn('duration-300 size-5 stroke-2', groupOpen && 'rotate-180')}
+          className={cn(
+            'size-5 stroke-2 transition-transform duration-300',
+            groupOpen && 'rotate-180',
+          )}
         />
       </span>
     </button>
@@ -106,12 +109,12 @@ function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProp
       <Popover
         open={floatOpen}
         onOpenChange={setFloatOpen}
-        placement="right-start"
+        position="right-start"
         contentRole={null}
         triggerHasPopup={false}>
         <Popover.Trigger>{trigger}</Popover.Trigger>
         <Popover.Content className="z-30 min-w-64 rounded-md border border-border bg-surface p-2 shadow-card">
-          <p className="p-3 font-semibold uppercase text-muted">{text}</p>
+          <p className="px-3 py-2 text-sm font-semibold uppercase text-muted">{text}</p>
           <div className="flex flex-col gap-2">{groupLinks}</div>
         </Popover.Content>
       </Popover>
@@ -125,11 +128,11 @@ function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProp
       <div
         id={contentId}
         className={cn(
-          'grid overflow-hidden transition-all duration-300',
+          'grid overflow-hidden transition-[grid-template-rows] duration-300',
           groupOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
         )}>
         <div className="overflow-hidden mx-7.75">
-          <div className="px-7 border-l-2 border-muted">{groupLinks}</div>
+          <div className="px-7 border-l border-muted">{groupLinks}</div>
         </div>
       </div>
     </div>

@@ -16,7 +16,12 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Modal } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Button, Modal } from '@adanft/ui';
+
+// Public package subpath imports
+import Button from '@adanft/ui/button';
+import Modal from '@adanft/ui/modal';`;
 
 const usageSnippet = `const [open, setOpen] = useState(false);
 
@@ -42,13 +47,13 @@ const defaultExampleJsx = `<Modal open={open} onClose={() => setOpen(false)}>
   </Modal.Panel>
 </Modal>`;
 
-const initialFocusExampleJsx = `<Modal open={open} onClose={() => setOpen(false)}>
+const formExampleJsx = `<Modal open={open} onClose={() => setOpen(false)}>
   <Modal.Backdrop />
   <Modal.Panel className="space-y-4">
     <Modal.Title>Rename project</Modal.Title>
     <Field>
       <Label htmlFor="project-name">Project name</Label>
-      <Input id="project-name" data-autofocus defaultValue="components" />
+      <Input id="project-name" defaultValue="components" />
     </Field>
     <div className="flex justify-end gap-2">
       <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
@@ -67,7 +72,7 @@ const labelledExampleJsx = `<Modal open={open} onClose={() => setOpen(false)}>
 
 function ModalPage() {
   const [defaultOpen, setDefaultOpen] = useState(false);
-  const [initialFocusOpen, setInitialFocusOpen] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
   const [labelledOpen, setLabelledOpen] = useState(false);
 
   return (
@@ -75,8 +80,7 @@ function ModalPage() {
       <header className="space-y-4 pb-6">
         <h1 className="text-3xl font-bold text-heading">Modal</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>Modal</Code> renders controlled dialog content in a portal with backdrop dismiss,
-          escape dismiss, focus trapping, and focus restoration.
+          <Code>Modal</Code> shows focused dialog content for blocking workflows and confirmations.
         </p>
       </header>
 
@@ -108,28 +112,28 @@ function ModalPage() {
         </Box>
         <CodeBlock code={defaultExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-heading">Initial focus</h3>
+        <h3 className="text-lg font-semibold text-heading">Form content</h3>
         <Box className="flex items-center" shadow="none" surface="none">
-          <Button onClick={() => setInitialFocusOpen(true)}>Rename project</Button>
+          <Button onClick={() => setFormOpen(true)}>Rename project</Button>
 
-          <Modal open={initialFocusOpen} onClose={() => setInitialFocusOpen(false)}>
+          <Modal open={formOpen} onClose={() => setFormOpen(false)}>
             <Modal.Backdrop />
             <Modal.Panel className="space-y-4">
               <Modal.Title>Rename project</Modal.Title>
               <Field>
                 <Label htmlFor="project-name">Project name</Label>
-                <Input id="project-name" data-autofocus defaultValue="components" />
+                <Input id="project-name" defaultValue="components" />
               </Field>
               <div className="flex justify-end gap-2">
-                <Button variant="secondary" onClick={() => setInitialFocusOpen(false)}>
+                <Button variant="secondary" onClick={() => setFormOpen(false)}>
                   Cancel
                 </Button>
-                <Button onClick={() => setInitialFocusOpen(false)}>Save</Button>
+                <Button onClick={() => setFormOpen(false)}>Save</Button>
               </div>
             </Modal.Panel>
           </Modal>
         </Box>
-        <CodeBlock code={initialFocusExampleJsx} />
+        <CodeBlock code={formExampleJsx} />
 
         <h3 className="text-lg font-semibold text-heading">Accessible name without title</h3>
         <Box className="flex items-center" shadow="none" surface="none">
@@ -184,24 +188,17 @@ function ModalPage() {
               <TableCell>—</TableCell>
               <TableCell>Runs when the backdrop is clicked or Escape is pressed.</TableCell>
             </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>children</Code>
-              </TableCell>
-              <TableCell>
-                <Code>ReactNode</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Modal compound parts rendered inside the portal.</TableCell>
-            </TableRow>
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">Modal.Backdrop and Modal.Panel</h3>
+        <h3 className="text-lg font-semibold text-heading">Modal.Backdrop</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead scope="col">Prop / Part</TableHead>
+              <TableHead scope="col">Prop</TableHead>
               <TableHead scope="col">Type</TableHead>
               <TableHead scope="col">Default</TableHead>
               <TableHead scope="col">Description</TableHead>
@@ -210,40 +207,42 @@ function ModalPage() {
           <TableBody>
             <TableRow>
               <TableCell>
-                <Code>Modal.Backdrop</Code>
-              </TableCell>
-              <TableCell>native div props</TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Renders the overlay and calls the root close handler on click.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>Modal.Panel</Code>
-              </TableCell>
-              <TableCell>native div props</TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Wraps the modal content and accepts layout/spacing classes.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>aria-label</Code> / <Code>aria-labelledby</Code>
+                <Code>className</Code>
               </TableCell>
               <TableCell>
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>
-                Names <Code>Modal.Panel</Code> when no <Code>Modal.Title</Code> is rendered.
-              </TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">Modal.Title and focus</h3>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead scope="col">Prop / Part</TableHead>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>aria-hidden</Code>
+              </TableCell>
+              <TableCell>Hides the backdrop from assistive technology.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Modal.Panel</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
               <TableHead scope="col">Type</TableHead>
               <TableHead scope="col">Default</TableHead>
               <TableHead scope="col">Description</TableHead>
@@ -252,24 +251,100 @@ function ModalPage() {
           <TableBody>
             <TableRow>
               <TableCell>
-                <Code>Modal.Title</Code>
+                <Code>className</Code>
               </TableCell>
-              <TableCell>native h2 props</TableCell>
-              <TableCell>—</TableCell>
               <TableCell>
-                Renders the visible title and names the panel when no manual name is provided.
+                <Code>string</Code>
               </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>Identifies the panel as a dialog.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>data-autofocus</Code>
+                <Code>aria-modal</Code>
+              </TableCell>
+              <TableCell>Marks the dialog as modal.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-label</Code>
+              </TableCell>
+              <TableCell>Names the panel when no visible title is rendered.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-labelledby</Code>
+              </TableCell>
+              <TableCell>References the element that names the panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>tabIndex</Code>
+              </TableCell>
+              <TableCell>Makes the panel focusable for initial focus management.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Modal.Title</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<h2>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
               </TableCell>
               <TableCell>
-                <Code>boolean</Code>
+                <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Add it to the element that should receive focus when the modal opens.
+                <Code>id</Code>
+              </TableCell>
+              <TableCell>
+                Provides the default accessible name for <Code>Modal.Panel</Code> when the panel
+                does not receive <Code>aria-label</Code> or <Code>aria-labelledby</Code>.
               </TableCell>
             </TableRow>
           </TableBody>

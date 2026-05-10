@@ -6,9 +6,7 @@ Reusable React UI components from the adanft design system.
 
 This package is currently published as a **beta** release.
 
-Current beta version: `0.2.0-beta.2`.
-
-Before any beta release publish, run `pnpm validate:pack-contract` from the workspace root to verify the package manifest, publish exports, workflow guardrail, and stylesheet subpath contract.
+Current beta version: `0.2.0-beta.3`.
 
 ## Current package model
 
@@ -20,7 +18,7 @@ That means consumers should:
 2. import the package stylesheet contract
 3. ensure their Tailwind entry scans both app sources and the compiled package output
 
-The docs app in this repo (`apps/docs`) is the reference consumer implementation.
+The documentation site is the reference consumer implementation.
 
 ## Usage
 
@@ -38,29 +36,32 @@ stylesheet:
 Then import components from the package root for convenience:
 
 ```tsx
-import { Button, initializeTheme } from '@adanft/ui';
+import { Button } from '@adanft/ui';
+import { initializeTheme } from '@adanft/ui/theme';
 
 initializeTheme();
 ```
 
 Theme helpers keep CSR simple: `initializeTheme()` is browser-only and reads
-`localStorage`; do not use it to decide the initial SSR theme. `toggleTheme()` updates
-`localStorage`, the `theme=dark` cookie, and the `<html>` class. In Next/SSR, read the
-cookie server-side, render `<html className="dark">`, and pass
+`localStorage`; do not use it to decide the initial SSR theme. In Next/SSR, read the
+`theme=dark` cookie server-side, render `<html className="dark">`, and pass
 `<ThemeSwitch initialDark={isDark} />` to avoid hydration mismatch.
 
-You can also import documented public component subpaths when you want narrower entrypoints:
+You can also import documented public subpaths when you want narrower entrypoints:
 
 ```tsx
 import Button from '@adanft/ui/button';
 import Modal from '@adanft/ui/modal';
 import Tabs from '@adanft/ui/tabs';
+import { initializeTheme } from '@adanft/ui/theme';
 ```
+
+See the documentation site for the full list of public component subpaths.
 
 ## Notes
 
 - The public API is exported from the package root and documented public subpaths.
-- Do not deep-import internal files like `@adanft/ui/src/components/...`.
+- Only import from the package root or documented public subpaths.
 - Router-specific behavior belongs in the consumer app, not in this package.
 
 ## Repository

@@ -15,7 +15,7 @@ const DropdownMenu = Object.assign(DropdownMenuRoot, {
 
 export default DropdownMenu;
 export type { DropdownMenuContentProps } from './content';
-export type { DropdownMenuProps } from './dropdown-menu';
+export type { DropdownMenuPosition, DropdownMenuProps } from './dropdown-menu';
 export type { DropdownMenuItemProps } from './item';
 export type { DropdownMenuLabelProps } from './label';
 export type { DropdownMenuSeparatorProps } from './separator';

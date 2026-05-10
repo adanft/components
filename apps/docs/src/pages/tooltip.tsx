@@ -14,7 +14,12 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Tooltip } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Button, Tooltip } from '@adanft/ui';
+
+// Public package subpath imports
+import Button from '@adanft/ui/button';
+import Tooltip from '@adanft/ui/tooltip';`;
 
 const usageSnippet = `const [open, setOpen] = useState(false);
 
@@ -45,7 +50,7 @@ const defaultExampleSnippet = `const [open, setOpen] = useState(false);
 
 const iconExampleSnippet = `const [open, setOpen] = useState(false);
 
-<Tooltip open={open} onOpenChange={setOpen} placement="right">
+<Tooltip open={open} onOpenChange={setOpen} position="right">
   <Tooltip.Trigger>
     <button
       type="button"
@@ -70,8 +75,7 @@ function TooltipPage() {
       <header className="space-y-4 pb-6">
         <h1 className="text-3xl font-bold text-heading">Tooltip</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>Tooltip</Code> shows short contextual text on hover or focus. It is a primitive for
-          non-interactive hints, not a replacement for <Code>Popover</Code>.
+          <Code>Tooltip</Code> shows short, non-interactive hints on hover or focus.
         </p>
       </header>
 
@@ -109,7 +113,7 @@ function TooltipPage() {
           className="flex min-h-44 items-center justify-center overflow-visible p-8"
           shadow="none"
           surface="none">
-          <Tooltip open={iconOpen} onOpenChange={setIconOpen} placement="right">
+          <Tooltip open={iconOpen} onOpenChange={setIconOpen} position="right">
             <Tooltip.Trigger>
               <button
                 type="button"
@@ -165,24 +169,52 @@ function TooltipPage() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>placement</Code>
+                <Code>position</Code>
               </TableCell>
               <TableCell>
-                <Code>Placement</Code>
+                <Code>{`"top" | "top-start" | "top-end" | "right" | "right-start" | "right-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end"`}</Code>
               </TableCell>
               <TableCell>
                 <Code>{`"top"`}</Code>
               </TableCell>
-              <TableCell>Sets the preferred Floating UI placement for the tooltip.</TableCell>
+              <TableCell>Sets the preferred position for the tooltip.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">Tooltip.Trigger and Tooltip.Content</h3>
+        <h3 className="text-lg font-semibold text-heading">Tooltip.Trigger</h3>
+        <p className="text-sm leading-6 text-foreground">
+          Accepts a single child element and attaches the tooltip trigger behavior to it.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead scope="col">Part</TableHead>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>aria-describedby</Code>
+              </TableCell>
+              <TableCell>
+                Connects the trigger to the tooltip content while the tooltip is open.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Tooltip.Content</h3>
+        <p className="text-sm leading-6 text-foreground">
+          <Code>Tooltip.Content</Code> wraps a native <Code>div</Code> element and accepts native
+          div props. Pass visual classes explicitly because the primitive has no default surface
+          styles.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
               <TableHead scope="col">Type</TableHead>
               <TableHead scope="col">Default</TableHead>
               <TableHead scope="col">Description</TableHead>
@@ -191,24 +223,40 @@ function TooltipPage() {
           <TableBody>
             <TableRow>
               <TableCell>
-                <Code>Tooltip.Trigger</Code>
+                <Code>className</Code>
               </TableCell>
-              <TableCell>single React element</TableCell>
-              <TableCell>—</TableCell>
               <TableCell>
-                Clones one interactive child and wires hover/focus handlers. Prefer a native button
-                or the library <Code>Button</Code> component.
+                <Code>string</Code>
               </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>Tooltip.Content</Code>
+                <Code>style</Code>
               </TableCell>
-              <TableCell>native div props</TableCell>
-              <TableCell>—</TableCell>
               <TableCell>
-                Renders short, non-interactive text while open. Pass visual classes explicitly
-                because the primitive has no default surface styles.
+                <Code>CSSProperties</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Merges with positioning styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>
+                Set to <Code>tooltip</Code> on the content.
               </TableCell>
             </TableRow>
           </TableBody>

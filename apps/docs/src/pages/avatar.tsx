@@ -11,7 +11,11 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Avatar } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Avatar } from '@adanft/ui';
+
+// Public package subpath import
+import Avatar from '@adanft/ui/avatar';`;
 
 const usageSnippet = `<Avatar type="text" size="md" text="AF" />`;
 
@@ -99,6 +103,11 @@ function AvatarPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          Image avatars render <Code>{`<img>`}</Code> and accept native image props except{' '}
+          <Code>src</Code> and <Code>alt</Code>. Text avatars render <Code>{`<div>`}</Code> and
+          accept native div props.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -177,9 +186,7 @@ function AvatarPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>
-                Extends the component styles and can override default values when needed.
-              </TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

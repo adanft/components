@@ -44,7 +44,6 @@ export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = pro
   const packageManifestPath = path.join(rootDir, 'packages/ui/package.json');
   const rootManifestPath = path.join(rootDir, 'package.json');
   const releaseWorkflowPath = path.join(rootDir, '.github/workflows/release.yml');
-  const packageReadmePath = path.join(rootDir, 'packages/ui/README.md');
   const packageStylesPath = path.join(rootDir, 'packages/ui/styles.css');
   const packageSourceStylesPath = path.join(rootDir, 'packages/ui/src/styles.css');
   const packageBuildConfigPath = path.join(rootDir, 'packages/ui/tsconfig.build.json');
@@ -53,7 +52,6 @@ export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = pro
   const packageBuildConfig = readJson(packageBuildConfigPath);
   const rootManifest = readJson(rootManifestPath);
   const releaseWorkflow = readFileSync(releaseWorkflowPath, 'utf8');
-  const packageReadme = readFileSync(packageReadmePath, 'utf8');
   const packageSourceStyles = readFileSync(packageSourceStylesPath, 'utf8');
 
   const files = Array.isArray(packageManifest.files) ? packageManifest.files : [];
@@ -107,8 +105,9 @@ export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = pro
     createCheck(
       'public package stylesheet carries dependency CSS and theme sources',
       packageSourceStyles.includes('@import "simplebar-react/dist/simplebar.min.css";') &&
-        packageSourceStyles.includes('@import "./theme/utilities.css";') &&
         packageSourceStyles.includes('@theme {') &&
+        packageSourceStyles.includes('@layer base {') &&
+        packageSourceStyles.includes('@keyframes tilt') &&
         !packageSourceStyles.includes('@import "tailwindcss";'),
       packageSourceStyles,
     ),
@@ -126,12 +125,6 @@ export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = pro
         scripts['release:latest'].includes('packages/ui') &&
         scripts.release === 'changeset publish --tag latest',
       releaseWorkflow,
-    ),
-    createCheck(
-      'package README documents the beta publish verification step',
-      packageReadme.includes('pnpm validate:pack-contract') &&
-        packageReadme.includes('beta release'),
-      packageReadme,
     ),
     ...verifySubpathExports(exportsMap, rootDir, { requireBuiltArtifacts }),
   ];

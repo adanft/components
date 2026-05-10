@@ -12,7 +12,11 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Switch } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Switch } from '@adanft/ui';
+
+// Public package subpath import
+import Switch from '@adanft/ui/switch';`;
 
 const usageSnippet = `import { useState } from 'react';
 import { Switch } from '@adanft/ui';
@@ -27,6 +31,13 @@ const positionsSnippet = `<Switch checked={false} onCheckedChange={() => undefin
 <Switch checked={false} onCheckedChange={() => undefined} label="Bottom" labelPosition="bottom" />`;
 
 const disabledSnippet = `<Switch checked={false} disabled onCheckedChange={() => undefined} label="Disabled" />`;
+
+const invalidSnippet = `<Switch
+  aria-invalid
+  checked={false}
+  onCheckedChange={() => undefined}
+  label="Invalid"
+/>`;
 
 function SwitchPage() {
   const [darkMode, setDarkMode] = useState(false);
@@ -89,10 +100,21 @@ function SwitchPage() {
           <Switch checked={false} disabled onCheckedChange={() => undefined} label="Disabled" />
         </Box>
         <CodeBlock code={disabledSnippet} />
+
+        <h3 className="text-lg font-semibold text-heading">Invalid</h3>
+        <Box shadow="none" surface="none">
+          <Switch aria-invalid checked={false} onCheckedChange={() => undefined} label="Invalid" />
+        </Box>
+        <CodeBlock code={invalidSnippet} />
       </section>
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          Renders a label wrapper with a hidden native <Code>{`input[type="checkbox"]`}</Code>.
+          Native input props are accepted, and <Code>className</Code> extends the visual switch
+          track.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -147,25 +169,48 @@ function SwitchPage() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>disabled</Code>
-              </TableCell>
-              <TableCell>
-                <Code>boolean</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Disables interaction and applies the disabled visual state.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
                 <Code>className</Code>
               </TableCell>
               <TableCell>
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Extends the component styles and can override default values when needed.
+                <Code>aria-checked</Code>
               </TableCell>
+              <TableCell>Reflects the checked switch state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>Identifies the input as a switch.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-invalid</Code>
+              </TableCell>
+              <TableCell>Applies the invalid visual state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-hidden</Code>
+              </TableCell>
+              <TableCell>Hides decorative switch visuals from assistive technology.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

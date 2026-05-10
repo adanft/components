@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { initializeTheme, toggleTheme } from '../theme';
+import { initializeTheme, toggleTheme } from '../helpers/theme';
 
 describe('theme helper transitions', () => {
   beforeEach(() => {

@@ -37,5 +37,4 @@ function useAccordionItemContext(componentName: string) {
   return context;
 }
 
-export type { AccordionContextValue, AccordionItemContextValue };
 export { AccordionContext, AccordionItemContext, useAccordionContext, useAccordionItemContext };

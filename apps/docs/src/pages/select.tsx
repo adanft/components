@@ -12,7 +12,11 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Select } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Select } from '@adanft/ui';
+
+// Public package subpath import
+import Select from '@adanft/ui/select';`;
 
 const usageSnippet = `<Select placeholder="Choose a plan" defaultValue="starter">
   <option value="starter">Starter</option>
@@ -24,6 +28,12 @@ const defaultExampleSnippet = `<Select aria-label="Choose plan" defaultValue="st
   <option value="starter">Starter</option>
   <option value="pro">Pro</option>
   <option value="team">Team</option>
+</Select>`;
+
+const invalidExampleSnippet = `<Select aria-invalid aria-label="Choose plan" defaultValue="">
+  <option value="">Choose a plan</option>
+  <option value="starter">Starter</option>
+  <option value="pro">Pro</option>
 </Select>`;
 
 const exampleSnippet = `const [value, setValue] = useState('pro');
@@ -50,8 +60,7 @@ function SelectPage() {
       <header className="space-y-4 pb-6">
         <h1 className="text-3xl font-bold text-heading">Select</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>Select</Code> is a styled native <Code>{'<select>'}</Code> control for choosing one
-          option from a list.
+          <Code>Select</Code> lets users choose one option from a list.
         </p>
       </header>
 
@@ -73,6 +82,16 @@ function SelectPage() {
           </Select>
         </Box>
         <CodeBlock code={defaultExampleSnippet} />
+
+        <h3 className="text-lg font-semibold text-heading">Invalid</h3>
+        <Box shadow="none" surface="none">
+          <Select aria-invalid aria-label="Choose plan" defaultValue="">
+            <option value="">Choose a plan</option>
+            <option value="starter">Starter</option>
+            <option value="pro">Pro</option>
+          </Select>
+        </Box>
+        <CodeBlock code={invalidExampleSnippet} />
 
         <h3 className="text-lg font-semibold text-heading">Controlled</h3>
         <Box shadow="none" surface="none">
@@ -96,6 +115,9 @@ function SelectPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<select>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -118,47 +140,42 @@ function SelectPage() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>value</Code>
-              </TableCell>
-              <TableCell>
-                <Code>string</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>
-                Controls the selected value when used as a controlled component.
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>defaultValue</Code>
-              </TableCell>
-              <TableCell>
-                <Code>string</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Sets the initial selected value for uncontrolled usage.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>disabled</Code>
-              </TableCell>
-              <TableCell>
-                <Code>boolean</Code>
-              </TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Disables interaction and applies the disabled visual state.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
                 <Code>className</Code>
               </TableCell>
               <TableCell>
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Extends the component styles and can override default values when needed.
+                <Code>data-placeholder</Code>
               </TableCell>
+              <TableCell>Applies the placeholder visual state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-invalid</Code>
+              </TableCell>
+              <TableCell>Applies the invalid visual state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-hidden</Code>
+              </TableCell>
+              <TableCell>Hides the decorative chevron icon from assistive technology.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

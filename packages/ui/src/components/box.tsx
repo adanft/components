@@ -45,5 +45,5 @@ function Box({
   return <div {...props} className={boxClassName} />;
 }
 
-export type { BoxPadding, BoxProps, BoxShadow, BoxSurface };
+export type { BoxProps };
 export default Box;

@@ -1,1 +1,1 @@
-export { initializeTheme, toggleTheme } from './helpers/theme';
+export { initializeTheme } from './helpers/theme';

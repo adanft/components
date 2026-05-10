@@ -1,36 +1,37 @@
 import {
   Box,
-  Input,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
+  Textarea,
 } from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
 const importSnippet = `// Package root import
-import { Input } from '@adanft/ui';
+import { Textarea } from '@adanft/ui';
 
 // Public package subpath import
-import Input from '@adanft/ui/input';`;
+import Textarea from '@adanft/ui/textarea';`;
 
-const usageSnippet = `<Input type="email" placeholder="name@example.com" />`;
+const usageSnippet = `<Textarea placeholder="Write a message" />`;
 
-const defaultExampleJsx = `<Input type="email" placeholder="name@example.com" />`;
+const defaultExampleJsx = `<Textarea aria-label="Message" placeholder="Write a message" />`;
 
-const disabledExampleJsx = `<Input type="email" placeholder="name@example.com" disabled />`;
+const invalidExampleJsx = `<Textarea aria-invalid aria-label="Message" placeholder="Write a message" />`;
 
-function InputPage() {
+const disabledExampleJsx = `<Textarea aria-label="Message" placeholder="Write a message" disabled />`;
+
+function TextareaPage() {
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
-        <h1 className="text-3xl font-bold text-heading">Input</h1>
+        <h1 className="text-3xl font-bold text-heading">Textarea</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>Input</Code> is a simple text field primitive with base styles for common form
-          entry.
+          <Code>Textarea</Code> is a multi-line text field for longer form content.
         </p>
       </header>
 
@@ -45,13 +46,19 @@ function InputPage() {
 
         <h3 className="text-lg font-semibold text-heading">Default</h3>
         <Box shadow="none" surface="none">
-          <Input type="email" placeholder="name@example.com" />
+          <Textarea aria-label="Message" placeholder="Write a message" />
         </Box>
         <CodeBlock code={defaultExampleJsx} />
 
+        <h3 className="text-lg font-semibold text-heading">Invalid</h3>
+        <Box shadow="none" surface="none">
+          <Textarea aria-invalid aria-label="Message" placeholder="Write a message" />
+        </Box>
+        <CodeBlock code={invalidExampleJsx} />
+
         <h3 className="text-lg font-semibold text-heading">Disabled</h3>
         <Box shadow="none" surface="none">
-          <Input type="email" placeholder="name@example.com" disabled />
+          <Textarea aria-label="Message" placeholder="Write a message" disabled />
         </Box>
         <CodeBlock code={disabledExampleJsx} />
       </section>
@@ -59,7 +66,7 @@ function InputPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <p className="text-foreground">
-          A thin wrapper around the native <Code>{`<input>`}</Code> element.
+          A thin wrapper around the native <Code>{`<textarea>`}</Code> element.
         </p>
         <Table>
           <TableHeader>
@@ -71,18 +78,6 @@ function InputPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>
-                <Code>type</Code>
-              </TableCell>
-              <TableCell>
-                <Code>string</Code>
-              </TableCell>
-              <TableCell>
-                <Code>"text"</Code>
-              </TableCell>
-              <TableCell>Uses the native input type attribute.</TableCell>
-            </TableRow>
             <TableRow>
               <TableCell>
                 <Code>className</Code>
@@ -117,4 +112,4 @@ function InputPage() {
   );
 }
 
-export default InputPage;
+export default TextareaPage;

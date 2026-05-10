@@ -1,12 +1,4 @@
 export type {
-  AccordionContentProps,
-  AccordionHeaderProps,
-  AccordionItemProps,
-  AccordionProps,
-  AccordionTriggerProps,
-} from './components/accordion';
-export { default as Accordion } from './components/accordion';
-export type {
   AlertDescriptionProps,
   AlertProps,
   AlertTitleProps,
@@ -29,6 +21,7 @@ export type {
 } from './components/breadcrumbs';
 export { default as Breadcrumbs } from './components/breadcrumbs';
 export type {
+  ButtonOutlineVariant,
   ButtonProps,
   ButtonSize,
   ButtonVariant,
@@ -40,6 +33,7 @@ export type {
   DropdownMenuContentProps,
   DropdownMenuItemProps,
   DropdownMenuLabelProps,
+  DropdownMenuPosition,
   DropdownMenuProps,
   DropdownMenuSeparatorProps,
   DropdownMenuTriggerProps,
@@ -69,12 +63,6 @@ export type { PaginationFootProps } from './components/pagination/foot';
 export { default as PaginationFoot } from './components/pagination/foot';
 export type { PaginationHeadProps } from './components/pagination/head';
 export { default as PaginationHead } from './components/pagination/head';
-export type {
-  PopoverContentProps,
-  PopoverProps,
-  PopoverTriggerProps,
-} from './components/popover';
-export { default as Popover } from './components/popover';
 export type { ProfileProps } from './components/profile';
 export { default as Profile } from './components/profile';
 export type { RadioGroupItemProps, RadioGroupProps } from './components/radio-group';
@@ -83,20 +71,22 @@ export type { SelectProps } from './components/select';
 export { default as Select } from './components/select';
 export type { SidebarProps } from './components/sidebar';
 export { default as Sidebar } from './components/sidebar';
-export type { SidebarBodyProps } from './components/sidebar/sidebar-body';
-export { default as SidebarBody } from './components/sidebar/sidebar-body';
-export type { SidebarGroupProps } from './components/sidebar/sidebar-group';
-export { default as SidebarGroup } from './components/sidebar/sidebar-group';
-export type { SidebarGroupLinkProps } from './components/sidebar/sidebar-group-link';
-export { default as SidebarGroupLink } from './components/sidebar/sidebar-group-link';
-export type { SidebarHeadProps } from './components/sidebar/sidebar-head';
-export { default as SidebarHead } from './components/sidebar/sidebar-head';
-export type { SidebarLinkProps } from './components/sidebar/sidebar-link';
-export { default as SidebarLink } from './components/sidebar/sidebar-link';
-export type { SidebarSectionProps } from './components/sidebar/sidebar-section';
-export { default as SidebarSection } from './components/sidebar/sidebar-section';
+export type { SidebarBodyProps } from './components/sidebar/body';
+export { default as SidebarBody } from './components/sidebar/body';
+export type { SidebarGroupProps } from './components/sidebar/group';
+export { default as SidebarGroup } from './components/sidebar/group';
+export type { SidebarGroupLinkProps } from './components/sidebar/group-link';
+export { default as SidebarGroupLink } from './components/sidebar/group-link';
+export type { SidebarHeadProps } from './components/sidebar/head';
+export { default as SidebarHead } from './components/sidebar/head';
+export type { SidebarLinkProps } from './components/sidebar/link';
+export { default as SidebarLink } from './components/sidebar/link';
+export type { SidebarSectionProps } from './components/sidebar/section';
+export { default as SidebarSection } from './components/sidebar/section';
 export type { SkeletonAnimation, SkeletonProps } from './components/skeleton';
 export { default as Skeleton } from './components/skeleton';
+export type { SpinnerProps, SpinnerSpeed } from './components/spinner';
+export { default as Spinner } from './components/spinner';
 export type { SwitchProps } from './components/switch';
 export { default as Switch } from './components/switch';
 export type {
@@ -119,19 +109,38 @@ export {
   TableHeader,
   TableRow,
 } from './components/table';
-export type {
-  TabsContentProps,
-  TabsListProps,
-  TabsProps,
-  TabsTriggerProps,
-} from './components/tabs';
-export { default as Tabs } from './components/tabs';
+export type { TextareaProps } from './components/textarea';
+export { default as Textarea } from './components/textarea';
 export type { ThemeSwitchProps, ThemeSwitchSize } from './components/theme-switch';
 export { default as ThemeSwitch } from './components/theme-switch';
 export type {
+  AccordionContentProps,
+  AccordionHeaderProps,
+  AccordionItemProps,
+  AccordionProps,
+  AccordionTriggerProps,
+} from './primitives/accordion';
+export { default as Accordion } from './primitives/accordion';
+export type {
+  PopoverContentProps,
+  PopoverPosition,
+  PopoverProps,
+  PopoverTriggerProps,
+} from './primitives/popover';
+export { default as Popover } from './primitives/popover';
+export type {
+  TabsContentProps,
+  TabsListOrientation,
+  TabsListProps,
+  TabsProps,
+  TabsTriggerProps,
+} from './primitives/tabs';
+export { default as Tabs } from './primitives/tabs';
+export type {
   TooltipContentProps,
+  TooltipPosition,
   TooltipProps,
   TooltipTriggerProps,
-} from './components/tooltip';
-export { default as Tooltip } from './components/tooltip';
-export { initializeTheme, toggleTheme } from './theme';
+} from './primitives/tooltip';
+export { default as Tooltip } from './primitives/tooltip';
+export { initializeTheme } from './theme';

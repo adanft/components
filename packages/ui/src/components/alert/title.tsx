@@ -5,7 +5,7 @@ import { cn } from '../../helpers/cn';
 type AlertTitleProps = ComponentPropsWithoutRef<'div'>;
 
 function AlertTitle({ className, ...props }: AlertTitleProps) {
-  return <div className={cn('font-semibold text-foreground', className)} {...props} />;
+  return <div className={cn('font-semibold text-heading', className)} {...props} />;
 }
 
 export type { AlertTitleProps };

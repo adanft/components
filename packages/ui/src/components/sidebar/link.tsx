@@ -42,8 +42,8 @@ type SidebarLinkChildElementProps = {
 function SidebarLink({ active = false, className, href, icon, text, ...props }: SidebarLinkProps) {
   const Icon = icon;
   const linkClassName = cn(
-    'flex leading-none items-center text-foreground gap-4 rounded-md',
-    active ? 'bg-brand text-white mx-2' : 'px-2',
+    'mx-2 flex items-center gap-4 rounded-md leading-none text-foreground',
+    active && 'bg-brand text-white',
     className,
   );
   const content = (
@@ -84,4 +84,4 @@ function SidebarLink({ active = false, className, href, icon, text, ...props }: 
 }
 
 export default SidebarLink;
-export type { SidebarIcon, SidebarLinkProps };
+export type { SidebarLinkProps };

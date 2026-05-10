@@ -20,7 +20,7 @@ function Checkbox({
   const resolvedId = id ?? autoId;
 
   const wrapperClassName = cn(
-    'inline-flex gap-2',
+    'inline-flex gap-2 text-heading has-aria-invalid:text-danger',
     labelPosition === 'right' && 'flex-row items-center',
     labelPosition === 'left' && 'flex-row-reverse items-center',
     labelPosition === 'top' && 'flex-col-reverse items-start',
@@ -31,6 +31,7 @@ function Checkbox({
   const inputClassName = cn(
     'peer relative h-4 w-4 shrink-0 appearance-none rounded-sm border border-muted bg-background',
     'checked:bg-brand checked:border-brand',
+    'aria-invalid:border-danger aria-invalid:focus-visible:outline-danger',
     className,
   );
 
@@ -55,7 +56,7 @@ function Checkbox({
     return (
       <label htmlFor={resolvedId} className={wrapperClassName}>
         {indicator}
-        <span className="text-sm font-medium text-foreground">{label}</span>
+        <span className="text-sm font-medium">{label}</span>
       </label>
     );
   }

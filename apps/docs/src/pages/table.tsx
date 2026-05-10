@@ -12,7 +12,8 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import {
+const importSnippet = `// Package root import
+import {
   Table,
   TableBody,
   TableCaption,
@@ -21,7 +22,18 @@ const importSnippet = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@adanft/ui';`;
+} from '@adanft/ui';
+
+// Public package subpath import
+import Table, {
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui/table';`;
 
 const usageSnippet = `<Table aria-label="Deals">
   <TableCaption>Pipeline by owner</TableCaption>
@@ -209,6 +221,10 @@ function TablePage() {
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
 
         <h3 className="text-lg font-semibold text-heading">Table</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<table>`}</Code> element inside a scrollable
+          container.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -227,84 +243,196 @@ function TablePage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Extends the base table element inside the scrollable wrapper.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>native table props</TableCell>
-              <TableCell>table attributes</TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>
-                Supports semantic attributes like <Code>aria-label</Code> directly on the table.
-              </TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
         <h3 className="text-lg font-semibold text-heading">TableCaption</h3>
-        <div className="space-y-3 text-base leading-7 text-foreground">
-          <p>
-            Use <Code>TableCaption</Code> when the table needs a short textual label or summary.
-          </p>
-        </div>
-
-        <h3 className="text-lg font-semibold text-heading">
-          TableHeader, TableBody and TableFooter
-        </h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<caption>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead scope="col">Component</TableHead>
-              <TableHead scope="col">Use</TableHead>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
               <TableCell>
-                <Code>TableHeader</Code>
+                <Code>className</Code>
               </TableCell>
-              <TableCell>Wraps column headers.</TableCell>
-            </TableRow>
-            <TableRow>
               <TableCell>
-                <Code>TableBody</Code>
+                <Code>string</Code>
               </TableCell>
-              <TableCell>Wraps the main table rows.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>TableFooter</Code>
-              </TableCell>
-              <TableCell>Wraps totals or summary rows.</TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">TableRow, TableHead and TableCell</h3>
+        <h3 className="text-lg font-semibold text-heading">TableHeader</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<thead>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead scope="col">Component</TableHead>
-              <TableHead scope="col">Use</TableHead>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
               <TableCell>
-                <Code>TableRow</Code>
+                <Code>className</Code>
               </TableCell>
-              <TableCell>Defines a single row.</TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">TableBody</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<tbody>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             <TableRow>
               <TableCell>
-                <Code>TableHead</Code>
+                <Code>className</Code>
               </TableCell>
-              <TableCell>Defines a header cell.</TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">TableFooter</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<tfoot>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             <TableRow>
               <TableCell>
-                <Code>TableCell</Code>
+                <Code>className</Code>
               </TableCell>
-              <TableCell>Defines a body or footer cell.</TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">TableRow</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<tr>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">TableHead</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<th>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">TableCell</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<td>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

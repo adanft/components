@@ -13,7 +13,12 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Popover } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Button, Popover } from '@adanft/ui';
+
+// Public package subpath imports
+import Button from '@adanft/ui/button';
+import Popover from '@adanft/ui/popover';`;
 
 const usageSnippet = `const [open, setOpen] = useState(false);
 
@@ -43,9 +48,9 @@ const defaultExampleSnippet = `const [open, setOpen] = useState(false);
   </Popover.Content>
 </Popover>`;
 
-const placementExampleSnippet = `const [open, setOpen] = useState(false);
+const positionExampleSnippet = `const [open, setOpen] = useState(false);
 
-<Popover open={open} onOpenChange={setOpen} placement="bottom-start">
+<Popover open={open} onOpenChange={setOpen} position="bottom-start">
   <Popover.Trigger>
     <Button variant="secondary">View shortcuts</Button>
   </Popover.Trigger>
@@ -61,16 +66,14 @@ const placementExampleSnippet = `const [open, setOpen] = useState(false);
 
 function PopoverPage() {
   const [defaultOpen, setDefaultOpen] = useState(false);
-  const [placementOpen, setPlacementOpen] = useState(false);
+  const [positionOpen, setPositionOpen] = useState(false);
 
   return (
     <article className="space-y-8">
       <header className="space-y-4 pb-6">
         <h1 className="text-3xl font-bold text-heading">Popover</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>Popover</Code> is a controlled primitive for anchored floating content. It provides
-          positioning, trigger state attributes, dismiss behavior, and ARIA hooks without adding
-          visual styling.
+          <Code>Popover</Code> shows interactive floating content anchored to a trigger.
         </p>
       </header>
 
@@ -108,12 +111,12 @@ function PopoverPage() {
         </Box>
         <CodeBlock code={defaultExampleSnippet} />
 
-        <h3 className="text-lg font-semibold text-heading">Placement</h3>
+        <h3 className="text-lg font-semibold text-heading">Position</h3>
         <Box
           className="flex min-h-44 items-start justify-center overflow-visible p-8"
           shadow="none"
           surface="none">
-          <Popover open={placementOpen} onOpenChange={setPlacementOpen} placement="bottom-start">
+          <Popover open={positionOpen} onOpenChange={setPositionOpen} position="bottom-start">
             <Popover.Trigger>
               <Button variant="secondary">View shortcuts</Button>
             </Popover.Trigger>
@@ -133,7 +136,7 @@ function PopoverPage() {
             </Popover.Content>
           </Popover>
         </Box>
-        <CodeBlock code={placementExampleSnippet} />
+        <CodeBlock code={positionExampleSnippet} />
       </section>
 
       <section className="space-y-4">
@@ -174,15 +177,15 @@ function PopoverPage() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>placement</Code>
+                <Code>position</Code>
               </TableCell>
               <TableCell>
-                <Code>Placement</Code>
+                <Code>{`"top" | "top-start" | "top-end" | "right" | "right-start" | "right-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end"`}</Code>
               </TableCell>
               <TableCell>
                 <Code>{`"bottom"`}</Code>
               </TableCell>
-              <TableCell>Sets the preferred Floating UI placement for the content.</TableCell>
+              <TableCell>Sets the preferred position for the content.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -217,11 +220,41 @@ function PopoverPage() {
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">Popover.Trigger and Popover.Content</h3>
+        <h3 className="text-lg font-semibold text-heading">Popover.Trigger</h3>
+        <p className="text-foreground">
+          Accepts a single child element and attaches the trigger behavior to it.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead scope="col">Part</TableHead>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>aria-expanded</Code>
+              </TableCell>
+              <TableCell>Reflects whether the popover is open.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-haspopup</Code>
+              </TableCell>
+              <TableCell>Identifies the trigger as opening a dialog when enabled.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Popover.Content</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
               <TableHead scope="col">Type</TableHead>
               <TableHead scope="col">Default</TableHead>
               <TableHead scope="col">Description</TableHead>
@@ -230,26 +263,23 @@ function PopoverPage() {
           <TableBody>
             <TableRow>
               <TableCell>
-                <Code>Popover.Trigger</Code>
+                <Code>className</Code>
               </TableCell>
-              <TableCell>single React element</TableCell>
-              <TableCell>—</TableCell>
               <TableCell>
-                Clones one interactive child and wires trigger handlers plus{' '}
-                <Code>aria-expanded</Code>. Prefer a native button or the library{' '}
-                <Code>Button</Code> component.
+                <Code>string</Code>
               </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>Popover.Content</Code>
+                <Code>style</Code>
               </TableCell>
-              <TableCell>native div props</TableCell>
-              <TableCell>—</TableCell>
               <TableCell>
-                Renders in a portal only while open. Pass layout, surface, border, and shadow
-                classes explicitly because the primitive has no default visual styling.
+                <Code>CSSProperties</Code>
               </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Merges with positioning styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

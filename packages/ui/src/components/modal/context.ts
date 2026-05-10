@@ -18,5 +18,4 @@ function useModalContext(componentName: string) {
   return context;
 }
 
-export type { ModalContextValue };
 export { ModalContext, useModalContext };

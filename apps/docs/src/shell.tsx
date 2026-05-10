@@ -58,11 +58,12 @@ function DocsShell({
     <>
       <Sidebar state={sidebarState} action={setSidebarState}>
         <SidebarHead
-          href={docsBranding.href}
+          asChild
           logoSrc={docsBranding.logoSrc}
           title={docsBranding.title}
-          className="h-24"
-        />
+          className="h-24">
+          <Link to={docsBranding.href} />
+        </SidebarHead>
         <SidebarBody>
           {navigation.map((node) =>
             renderNavigationNode(

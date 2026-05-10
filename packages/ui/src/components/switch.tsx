@@ -27,7 +27,7 @@ function Switch({
   const resolvedId = id ?? autoId;
 
   const wrapperClassName = cn(
-    'inline-flex gap-2',
+    'inline-flex gap-2 text-heading has-aria-invalid:text-danger',
     labelPosition === 'right' && 'flex-row items-center',
     labelPosition === 'left' && 'flex-row-reverse items-center',
     labelPosition === 'top' && 'flex-col-reverse items-start',
@@ -54,8 +54,9 @@ function Switch({
         <span
           aria-hidden="true"
           className={cn(
-            'inline-flex h-6 w-11 rounded-full bg-muted',
+            'inline-flex h-6 w-11 rounded-full border border-border bg-muted',
             'peer-checked:bg-brand peer-focus-visible:outline-2 peer-focus-visible:outline-brand peer-focus-visible:outline-offset-2',
+            'peer-aria-invalid:border-danger peer-aria-invalid:peer-focus-visible:outline-danger',
             className,
           )}
         />
@@ -68,11 +69,7 @@ function Switch({
         />
       </span>
       {label ? (
-        <span
-          className={cn(
-            'select-none text-sm font-medium text-foreground',
-            !disabled && 'cursor-pointer',
-          )}>
+        <span className={cn('select-none text-sm font-medium', !disabled && 'cursor-pointer')}>
           {label}
         </span>
       ) : null}

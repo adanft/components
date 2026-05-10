@@ -1,9 +1,9 @@
+import FieldDescription from './description';
+import FieldError from './error';
 import FieldRoot from './field';
-import FieldDescription from './field-description';
-import FieldError from './field-error';
-import FieldLabel from './field-label';
-import FieldLegend from './field-legend';
-import FieldSet from './field-set';
+import FieldLabel from './label';
+import FieldLegend from './legend';
+import FieldSet from './set';
 
 const Field = Object.assign(FieldRoot, {
   Description: FieldDescription,
@@ -13,10 +13,10 @@ const Field = Object.assign(FieldRoot, {
   Set: FieldSet,
 });
 
-export default Field;
+export type { FieldDescriptionProps } from './description';
+export type { FieldErrorProps } from './error';
 export type { FieldProps } from './field';
-export type { FieldDescriptionProps } from './field-description';
-export type { FieldErrorProps } from './field-error';
-export type { FieldLabelProps } from './field-label';
-export type { FieldLegendProps } from './field-legend';
-export type { FieldSetProps } from './field-set';
+export type { FieldLabelProps } from './label';
+export type { FieldLegendProps } from './legend';
+export type { FieldSetProps } from './set';
+export default Field;

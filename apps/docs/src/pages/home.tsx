@@ -9,6 +9,7 @@ type HomeComponentCard = {
   href: string;
   icon: LucideIcon;
   name: string;
+  subpaths: string[];
 };
 
 type HomeCatalogSection = {
@@ -17,33 +18,64 @@ type HomeCatalogSection = {
 };
 
 const COMPONENT_DESCRIPTIONS: Record<string, string> = {
-  Accordion: 'Disclosure primitive for grouping expandable sections with keyboard-friendly state.',
-  Alert: 'Status message component for communicating feedback, warnings, and destructive states.',
-  Avatar: 'User image fallback pattern for profiles, authors, and account surfaces.',
-  Badge: 'Compact label for status, metadata, counts, and small categorical hints.',
-  Box: 'Semantic surface container for composing cards, panels, and content blocks.',
-  Breadcrumbs:
-    'Location trail primitive that composes with anchors or consumer-owned router links.',
-  Button: 'Accessible action trigger with consistent sizing, variants, and interaction states.',
-  Checkbox: 'Boolean form control for toggles that belong inside forms or option lists.',
-  DropdownMenu: 'Menu pattern for grouped actions attached to a trigger.',
-  Field: 'Form composition primitives for labels, descriptions, errors, and grouped controls.',
-  Input: 'Text input primitive with token-based styling and native form semantics.',
-  Label: 'Native label primitive for explicitly connecting text with form controls.',
-  Modal:
-    'Dialog primitive for blocking workflows that need focus management and an accessible name.',
-  Pagination: 'Navigation component for moving across paged collections.',
-  Popover: 'Floating primitive for interactive contextual content anchored to a trigger.',
-  Profile: 'Account menu pattern combining avatar identity and user actions.',
-  RadioGroup: 'Single-choice form control pattern with grouped radio options.',
-  Select: 'Selection control for choosing one option from a compact list.',
-  Sidebar: 'Application navigation shell for dense side menus and nested navigation.',
-  Skeleton: 'Loading placeholder for preserving layout while async content resolves.',
-  Switch: 'Binary setting control for immediate on/off preferences.',
-  Table: 'Semantic table primitives for structured data and API reference content.',
-  Tabs: 'Section switcher for related panels that share the same page context.',
-  ThemeSwitch: 'Theme control wired to the library theme helpers.',
-  Tooltip: 'Non-interactive floating hint for short contextual help on hover or focus.',
+  Accordion: 'Accordion shows expandable sections and is used to organize related content.',
+  Alert: 'Alert shows status messages and is used to communicate feedback or warnings.',
+  Avatar: 'Avatar shows a user image or fallback and is used for identity surfaces.',
+  Badge: 'Badge shows a compact label and is used for status, metadata, or counts.',
+  Box: 'Box is a surface container and is used to compose cards, panels, and content blocks.',
+  Breadcrumbs: 'Breadcrumbs show a location trail and are used for hierarchical navigation.',
+  Button: 'Button triggers an action and is used for forms, dialogs, and interactive flows.',
+  Checkbox: 'Checkbox captures a boolean choice and is used in forms or option lists.',
+  'Dropdown Menu': 'Dropdown Menu shows grouped actions and is used for trigger-based menus.',
+  Field: 'Field groups form copy and controls and is used for labels, help text, and errors.',
+  Input: 'Input captures single-line text and is used for native text entry in forms.',
+  Label: 'Label names a form control and is used to connect text with an input.',
+  Modal: 'Modal shows a focused dialog and is used for workflows that block the page.',
+  Pagination: 'Pagination moves through pages and is used for paged collections.',
+  Popover: 'Popover shows anchored content and is used for interactive contextual panels.',
+  Profile: 'Profile shows account identity and is used for user menus and account actions.',
+  'Radio Group': 'Radio Group captures one choice and is used for grouped radio options.',
+  Select: 'Select lets users choose one option and is used for compact option lists.',
+  Sidebar: 'Sidebar shows app navigation and is used for side menus and nested links.',
+  Skeleton: 'Skeleton reserves loading space and is used while async content is pending.',
+  Spinner: 'Spinner shows indeterminate progress and is used for loading states.',
+  Switch: 'Switch toggles a setting and is used for immediate on/off preferences.',
+  Table: 'Table shows structured data and is used for rows, columns, and API references.',
+  Tabs: 'Tabs switch between panels and are used for related content on the same page.',
+  Textarea: 'Textarea captures multi-line text and is used for longer form content.',
+  'Theme Switch':
+    'Theme Switch toggles color mode and is used to change between light and dark themes.',
+  Tooltip: 'Tooltip shows a short hint and is used for non-interactive contextual help.',
+};
+
+const COMPONENT_SUBPATHS: Record<string, string[]> = {
+  Accordion: ['@adanft/ui/accordion'],
+  Alert: ['@adanft/ui/alert'],
+  Avatar: ['@adanft/ui/avatar'],
+  Badge: ['@adanft/ui/badge'],
+  Box: ['@adanft/ui/box'],
+  Breadcrumbs: ['@adanft/ui/breadcrumbs'],
+  Button: ['@adanft/ui/button'],
+  Checkbox: ['@adanft/ui/checkbox'],
+  'Dropdown Menu': ['@adanft/ui/dropdown-menu'],
+  Field: ['@adanft/ui/field'],
+  Input: ['@adanft/ui/input'],
+  Label: ['@adanft/ui/label'],
+  Modal: ['@adanft/ui/modal'],
+  Pagination: ['@adanft/ui/pagination-head', '@adanft/ui/pagination-foot'],
+  Popover: ['@adanft/ui/popover'],
+  Profile: ['@adanft/ui/profile'],
+  'Radio Group': ['@adanft/ui/radio-group'],
+  Select: ['@adanft/ui/select'],
+  Sidebar: ['@adanft/ui/sidebar'],
+  Skeleton: ['@adanft/ui/skeleton'],
+  Spinner: ['@adanft/ui/spinner'],
+  Switch: ['@adanft/ui/switch'],
+  Table: ['@adanft/ui/table'],
+  Tabs: ['@adanft/ui/tabs'],
+  Textarea: ['@adanft/ui/textarea'],
+  'Theme Switch': ['@adanft/ui/theme-switch', '@adanft/ui/theme'],
+  Tooltip: ['@adanft/ui/tooltip'],
 };
 
 const INSTALL_SNIPPET = `pnpm add @adanft/ui`;
@@ -54,7 +86,7 @@ const STYLE_SETUP_SNIPPET = `@import "tailwindcss";
 /* Adjust the relative path from this stylesheet to node_modules. */
 @source "../node_modules/@adanft/ui/dist";`;
 
-const CSR_THEME_BOOTSTRAP_SNIPPET = `import { initializeTheme } from '@adanft/ui';
+const CSR_THEME_BOOTSTRAP_SNIPPET = `import { initializeTheme } from '@adanft/ui/theme';
 
 // CSR only: reads localStorage and toggles html.dark in the browser.
 initializeTheme();`;
@@ -76,10 +108,14 @@ export default async function RootLayout({ children }) {
   );
 }`;
 
-const USAGE_SNIPPET = `import { Button } from '@adanft/ui';
+const USAGE_SNIPPET = `// Package root: convenient when you want one public surface.
+import { Button, Sidebar, ThemeSwitch } from '@adanft/ui';
 
-// Or use a documented public subpath for a narrower entrypoint.
+// Public subpaths: narrower entrypoints for components and helpers.
 // import Button from '@adanft/ui/button';
+// import Sidebar, { SidebarBody, SidebarLink } from '@adanft/ui/sidebar';
+// import ThemeSwitch from '@adanft/ui/theme-switch';
+import { initializeTheme } from '@adanft/ui/theme';
 
 function Example() {
   return <Button>Save changes</Button>;
@@ -100,6 +136,7 @@ const CATALOG_SECTIONS = docsSidebarNavigation.reduce<HomeCatalogSection[]>((sec
         href: node.href,
         icon: node.icon,
         name: node.text,
+        subpaths: COMPONENT_SUBPATHS[node.text] ?? [],
       });
     }
   }
@@ -173,10 +210,8 @@ function Home() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">Basic usage</h2>
         <p className="max-w-3xl text-foreground">
-          Import components from <Code>@adanft/ui</Code> for convenience, or use documented public
-          subpaths like <Code>@adanft/ui/button</Code> when you want narrower entrypoints. The docs
-          pages show composition patterns, accessibility notes, and API references for each
-          component.
+          Choose the import shape based on the boundary you want. The package root keeps examples
+          compact; documented public subpaths keep component and helper entrypoints narrower.
         </p>
         <CodeBlock code={USAGE_SNIPPET} />
       </section>
@@ -213,6 +248,23 @@ function Home() {
                           <p className="text-sm leading-6 text-foreground">
                             {component.description}
                           </p>
+                          <div className="space-y-1 text-xs leading-5 text-muted">
+                            <p>
+                              <span className="font-semibold text-foreground">Root:</span>{' '}
+                              <Code>@adanft/ui</Code>
+                            </p>
+                            {component.subpaths.length > 0 ? (
+                              <p>
+                                <span className="font-semibold text-foreground">Subpath:</span>{' '}
+                                {component.subpaths.map((subpath, index) => (
+                                  <span key={subpath}>
+                                    {index > 0 ? ', ' : null}
+                                    <Code>{subpath}</Code>
+                                  </span>
+                                ))}
+                              </p>
+                            ) : null}
+                          </div>
                         </div>
                       </div>
                     </Link>

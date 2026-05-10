@@ -15,6 +15,9 @@ import { Code } from '../components/code';
 
 const importSnippet = `import { PaginationFoot, PaginationHead } from '@adanft/ui';`;
 
+const subpathImportSnippet = `import PaginationHead from '@adanft/ui/pagination-head';
+import PaginationFoot from '@adanft/ui/pagination-foot';`;
+
 const usageSnippet = `const totalItems = 125;
 const [pageIndex, setPageIndex] = useState(0);
 const [pageSize, setPageSize] = useState(10);
@@ -62,14 +65,18 @@ function PaginationPage() {
       <header className="space-y-4 pb-6">
         <h1 className="text-3xl font-bold text-heading">Pagination</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>PaginationHead</Code> and <Code>PaginationFoot</Code> are presentational primitives
-          for page-size controls, page navigation, and visible range feedback.
+          <Code>Pagination</Code> helps users change page size and move through paged content.
         </p>
       </header>
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
+        <p className="text-foreground">
+          Use the package root for convenience, or import each pagination part from its documented
+          public subpath when you want narrower entrypoints.
+        </p>
+        <CodeBlock code={subpathImportSnippet} />
         <CodeBlock code={usageSnippet} />
       </section>
 
@@ -104,6 +111,9 @@ function PaginationPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <h3 className="text-lg font-semibold text-heading">PaginationHead</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -167,9 +177,7 @@ function PaginationPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>
-                Extends the wrapper layout and can override default visual styles when needed.
-              </TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -186,7 +194,33 @@ function PaginationPage() {
           </TableBody>
         </Table>
 
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>id</Code>
+              </TableCell>
+              <TableCell>Connects the page-size select with its label.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-label</Code>
+              </TableCell>
+              <TableCell>Labels the page-size select.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
         <h3 className="text-lg font-semibold text-heading">PaginationFoot</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -255,9 +289,7 @@ function PaginationPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>
-                Extends the wrapper layout and can override default visual styles when needed.
-              </TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -270,6 +302,35 @@ function PaginationPage() {
                 <Code>{`"items"`}</Code>
               </TableCell>
               <TableCell>Label used in the visible range text.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>aria-label</Code>
+              </TableCell>
+              <TableCell>Labels the pagination navigation and page buttons.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-current</Code>
+              </TableCell>
+              <TableCell>Marks the current page button.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-hidden</Code>
+              </TableCell>
+              <TableCell>Hides decorative icons and ellipsis from assistive technology.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

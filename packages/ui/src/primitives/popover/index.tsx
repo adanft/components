@@ -9,5 +9,5 @@ const Popover = Object.assign(PopoverRoot, {
 
 export default Popover;
 export type { PopoverContentProps } from './content';
-export type { PopoverProps } from './popover';
+export type { PopoverPosition, PopoverProps } from './popover';
 export type { PopoverTriggerProps } from './trigger';

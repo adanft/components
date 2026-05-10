@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import Popover from '../primitives/popover';
 import type { AvatarSize } from './avatar';
 import Avatar from './avatar';
 import Box from './box';
 import Button from './button';
-import Popover from './popover';
 
 type ProfileBaseProps = {
   actionLabel: string;
@@ -52,7 +52,7 @@ function Profile({
     );
 
   return (
-    <Popover open={open} onOpenChange={setOpen} placement="bottom-end">
+    <Popover open={open} onOpenChange={setOpen} position="bottom-end">
       <Popover.Trigger>
         <button type="button" className="inline-flex cursor-pointer rounded-full">
           {renderAvatar(avatarSize)}
@@ -62,7 +62,7 @@ function Profile({
         <Box className="w-72">
           <div className="flex items-center gap-2">
             {renderAvatar(panelAvatarSize)}
-            <div className="flex flex-col gap-2 text-foreground">
+            <div className="flex flex-col gap-1 text-foreground">
               <span>{name}</span>
               <span className="text-sm font-semibold">{username}</span>
             </div>

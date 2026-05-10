@@ -1,6 +1,6 @@
 {
   "name": "@adanft/ui",
-  "version": "0.2.0-beta.2",
+  "version": "0.2.0-beta.3",
   "description": "Reusable React UI components with a Tailwind-driven design system contract.",
   "license": "MIT",
   "homepage": "https://adanft.github.io/components",
@@ -34,9 +34,9 @@
       "default": "./src/index.ts"
     },
     "./accordion": {
-      "types": "./src/components/accordion/index.tsx",
-      "import": "./src/components/accordion/index.tsx",
-      "default": "./src/components/accordion/index.tsx"
+      "types": "./src/primitives/accordion/index.tsx",
+      "import": "./src/primitives/accordion/index.tsx",
+      "default": "./src/primitives/accordion/index.tsx"
     },
     "./alert": {
       "types": "./src/components/alert/index.tsx",
@@ -109,9 +109,9 @@
       "default": "./src/components/pagination/head.tsx"
     },
     "./popover": {
-      "types": "./src/components/popover/index.tsx",
-      "import": "./src/components/popover/index.tsx",
-      "default": "./src/components/popover/index.tsx"
+      "types": "./src/primitives/popover/index.tsx",
+      "import": "./src/primitives/popover/index.tsx",
+      "default": "./src/primitives/popover/index.tsx"
     },
     "./profile": {
       "types": "./src/components/profile.tsx",
@@ -128,6 +128,11 @@
       "import": "./src/components/select.tsx",
       "default": "./src/components/select.tsx"
     },
+    "./textarea": {
+      "types": "./src/components/textarea.tsx",
+      "import": "./src/components/textarea.tsx",
+      "default": "./src/components/textarea.tsx"
+    },
     "./sidebar": {
       "types": "./src/components/sidebar/index.tsx",
       "import": "./src/components/sidebar/index.tsx",
@@ -137,6 +142,11 @@
       "types": "./src/components/skeleton.tsx",
       "import": "./src/components/skeleton.tsx",
       "default": "./src/components/skeleton.tsx"
+    },
+    "./spinner": {
+      "types": "./src/components/spinner.tsx",
+      "import": "./src/components/spinner.tsx",
+      "default": "./src/components/spinner.tsx"
     },
     "./switch": {
       "types": "./src/components/switch.tsx",
@@ -149,9 +159,14 @@
       "default": "./src/components/table/index.tsx"
     },
     "./tabs": {
-      "types": "./src/components/tabs/index.tsx",
-      "import": "./src/components/tabs/index.tsx",
-      "default": "./src/components/tabs/index.tsx"
+      "types": "./src/primitives/tabs/index.tsx",
+      "import": "./src/primitives/tabs/index.tsx",
+      "default": "./src/primitives/tabs/index.tsx"
+    },
+    "./theme": {
+      "types": "./src/theme.ts",
+      "import": "./src/theme.ts",
+      "default": "./src/theme.ts"
     },
     "./theme-switch": {
       "types": "./src/components/theme-switch.tsx",
@@ -159,9 +174,9 @@
       "default": "./src/components/theme-switch.tsx"
     },
     "./tooltip": {
-      "types": "./src/components/tooltip/index.tsx",
-      "import": "./src/components/tooltip/index.tsx",
-      "default": "./src/components/tooltip/index.tsx"
+      "types": "./src/primitives/tooltip/index.tsx",
+      "import": "./src/primitives/tooltip/index.tsx",
+      "default": "./src/primitives/tooltip/index.tsx"
     },
     "./styles.css": "./styles.css"
   },
@@ -177,9 +192,9 @@
         "default": "./dist/index.js"
       },
       "./accordion": {
-        "types": "./dist/components/accordion/index.d.ts",
-        "import": "./dist/components/accordion/index.js",
-        "default": "./dist/components/accordion/index.js"
+        "types": "./dist/primitives/accordion/index.d.ts",
+        "import": "./dist/primitives/accordion/index.js",
+        "default": "./dist/primitives/accordion/index.js"
       },
       "./alert": {
         "types": "./dist/components/alert/index.d.ts",
@@ -252,9 +267,9 @@
         "default": "./dist/components/pagination-head/index.js"
       },
       "./popover": {
-        "types": "./dist/components/popover/index.d.ts",
-        "import": "./dist/components/popover/index.js",
-        "default": "./dist/components/popover/index.js"
+        "types": "./dist/primitives/popover/index.d.ts",
+        "import": "./dist/primitives/popover/index.js",
+        "default": "./dist/primitives/popover/index.js"
       },
       "./profile": {
         "types": "./dist/components/profile.d.ts",
@@ -271,6 +286,11 @@
         "import": "./dist/components/select/index.js",
         "default": "./dist/components/select/index.js"
       },
+      "./textarea": {
+        "types": "./dist/components/textarea.d.ts",
+        "import": "./dist/components/textarea/index.js",
+        "default": "./dist/components/textarea/index.js"
+      },
       "./sidebar": {
         "types": "./dist/components/sidebar/index.d.ts",
         "import": "./dist/components/sidebar/index.js",
@@ -280,6 +300,11 @@
         "types": "./dist/components/skeleton.d.ts",
         "import": "./dist/components/skeleton/index.js",
         "default": "./dist/components/skeleton/index.js"
+      },
+      "./spinner": {
+        "types": "./dist/components/spinner.d.ts",
+        "import": "./dist/components/spinner/index.js",
+        "default": "./dist/components/spinner/index.js"
       },
       "./switch": {
         "types": "./dist/components/switch.d.ts",
@@ -292,9 +317,14 @@
         "default": "./dist/components/table/index.js"
       },
       "./tabs": {
-        "types": "./dist/components/tabs/index.d.ts",
-        "import": "./dist/components/tabs/index.js",
-        "default": "./dist/components/tabs/index.js"
+        "types": "./dist/primitives/tabs/index.d.ts",
+        "import": "./dist/primitives/tabs/index.js",
+        "default": "./dist/primitives/tabs/index.js"
+      },
+      "./theme": {
+        "types": "./dist/theme.d.ts",
+        "import": "./dist/theme.js",
+        "default": "./dist/theme.js"
       },
       "./theme-switch": {
         "types": "./dist/components/theme-switch.d.ts",
@@ -302,9 +332,9 @@
         "default": "./dist/components/theme-switch/index.js"
       },
       "./tooltip": {
-        "types": "./dist/components/tooltip/index.d.ts",
-        "import": "./dist/components/tooltip/index.js",
-        "default": "./dist/components/tooltip/index.js"
+        "types": "./dist/primitives/tooltip/index.d.ts",
+        "import": "./dist/primitives/tooltip/index.js",
+        "default": "./dist/primitives/tooltip/index.js"
       },
       "./styles.css": "./dist/styles.css"
     }

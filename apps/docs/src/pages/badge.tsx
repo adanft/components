@@ -11,7 +11,11 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Badge } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Badge } from '@adanft/ui';
+
+// Public package subpath import
+import Badge from '@adanft/ui/badge';`;
 
 const usageSnippet = `<Badge>Beta</Badge>`;
 
@@ -60,6 +64,9 @@ function BadgePage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<span>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -90,9 +97,7 @@ function BadgePage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>
-                Extends the component styles and can override default values when needed.
-              </TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

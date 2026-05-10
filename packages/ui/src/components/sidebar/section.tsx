@@ -14,7 +14,7 @@ function SidebarSection({ text, className, ...props }: SidebarSectionProps) {
   return (
     <h5
       className={cn(
-        'text-muted py-4 text-lg font-semibold whitespace-nowrap',
+        'py-4 text-sm font-semibold whitespace-nowrap text-muted uppercase',
         sidebar?.state ? 'px-2' : 'px-6',
         className,
       )}

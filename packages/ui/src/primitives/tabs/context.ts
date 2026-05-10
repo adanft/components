@@ -18,5 +18,4 @@ function useTabsContext(componentName: string) {
   return context;
 }
 
-export type { TabsContextValue };
 export { TabsContext, useTabsContext };

@@ -1,8 +1,23 @@
-import { Box, Input, Label } from '@adanft/ui';
+import {
+  Box,
+  Input,
+  Label,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@adanft/ui';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Label } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Input, Label } from '@adanft/ui';
+
+// Public package subpath imports
+import Input from '@adanft/ui/input';
+import Label from '@adanft/ui/label';`;
 
 const usageSnippet = `<Label htmlFor="email">Email</Label>
 <Input id="email" type="email" placeholder="name@example.com" />`;
@@ -53,12 +68,31 @@ function LabelPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
-        <div className="space-y-3 text-base leading-7 text-foreground">
-          <p>
-            <Code>Label</Code> accepts native <Code>{'<label>'}</Code> attributes and adds base text
-            styles for form labels. Use <Code>children</Code> for the label content.
-          </p>
-        </div>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<label>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </section>
     </article>
   );

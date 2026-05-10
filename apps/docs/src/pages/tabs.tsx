@@ -13,7 +13,11 @@ import { useState } from 'react';
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Tabs } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Tabs } from '@adanft/ui';
+
+// Public package subpath import
+import Tabs from '@adanft/ui/tabs';`;
 
 const usageSnippet = `const [value, setValue] = useState('overview');
 
@@ -223,6 +227,7 @@ function TabsPage() {
             <TableRow>
               <TableHead scope="col">Prop</TableHead>
               <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
               <TableHead scope="col">Description</TableHead>
             </TableRow>
           </TableHeader>
@@ -234,6 +239,7 @@ function TabsPage() {
               <TableCell>
                 <Code>string</Code>
               </TableCell>
+              <TableCell>—</TableCell>
               <TableCell>Current selected tab value.</TableCell>
             </TableRow>
             <TableRow>
@@ -243,62 +249,188 @@ function TabsPage() {
               <TableCell>
                 <Code>{`(value: string) => void`}</Code>
               </TableCell>
+              <TableCell>—</TableCell>
               <TableCell>Runs when click or keyboard navigation requests a new tab.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
-        <h3 className="text-lg font-semibold text-heading">Parts</h3>
+        <h3 className="text-lg font-semibold text-heading">Tabs.List</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead scope="col">Part</TableHead>
-              <TableHead scope="col">Key props</TableHead>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
               <TableHead scope="col">Description</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
               <TableCell>
-                <Code>Tabs.List</Code>
+                <Code>orientation</Code>
               </TableCell>
               <TableCell>
-                <Code>orientation?: "horizontal" | "vertical"</Code>
+                <Code>{`"horizontal" | "vertical"`}</Code>
               </TableCell>
               <TableCell>
-                Renders the tablist and handles arrow-key navigation. Horizontal lists use left and
-                right arrows; vertical lists use up and down arrows.
+                <Code>{`"horizontal"`}</Code>
               </TableCell>
+              <TableCell>Controls which arrow keys move through triggers.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>Tabs.Trigger</Code>
+                <Code>className</Code>
               </TableCell>
               <TableCell>
-                <Code>value: string</Code>
+                <Code>string</Code>
               </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
               <TableCell>
-                Renders a tab button and wires <Code>aria-selected</Code>,{' '}
-                <Code>aria-controls</Code>, roving tabindex, and active state.
+                <Code>role</Code>
               </TableCell>
+              <TableCell>Identifies the list as a tablist.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>Tabs.Content</Code>
+                <Code>aria-orientation</Code>
+              </TableCell>
+              <TableCell>Reflects the tablist orientation.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold text-heading">Tabs.Trigger</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<button>`}</Code> element.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Prop</TableHead>
+              <TableHead scope="col">Type</TableHead>
+              <TableHead scope="col">Default</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>value</Code>
               </TableCell>
               <TableCell>
-                <Code>value: string; keepMounted?: boolean</Code>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Matches the content value this trigger controls.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
               </TableCell>
               <TableCell>
-                Renders a tabpanel linked to its trigger. Inactive panels unmount by default; use{' '}
-                <Code>keepMounted</Code> to keep inactive content in the DOM with the native{' '}
-                <Code>hidden</Code> attribute.
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>disabled</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Prevents selecting the tab and removes it from keyboard navigation.
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
 
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>id</Code>
+              </TableCell>
+              <TableCell>Connects the trigger to its tab panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>type</Code>
+              </TableCell>
+              <TableCell>Sets the trigger button type.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>Identifies the button as a tab.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-selected</Code>
+              </TableCell>
+              <TableCell>Reflects whether the tab is selected.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-controls</Code>
+              </TableCell>
+              <TableCell>References the controlled tab panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-disabled</Code>
+              </TableCell>
+              <TableCell>Reflects disabled tab semantics when provided.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>tabIndex</Code>
+              </TableCell>
+              <TableCell>Controls roving focus for selected and inactive tabs.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>data-state</Code>
+              </TableCell>
+              <TableCell>Reflects the active or inactive tab state.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
         <h3 className="text-lg font-semibold text-heading">Tabs.Content</h3>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -333,6 +465,57 @@ function TabsPage() {
                 Keeps inactive content mounted and hidden with the native <Code>hidden</Code>{' '}
                 attribute. By default, inactive panels unmount to avoid rendering hidden work.
               </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Attribute</TableHead>
+              <TableHead scope="col">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>id</Code>
+              </TableCell>
+              <TableCell>Connects the tab panel to its trigger.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>role</Code>
+              </TableCell>
+              <TableCell>Identifies the content as a tab panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-labelledby</Code>
+              </TableCell>
+              <TableCell>References the trigger that labels the tab panel.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>data-state</Code>
+              </TableCell>
+              <TableCell>Reflects the active or inactive panel state.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>hidden</Code>
+              </TableCell>
+              <TableCell>Hides kept-mounted inactive panels.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

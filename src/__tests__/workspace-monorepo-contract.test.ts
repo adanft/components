@@ -115,12 +115,13 @@ describe('workspace monorepo contract', () => {
 
   it('keeps the package stylesheet focused on the shared theme contract', () => {
     const packageStyles = readRepoFile('packages/ui/src/styles.css');
-    const sidebarBody = readRepoFile('packages/ui/src/components/sidebar/sidebar-body.tsx');
+    const sidebarBody = readRepoFile('packages/ui/src/components/sidebar/body.tsx');
 
     expect(packageStyles).not.toContain('@import "tailwindcss";');
     expect(packageStyles).toContain('@import "simplebar-react/dist/simplebar.min.css";');
-    expect(packageStyles).toContain('@import "./theme/utilities.css";');
     expect(packageStyles).toContain('@theme {');
+    expect(packageStyles).toContain('@layer base {');
+    expect(packageStyles).toContain('@keyframes tilt');
     expect(sidebarBody).not.toContain('simplebar-react/dist/simplebar.min.css');
   });
 

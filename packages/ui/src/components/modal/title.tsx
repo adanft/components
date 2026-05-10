@@ -8,7 +8,9 @@ type ModalTitleProps = ComponentPropsWithoutRef<'h2'>;
 function ModalTitle({ className, ...props }: ModalTitleProps) {
   const { titleId } = useModalContext('Title');
 
-  return <h2 className={cn('text-heading font-medium', className)} {...props} id={titleId} />;
+  return (
+    <h2 className={cn('text-lg font-semibold text-heading', className)} {...props} id={titleId} />
+  );
 }
 
 export default ModalTitle;

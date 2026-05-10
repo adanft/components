@@ -9,14 +9,18 @@ const defaultExampleJsx = `<Box className="space-y-2">
   </p>
 </Box>`;
 
-const transparentExampleJsx = `<Box surface="none" shadow="none" className="space-y-2">
+const withoutSurfaceExampleJsx = `<Box surface="none" shadow="none" className="space-y-2">
   <h3 className="text-lg font-semibold text-heading">Release notes</h3>
   <p className="text-foreground">
     Version 2.4 ships improved card spacing and keyboard focus styles.
   </p>
 </Box>`;
 
-const importSnippet = `import { Box } from '@adanft/ui';`;
+const importSnippet = `// Package root import
+import { Box } from '@adanft/ui';
+
+// Public package subpath import
+import Box from '@adanft/ui/box';`;
 
 const usageSnippet = `<Box surface="default" padding="default" shadow="default">
   <p className="text-foreground">Content inside the container</p>
@@ -52,7 +56,7 @@ function BoxPage() {
         </Box>
         <CodeBlock code={defaultExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-heading">Transparent</h3>
+        <h3 className="text-lg font-semibold text-heading">Without surface background</h3>
         <Box shadow="none" surface="none">
           <Box surface="none" shadow="none" className="space-y-2">
             <h3 className="text-lg font-semibold text-heading">Release notes</h3>
@@ -61,11 +65,14 @@ function BoxPage() {
             </p>
           </Box>
         </Box>
-        <CodeBlock code={transparentExampleJsx} />
+        <CodeBlock code={withoutSurfaceExampleJsx} />
       </section>
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -87,7 +94,7 @@ function BoxPage() {
                 <Code>{`"default"`}</Code>
               </TableCell>
               <TableCell>
-                Defines whether <Code>Box</Code> renders its default surface or stays transparent.
+                Defines whether <Code>Box</Code> renders its default background surface.
               </TableCell>
             </TableRow>
             <TableRow>
@@ -122,9 +129,7 @@ function BoxPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>
-                Extends the component styles and can override default values when needed.
-              </TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
