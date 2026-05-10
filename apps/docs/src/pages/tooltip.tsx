@@ -45,7 +45,7 @@ const defaultExampleSnippet = `const [open, setOpen] = useState(false);
 
 const iconExampleSnippet = `const [open, setOpen] = useState(false);
 
-<Tooltip open={open} onOpenChange={setOpen} placement="right">
+<Tooltip open={open} onOpenChange={setOpen} position="right">
   <Tooltip.Trigger>
     <button
       type="button"
@@ -108,7 +108,7 @@ function TooltipPage() {
           className="flex min-h-44 items-center justify-center overflow-visible p-8"
           shadow="none"
           surface="none">
-          <Tooltip open={iconOpen} onOpenChange={setIconOpen} placement="right">
+          <Tooltip open={iconOpen} onOpenChange={setIconOpen} position="right">
             <Tooltip.Trigger>
               <button
                 type="button"
@@ -164,15 +164,15 @@ function TooltipPage() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>placement</Code>
+                <Code>position</Code>
               </TableCell>
               <TableCell>
-                <Code>Placement</Code>
+                <Code>{`"top" | "top-start" | "top-end" | "right" | "right-start" | "right-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end"`}</Code>
               </TableCell>
               <TableCell>
                 <Code>{`"top"`}</Code>
               </TableCell>
-              <TableCell>Sets the preferred Floating UI placement for the tooltip.</TableCell>
+              <TableCell>Sets the preferred position for the tooltip.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -234,7 +234,7 @@ function TooltipPage() {
                 <Code>CSSProperties</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Merges with the computed floating styles from the root.</TableCell>
+              <TableCell>Merges with positioning styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

@@ -68,7 +68,7 @@ const simpleExampleJsx = `const [open, setOpen] = useState(false);
 
 const advancedExampleJsx = `const [open, setOpen] = useState(false);
 
-<DropdownMenu open={open} onOpenChange={setOpen} placement="bottom-end">
+<DropdownMenu open={open} onOpenChange={setOpen} position="bottom-end">
   <DropdownMenu.Trigger>
     <Button variant="secondary">Row actions</Button>
   </DropdownMenu.Trigger>
@@ -132,7 +132,7 @@ function DropdownMenuPage() {
 
         <h3 className="text-lg font-semibold text-heading">Advanced</h3>
         <Box shadow="none" surface="none" className="overflow-visible p-8">
-          <DropdownMenu open={advancedOpen} onOpenChange={setAdvancedOpen} placement="bottom-end">
+          <DropdownMenu open={advancedOpen} onOpenChange={setAdvancedOpen} position="bottom-end">
             <DropdownMenu.Trigger>
               <Button variant="secondary">Row actions</Button>
             </DropdownMenu.Trigger>
@@ -186,15 +186,15 @@ function DropdownMenuPage() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>placement</Code>
+                <Code>position</Code>
               </TableCell>
               <TableCell>
-                <Code>Placement</Code>
+                <Code>{`"top" | "top-start" | "top-end" | "right" | "right-start" | "right-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end"`}</Code>
               </TableCell>
               <TableCell>
                 <Code>{`"bottom-start"`}</Code>
               </TableCell>
-              <TableCell>Sets the Floating UI placement used for the menu content.</TableCell>
+              <TableCell>Sets the preferred position for the menu content.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -264,7 +264,7 @@ function DropdownMenuPage() {
                 <Code>CSSProperties</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Merges with the computed floating styles from the root.</TableCell>
+              <TableCell>Merges with positioning styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

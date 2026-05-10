@@ -43,9 +43,9 @@ const defaultExampleSnippet = `const [open, setOpen] = useState(false);
   </Popover.Content>
 </Popover>`;
 
-const placementExampleSnippet = `const [open, setOpen] = useState(false);
+const positionExampleSnippet = `const [open, setOpen] = useState(false);
 
-<Popover open={open} onOpenChange={setOpen} placement="bottom-start">
+<Popover open={open} onOpenChange={setOpen} position="bottom-start">
   <Popover.Trigger>
     <Button variant="secondary">View shortcuts</Button>
   </Popover.Trigger>
@@ -61,7 +61,7 @@ const placementExampleSnippet = `const [open, setOpen] = useState(false);
 
 function PopoverPage() {
   const [defaultOpen, setDefaultOpen] = useState(false);
-  const [placementOpen, setPlacementOpen] = useState(false);
+  const [positionOpen, setPositionOpen] = useState(false);
 
   return (
     <article className="space-y-8">
@@ -106,12 +106,12 @@ function PopoverPage() {
         </Box>
         <CodeBlock code={defaultExampleSnippet} />
 
-        <h3 className="text-lg font-semibold text-heading">Placement</h3>
+        <h3 className="text-lg font-semibold text-heading">Position</h3>
         <Box
           className="flex min-h-44 items-start justify-center overflow-visible p-8"
           shadow="none"
           surface="none">
-          <Popover open={placementOpen} onOpenChange={setPlacementOpen} placement="bottom-start">
+          <Popover open={positionOpen} onOpenChange={setPositionOpen} position="bottom-start">
             <Popover.Trigger>
               <Button variant="secondary">View shortcuts</Button>
             </Popover.Trigger>
@@ -131,7 +131,7 @@ function PopoverPage() {
             </Popover.Content>
           </Popover>
         </Box>
-        <CodeBlock code={placementExampleSnippet} />
+        <CodeBlock code={positionExampleSnippet} />
       </section>
 
       <section className="space-y-4">
@@ -172,15 +172,15 @@ function PopoverPage() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Code>placement</Code>
+                <Code>position</Code>
               </TableCell>
               <TableCell>
-                <Code>Placement</Code>
+                <Code>{`"top" | "top-start" | "top-end" | "right" | "right-start" | "right-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end"`}</Code>
               </TableCell>
               <TableCell>
                 <Code>{`"bottom"`}</Code>
               </TableCell>
-              <TableCell>Sets the preferred Floating UI placement for the content.</TableCell>
+              <TableCell>Sets the preferred position for the content.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -274,7 +274,7 @@ function PopoverPage() {
                 <Code>CSSProperties</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Merges with the computed floating styles from the root.</TableCell>
+              <TableCell>Merges with positioning styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

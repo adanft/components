@@ -52,7 +52,7 @@ function Profile({
     );
 
   return (
-    <Popover open={open} onOpenChange={setOpen} placement="bottom-end">
+    <Popover open={open} onOpenChange={setOpen} position="bottom-end">
       <Popover.Trigger>
         <button type="button" className="inline-flex cursor-pointer rounded-full">
           {renderAvatar(avatarSize)}

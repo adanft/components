@@ -32,6 +32,7 @@ export type {
   DropdownMenuContentProps,
   DropdownMenuItemProps,
   DropdownMenuLabelProps,
+  DropdownMenuPosition,
   DropdownMenuProps,
   DropdownMenuSeparatorProps,
   DropdownMenuTriggerProps,
@@ -121,6 +122,7 @@ export type {
 export { default as Accordion } from './primitives/accordion';
 export type {
   PopoverContentProps,
+  PopoverPosition,
   PopoverProps,
   PopoverTriggerProps,
 } from './primitives/popover';
@@ -134,6 +136,7 @@ export type {
 export { default as Tabs } from './primitives/tabs';
 export type {
   TooltipContentProps,
+  TooltipPosition,
   TooltipProps,
   TooltipTriggerProps,
 } from './primitives/tooltip';

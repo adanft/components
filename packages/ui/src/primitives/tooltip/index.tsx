@@ -9,5 +9,5 @@ const Tooltip = Object.assign(TooltipRoot, {
 
 export default Tooltip;
 export type { TooltipContentProps } from './content';
-export type { TooltipProps } from './tooltip';
+export type { TooltipPosition, TooltipProps } from './tooltip';
 export type { TooltipTriggerProps } from './trigger';

@@ -109,7 +109,7 @@ function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProp
       <Popover
         open={floatOpen}
         onOpenChange={setFloatOpen}
-        placement="right-start"
+        position="right-start"
         contentRole={null}
         triggerHasPopup={false}>
         <Popover.Trigger>{trigger}</Popover.Trigger>

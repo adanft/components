@@ -1,4 +1,3 @@
-import type { Placement } from '@floating-ui/react';
 import {
   autoUpdate,
   flip,
@@ -17,18 +16,32 @@ import { useRef, useState } from 'react';
 
 import { DropdownMenuContext } from './context';
 
+type DropdownMenuPosition =
+  | 'top'
+  | 'top-start'
+  | 'top-end'
+  | 'right'
+  | 'right-start'
+  | 'right-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left'
+  | 'left-start'
+  | 'left-end';
+
 type DropdownMenuProps = {
   children: ReactNode;
   onOpenChange: (open: boolean) => void;
   open: boolean;
-  placement?: Placement;
+  position?: DropdownMenuPosition;
 };
 
 function DropdownMenu({
   children,
   onOpenChange,
   open,
-  placement = 'bottom-start',
+  position = 'bottom-start',
 }: DropdownMenuProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const listRef = useRef<Array<HTMLElement | null>>([]);
@@ -43,7 +56,7 @@ function DropdownMenu({
         setActiveIndex(null);
       }
     },
-    placement,
+    placement: position,
     middleware: [offset(16), flip(), shift({ padding: 16 })],
     whileElementsMounted: autoUpdate,
   });
@@ -95,5 +108,5 @@ function DropdownMenu({
   );
 }
 
-export type { DropdownMenuProps };
+export type { DropdownMenuPosition, DropdownMenuProps };
 export default DropdownMenu;

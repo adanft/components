@@ -1,4 +1,3 @@
-import type { Placement } from '@floating-ui/react';
 import {
   autoUpdate,
   flip,
@@ -15,20 +14,34 @@ import type { ReactNode } from 'react';
 
 import { TooltipContext } from './context';
 
+type TooltipPosition =
+  | 'top'
+  | 'top-start'
+  | 'top-end'
+  | 'right'
+  | 'right-start'
+  | 'right-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left'
+  | 'left-start'
+  | 'left-end';
+
 type TooltipProps = {
   children: ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  placement?: Placement;
+  position?: TooltipPosition;
 };
 
-function Tooltip({ children, open, onOpenChange, placement = 'top' }: TooltipProps) {
+function Tooltip({ children, open, onOpenChange, position = 'top' }: TooltipProps) {
   const { refs, floatingStyles, context } = useFloating({
     open,
     onOpenChange(nextOpen) {
       onOpenChange(nextOpen);
     },
-    placement,
+    placement: position,
     middleware: [offset(16), flip(), shift({ padding: 16 })],
     whileElementsMounted: autoUpdate,
   });
@@ -57,4 +70,4 @@ function Tooltip({ children, open, onOpenChange, placement = 'top' }: TooltipPro
 }
 
 export default Tooltip;
-export type { TooltipProps };
+export type { TooltipPosition, TooltipProps };
