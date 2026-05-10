@@ -84,4 +84,4 @@ function SidebarLink({ active = false, className, href, icon, text, ...props }: 
 }
 
 export default SidebarLink;
-export type { SidebarIcon, SidebarLinkProps };
+export type { SidebarLinkProps };

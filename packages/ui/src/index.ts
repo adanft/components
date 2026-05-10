@@ -21,6 +21,7 @@ export type {
 } from './components/breadcrumbs';
 export { default as Breadcrumbs } from './components/breadcrumbs';
 export type {
+  ButtonOutlineVariant,
   ButtonProps,
   ButtonSize,
   ButtonVariant,
@@ -129,6 +130,7 @@ export type {
 export { default as Popover } from './primitives/popover';
 export type {
   TabsContentProps,
+  TabsListOrientation,
   TabsListProps,
   TabsProps,
   TabsTriggerProps,

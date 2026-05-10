@@ -1,23 +1,21 @@
-import { cn } from '../../helpers/cn';
 import TableBody from './body';
 import TableCaption from './caption';
 import TableCell from './cell';
 import TableFooter from './footer';
+import TableHead from './head';
 import TableHeader from './header';
 import TableRow from './row';
-import TableHead from './table-head';
-import type { TableProps } from './types';
+import TableRoot from './table';
 
-function Table({ className, ...props }: TableProps) {
-  return (
-    <div className="relative w-full overflow-x-auto rounded-md border-2 border-border">
-      <table
-        className={cn('w-full caption-bottom border-collapse text-sm', className)}
-        {...props}
-      />
-    </div>
-  );
-}
+const Table = Object.assign(TableRoot, {
+  Body: TableBody,
+  Caption: TableCaption,
+  Cell: TableCell,
+  Footer: TableFooter,
+  Head: TableHead,
+  Header: TableHeader,
+  Row: TableRow,
+});
 
 export default Table;
 export type {

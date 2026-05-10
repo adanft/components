@@ -4,6 +4,7 @@ import {
   Alert,
   Breadcrumbs,
   Button,
+  type ButtonOutlineVariant,
   Modal,
   Select,
   type SidebarBodyProps,
@@ -22,9 +23,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  type TabsListOrientation,
   Textarea,
 } from '@adanft/ui';
 import AccordionSubpath from '@adanft/ui/accordion';
+import ButtonSubpath, {
+  type ButtonOutlineVariant as ButtonOutlineVariantSubpath,
+} from '@adanft/ui/button';
 import PopoverSubpath from '@adanft/ui/popover';
 import SidebarSubpath, {
   SidebarBody as SidebarBodySubpath,
@@ -42,7 +47,9 @@ import SidebarSubpath, {
   type SidebarSectionProps as SidebarSectionSubpathProps,
   type SidebarProps as SidebarSubpathProps,
 } from '@adanft/ui/sidebar';
-import TabsSubpath from '@adanft/ui/tabs';
+import TabsSubpath, {
+  type TabsListOrientation as TabsListOrientationSubpath,
+} from '@adanft/ui/tabs';
 import TooltipSubpath from '@adanft/ui/tooltip';
 import { render, screen } from '@testing-library/react';
 import type { ComponentPropsWithoutRef, SVGProps } from 'react';
@@ -180,9 +187,15 @@ describe('@adanft/ui public API', () => {
 
   it('keeps primitive public subpaths compatible', () => {
     expect(AccordionSubpath).toBe(Accordion);
+    expect(ButtonSubpath).toBe(Button);
     expect(PopoverSubpath).toBe(components.Popover);
     expect(TabsSubpath).toBe(components.Tabs);
     expect(TooltipSubpath).toBe(components.Tooltip);
+  });
+
+  it('keeps root-only type exports aligned with their subpaths', () => {
+    expectTypeOf<ButtonOutlineVariant>().toEqualTypeOf<ButtonOutlineVariantSubpath>();
+    expectTypeOf<TabsListOrientation>().toEqualTypeOf<TabsListOrientationSubpath>();
   });
 
   it('keeps the Sidebar public subpath aligned with the compound root API', () => {
