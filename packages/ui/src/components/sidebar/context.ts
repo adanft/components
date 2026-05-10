@@ -18,5 +18,4 @@ function useSidebarContext(componentName: string) {
   return context;
 }
 
-export type { SidebarContextValue };
 export { SidebarContext, useSidebarContext };

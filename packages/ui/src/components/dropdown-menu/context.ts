@@ -29,5 +29,4 @@ function useDropdownMenuContext(componentName: string) {
   return context;
 }
 
-export type { DropdownMenuContextValue };
 export { DropdownMenuContext, useDropdownMenuContext };

@@ -56,6 +56,8 @@ import Tabs from '@adanft/ui/tabs';
 import { initializeTheme } from '@adanft/ui/theme';
 ```
 
+See the documentation site for the full list of public component subpaths.
+
 ## Notes
 
 - The public API is exported from the package root and documented public subpaths.

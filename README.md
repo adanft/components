@@ -7,7 +7,6 @@ Monorepo for the `@adanft/ui` React component library and its docs consumer app.
 - `packages/ui` — publishable UI package (`@adanft/ui`)
 - `apps/docs` — Vite docs app and first real consumer of the package
 - `scripts` — workspace validators
-- `.changeset` — versioning and release metadata
 
 ## Local development
 

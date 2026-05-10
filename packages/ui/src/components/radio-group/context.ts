@@ -20,5 +20,4 @@ function useRadioGroupContext(componentName: string) {
   return context;
 }
 
-export type { RadioGroupContextValue };
 export { RadioGroupContext, useRadioGroupContext };

@@ -9,7 +9,7 @@ const defaultExampleJsx = `<Box className="space-y-2">
   </p>
 </Box>`;
 
-const transparentExampleJsx = `<Box surface="none" shadow="none" className="space-y-2">
+const withoutSurfaceExampleJsx = `<Box surface="none" shadow="none" className="space-y-2">
   <h3 className="text-lg font-semibold text-heading">Release notes</h3>
   <p className="text-foreground">
     Version 2.4 ships improved card spacing and keyboard focus styles.
@@ -52,7 +52,7 @@ function BoxPage() {
         </Box>
         <CodeBlock code={defaultExampleJsx} />
 
-        <h3 className="text-lg font-semibold text-heading">Transparent</h3>
+        <h3 className="text-lg font-semibold text-heading">Without surface background</h3>
         <Box shadow="none" surface="none">
           <Box surface="none" shadow="none" className="space-y-2">
             <h3 className="text-lg font-semibold text-heading">Release notes</h3>
@@ -61,7 +61,7 @@ function BoxPage() {
             </p>
           </Box>
         </Box>
-        <CodeBlock code={transparentExampleJsx} />
+        <CodeBlock code={withoutSurfaceExampleJsx} />
       </section>
 
       <section className="space-y-4">
@@ -90,7 +90,7 @@ function BoxPage() {
                 <Code>{`"default"`}</Code>
               </TableCell>
               <TableCell>
-                Defines whether <Code>Box</Code> renders its default surface or stays transparent.
+                Defines whether <Code>Box</Code> renders its default background surface.
               </TableCell>
             </TableRow>
             <TableRow>

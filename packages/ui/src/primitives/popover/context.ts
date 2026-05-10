@@ -25,5 +25,4 @@ function usePopoverContext(componentName: string) {
   return context;
 }
 
-export type { PopoverContextValue };
 export { PopoverContext, usePopoverContext };

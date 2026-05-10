@@ -233,6 +233,7 @@ function BreadcrumbsPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
+        <CodeBlock code={basicExampleSnippet} />
       </section>
 
       <section className="space-y-4">

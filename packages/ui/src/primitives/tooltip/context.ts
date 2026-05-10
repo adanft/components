@@ -24,5 +24,4 @@ function useTooltipContext(componentName: string) {
   return context;
 }
 
-export type { TooltipContextValue };
 export { TooltipContext, useTooltipContext };
