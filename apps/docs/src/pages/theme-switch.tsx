@@ -36,7 +36,16 @@ export default async function RootLayout({ children }) {
   );
 }`;
 
-const usageSnippet = `<ThemeSwitch initialDark={isDark} />`;
+const usageSnippet = `<ThemeSwitch initialDark={false} />`;
+
+const defaultExampleSnippet = `import { ThemeSwitch } from '@adanft/ui';
+import { useState } from 'react';
+
+function ExampleThemeSwitch() {
+  const [isDark, setIsDark] = useState(false);
+
+  return <ThemeSwitch initialDark={isDark} onCheckedChange={setIsDark} />;
+}`;
 
 const sizesSnippet = `<ThemeSwitch initialDark={false} onCheckedChange={() => {}} size="sm" />
 <ThemeSwitch initialDark={false} onCheckedChange={() => {}} size="md" />
@@ -77,7 +86,7 @@ function ThemeSwitchPage() {
         <Box shadow="none" surface="none">
           <ThemeSwitch initialDark={demoIsDark} onCheckedChange={setDemoIsDark} />
         </Box>
-        <CodeBlock code={usageSnippet} />
+        <CodeBlock code={defaultExampleSnippet} />
 
         <h3 className="text-lg font-semibold text-heading">Sizes</h3>
         <Box className="flex flex-wrap items-center gap-6" shadow="none" surface="none">

@@ -25,7 +25,7 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   Breadcrumbs: 'Breadcrumbs show a location trail and are used for hierarchical navigation.',
   Button: 'Button triggers an action and is used for forms, dialogs, and interactive flows.',
   Checkbox: 'Checkbox captures a boolean choice and is used in forms or option lists.',
-  DropdownMenu: 'Dropdown Menu shows grouped actions and is used for trigger-based menus.',
+  'Dropdown Menu': 'Dropdown Menu shows grouped actions and is used for trigger-based menus.',
   Field: 'Field groups form copy and controls and is used for labels, help text, and errors.',
   Input: 'Input captures single-line text and is used for native text entry in forms.',
   Label: 'Label names a form control and is used to connect text with an input.',
@@ -33,7 +33,7 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   Pagination: 'Pagination moves through pages and is used for paged collections.',
   Popover: 'Popover shows anchored content and is used for interactive contextual panels.',
   Profile: 'Profile shows account identity and is used for user menus and account actions.',
-  RadioGroup: 'Radio Group captures one choice and is used for grouped radio options.',
+  'Radio Group': 'Radio Group captures one choice and is used for grouped radio options.',
   Select: 'Select lets users choose one option and is used for compact option lists.',
   Sidebar: 'Sidebar shows app navigation and is used for side menus and nested links.',
   Skeleton: 'Skeleton reserves loading space and is used while async content is pending.',
@@ -42,15 +42,9 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   Table: 'Table shows structured data and is used for rows, columns, and API references.',
   Tabs: 'Tabs switch between panels and are used for related content on the same page.',
   Textarea: 'Textarea captures multi-line text and is used for longer form content.',
-  ThemeSwitch:
+  'Theme Switch':
     'Theme Switch toggles color mode and is used to change between light and dark themes.',
   Tooltip: 'Tooltip shows a short hint and is used for non-interactive contextual help.',
-};
-
-const COMPONENT_DISPLAY_NAMES: Record<string, string> = {
-  DropdownMenu: 'Dropdown Menu',
-  RadioGroup: 'Radio Group',
-  ThemeSwitch: 'Theme Switch',
 };
 
 const INSTALL_SNIPPET = `pnpm add @adanft/ui`;
@@ -106,7 +100,7 @@ const CATALOG_SECTIONS = docsSidebarNavigation.reduce<HomeCatalogSection[]>((sec
         description: COMPONENT_DESCRIPTIONS[node.text] ?? 'Documented library component.',
         href: node.href,
         icon: node.icon,
-        name: COMPONENT_DISPLAY_NAMES[node.text] ?? node.text,
+        name: node.text,
       });
     }
   }

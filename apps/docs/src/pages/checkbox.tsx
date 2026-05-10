@@ -84,8 +84,8 @@ function CheckboxPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <p className="text-foreground">
-          A thin wrapper around the native <Code>{`<input>`}</Code> element with{' '}
-          <Code>{`type="checkbox"`}</Code>.
+          Renders a wrapper with a native <Code>{`input[type="checkbox"]`}</Code>. Native checkbox
+          input props are accepted, and <Code>className</Code> styles the input.
         </p>
         <Table>
           <TableHeader>

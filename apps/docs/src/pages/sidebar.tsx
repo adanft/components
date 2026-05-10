@@ -709,7 +709,7 @@ function SidebarPage() {
         </Table>
 
         <h3 className="text-lg font-semibold text-heading">SidebarBody</h3>
-        <p className="text-foreground">Wraps the navigation content area with SimpleBar.</p>
+        <p className="text-foreground">Wraps the scrollable navigation content area.</p>
         <Table>
           <TableHeader>
             <TableRow>

@@ -192,7 +192,7 @@ function DropdownMenuPage() {
                 <Code>Placement</Code>
               </TableCell>
               <TableCell>
-                <Code>bottom-start</Code>
+                <Code>{`"bottom-start"`}</Code>
               </TableCell>
               <TableCell>Sets the Floating UI placement used for the menu content.</TableCell>
             </TableRow>
@@ -340,7 +340,7 @@ function DropdownMenuPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Extends the button element rendered for each menu item.</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

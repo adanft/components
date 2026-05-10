@@ -1,7 +1,7 @@
 import { type ComponentPropsWithoutRef, useState } from 'react';
 import { cn } from '../helpers/cn';
+import { toggleTheme } from '../helpers/theme';
 import { MoonIcon, SunIcon } from '../icons';
-import { toggleTheme } from '../theme';
 
 type ThemeSwitchSize = 'sm' | 'md' | 'lg';
 

@@ -347,6 +347,20 @@ function TabsPage() {
               <TableCell>—</TableCell>
               <TableCell>Extends the component styles.</TableCell>
             </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>disabled</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Prevents selecting the tab and removes it from keyboard navigation.
+              </TableCell>
+            </TableRow>
           </TableBody>
         </Table>
 

@@ -13,7 +13,7 @@ import {
 import { CodeBlock } from '../code-block';
 import { Code } from '../components/code';
 
-const importSnippet = `import { Field, Input, Label } from '@adanft/ui';`;
+const importSnippet = `import { Field, Input, RadioGroup } from '@adanft/ui';`;
 
 const usageSnippet = `<Field required>
   <Field.Label htmlFor="email">Email *</Field.Label>

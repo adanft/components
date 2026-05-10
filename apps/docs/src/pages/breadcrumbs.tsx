@@ -112,6 +112,12 @@ const apiSections: ApiSectionProps[] = [
     props: [
       classNameProp,
       {
+        name: 'href',
+        type: 'string',
+        defaultValue: '—',
+        description: 'Destination for the anchor when asChild is not enabled.',
+      },
+      {
         name: 'asChild',
         type: 'boolean',
         defaultValue: 'false',

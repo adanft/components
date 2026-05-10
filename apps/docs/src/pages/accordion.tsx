@@ -232,23 +232,6 @@ function AccordionPage() {
           </TableBody>
         </Table>
 
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">Attribute</TableHead>
-              <TableHead scope="col">Description</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell>
-                <Code>data-accordion-root</Code>
-              </TableCell>
-              <TableCell>Identifies the root used for trigger keyboard navigation.</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-
         <h3 className="text-lg font-semibold text-heading">Accordion.Item</h3>
         <p className="text-foreground">
           A thin wrapper around the native <Code>{`<div>`}</Code> element.
@@ -331,6 +314,16 @@ function AccordionPage() {
                 Keeps closed content mounted and hidden with the native <Code>hidden</Code>{' '}
                 attribute. By default, closed panels unmount to avoid rendering hidden work.
               </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>className</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Extends the component styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -421,6 +414,20 @@ function AccordionPage() {
               <TableCell>—</TableCell>
               <TableCell>Extends the component styles.</TableCell>
             </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>disabled</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Uses native button disabled behavior to prevent activation and toggling.
+              </TableCell>
+            </TableRow>
           </TableBody>
         </Table>
 
@@ -455,12 +462,6 @@ function AccordionPage() {
                 <Code>aria-controls</Code>
               </TableCell>
               <TableCell>References the controlled content panel.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Code>data-accordion-trigger</Code>
-              </TableCell>
-              <TableCell>Identifies triggers used for keyboard navigation.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>

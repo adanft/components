@@ -234,7 +234,7 @@ function TooltipPage() {
                 <Code>CSSProperties</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Extends the Floating UI positioning styles.</TableCell>
+              <TableCell>Merges with the computed floating styles from the root.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -251,7 +251,7 @@ function TooltipPage() {
                 <Code>role</Code>
               </TableCell>
               <TableCell>
-                Set to <Code>tooltip</Code> by the Floating UI role interaction.
+                Set to <Code>tooltip</Code> on the content.
               </TableCell>
             </TableRow>
           </TableBody>

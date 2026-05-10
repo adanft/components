@@ -107,8 +107,9 @@ function SwitchPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <p className="text-foreground">
-          A thin wrapper around the native <Code>{`<input>`}</Code> element with{' '}
-          <Code>{`type="checkbox"`}</Code>.
+          Renders a label wrapper with a hidden native <Code>{`input[type="checkbox"]`}</Code>.
+          Native input props are accepted, and <Code>className</Code> extends the visual switch
+          track.
         </p>
         <Table>
           <TableHeader>

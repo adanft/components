@@ -249,8 +249,8 @@ function RadioGroupPage() {
 
         <h3 className="text-lg font-semibold text-heading">RadioGroup.Item</h3>
         <p className="text-foreground">
-          A thin wrapper around the native <Code>{`<input>`}</Code> element with{' '}
-          <Code>{`type="radio"`}</Code>.
+          Renders a label wrapper with a hidden native <Code>{`<input type="radio">`}</Code>. Native
+          radio input props are accepted.
         </p>
         <Table>
           <TableHeader>
@@ -304,7 +304,7 @@ function RadioGroupPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Extends the component styles.</TableCell>
+              <TableCell>Extends the visual radio indicator styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

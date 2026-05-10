@@ -99,6 +99,11 @@ function AvatarPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
+        <p className="text-foreground">
+          Image avatars render <Code>{`<img>`}</Code> and accept native image props except{' '}
+          <Code>src</Code> and <Code>alt</Code>. Text avatars render <Code>{`<div>`}</Code> and
+          accept native div props.
+        </p>
         <Table>
           <TableHeader>
             <TableRow>

@@ -162,14 +162,14 @@ describe('@adanft/ui public API', () => {
     expect(TooltipSubpath).toBe(components.Tooltip);
   });
 
-  it('keeps theme public exports available from the package root', () => {
+  it('keeps supported theme public exports available from the package root', () => {
     localStorage.clear();
     document.documentElement.classList.remove('dark');
     // biome-ignore lint/suspicious/noDocumentCookie: tests need to reset the SSR-readable theme cookie.
     document.cookie = 'theme=; path=/; max-age=0; SameSite=Lax';
 
     expect(components.initializeTheme()).toBe(false);
-    expect(components.toggleTheme()).toBe(true);
+    expect('toggleTheme' in components).toBe(false);
     expect(components.ThemeSwitch).toBeTypeOf('function');
   });
 

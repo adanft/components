@@ -186,23 +186,6 @@ function ModalPage() {
           </TableBody>
         </Table>
 
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">Attribute</TableHead>
-              <TableHead scope="col">Description</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell>
-                <Code>data-modal-portal</Code>
-              </TableCell>
-              <TableCell>Identifies the fixed portal container rendered by Modal.</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-
         <h3 className="text-lg font-semibold text-heading">Modal.Backdrop</h3>
         <p className="text-foreground">
           A thin wrapper around the native <Code>{`<div>`}</Code> element.
@@ -362,7 +345,10 @@ function ModalPage() {
               <TableCell>
                 <Code>id</Code>
               </TableCell>
-              <TableCell>Connects the title to the panel accessible name.</TableCell>
+              <TableCell>
+                Provides the default accessible name for <Code>Modal.Panel</Code> when the panel
+                does not receive <Code>aria-label</Code> or <Code>aria-labelledby</Code>.
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
