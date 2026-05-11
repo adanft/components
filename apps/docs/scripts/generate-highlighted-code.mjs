@@ -1,7 +1,7 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import ts from 'typescript';
 import { createHighlighter } from 'shiki';
+import ts from 'typescript';
 
 const docsRoot = new URL('..', import.meta.url);
 const sourceRoot = new URL('src', docsRoot);
@@ -83,7 +83,12 @@ function collectSnippetValues(sourceFile, identifiers) {
   const snippets = [];
 
   function visit(node) {
-    if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && identifiers.has(node.name.text) && node.initializer) {
+    if (
+      ts.isVariableDeclaration(node) &&
+      ts.isIdentifier(node.name) &&
+      identifiers.has(node.name.text) &&
+      node.initializer
+    ) {
       const value = getExpressionText(node.initializer);
 
       if (value !== undefined) {
@@ -103,7 +108,13 @@ const snippets = new Set();
 
 for (const filePath of files) {
   const source = await readFile(filePath, 'utf8');
-  const sourceFile = ts.createSourceFile(filePath, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const sourceFile = ts.createSourceFile(
+    filePath,
+    source,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  );
   const identifiers = collectCodeBlockIdentifiers(sourceFile);
 
   for (const snippet of collectSnippetValues(sourceFile, identifiers)) {
