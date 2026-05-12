@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router';
-import NotFound from './components/not-found';
 import {
   DOCS_ACCORDION_PATH,
   DOCS_ALERT_PATH,
@@ -45,6 +44,7 @@ import Home from './pages/home';
 import InputPage from './pages/input';
 import LabelPage from './pages/label';
 import ModalPage from './pages/modal';
+import NotFoundPage from './pages/not-found';
 import PaginationPage from './pages/pagination';
 import PopoverPage from './pages/popover';
 import ProfilePage from './pages/profile';
@@ -93,7 +93,7 @@ function App() {
         <Route path={DOCS_CHECKBOX_PATH} element={<CheckboxPage />} />
         <Route path={DOCS_THEME_SWITCH_PATH} element={<ThemeSwitchPage />} />
         <Route path={DOCS_TOOLTIP_PATH} element={<TooltipPage />} />
-        <Route path={DOCS_NOT_FOUND_PATH} element={<NotFound />} />
+        <Route path={DOCS_NOT_FOUND_PATH} element={<NotFoundPage />} />
       </Routes>
     </DocsShell>
   );
