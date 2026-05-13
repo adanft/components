@@ -1,45 +1,20 @@
-import { useEffect, useState } from 'react';
+import { getHighlightedCode } from './generated/highlighted-code';
 
-import { getSingletonHighlighter } from 'shiki';
-
-const THEME = 'catppuccin-mocha';
-const LANGUAGE = 'tsx';
+function escapeHtml(value: string) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
 
 type CodeBlockProps = {
   code: string;
 };
 
 function CodeBlock({ code }: CodeBlockProps) {
-  const [html, setHtml] = useState<string>('');
-
-  useEffect(() => {
-    let isMounted = true;
-
-    getSingletonHighlighter({
-      langs: [LANGUAGE],
-      themes: [THEME],
-    })
-      .then((highlighter) =>
-        highlighter.codeToHtml(code, {
-          lang: LANGUAGE,
-          theme: THEME,
-        }),
-      )
-      .then((highlightedHtml) => {
-        if (isMounted) {
-          setHtml(highlightedHtml);
-        }
-      })
-      .catch(() => {
-        if (isMounted) {
-          setHtml('');
-        }
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, [code]);
+  const html = getHighlightedCode(code) ?? `<pre><code>${escapeHtml(code)}</code></pre>`;
 
   return (
     <div

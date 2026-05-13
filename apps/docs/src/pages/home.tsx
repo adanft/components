@@ -1,3 +1,4 @@
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@adanft/ui';
 import type { LucideIcon } from 'lucide-react';
 import { Link } from 'react-router';
 import { CodeBlock } from '../code-block';
@@ -121,6 +122,43 @@ function Example() {
   return <Button>Save changes</Button>;
 }`;
 
+const TOKEN_OVERRIDE_SNIPPET = `@import '@adanft/ui/styles.css';
+
+/* Override after importing the package styles. */
+:root {
+  --color-brand: #7c3aed;
+  --color-background: #fafafa;
+  --color-surface: #ffffff;
+  --color-foreground: #1f2937;
+  --shadow-card: 0 12px 32px oklch(0.25 0 0 / 0.12);
+}
+
+:root.dark {
+  --color-background: #0f172a;
+  --color-surface: #111827;
+  --color-foreground: #e5e7eb;
+}`;
+
+const COLOR_TOKENS = [
+  ['--color-brand', '#6747c8', '#6747c8', 'Primary brand color.'],
+  ['--color-danger', '#ff004c', '#ff004c', 'Danger and destructive states.'],
+  ['--color-info', '#00b4d8', '#00b4d8', 'Informational states.'],
+  ['--color-success', '#2a9d8f', '#2a9d8f', 'Success states.'],
+  ['--color-warning', '#e9c46a', '#e9c46a', 'Warning states.'],
+  ['--color-background', '#ffffff', '#16141a', 'Page background.'],
+  ['--color-surface', '#ffffff', '#1f1d24', 'Card and overlay surfaces.'],
+  ['--color-foreground', '#34303d', '#9e99ad', 'Default body text.'],
+  ['--color-heading', '#251a44', '#bfb8d1', 'Headings and high-emphasis text.'],
+  ['--color-muted', '#9b98a3', '#6c6877', 'Subtle text, placeholders, and scrollbars.'],
+  ['--color-border', '#d4dee8', '#292436', 'Component borders.'],
+  ['--color-separator', '#ebeef1', '#221e2c', 'Dividers and separators.'],
+  ['--color-shadow', 'oklch(0.85 0 0 / 0.5)', 'oklch(0.6 0 0 / 0.15)', 'Base shadow color.'],
+] as const;
+
+const EFFECT_TOKENS = [
+  ['--shadow-card', '0 0 8px var(--color-shadow)', 'Default card shadow.'],
+] as const;
+
 const CATALOG_SECTIONS = docsSidebarNavigation.reduce<HomeCatalogSection[]>((sections, node) => {
   if (node.type === 'heading') {
     sections.push({ title: node.text, items: [] });
@@ -143,6 +181,16 @@ const CATALOG_SECTIONS = docsSidebarNavigation.reduce<HomeCatalogSection[]>((sec
 
   return sections;
 }, []);
+
+function TokenSwatch({ value }: { value: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className="inline-flex size-5 rounded-full border border-border align-middle"
+      style={{ background: value }}
+    />
+  );
+}
 
 function Home() {
   return (
@@ -214,6 +262,81 @@ function Home() {
           compact; documented public subpaths keep component and helper entrypoints narrower.
         </p>
         <CodeBlock code={USAGE_SNIPPET} />
+      </section>
+
+      <section id="design-tokens" className="space-y-6">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-semibold text-heading">Design tokens</h2>
+          <p className="max-w-3xl text-foreground">
+            These CSS variables define the default visual contract. Import the package stylesheet
+            first, then override any token in your app CSS with <Code>:root</Code> and{' '}
+            <Code>:root.dark</Code>.
+          </p>
+        </div>
+
+        <CodeBlock code={TOKEN_OVERRIDE_SNIPPET} />
+
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-heading">Color variables</h3>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead scope="col">Variable</TableHead>
+                <TableHead scope="col">Light default</TableHead>
+                <TableHead scope="col">Dark default</TableHead>
+                <TableHead scope="col">Usage</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {COLOR_TOKENS.map(([name, light, dark, description]) => (
+                <TableRow key={name}>
+                  <TableCell>
+                    <Code>{name}</Code>
+                  </TableCell>
+                  <TableCell>
+                    <span className="inline-flex items-center gap-2">
+                      <TokenSwatch value={light} />
+                      <Code>{light}</Code>
+                    </span>
+                  </TableCell>
+                  <TableCell>
+                    <span className="inline-flex items-center gap-2">
+                      <TokenSwatch value={dark} />
+                      <Code>{dark}</Code>
+                    </span>
+                  </TableCell>
+                  <TableCell>{description}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-heading">Effect variables</h3>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead scope="col">Variable</TableHead>
+                <TableHead scope="col">Default</TableHead>
+                <TableHead scope="col">Usage</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {EFFECT_TOKENS.map(([name, value, description]) => (
+                <TableRow key={name}>
+                  <TableCell>
+                    <Code>{name}</Code>
+                  </TableCell>
+                  <TableCell>
+                    <Code>{value}</Code>
+                  </TableCell>
+                  <TableCell>{description}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </section>
 
       <section id="catalog" className="space-y-6">
