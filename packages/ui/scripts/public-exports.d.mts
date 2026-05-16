@@ -23,4 +23,4 @@ declare function createRootExports(): PackageExports;
 declare function createPublishExports(): PackageExports;
 declare function createViteEntries(options: ViteEntryOptions): Record<string, string>;
 
-export { PUBLIC_SUBPATH_EXPORTS, createPublishExports, createRootExports, createViteEntries };
+export { createPublishExports, createRootExports, createViteEntries, PUBLIC_SUBPATH_EXPORTS };
