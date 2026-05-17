@@ -1,5 +1,6 @@
 import { Button, ThemeSwitch } from '@adanft/ui';
-import { Search } from 'lucide-react';
+
+import NavbarSearch from './search';
 
 const GITHUB_REPOSITORY_URL = 'https://github.com/adanft/components';
 
@@ -18,15 +19,8 @@ function GitHubMark() {
 function Navbar({ searchPlaceholder = 'Search' }: NavbarProps) {
   return (
     <div className="fixed left-[65px] top-0 right-0 h-[97px] bg-surface border-separator border-b shadow-card px-8 flex justify-between items-center z-10">
-      <div></div>
-      <div className="hidden gap-4 rounded-full border border-brand bg-background px-4 py-2 sm:flex sm:w-80">
-        <Search aria-hidden="true" className="mt-0.5 size-5 text-brand stroke-2" />
-        <input
-          className="w-full bg-background font-medium text-foreground focus-visible:outline-none"
-          type="text"
-          placeholder={searchPlaceholder}
-        />
-      </div>
+      <div aria-hidden="true" />
+      <NavbarSearch placeholder={searchPlaceholder} />
       <div className="flex gap-4 items-center">
         <ThemeSwitch initialDark={document.documentElement.classList.contains('dark')} />
         <Button
