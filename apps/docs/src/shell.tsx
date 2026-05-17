@@ -74,8 +74,8 @@ function DocsShell({
           )}
         </SidebarBody>
       </Sidebar>
-      <main className="absolute left-[65px] top-[97px] min-h-[calc(100vh-97px)] w-[calc(100%-65px)] bg-background p-4 text-foreground">
-        <div className="container mx-auto">
+      <main className="absolute left-[65px] top-[97px] min-h-[calc(100vh-97px)] w-[calc(100%-65px)] overflow-x-hidden bg-background p-4 text-foreground">
+        <div className="container mx-auto min-w-0">
           <Navbar {...navbarProps} />
           {children}
         </div>
