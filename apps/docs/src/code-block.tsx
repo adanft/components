@@ -18,7 +18,7 @@ function CodeBlock({ code }: CodeBlockProps) {
 
   return (
     <div
-      className="[&_pre]:p-4 [&_pre]:rounded-md [&_pre]:w-full [&_pre]:overflow-x-auto"
+      className="min-w-0 max-w-full overflow-x-auto [&_pre]:w-full [&_pre]:overflow-x-auto [&_pre]:rounded-md [&_pre]:p-4"
       // biome-ignore lint/security/noDangerouslySetInnerHtml: sanitized HTML from shiki syntax highlighter
       dangerouslySetInnerHTML={{ __html: html }}
     />

@@ -194,10 +194,11 @@ function TokenSwatch({ value }: { value: string }) {
 
 function Home() {
   return (
-    <article className="space-y-10">
+    <article className="max-w-full space-y-10 overflow-x-hidden">
       <header className="relative overflow-hidden rounded-md border border-border bg-surface p-6 shadow-card">
         <div className="pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 left-12 h-64 w-64 rounded-full bg-highlight/20 blur-3xl" />
+        <div className="pointer-events-none absolute -top-24 -left-16 h-48 w-48 rounded-full bg-info/20 blur-3xl" />
         <div className="relative max-w-4xl space-y-5">
           <h1 className="text-3xl font-bold text-heading md:text-5xl">Components</h1>
           <p className="text-base leading-7 text-foreground md:text-lg">
@@ -229,18 +230,18 @@ function Home() {
           resolves the first paint on the server. Mix those up and you earn a hydration bug.
         </p>
 
-        <div className="grid gap-4 lg:grid-cols-2">
-          <div className="space-y-3 rounded-md border border-border bg-surface p-4 shadow-card">
+        <div className="grid min-w-0 gap-4 lg:grid-cols-2">
+          <div className="min-w-0 space-y-3 rounded-md border border-border bg-surface p-4 shadow-card">
             <h3 className="text-lg font-semibold text-heading">Install package</h3>
             <CodeBlock code={INSTALL_SNIPPET} />
           </div>
 
-          <div className="space-y-3 rounded-md border border-border bg-surface p-4 shadow-card">
+          <div className="min-w-0 space-y-3 rounded-md border border-border bg-surface p-4 shadow-card">
             <h3 className="text-lg font-semibold text-heading">Register styles in Tailwind</h3>
             <CodeBlock code={STYLE_SETUP_SNIPPET} />
           </div>
 
-          <div className="space-y-3 rounded-md border border-border bg-surface p-4 shadow-card lg:col-span-2">
+          <div className="min-w-0 space-y-3 rounded-md border border-border bg-surface p-4 shadow-card lg:col-span-2">
             <h3 className="text-lg font-semibold text-heading">Bootstrap theme</h3>
             <p className="text-sm leading-6 text-foreground">
               <Code>initializeTheme()</Code> is a CSR helper: it reads <Code>localStorage</Code> and
@@ -261,7 +262,9 @@ function Home() {
           Choose the import shape based on the boundary you want. The package root keeps examples
           compact; documented public subpaths keep component and helper entrypoints narrower.
         </p>
-        <CodeBlock code={USAGE_SNIPPET} />
+        <div className="min-w-0">
+          <CodeBlock code={USAGE_SNIPPET} />
+        </div>
       </section>
 
       <section id="design-tokens" className="space-y-6">
@@ -274,7 +277,9 @@ function Home() {
           </p>
         </div>
 
-        <CodeBlock code={TOKEN_OVERRIDE_SNIPPET} />
+        <div className="min-w-0">
+          <CodeBlock code={TOKEN_OVERRIDE_SNIPPET} />
+        </div>
 
         <div className="space-y-4">
           <h3 className="text-lg font-semibold text-heading">Color variables</h3>
@@ -353,7 +358,7 @@ function Home() {
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               {section.title}
             </h3>
-            <ul className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <ul className="grid min-w-0 gap-4 md:grid-cols-2 xl:grid-cols-3">
               {section.items.map((component) => {
                 const Icon = component.icon;
 
@@ -361,12 +366,12 @@ function Home() {
                   <li key={component.name}>
                     <Link
                       to={component.href}
-                      className="block h-full rounded-md border border-border bg-surface p-4 shadow-card transition-transform duration-150 hover:-translate-y-0.5">
+                      className="block h-full min-w-0 rounded-md border border-border bg-surface p-4 shadow-card">
                       <div className="flex items-start gap-3">
                         <span className="rounded-md border border-border bg-background p-2 text-brand">
                           <Icon aria-hidden="true" className="size-5" />
                         </span>
-                        <div className="space-y-2">
+                        <div className="min-w-0 space-y-2">
                           <h4 className="text-lg font-semibold text-heading">{component.name}</h4>
                           <p className="text-sm leading-6 text-foreground">
                             {component.description}
