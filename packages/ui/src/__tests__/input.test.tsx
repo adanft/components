@@ -33,7 +33,7 @@ describe('Input', () => {
 
     expect(screen.getByLabelText('Email')).toHaveClass(
       'aria-invalid:border-danger',
-      'aria-invalid:focus-visible:outline-danger',
+      'aria-invalid:focus-visible:outline-outline-danger',
     );
   });
 });

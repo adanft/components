@@ -16,6 +16,9 @@
   --color-separator: #ebeef1;
   --color-shadow: oklch(0.85 0 0 / 0.5);
   --shadow-card: 0 0 8px var(--color-shadow);
+  --color-outline: #dbd4e9;
+  --color-outline-danger: #ffd6e1;
+  --shadow-outline: 0 0 0 1px var(--color-border);
 }
 
 /* Runtime theme overrides toggled by the theme helpers. */
@@ -28,6 +31,8 @@
   --color-border: #292436;
   --color-separator: #221e2c;
   --color-shadow: oklch(0.6 0 0 / 0.15);
+  --color-outline: #382f4a;
+  --color-outline-danger: #5a1f2f;
 }
 
 /*
@@ -38,8 +43,9 @@
 /* semantic-token-exception:start */
 @layer base {
   :focus-visible {
-    outline: 2px solid var(--color-brand);
-    outline-offset: 2px;
+    outline: 3px solid var(--color-outline);
+    box-shadow: var(--shadow-outline);
+    outline-offset: 1px;
   }
 }
 /* semantic-token-exception:end */

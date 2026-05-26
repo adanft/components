@@ -29,7 +29,7 @@ describe('Textarea', () => {
 
     expect(screen.getByLabelText('Message')).toHaveClass(
       'aria-invalid:border-danger',
-      'aria-invalid:focus-visible:outline-danger',
+      'aria-invalid:focus-visible:outline-outline-danger',
     );
   });
 
