@@ -49,19 +49,22 @@ function NavbarSearch({ placeholder = 'Search' }: NavbarSearchProps) {
       aria-label="Docs search"
       className="relative hidden sm:block sm:w-80"
       onBlur={handleBlur}>
-      <div className="flex gap-4 rounded-full border border-brand bg-background px-4 py-2">
-        <Search aria-hidden="true" className="mt-0.5 size-5 text-brand stroke-2" />
+      <label className="relative block rounded-full">
+        <Search
+          aria-hidden="true"
+          className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-brand stroke-2"
+        />
         <input
           aria-controls={showPanel ? resultsListId : undefined}
           aria-label="Search docs"
-          className="w-full bg-background font-medium text-foreground placeholder:text-foreground/60 focus-visible:outline-none"
+          className="w-full rounded-full border border-brand bg-background py-2 pr-4 pl-13 font-medium text-foreground placeholder:text-foreground/60"
           onChange={(event) => setQuery(event.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           type="text"
           value={query}
         />
-      </div>
+      </label>
 
       {showPanel ? (
         <Box className="absolute right-0 top-14 max-h-[calc(100vh-8rem)] w-full overflow-y-auto">

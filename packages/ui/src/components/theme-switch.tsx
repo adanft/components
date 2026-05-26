@@ -91,7 +91,7 @@ function ThemeSwitch({
         aria-hidden="true"
         className={cn(
           'absolute inset-0 rounded-full bg-linear-to-l from-info to-brand',
-          'peer-focus-visible:outline-2 peer-focus-visible:outline-brand peer-focus-visible:outline-offset-2',
+          'peer-focus-visible:outline-3 peer-focus-visible:outline-outline peer-focus-visible:outline-offset-1 peer-focus-visible:shadow-outline',
         )}
       />
 

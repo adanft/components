@@ -30,7 +30,7 @@ function Select({
         className={cn(
           'w-full appearance-none rounded-md border border-border bg-background px-3 py-2 pr-10 text-foreground',
           'data-placeholder:text-muted',
-          'aria-invalid:border-danger aria-invalid:focus-visible:outline-danger',
+          'aria-invalid:border-danger aria-invalid:focus-visible:outline-outline-danger',
           'disabled:cursor-not-allowed disabled:bg-muted/20 disabled:opacity-50',
           className,
         )}>

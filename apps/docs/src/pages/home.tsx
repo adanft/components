@@ -130,13 +130,18 @@ const TOKEN_OVERRIDE_SNIPPET = `@import '@adanft/ui/styles.css';
   --color-background: #fafafa;
   --color-surface: #ffffff;
   --color-foreground: #1f2937;
+  --color-outline: #d8d0ea;
+  --color-outline-danger: #ffd6e1;
   --shadow-card: 0 12px 32px oklch(0.25 0 0 / 0.12);
+  --shadow-outline: 0 0 0 1px var(--color-border);
 }
 
 :root.dark {
   --color-background: #0f172a;
   --color-surface: #111827;
   --color-foreground: #e5e7eb;
+  --color-outline: #382f4a;
+  --color-outline-danger: #5a1f2f;
 }`;
 
 const COLOR_TOKENS = [
@@ -153,10 +158,13 @@ const COLOR_TOKENS = [
   ['--color-border', '#d4dee8', '#292436', 'Component borders.'],
   ['--color-separator', '#ebeef1', '#221e2c', 'Dividers and separators.'],
   ['--color-shadow', 'oklch(0.85 0 0 / 0.5)', 'oklch(0.6 0 0 / 0.15)', 'Base shadow color.'],
+  ['--color-outline', '#dbd4e9', '#382f4a', 'Default focus outline color.'],
+  ['--color-outline-danger', '#ffd6e1', '#5a1f2f', 'Invalid focus outline color.'],
 ] as const;
 
 const EFFECT_TOKENS = [
   ['--shadow-card', '0 0 8px var(--color-shadow)', 'Default card shadow.'],
+  ['--shadow-outline', '0 0 0 1px var(--color-border)', 'Focus outline companion shadow.'],
 ] as const;
 
 const CATALOG_SECTIONS = docsSidebarNavigation.reduce<HomeCatalogSection[]>((sections, node) => {

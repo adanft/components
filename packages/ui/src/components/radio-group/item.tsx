@@ -52,8 +52,8 @@ function RadioGroupItem({ className, disabled, id, label, value, ...props }: Rad
           aria-hidden="true"
           className={cn(
             'inline-flex h-4 w-4 rounded-full border border-muted bg-background',
-            'peer-checked:border-brand peer-focus-visible:outline-2 peer-focus-visible:outline-brand peer-focus-visible:outline-offset-2',
-            'peer-aria-invalid:border-danger peer-aria-invalid:peer-focus-visible:outline-danger',
+            'peer-checked:border-brand peer-focus-visible:outline-3 peer-focus-visible:outline-outline peer-focus-visible:outline-offset-1 peer-focus-visible:shadow-outline',
+            'peer-aria-invalid:border-danger peer-aria-invalid:peer-focus-visible:outline-outline-danger',
             className,
           )}
         />
