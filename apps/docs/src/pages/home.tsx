@@ -203,11 +203,8 @@ function TokenSwatch({ value }: { value: string }) {
 function Home() {
   return (
     <article className="max-w-full space-y-10 overflow-x-hidden">
-      <header className="relative overflow-hidden rounded-md border border-border bg-surface p-6 shadow-card">
-        <div className="pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 left-12 h-64 w-64 rounded-full bg-highlight/20 blur-3xl" />
-        <div className="pointer-events-none absolute -top-24 -left-16 h-48 w-48 rounded-full bg-info/20 blur-3xl" />
-        <div className="relative max-w-4xl space-y-5">
+      <header className="rounded-md border border-border bg-surface p-6 shadow-card">
+        <div className="max-w-4xl space-y-5">
           <h1 className="text-3xl font-bold text-heading md:text-5xl">Components</h1>
           <p className="text-base leading-7 text-foreground md:text-lg">
             Production-oriented React components built with semantic tokens, accessible primitives,
