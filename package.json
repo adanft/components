@@ -24,7 +24,7 @@
     "changeset:version": "changeset version",
     "release": "changeset publish --tag latest",
     "release:latest": "node scripts/verify-release-channel.mjs latest && pnpm --dir packages/ui build && pnpm validate:pack-contract && pnpm release",
-    "release:beta": "node scripts/verify-release-channel.mjs beta && pnpm --dir packages/ui build && pnpm validate:pack-contract && changeset publish --tag beta"
+    "release:beta": "node scripts/verify-release-channel.mjs beta && pnpm --dir packages/ui build && pnpm validate:pack-contract && changeset publish"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.15",
