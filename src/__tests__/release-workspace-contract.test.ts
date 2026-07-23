@@ -32,7 +32,8 @@ describe('release workspace contract', () => {
     expect(packageJson.scripts?.['release:beta']).toContain('verify-release-channel.mjs beta');
     expect(packageJson.scripts?.['release:beta']).toContain('packages/ui');
     expect(packageJson.scripts?.['release:beta']).toContain('validate:pack-contract');
-    expect(packageJson.scripts?.['release:beta']).toContain('changeset publish --tag beta');
+    expect(packageJson.scripts?.['release:beta']).toContain('changeset publish');
+    expect(packageJson.scripts?.['release:beta']).not.toContain('--tag');
   });
 
   it('splits validation and release workflows', () => {

@@ -133,7 +133,8 @@ export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = pro
         scripts['release:beta'].includes('verify-release-channel.mjs beta') &&
         scripts['release:beta'].includes('validate:pack-contract') &&
         scripts['release:beta'].includes('packages/ui') &&
-        scripts['release:beta'].includes('changeset publish --tag beta') &&
+        scripts['release:beta'].endsWith('changeset publish') &&
+        !scripts['release:beta'].includes('--tag') &&
         scripts.release === 'changeset publish --tag latest',
       releaseWorkflow,
     ),
