@@ -43,6 +43,7 @@ function RadioGroupItem({ className, disabled, id, label, value, ...props }: Rad
           disabled={isDisabled}
           name={context.name}
           type="radio"
+          value={value}
           className="peer sr-only"
           onChange={() => {
             context.onValueChange(value);
