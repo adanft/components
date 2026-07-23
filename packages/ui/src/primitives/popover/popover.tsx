@@ -63,6 +63,7 @@ function Popover({
   return (
     <PopoverContext.Provider
       value={{
+        contentRole,
         context,
         floatingStyles,
         getFloatingProps,

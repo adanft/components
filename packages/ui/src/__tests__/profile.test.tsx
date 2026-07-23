@@ -45,6 +45,11 @@ describe('Profile', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /taylor avatar/i }));
 
+    const dialog = screen.getByRole('dialog', { name: 'Taylor Brown' });
+    const labelledby = dialog.getAttribute('aria-labelledby');
+
+    expect(labelledby).toBeTruthy();
+    expect(document.getElementById(labelledby ?? '')).toHaveTextContent('Taylor Brown');
     expect(screen.getAllByRole('img', { name: 'Taylor avatar' })[1]).toHaveClass('size-14');
     expect(screen.getByText('@taylor')).toBeInTheDocument();
     expect(screen.getByText('Taylor Brown')).toBeInTheDocument();

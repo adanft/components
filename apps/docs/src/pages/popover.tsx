@@ -27,7 +27,10 @@ const usageSnippet = `const [open, setOpen] = useState(false);
     <Button>Open popover</Button>
   </Popover.Trigger>
 
-  <Popover.Content className="rounded-md border border-border bg-surface p-4 shadow-card">
+  <Popover.Content
+    aria-label="Popover details"
+    className="rounded-md border border-border bg-surface p-4 shadow-card"
+  >
     <div className="text-foreground">Popover content</div>
   </Popover.Content>
 </Popover>`;
@@ -39,7 +42,10 @@ const defaultExampleSnippet = `const [open, setOpen] = useState(false);
     <Button>Share project</Button>
   </Popover.Trigger>
 
-  <Popover.Content className="w-72 rounded-md border border-border bg-surface p-4 shadow-card">
+  <Popover.Content
+    aria-label="Share project"
+    className="w-72 rounded-md border border-border bg-surface p-4 shadow-card"
+  >
     <div className="space-y-3">
       <p className="font-semibold text-foreground">Share project</p>
       <p className="text-sm text-foreground">Invite a teammate to review the release notes.</p>
@@ -55,7 +61,10 @@ const positionExampleSnippet = `const [open, setOpen] = useState(false);
     <Button variant="secondary">View shortcuts</Button>
   </Popover.Trigger>
 
-  <Popover.Content className="rounded-md border border-border bg-surface p-4 shadow-card">
+  <Popover.Content
+    aria-label="Keyboard shortcuts"
+    className="rounded-md border border-border bg-surface p-4 shadow-card"
+  >
     <ul className="space-y-2 text-sm text-foreground">
       <li><strong>⌘K</strong> Open command menu</li>
       <li><strong>G then H</strong> Go to home</li>
@@ -96,7 +105,9 @@ function PopoverPage() {
               <Button>Share project</Button>
             </Popover.Trigger>
 
-            <Popover.Content className="w-72 rounded-md border border-border bg-surface p-4 shadow-card">
+            <Popover.Content
+              aria-label="Share project"
+              className="w-72 rounded-md border border-border bg-surface p-4 shadow-card">
               <div className="space-y-3">
                 <p className="font-semibold text-foreground">Share project</p>
                 <p className="text-sm text-foreground">
@@ -121,7 +132,9 @@ function PopoverPage() {
               <Button variant="secondary">View shortcuts</Button>
             </Popover.Trigger>
 
-            <Popover.Content className="rounded-md border border-border bg-surface p-4 shadow-card">
+            <Popover.Content
+              aria-label="Keyboard shortcuts"
+              className="rounded-md border border-border bg-surface p-4 shadow-card">
               <ul className="space-y-2 text-sm text-foreground">
                 <li>
                   <strong>⌘K</strong> Open command menu
@@ -249,7 +262,9 @@ function PopoverPage() {
 
         <h3 className="text-lg font-semibold text-heading">Popover.Content</h3>
         <p className="text-foreground">
-          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+          A thin wrapper around the native <Code>{`<div>`}</Code> element. When Popover uses its
+          default dialog role, provide either <Code>aria-label</Code> or{' '}
+          <Code>aria-labelledby</Code>. Content without a role does not require a dialog name.
         </p>
         <Table>
           <TableHeader>
@@ -261,6 +276,26 @@ function PopoverPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
+            <TableRow>
+              <TableCell>
+                <Code>aria-label</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Provides an accessible name for dialog content.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-labelledby</Code>
+              </TableCell>
+              <TableCell>
+                <Code>string</Code>
+              </TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>References visible content that names the dialog.</TableCell>
+            </TableRow>
             <TableRow>
               <TableCell>
                 <Code>className</Code>

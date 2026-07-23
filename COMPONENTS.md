@@ -545,13 +545,19 @@ const [open, setOpen] = useState(false);
 
 <Popover open={open} onOpenChange={setOpen}>
   <Popover.Trigger><Button>Open popover</Button></Popover.Trigger>
-  <Popover.Content className="rounded-md border p-4">Popover content</Popover.Content>
+  <Popover.Content aria-label="Popover details" className="rounded-md border p-4">
+    Popover content
+  </Popover.Content>
 </Popover>;
 ```
 
 **Examples:** share panel, positioned shortcuts panel.
 
-**API:** `open`, `onOpenChange(open)`, `position = "bottom"`, `contentRole: "dialog" | null = "dialog"`, `triggerHasPopup = true`, `Popover.Content` accepts `className` and `style`.
+With the default `dialog` role, `Popover.Content` requires `aria-label` or
+`aria-labelledby`. Set `contentRole={null}` only when the floating content does
+not represent a dialog.
+
+**API:** `open`, `onOpenChange(open)`, `position = "bottom"`, `contentRole: "dialog" | null = "dialog"`, `triggerHasPopup = true`, `Popover.Content` accepts native div props, `className`, and `style`.
 
 ## Profile
 
