@@ -79,6 +79,8 @@ const sizesSnippet = `<ThemeSwitch checked={false} onCheckedChange={() => {}} si
 <ThemeSwitch checked={false} onCheckedChange={() => {}} size="md" />
 <ThemeSwitch checked={false} onCheckedChange={() => {}} size="lg" />`;
 
+const disabledSnippet = `<ThemeSwitch disabled checked={false} onCheckedChange={() => {}} />`;
+
 function ThemeSwitchPage() {
   const [demoIsDark, setDemoIsDark] = useState(false);
 
@@ -124,6 +126,12 @@ function ThemeSwitchPage() {
           <ThemeSwitch checked={false} onCheckedChange={() => {}} size="lg" />
         </Box>
         <CodeBlock code={sizesSnippet} />
+
+        <h3 className="text-lg font-semibold text-heading">Disabled</h3>
+        <Box shadow="none" surface="none">
+          <ThemeSwitch disabled checked={false} onCheckedChange={() => {}} />
+        </Box>
+        <CodeBlock code={disabledSnippet} />
       </section>
 
       <section className="space-y-4">
@@ -161,6 +169,20 @@ function ThemeSwitchPage() {
               <TableCell>—</TableCell>
               <TableCell>
                 Requests a controlled state change without mutating global theme state.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>disabled</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Disables the native switch input and prevents controlled change requests.
               </TableCell>
             </TableRow>
             <TableRow>

@@ -6,6 +6,7 @@ type ThemeSwitchSize = 'sm' | 'md' | 'lg';
 
 type ThemeSwitchProps = Omit<ComponentPropsWithoutRef<'label'>, 'onChange'> & {
   checked: boolean;
+  disabled?: boolean;
   onCheckedChange: (isDark: boolean) => void;
   size?: ThemeSwitchSize;
 };
@@ -37,6 +38,7 @@ const sizeClassNames: Record<
 function ThemeSwitch({
   checked,
   className,
+  disabled = false,
   onCheckedChange,
   size = 'md',
   ...props
@@ -47,7 +49,8 @@ function ThemeSwitch({
     <label
       {...props}
       className={cn(
-        'relative inline-flex cursor-pointer items-center justify-between',
+        'relative inline-flex items-center justify-between',
+        disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
         sizeClasses.track,
         className,
       )}>
@@ -74,7 +77,10 @@ function ThemeSwitch({
         role="switch"
         aria-checked={checked}
         className="peer sr-only"
-        onChange={() => onCheckedChange(!checked)}
+        disabled={disabled}
+        onChange={() => {
+          if (!disabled) onCheckedChange(!checked);
+        }}
         checked={checked}
       />
 

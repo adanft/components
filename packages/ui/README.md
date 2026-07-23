@@ -46,7 +46,9 @@ Theme helpers keep state transitions explicit: `initializeTheme()` bootstraps CS
 `localStorage`, while `setTheme(isDark)` applies and persists a user change. In Next/SSR,
 read the `theme=dark` cookie server-side, render `<html className="dark">`, and pass that
 value into a controlled client component that renders
-`<ThemeSwitch checked={isDark} onCheckedChange={handleThemeChange} />`.
+`<ThemeSwitch checked={isDark} onCheckedChange={handleThemeChange} />`. Pass `disabled` when theme
+changes are temporarily unavailable; it disables the native switch input and suppresses change
+requests.
 
 You can also import documented public subpaths when you want narrower entrypoints:
 

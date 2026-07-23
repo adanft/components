@@ -903,13 +903,13 @@ const initialDark = initializeTheme();
 
 For SSR apps, read your theme source on the server and pass it into a controlled client component.
 
-**Examples:** default controlled switch and `sm`/`md`/`lg` sizes.
+**Examples:** default controlled switch, disabled state, and `sm`/`md`/`lg` sizes.
 
 **API:**
 
 | Export | Public contract |
 | --- | --- |
-| `ThemeSwitch` | `checked`, `onCheckedChange(isDark)`, `size: "sm" | "md" | "lg" = "md"`,`className` |
+| `ThemeSwitch` | `checked`, `onCheckedChange(isDark)`, `disabled = false`, `size: "sm" | "md" | "lg" = "md"`,`className` |
 | `initializeTheme` | Browser setup helper for CSR apps before render. |
 | `setTheme` | Applies and persists an explicit browser theme change. |
 

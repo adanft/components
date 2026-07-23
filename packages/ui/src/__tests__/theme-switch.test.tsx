@@ -60,6 +60,42 @@ describe('ThemeSwitch', () => {
     expect(onCheckedChange).toHaveBeenCalledWith(false);
   });
 
+  it('disables the native switch and prevents change requests', () => {
+    const onCheckedChange = vi.fn();
+
+    const { rerender } = render(
+      <ThemeSwitch
+        disabled
+        checked={false}
+        onCheckedChange={onCheckedChange}
+        data-testid="switch-label"
+      />,
+    );
+
+    const input = screen.getByRole('switch');
+    const label = screen.getByTestId('switch-label');
+
+    expect(input).toBeDisabled();
+    expect(label).not.toHaveAttribute('disabled');
+    expect(label).toHaveClass('cursor-not-allowed', 'opacity-50');
+
+    fireEvent.click(input);
+    fireEvent.keyDown(input, { key: ' ' });
+    fireEvent.change(input, { target: { checked: true } });
+
+    expect(onCheckedChange).not.toHaveBeenCalled();
+
+    rerender(
+      <ThemeSwitch
+        disabled
+        checked={false}
+        onCheckedChange={onCheckedChange}
+        data-testid="switch-label"
+      />,
+    );
+    expect(input).not.toBeChecked();
+  });
+
   it('merges custom className with base styles', () => {
     render(
       <ThemeSwitch
