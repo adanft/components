@@ -2,6 +2,15 @@ name: UI package release
 
 on:
   workflow_dispatch:
+    inputs:
+      channel:
+        description: npm distribution tag
+        required: true
+        default: beta
+        type: choice
+        options:
+          - beta
+          - latest
 
 permissions:
   contents: write
@@ -26,7 +35,7 @@ jobs:
         uses: changesets/action@v1
         with:
           version: pnpm changeset:version
-          publish: pnpm release:latest
+          publish: pnpm release:${{ inputs.channel }}
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
         env:

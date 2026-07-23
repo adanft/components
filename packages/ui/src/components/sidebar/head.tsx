@@ -20,7 +20,7 @@ function SidebarHead({
   title,
   ...props
 }: SidebarHeadProps) {
-  const { action, state } = useSidebarContext('Head');
+  const { action, sidebarId, state, toggleRef } = useSidebarContext('Head');
   const ToggleIcon = state ? SidebarOpenIcon : SidebarClosedIcon;
   const linkClassName = 'flex items-center gap-2 overflow-hidden';
   const linkContent = (
@@ -48,7 +48,10 @@ function SidebarHead({
     <header {...props} className={cn('relative flex shrink-0 items-center p-2', className)}>
       {brandLink}
       <button
+        ref={toggleRef}
         type="button"
+        aria-controls={sidebarId}
+        aria-expanded={state}
         aria-label={state ? 'Collapse sidebar' : 'Expand sidebar'}
         className={cn(
           'absolute top-1/2 -translate-y-1/2 inline-flex h-9 w-9 items-center justify-center cursor-pointer rounded-md border border-brand leading-none text-brand transition-[left] duration-300',

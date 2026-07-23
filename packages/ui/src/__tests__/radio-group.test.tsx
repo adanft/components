@@ -53,6 +53,22 @@ describe('RadioGroup', () => {
     expect(screen.getByRole('radio', { name: 'Pro' })).toBeChecked();
   });
 
+  it('submits the selected item value with native form data', () => {
+    const { container } = render(
+      <form>
+        <RadioGroup name="plan" value="pro" onValueChange={() => undefined}>
+          <RadioGroup.Item value="starter" label="Starter" />
+          <RadioGroup.Item value="pro" label="Pro" />
+        </RadioGroup>
+      </form>,
+    );
+
+    const form = container.querySelector('form');
+
+    expect(form).not.toBeNull();
+    expect(new FormData(form ?? undefined).get('plan')).toBe('pro');
+  });
+
   it('passes disabled state to items', () => {
     render(
       <RadioGroup value="starter" onValueChange={() => undefined} disabled>

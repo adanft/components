@@ -20,7 +20,8 @@ function AccordionTrigger({ children, onClick, onKeyDown, ...props }: AccordionT
 
     const root = event.currentTarget.closest('[data-accordion-root="true"]');
     const triggers = Array.from(
-      root?.querySelectorAll<HTMLButtonElement>('[data-accordion-trigger="true"]') ?? [],
+      root?.querySelectorAll<HTMLButtonElement>('[data-accordion-trigger="true"]:not(:disabled)') ??
+        [],
     ).filter((trigger) => trigger.closest('[data-accordion-root="true"]') === root);
 
     const currentIndex = triggers.indexOf(event.currentTarget);

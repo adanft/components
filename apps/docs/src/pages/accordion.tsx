@@ -429,7 +429,8 @@ function AccordionPage() {
                 <Code>false</Code>
               </TableCell>
               <TableCell>
-                Uses native button disabled behavior to prevent activation and toggling.
+                Uses native button disabled behavior to prevent activation and toggling. Keyboard
+                navigation skips disabled triggers.
               </TableCell>
             </TableRow>
           </TableBody>

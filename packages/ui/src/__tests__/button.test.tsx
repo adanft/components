@@ -186,4 +186,66 @@ describe('Button', () => {
 
     expect(link).toHaveClass('ui-class', 'router-class', 'rounded-full');
   });
+
+  it('makes an asChild link non-interactive when disabled', () => {
+    const onButtonClick = vi.fn();
+    const onLinkClick = vi.fn();
+
+    render(
+      <Button asChild disabled onClick={onButtonClick}>
+        <RouterLink to="/checkout" onClick={onLinkClick}>
+          Checkout
+        </RouterLink>
+      </Button>,
+    );
+
+    const link = screen.getByRole('link', { name: 'Checkout' });
+    const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
+
+    expect(link).toHaveAttribute('aria-disabled', 'true');
+    expect(link).toHaveAttribute('tabindex', '-1');
+    expect(link.dispatchEvent(clickEvent)).toBe(false);
+    expect(onButtonClick).not.toHaveBeenCalled();
+    expect(onLinkClick).not.toHaveBeenCalled();
+  });
+
+  it('composes child and Button click handlers when asChild is enabled', () => {
+    const onButtonClick = vi.fn((event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+    });
+    const onLinkClick = vi.fn();
+
+    render(
+      <Button asChild onClick={onButtonClick}>
+        <RouterLink to="/checkout" onClick={onLinkClick}>
+          Checkout
+        </RouterLink>
+      </Button>,
+    );
+
+    fireEvent.click(screen.getByRole('link', { name: 'Checkout' }));
+
+    expect(onLinkClick).toHaveBeenCalledTimes(1);
+    expect(onButtonClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('honors a child handler that prevents the Button handler', () => {
+    const onButtonClick = vi.fn();
+    const onLinkClick = vi.fn((event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+    });
+
+    render(
+      <Button asChild onClick={onButtonClick}>
+        <RouterLink to="/checkout" onClick={onLinkClick}>
+          Checkout
+        </RouterLink>
+      </Button>,
+    );
+
+    fireEvent.click(screen.getByRole('link', { name: 'Checkout' }));
+
+    expect(onLinkClick).toHaveBeenCalledTimes(1);
+    expect(onButtonClick).not.toHaveBeenCalled();
+  });
 });

@@ -6,7 +6,7 @@ Reusable React UI components from the adanft design system.
 
 This package is currently published as a **beta** release.
 
-Current beta version: `0.2.0-beta.5`.
+Current beta version: `0.2.0-beta.6`.
 
 ## Current package model
 
@@ -37,15 +37,18 @@ Then import components from the package root for convenience:
 
 ```tsx
 import { Button } from '@adanft/ui';
-import { initializeTheme } from '@adanft/ui/theme';
+import { initializeTheme, setTheme } from '@adanft/ui/theme';
 
 initializeTheme();
 ```
 
-Theme helpers keep CSR simple: `initializeTheme()` is browser-only and reads
-`localStorage`; do not use it to decide the initial SSR theme. In Next/SSR, read the
-`theme=dark` cookie server-side, render `<html className="dark">`, and pass
-`<ThemeSwitch initialDark={isDark} />` to avoid hydration mismatch.
+Theme helpers keep state transitions explicit: `initializeTheme()` bootstraps CSR from
+`localStorage`, while `setTheme(isDark)` applies and persists a user change. In Next/SSR,
+read the `theme=dark` cookie server-side, render `<html className="dark">`, and pass that
+value into a controlled client component that renders
+`<ThemeSwitch checked={isDark} onCheckedChange={handleThemeChange} />`. Pass `disabled` when theme
+changes are temporarily unavailable; it disables the native switch input and suppresses change
+requests.
 
 You can also import documented public subpaths when you want narrower entrypoints:
 
@@ -53,7 +56,7 @@ You can also import documented public subpaths when you want narrower entrypoint
 import Button from '@adanft/ui/button';
 import Modal from '@adanft/ui/modal';
 import Tabs from '@adanft/ui/tabs';
-import { initializeTheme } from '@adanft/ui/theme';
+import { initializeTheme, setTheme } from '@adanft/ui/theme';
 ```
 
 See the documentation site for the full list of public component subpaths.
@@ -66,4 +69,4 @@ See the documentation site for the full list of public component subpaths.
 
 ## Repository
 
-Source: https://github.com/adanft/components
+Source: <https://github.com/adanft/components>

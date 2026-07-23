@@ -1,9 +1,11 @@
-import { createContext, useContext } from 'react';
+import { createContext, type RefObject, useContext } from 'react';
 
 type SidebarContextValue = {
   action: (state: boolean) => void;
   collapsed: boolean;
+  sidebarId: string;
   state: boolean;
+  toggleRef: RefObject<HTMLButtonElement | null>;
 };
 
 const SidebarContext = createContext<SidebarContextValue | null>(null);

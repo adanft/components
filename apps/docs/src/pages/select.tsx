@@ -18,7 +18,7 @@ import { Select } from '@adanft/ui';
 // Public package subpath import
 import Select from '@adanft/ui/select';`;
 
-const usageSnippet = `<Select placeholder="Choose a plan" defaultValue="starter">
+const usageSnippet = `<Select placeholder="Choose a plan">
   <option value="starter">Starter</option>
   <option value="pro">Pro</option>
   <option value="team">Team</option>
@@ -68,6 +68,11 @@ function SelectPage() {
         <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
+        <p className="text-foreground">
+          For a single uncontrolled select, <Code>placeholder</Code> is selected initially unless
+          you provide an explicit <Code>defaultValue</Code>. Native form reset restores that initial
+          selection. Multiple selects ignore <Code>placeholder</Code>.
+        </p>
       </section>
 
       <section className="space-y-4">
@@ -136,7 +141,11 @@ function SelectPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Renders an initial disabled option when provided.</TableCell>
+              <TableCell>
+                For single selects, renders a disabled option and selects it initially in
+                uncontrolled mode unless <Code>defaultValue</Code> is provided. Ignored when{' '}
+                <Code>multiple</Code> is enabled.
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -159,12 +168,6 @@ function SelectPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>
-                <Code>data-placeholder</Code>
-              </TableCell>
-              <TableCell>Applies the placeholder visual state.</TableCell>
-            </TableRow>
             <TableRow>
               <TableCell>
                 <Code>aria-invalid</Code>

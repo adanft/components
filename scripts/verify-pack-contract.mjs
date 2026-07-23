@@ -4,7 +4,11 @@ import path from 'node:path';
 import { createPublishExports, createRootExports } from '../packages/ui/scripts/public-exports.mjs';
 
 function readJson(filePath) {
-  return JSON.parse(readFileSync(filePath, 'utf8'));
+  try {
+    return JSON.parse(readFileSync(filePath, 'utf8'));
+  } catch (error) {
+    throw new Error(`Failed to read JSON contract at ${filePath}`, { cause: error });
+  }
 }
 
 function createCheck(name, ok, details) {
@@ -118,11 +122,18 @@ export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = pro
       `validate:pack-contract=${scripts['validate:pack-contract']}; validate=${scripts.validate}`,
     ),
     createCheck(
-      'release workflow runs the pack contract guardrail before publish',
-      releaseWorkflow.includes('pnpm release:latest') &&
+      'release workflow routes validated publishes to the selected distribution tag',
+      releaseWorkflow.includes('default: beta') &&
+        releaseWorkflow.includes('publish: pnpm release:$' + '{{ inputs.channel }}') &&
         typeof scripts['release:latest'] === 'string' &&
+        scripts['release:latest'].includes('verify-release-channel.mjs latest') &&
         scripts['release:latest'].includes('validate:pack-contract') &&
         scripts['release:latest'].includes('packages/ui') &&
+        typeof scripts['release:beta'] === 'string' &&
+        scripts['release:beta'].includes('verify-release-channel.mjs beta') &&
+        scripts['release:beta'].includes('validate:pack-contract') &&
+        scripts['release:beta'].includes('packages/ui') &&
+        scripts['release:beta'].includes('changeset publish --tag beta') &&
         scripts.release === 'changeset publish --tag latest',
       releaseWorkflow,
     ),

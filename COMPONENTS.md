@@ -15,7 +15,7 @@ import '@adanft/ui/styles.css';
 If you use theme switching in a client-side app, initialize the theme before rendering:
 
 ```tsx
-import { initializeTheme } from '@adanft/ui/theme';
+import { initializeTheme, setTheme } from '@adanft/ui/theme';
 
 initializeTheme();
 ```
@@ -149,6 +149,9 @@ const [value, setValue] = useState<string | null>('overview');
 ```
 
 **Examples:** collapsible sections, fixed-open sections with `collapsible={false}`.
+
+Arrow keys, Home, and End move focus between enabled triggers in the current
+Accordion. Native `disabled` triggers are skipped.
 
 **API:**
 
@@ -299,9 +302,15 @@ import Button from '@adanft/ui/button';
 <Button>Save changes</Button>
 ```
 
-**Examples:** variants, outline variants, sizes, router links with `asChild`.
+**Examples:** variants, outline variants, sizes, router links with `asChild`,
+disabled links.
 
-**API:** `variant: "primary" | "secondary" | "danger" | "info" | "success" | "theme" = "primary"`, `outline = false`, `size: "sm" | "md" | "lg" = "md"`, `asChild = false`, `type = "button"`, `className`.
+With `asChild`, the child's click handler runs before the Button handler. Calling
+`event.preventDefault()` from the child skips the Button handler. A disabled
+child is removed from keyboard navigation and blocks click handlers and
+navigation.
+
+**API:** `variant: "primary" | "secondary" | "danger" | "info" | "success" | "theme" = "primary"`, `outline = false`, `size: "sm" | "md" | "lg" = "md"`, `asChild = false`, `disabled = false`, `type = "button"`, `className`.
 
 ## Checkbox
 
@@ -390,7 +399,7 @@ import RadioGroup from '@adanft/ui/radio-group';
 | --- | --- |
 | `Field`, `Field.Set` | `invalid = false`, `required = false`, `className` |
 | `Field.Legend`, `Field.Label`, `Field.Description` | `className` |
-| `Field.Error` | `errors?: Array<{ message?: string } | undefined>`, `role = "alert"`, `className` |
+| `Field.Error` | `errors?: Array<{ message?: string } | undefined>`,`role = "alert"`,`className` |
 
 ## Input
 
@@ -460,6 +469,11 @@ const [open, setOpen] = useState(false);
 ```
 
 **Examples:** publish confirmation, form modal, panel named with `aria-label` when no visible title exists.
+
+When rendered by an SSR framework, an open modal omits its portal from the
+server output and mounts it after hydration. While open on the client, it locks
+document scrolling, traps focus inside the dialog, and restores focus when
+closed.
 
 **API:**
 
@@ -531,13 +545,20 @@ const [open, setOpen] = useState(false);
 
 <Popover open={open} onOpenChange={setOpen}>
   <Popover.Trigger><Button>Open popover</Button></Popover.Trigger>
-  <Popover.Content className="rounded-md border p-4">Popover content</Popover.Content>
+  <Popover.Content aria-label="Popover details" className="rounded-md border p-4">
+    Popover content
+  </Popover.Content>
 </Popover>;
 ```
 
 **Examples:** share panel, positioned shortcuts panel.
 
-**API:** `open`, `onOpenChange(open)`, `position = "bottom"`, `contentRole: "dialog" | null = "dialog"`, `triggerHasPopup = true`, `Popover.Content` accepts `className` and `style`.
+With the default `dialog` role, `Popover.Content` requires `aria-label` or
+`aria-labelledby`. Set `contentRole={null}` only when the floating content does
+not represent a dialog; the trigger then omits `aria-haspopup`. Set
+`triggerHasPopup={false}` to opt out while keeping dialog content.
+
+**API:** `open`, `onOpenChange(open)`, `position = "bottom"`, `contentRole: "dialog" | null = "dialog"`, `triggerHasPopup = true`, `Popover.Content` accepts native div props, `className`, and `style`.
 
 ## Profile
 
@@ -593,6 +614,11 @@ const [plan, setPlan] = useState('starter');
 
 **Examples:** default group, label position, disabled group, invalid item.
 
+Radio Group participates in native form submission. Set `name` on the group;
+the selected item's `value` is serialized under that name by `FormData` and
+regular browser submission. When `name` is omitted, the group generates one
+for radio coordination only.
+
 **API:**
 
 | Component | Public props |
@@ -613,13 +639,18 @@ import Select from '@adanft/ui/select';
 ```
 
 ```tsx
-<Select placeholder="Choose a plan" defaultValue="starter">
+<Select placeholder="Choose a plan">
   <option value="starter">Starter</option>
   <option value="pro">Pro</option>
 </Select>
 ```
 
 **Examples:** default, invalid, controlled select.
+
+For a single uncontrolled select, `placeholder` becomes the initial selection
+unless an explicit `defaultValue` is provided. Native form reset restores that
+initial selection and its placeholder styling. Multiple selects ignore
+`placeholder`.
 
 **API:** native select props, `placeholder`, `className`.
 
@@ -824,7 +855,7 @@ const [value, setValue] = useState('overview');
 | Component | Public props |
 | --- | --- |
 | `Tabs` | `value`, `onValueChange(value)` |
-| `Tabs.List` | `orientation: "horizontal" | "vertical" = "horizontal"`, `className` |
+| `Tabs.List` | `orientation: "horizontal" | "vertical" = "horizontal"`,`className` |
 | `Tabs.Trigger` | `value`, `disabled = false`, `className` |
 | `Tabs.Content` | `value`, `keepMounted = false`, `className` |
 
@@ -853,31 +884,35 @@ import Textarea from '@adanft/ui/textarea';
 Lets users toggle between light and dark themes.
 
 ```tsx
-import { ThemeSwitch, initializeTheme } from '@adanft/ui';
+import { ThemeSwitch, initializeTheme, setTheme } from '@adanft/ui';
 ```
 
 ```tsx
 import ThemeSwitch from '@adanft/ui/theme-switch';
-import { initializeTheme } from '@adanft/ui/theme';
+import { initializeTheme, setTheme } from '@adanft/ui/theme';
 ```
 
 ```tsx
 // CSR only: call before your app renders.
-initializeTheme();
+const initialDark = initializeTheme();
 
-<ThemeSwitch initialDark={false} />;
+<ThemeSwitch
+  checked={initialDark}
+  onCheckedChange={(nextIsDark) => setTheme(nextIsDark)}
+/>;
 ```
 
-For SSR apps, read your theme source on the server and pass it into `initialDark`.
+For SSR apps, read your theme source on the server and pass it into a controlled client component.
 
-**Examples:** default switch, `sm`/`md`/`lg` sizes, controlled demo with `onCheckedChange`.
+**Examples:** default controlled switch, disabled state, and `sm`/`md`/`lg` sizes.
 
 **API:**
 
 | Export | Public contract |
 | --- | --- |
-| `ThemeSwitch` | `initialDark`, `onCheckedChange(isDark)`, `size: "sm" | "md" | "lg" = "md"`, `className` |
+| `ThemeSwitch` | `checked`, `onCheckedChange(isDark)`, `disabled = false`, `size: "sm" | "md" | "lg" = "md"`,`className` |
 | `initializeTheme` | Browser setup helper for CSR apps before render. |
+| `setTheme` | Applies and persists an explicit browser theme change. |
 
 ## Tooltip
 

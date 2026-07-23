@@ -45,6 +45,10 @@ const linkSnippet = `import { Link } from 'react-router';
   <Link to="/components">Go to</Link>
 </Button>`;
 
+const disabledLinkSnippet = `<Button asChild disabled>
+  <Link to="/checkout">Checkout unavailable</Link>
+</Button>`;
+
 function ButtonPage() {
   return (
     <article className="space-y-8">
@@ -114,6 +118,22 @@ function ButtonPage() {
           </Button>
         </Box>
         <CodeBlock code={linkSnippet} />
+        <p className="text-foreground">
+          With <Code>asChild</Code>, the child click handler runs before the Button handler. If the
+          child calls <Code>event.preventDefault()</Code>, the Button handler is skipped.
+        </p>
+        <h3 className="text-lg font-semibold text-heading">Disabled links</h3>
+        <p className="text-foreground">
+          When <Code>asChild</Code> and <Code>disabled</Code> are combined, Button marks the child
+          as disabled for assistive technology, removes it from keyboard navigation, and prevents
+          navigation and click handlers.
+        </p>
+        <Box className="flex items-center" shadow="none" surface="none">
+          <Button asChild disabled>
+            <Link to="/checkout">Checkout unavailable</Link>
+          </Button>
+        </Box>
+        <CodeBlock code={disabledLinkSnippet} />
       </section>
 
       <section className="space-y-4">
@@ -184,6 +204,22 @@ function ButtonPage() {
               </TableCell>
               <TableCell>
                 Applies Button styling to a child element, such as React Router or Next.js links.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>disabled</Code>
+              </TableCell>
+              <TableCell>
+                <Code>boolean</Code>
+              </TableCell>
+              <TableCell>
+                <Code>false</Code>
+              </TableCell>
+              <TableCell>
+                Disables native buttons. With <Code>asChild</Code>, it also applies{' '}
+                <Code>aria-disabled</Code>, removes the child from keyboard navigation, and blocks
+                navigation and click handlers.
               </TableCell>
             </TableRow>
             <TableRow>

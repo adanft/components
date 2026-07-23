@@ -1,4 +1,5 @@
-import { Button, ThemeSwitch } from '@adanft/ui';
+import { Button, setTheme, ThemeSwitch } from '@adanft/ui';
+import { useState } from 'react';
 
 import NavbarSearch from './search';
 
@@ -17,12 +18,19 @@ function GitHubMark() {
 }
 
 function Navbar({ searchPlaceholder = 'Search' }: NavbarProps) {
+  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'));
+
+  const handleThemeChange = (nextIsDark: boolean) => {
+    setTheme(nextIsDark);
+    setIsDark(nextIsDark);
+  };
+
   return (
     <div className="fixed left-[65px] top-0 right-0 h-[97px] bg-surface border-separator border-b shadow-card px-8 flex justify-between items-center z-10">
       <div aria-hidden="true" />
       <NavbarSearch placeholder={searchPlaceholder} />
       <div className="flex gap-4 items-center">
-        <ThemeSwitch initialDark={document.documentElement.classList.contains('dark')} />
+        <ThemeSwitch checked={isDark} onCheckedChange={handleThemeChange} />
         <Button
           asChild
           outline

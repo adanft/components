@@ -1,4 +1,9 @@
-import { type ComponentPropsWithoutRef, cloneElement, isValidElement } from 'react';
+import {
+  type ComponentPropsWithoutRef,
+  cloneElement,
+  isValidElement,
+  type MouseEventHandler,
+} from 'react';
 
 import { cn } from '../helpers/cn';
 
@@ -21,6 +26,13 @@ type ButtonOutlineProps = ButtonBaseProps & {
 };
 
 type ButtonProps = ButtonFilledProps | ButtonOutlineProps;
+type ButtonChildProps = {
+  'aria-disabled'?: boolean;
+  className?: string;
+  disabled?: boolean;
+  onClick?: MouseEventHandler<HTMLElement>;
+  tabIndex?: number;
+};
 
 const filledVariantStyles: Record<ButtonVariant, string> = {
   primary: 'bg-brand text-white hover:bg-brand/90',
@@ -50,6 +62,7 @@ function Button({
   children,
   className,
   disabled,
+  onClick,
   outline = false,
   type = 'button',
   variant = 'primary',
@@ -63,20 +76,44 @@ function Button({
   const buttonClassName = cn(
     'inline-flex items-center justify-center rounded-full font-semibold cursor-pointer',
     'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
+    'aria-disabled:opacity-50 aria-disabled:cursor-not-allowed aria-disabled:pointer-events-none',
     variantClassName,
     sizeStyles[size],
     className,
   );
 
-  if (asChild && isValidElement<{ className?: string }>(children)) {
+  if (asChild && isValidElement<ButtonChildProps>(children)) {
+    const childOnClick = children.props.onClick;
+    const handleClick: MouseEventHandler<HTMLElement> = (event) => {
+      if (disabled) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+
+      childOnClick?.(event);
+      if (!event.defaultPrevented) {
+        onClick?.(event as Parameters<NonNullable<typeof onClick>>[0]);
+      }
+    };
+
     return cloneElement(children, {
       ...props,
+      ...(children.type === 'button' ? { disabled } : {}),
+      'aria-disabled': disabled || children.props['aria-disabled'],
       className: cn(buttonClassName, children.props.className),
+      onClick: handleClick,
+      tabIndex: disabled ? -1 : children.props.tabIndex,
     });
   }
 
   return (
-    <button {...props} disabled={disabled} type={type} className={buttonClassName}>
+    <button
+      {...props}
+      disabled={disabled}
+      type={type}
+      className={buttonClassName}
+      onClick={onClick}>
       {children}
     </button>
   );

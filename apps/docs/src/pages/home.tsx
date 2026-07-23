@@ -93,16 +93,16 @@ const CSR_THEME_BOOTSTRAP_SNIPPET = `import { initializeTheme } from '@adanft/ui
 initializeTheme();`;
 
 const SSR_THEME_BOOTSTRAP_SNIPPET = `import { cookies } from 'next/headers';
-import { ThemeSwitch } from '@adanft/ui';
+import { ThemeControl } from './theme-control';
 
-// Next/SSR: resolve the initial theme on the server.
+// Next/SSR: resolve the initial theme on the server, then pass it to a controlled client component.
 export default async function RootLayout({ children }) {
   const isDark = (await cookies()).get('theme')?.value === 'dark';
 
   return (
     <html className={isDark ? 'dark' : ''}>
       <body>
-        <ThemeSwitch initialDark={isDark} />
+        <ThemeControl initialDark={isDark} />
         {children}
       </body>
     </html>
@@ -252,8 +252,8 @@ function Home() {
               <Code>initializeTheme()</Code> is a CSR helper: it reads <Code>localStorage</Code> and
               applies <Code>html.dark</Code> in the browser. In SSR, read the{' '}
               <Code>theme=dark</Code>
-              cookie server-side and pass that boolean to <Code>ThemeSwitch initialDark</Code> so
-              the server markup and client hydration agree.
+              cookie server-side and pass that boolean into a controlled client component so the
+              server markup and client hydration agree.
             </p>
             <CodeBlock code={CSR_THEME_BOOTSTRAP_SNIPPET} />
             <CodeBlock code={SSR_THEME_BOOTSTRAP_SNIPPET} />

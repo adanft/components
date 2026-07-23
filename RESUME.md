@@ -14,7 +14,7 @@ site.
 - **Docs URL**: <https://adanft.github.io/components>
 - **Docs base path**: `/components/`
 - **Default branch**: `main`
-- **Current beta package version**: `0.2.0-beta.5`
+- **Current beta package version**: `0.2.0-beta.6`
 
 The docs app is intentionally a real consumer of the package. It must import from `@adanft/ui`, not
 from package internals.
@@ -94,7 +94,7 @@ Docs must use public package imports:
 ```ts
 import { Button } from '@adanft/ui';
 import Button from '@adanft/ui/button';
-import { initializeTheme } from '@adanft/ui/theme';
+import { initializeTheme, setTheme } from '@adanft/ui/theme';
 import '@adanft/ui/styles.css';
 ```
 
@@ -210,7 +210,8 @@ Current public API includes:
   `SidebarGroup`, `SidebarGroupLink`, `SidebarHead`, `SidebarLink`, `SidebarSection`, `Skeleton`,
   `Spinner`, `Switch`, `Table`, `TableBody`, `TableCaption`, `TableCell`, `TableFooter`,
   `TableHead`, `TableHeader`, `TableRow`, `Tabs`, `Textarea`, `ThemeSwitch`, `Tooltip`
-- Theme helpers: `initializeTheme` from the root export or the narrower `@adanft/ui/theme` subpath
+- Theme helpers: `initializeTheme` and `setTheme` from the root export or the narrower
+  `@adanft/ui/theme` subpath
 - Public stylesheet: `@adanft/ui/styles.css`
 - Public package subpaths are intentionally documented in the component docs Usage sections and on
   the docs home catalog.
@@ -370,8 +371,8 @@ The package release flow uses Changesets.
 - Keep `.changeset/config.json`.
 - `packages/ui` is the only publishable package.
 - `apps/docs` is private and ignored by Changesets.
-- While releases are beta-only, releases publish `@adanft/ui` with the npm `latest` tag.
-- Current beta package version is `0.2.0-beta.5`.
+- Beta releases publish `@adanft/ui` with the npm `beta` tag; stable releases use `latest`.
+- Current beta package version is `0.2.0-beta.6`.
 - Stable `1.0.0` is not the current target.
 - Clean release validation has passed after deleting `node_modules` and `dist` outputs, reinstalling,
   and running `pnpm validate`.
@@ -380,6 +381,7 @@ Release-related commands:
 
 ```bash
 pnpm validate:pack-contract
+pnpm release:beta
 pnpm release:latest
 ```
 

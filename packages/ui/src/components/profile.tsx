@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import Popover from '../primitives/popover';
 import type { AvatarSize } from './avatar';
 import Avatar from './avatar';
@@ -37,6 +37,7 @@ function Profile({
   avatarType,
   ...avatarProps
 }: ProfileProps) {
+  const nameId = useId();
   const [open, setOpen] = useState(false);
 
   const renderAvatar = (size?: AvatarSize) =>
@@ -58,12 +59,12 @@ function Profile({
           {renderAvatar(avatarSize)}
         </button>
       </Popover.Trigger>
-      <Popover.Content className="z-50">
+      <Popover.Content aria-labelledby={nameId} className="z-50">
         <Box className="w-72">
           <div className="flex items-center gap-2">
             {renderAvatar(panelAvatarSize)}
             <div className="flex flex-col gap-1 text-foreground">
-              <span>{name}</span>
+              <span id={nameId}>{name}</span>
               <span className="text-sm font-semibold">{username}</span>
             </div>
           </div>

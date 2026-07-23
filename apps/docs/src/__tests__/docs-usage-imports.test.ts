@@ -182,8 +182,8 @@ const usageImportExamples = [
   ],
   [
     'theme-switch.tsx',
-    "import { initializeTheme } from '@adanft/ui';",
-    "import { initializeTheme } from '@adanft/ui/theme';",
+    "import { initializeTheme, setTheme } from '@adanft/ui';",
+    "import { initializeTheme, setTheme } from '@adanft/ui/theme';",
   ],
   [
     'tooltip.tsx',

@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 import { createContext, useContext } from 'react';
 
 type PopoverContextValue = {
+  contentRole: 'dialog' | null;
   context: FloatingContext;
   floatingStyles: CSSProperties;
   getFloatingProps: UseInteractionsReturn['getFloatingProps'];
