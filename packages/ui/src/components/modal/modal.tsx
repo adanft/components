@@ -1,5 +1,5 @@
 import { FloatingFocusManager, useFloating } from '@floating-ui/react';
-import { type ReactNode, useEffect, useId, useRef } from 'react';
+import { type ReactNode, useEffect, useId, useRef, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 
 import { ModalContext } from './context';
@@ -12,6 +12,14 @@ type ModalProps = {
 
 let scrollLockCount = 0;
 let previousDocumentOverflow = '';
+
+const subscribeToClientEnvironment = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
+function useIsClient() {
+  return useSyncExternalStore(subscribeToClientEnvironment, getClientSnapshot, getServerSnapshot);
+}
 
 function lockDocumentScroll() {
   const style = document.documentElement.style;
@@ -36,6 +44,7 @@ function lockDocumentScroll() {
 function Modal({ open, onClose, children }: ModalProps) {
   const titleId = `modal-title-${useId()}`;
   const initialFocusRef = useRef<HTMLElement | null>(null);
+  const isClient = useIsClient();
   const { context: floatingContext, refs } = useFloating({
     open,
     onOpenChange(nextOpen) {
@@ -54,7 +63,7 @@ function Modal({ open, onClose, children }: ModalProps) {
     };
   }, [open]);
 
-  if (!open) return null;
+  if (!open || !isClient) return null;
 
   return createPortal(
     <ModalContext.Provider value={{ initialFocusRef, onClose, titleId }}>
