@@ -85,6 +85,53 @@ describe('Accordion', () => {
     expect(screen.getByRole('button', { name: 'Analytics' })).toHaveFocus();
   });
 
+  it('skips disabled triggers during keyboard navigation', () => {
+    render(
+      <Accordion value="first" onValueChange={() => undefined}>
+        <Accordion.Item value="first">
+          <Accordion.Header>
+            <Accordion.Trigger>First</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>First content</Accordion.Content>
+        </Accordion.Item>
+        <Accordion.Item value="disabled">
+          <Accordion.Header>
+            <Accordion.Trigger disabled>Disabled</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>Disabled content</Accordion.Content>
+        </Accordion.Item>
+        <Accordion.Item value="last">
+          <Accordion.Header>
+            <Accordion.Trigger>Last</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>Last content</Accordion.Content>
+        </Accordion.Item>
+      </Accordion>,
+    );
+
+    const firstTrigger = screen.getByRole('button', { name: 'First' });
+    const lastTrigger = screen.getByRole('button', { name: 'Last' });
+
+    firstTrigger.focus();
+    fireEvent.keyDown(firstTrigger, { key: 'ArrowDown' });
+    expect(lastTrigger).toHaveFocus();
+
+    fireEvent.keyDown(lastTrigger, { key: 'ArrowUp' });
+    expect(firstTrigger).toHaveFocus();
+
+    fireEvent.keyDown(firstTrigger, { key: 'End' });
+    expect(lastTrigger).toHaveFocus();
+
+    fireEvent.keyDown(lastTrigger, { key: 'Home' });
+    expect(firstTrigger).toHaveFocus();
+
+    fireEvent.keyDown(firstTrigger, { key: 'ArrowUp' });
+    expect(lastTrigger).toHaveFocus();
+
+    fireEvent.keyDown(lastTrigger, { key: 'ArrowDown' });
+    expect(firstTrigger).toHaveFocus();
+  });
+
   it('limits keyboard navigation to the current accordion when nested accordions exist', () => {
     render(
       <Accordion value="parent-1" onValueChange={() => undefined}>

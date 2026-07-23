@@ -150,6 +150,9 @@ const [value, setValue] = useState<string | null>('overview');
 
 **Examples:** collapsible sections, fixed-open sections with `collapsible={false}`.
 
+Arrow keys, Home, and End move focus between enabled triggers in the current
+Accordion. Native `disabled` triggers are skipped.
+
 **API:**
 
 | Component | Public props |
