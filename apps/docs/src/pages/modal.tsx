@@ -88,6 +88,11 @@ function ModalPage() {
         <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
+        <p className="text-foreground">
+          In SSR applications, an open modal omits its portal from server output and mounts it after
+          hydration. On the client, it locks document scrolling, traps focus inside the dialog, and
+          restores focus when closed.
+        </p>
       </section>
 
       <section className="space-y-4">

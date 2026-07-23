@@ -94,7 +94,7 @@ Docs must use public package imports:
 ```ts
 import { Button } from '@adanft/ui';
 import Button from '@adanft/ui/button';
-import { initializeTheme } from '@adanft/ui/theme';
+import { initializeTheme, setTheme } from '@adanft/ui/theme';
 import '@adanft/ui/styles.css';
 ```
 
@@ -210,7 +210,8 @@ Current public API includes:
   `SidebarGroup`, `SidebarGroupLink`, `SidebarHead`, `SidebarLink`, `SidebarSection`, `Skeleton`,
   `Spinner`, `Switch`, `Table`, `TableBody`, `TableCaption`, `TableCell`, `TableFooter`,
   `TableHead`, `TableHeader`, `TableRow`, `Tabs`, `Textarea`, `ThemeSwitch`, `Tooltip`
-- Theme helpers: `initializeTheme` from the root export or the narrower `@adanft/ui/theme` subpath
+- Theme helpers: `initializeTheme` and `setTheme` from the root export or the narrower
+  `@adanft/ui/theme` subpath
 - Public stylesheet: `@adanft/ui/styles.css`
 - Public package subpaths are intentionally documented in the component docs Usage sections and on
   the docs home catalog.

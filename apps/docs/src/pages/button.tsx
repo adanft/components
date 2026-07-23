@@ -118,6 +118,10 @@ function ButtonPage() {
           </Button>
         </Box>
         <CodeBlock code={linkSnippet} />
+        <p className="text-foreground">
+          With <Code>asChild</Code>, the child click handler runs before the Button handler. If the
+          child calls <Code>event.preventDefault()</Code>, the Button handler is skipped.
+        </p>
         <h3 className="text-lg font-semibold text-heading">Disabled links</h3>
         <p className="text-foreground">
           When <Code>asChild</Code> and <Code>disabled</Code> are combined, Button marks the child

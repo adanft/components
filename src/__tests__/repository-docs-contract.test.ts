@@ -16,6 +16,7 @@ describe('repository documentation contract', () => {
     expect(resume).toContain('`packages/ui`');
     expect(resume).toContain('`apps/docs`');
     expect(resume).toContain('`@adanft/ui`');
+    expect(resume).toContain('Theme helpers: `initializeTheme` and `setTheme`');
     expect(resume).not.toContain('`src/lib`');
     expect(resume).not.toContain('`src/docs`');
   });

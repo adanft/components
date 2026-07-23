@@ -299,9 +299,15 @@ import Button from '@adanft/ui/button';
 <Button>Save changes</Button>
 ```
 
-**Examples:** variants, outline variants, sizes, router links with `asChild`.
+**Examples:** variants, outline variants, sizes, router links with `asChild`,
+disabled links.
 
-**API:** `variant: "primary" | "secondary" | "danger" | "info" | "success" | "theme" = "primary"`, `outline = false`, `size: "sm" | "md" | "lg" = "md"`, `asChild = false`, `type = "button"`, `className`.
+With `asChild`, the child's click handler runs before the Button handler. Calling
+`event.preventDefault()` from the child skips the Button handler. A disabled
+child is removed from keyboard navigation and blocks click handlers and
+navigation.
+
+**API:** `variant: "primary" | "secondary" | "danger" | "info" | "success" | "theme" = "primary"`, `outline = false`, `size: "sm" | "md" | "lg" = "md"`, `asChild = false`, `disabled = false`, `type = "button"`, `className`.
 
 ## Checkbox
 
@@ -461,6 +467,11 @@ const [open, setOpen] = useState(false);
 
 **Examples:** publish confirmation, form modal, panel named with `aria-label` when no visible title exists.
 
+When rendered by an SSR framework, an open modal omits its portal from the
+server output and mounts it after hydration. While open on the client, it locks
+document scrolling, traps focus inside the dialog, and restores focus when
+closed.
+
 **API:**
 
 | Component | Public props |
@@ -592,6 +603,11 @@ const [plan, setPlan] = useState('starter');
 ```
 
 **Examples:** default group, label position, disabled group, invalid item.
+
+Radio Group participates in native form submission. Set `name` on the group;
+the selected item's `value` is serialized under that name by `FormData` and
+regular browser submission. When `name` is omitted, the group generates one
+for radio coordination only.
 
 **API:**
 

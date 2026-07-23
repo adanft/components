@@ -88,6 +88,11 @@ function RadioGroupPage() {
         <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
+        <p className="text-foreground">
+          Set <Code>name</Code> to include the selected item in native form submission. The item's{' '}
+          <Code>value</Code> is serialized under that name by <Code>FormData</Code> and regular
+          browser submission.
+        </p>
       </section>
 
       <section className="space-y-4">
