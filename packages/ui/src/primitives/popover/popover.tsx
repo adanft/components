@@ -42,7 +42,7 @@ function Popover({
   open,
   onOpenChange,
   position = 'bottom',
-  triggerHasPopup = true,
+  triggerHasPopup,
 }: PopoverProps) {
   const { refs, floatingStyles, context } = useFloating({
     open,
@@ -68,7 +68,7 @@ function Popover({
         floatingStyles,
         getFloatingProps,
         getReferenceProps,
-        hasPopup: triggerHasPopup,
+        hasPopup: contentRole === 'dialog' && triggerHasPopup !== false,
         open,
         setFloating: refs.setFloating,
         setReference: refs.setReference,

@@ -212,7 +212,7 @@ function PopoverPage() {
               </TableCell>
               <TableCell>
                 Sets the ARIA role on <Code>Popover.Content</Code>. Use <Code>null</Code> for purely
-                supplemental content that should not expose a dialog role.
+                supplemental content; the trigger will not announce a dialog.
               </TableCell>
             </TableRow>
             <TableRow>
@@ -226,8 +226,9 @@ function PopoverPage() {
                 <Code>true</Code>
               </TableCell>
               <TableCell>
-                Adds <Code>aria-haspopup="dialog"</Code> to the trigger. Set to <Code>false</Code>
-                when that announcement is not appropriate for your content.
+                Allows <Code>aria-haspopup="dialog"</Code> when the content uses its dialog role.
+                Set to <Code>false</Code> to opt out. Content without a dialog role never announces
+                one.
               </TableCell>
             </TableRow>
           </TableBody>

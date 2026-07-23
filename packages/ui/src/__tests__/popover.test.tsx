@@ -114,6 +114,28 @@ describe('Popover', () => {
 
     expect(screen.getByTestId('popover-content')).not.toHaveAttribute('role');
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Toggle popover' })).not.toHaveAttribute(
+      'aria-haspopup',
+    );
+  });
+
+  it('does not announce a dialog when contentRole is null even if triggerHasPopup is true', () => {
+    render(
+      <Popover
+        contentRole={null}
+        open={false}
+        onOpenChange={() => undefined}
+        triggerHasPopup={true}>
+        <Popover.Trigger>
+          <button type="button">Toggle supplemental content</button>
+        </Popover.Trigger>
+        <Popover.Content>Supplemental content</Popover.Content>
+      </Popover>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Toggle supplemental content' })).not.toHaveAttribute(
+      'aria-haspopup',
+    );
   });
 
   it('calls onOpenChange(false) when Escape is pressed', () => {

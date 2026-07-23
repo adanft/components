@@ -555,7 +555,8 @@ const [open, setOpen] = useState(false);
 
 With the default `dialog` role, `Popover.Content` requires `aria-label` or
 `aria-labelledby`. Set `contentRole={null}` only when the floating content does
-not represent a dialog.
+not represent a dialog; the trigger then omits `aria-haspopup`. Set
+`triggerHasPopup={false}` to opt out while keeping dialog content.
 
 **API:** `open`, `onOpenChange(open)`, `position = "bottom"`, `contentRole: "dialog" | null = "dialog"`, `triggerHasPopup = true`, `Popover.Content` accepts native div props, `className`, and `style`.
 
