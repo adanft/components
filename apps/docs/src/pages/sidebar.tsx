@@ -277,8 +277,11 @@ function SidebarPage() {
 
         <h3 className="text-lg font-semibold text-heading">Sidebar</h3>
         <p className="text-foreground">
-          A thin wrapper around the native <Code>{`<aside>`}</Code> element.
+          A thin wrapper around the native <Code>{`<aside>`}</Code> element. Pressing{' '}
+          <Code>Escape</Code> while focus is inside an expanded sidebar collapses it and returns
+          focus to the toggle.
         </p>
+
         <Table>
           <TableHeader>
             <TableRow>
@@ -308,7 +311,8 @@ function SidebarPage() {
               </TableCell>
               <TableCell>—</TableCell>
               <TableCell>
-                Receives expansion changes from the toggle button and outside click handler.
+                Receives expansion changes from the toggle button, outside click handler, and{' '}
+                <Code>Escape</Code> key.
               </TableCell>
             </TableRow>
             <TableRow>
@@ -416,6 +420,18 @@ function SidebarPage() {
                 <Code>aria-label</Code>
               </TableCell>
               <TableCell>Labels the sidebar toggle button.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-controls</Code>
+              </TableCell>
+              <TableCell>Connects the toggle button to the sidebar element.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>aria-expanded</Code>
+              </TableCell>
+              <TableCell>Reflects whether the sidebar is expanded or collapsed.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>

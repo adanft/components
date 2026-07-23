@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { type SVGProps, useState } from 'react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
   Sidebar,
@@ -57,6 +57,76 @@ describe('Sidebar', () => {
     fireEvent.click(toggle);
 
     expect(screen.getByRole('button', { name: /collapse sidebar/i })).toBeInTheDocument();
+  });
+
+  it('exposes the controlled state and sidebar relationship from the toggle', () => {
+    render(<StatefulSidebar />);
+
+    const sidebar = screen.getByTestId('sidebar');
+    const toggle = screen.getByRole('button', { name: /expand sidebar/i });
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    expect(toggle).toHaveAttribute('aria-controls', sidebar.id);
+
+    fireEvent.click(toggle);
+
+    expect(screen.getByRole('button', { name: /collapse sidebar/i })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
+  });
+
+  it('closes with Escape and restores focus to the toggle', () => {
+    render(<StatefulSidebar />);
+
+    fireEvent.click(screen.getByRole('button', { name: /expand sidebar/i }));
+    const brandLink = screen.getByRole('link', { name: /docs logo.*docs/i });
+    brandLink.focus();
+
+    fireEvent.keyDown(brandLink, { key: 'Escape' });
+
+    expect(screen.getByRole('button', { name: /expand sidebar/i })).toHaveFocus();
+  });
+
+  it('respects a consumer key handler that prevents Escape', () => {
+    const action = vi.fn();
+
+    render(
+      <Sidebar
+        state
+        action={action}
+        className="static"
+        onKeyDown={(event) => event.preventDefault()}>
+        <SidebarHead href="/" logoSrc="/logo.png" title="Docs" />
+      </Sidebar>,
+    );
+
+    const brandLink = screen.getByRole('link', { name: /docs logo.*docs/i });
+    brandLink.focus();
+    fireEvent.keyDown(brandLink, { key: 'Escape' });
+
+    expect(action).not.toHaveBeenCalled();
+  });
+
+  it('closes only the nearest nested sidebar with Escape', () => {
+    const outerAction = vi.fn();
+    const innerAction = vi.fn();
+
+    render(
+      <Sidebar state action={outerAction} className="static">
+        <SidebarHead href="/" logoSrc="/outer.png" title="Outer" />
+        <Sidebar state action={innerAction} className="static">
+          <SidebarHead href="/inner" logoSrc="/inner.png" title="Inner" />
+        </Sidebar>
+      </Sidebar>,
+    );
+
+    const innerLink = screen.getByRole('link', { name: /inner logo.*inner/i });
+    innerLink.focus();
+    fireEvent.keyDown(innerLink, { key: 'Escape' });
+
+    expect(innerAction).toHaveBeenCalledWith(false);
+    expect(outerAction).not.toHaveBeenCalled();
   });
 
   it('forwards custom header props through SidebarHead', () => {
