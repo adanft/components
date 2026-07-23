@@ -143,4 +143,4 @@ export type {
   TooltipTriggerProps,
 } from './primitives/tooltip';
 export { default as Tooltip } from './primitives/tooltip';
-export { initializeTheme } from './theme';
+export { initializeTheme, setTheme } from './theme';

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { initializeTheme, toggleTheme } from '../helpers/theme';
+import { initializeTheme, setTheme } from '../helpers/theme';
 
 describe('theme helper transitions', () => {
   beforeEach(() => {
@@ -31,10 +31,10 @@ describe('theme helper transitions', () => {
     expect(document.documentElement.classList.contains('dark')).toBe(false);
   });
 
-  it('toggles dark, writes localStorage and cookie, and flips document class', () => {
+  it('sets dark, writes localStorage and cookie, and updates the document class', () => {
     expect(initializeTheme()).toBe(false);
 
-    const isDark = toggleTheme();
+    const isDark = setTheme(true);
 
     expect(isDark).toBe(true);
     expect(localStorage.getItem('theme')).toBe('dark');
@@ -42,13 +42,13 @@ describe('theme helper transitions', () => {
     expect(document.documentElement.classList.contains('dark')).toBe(true);
   });
 
-  it('toggles back to default, clears localStorage, and expires cookie', () => {
+  it('sets the default theme, clears localStorage, and expires the cookie', () => {
     document.documentElement.classList.add('dark');
     localStorage.setItem('theme', 'dark');
     // biome-ignore lint/suspicious/noDocumentCookie: tests need to seed the SSR-readable theme cookie.
     document.cookie = 'theme=dark; path=/; max-age=31536000; SameSite=Lax';
 
-    const isDark = toggleTheme();
+    const isDark = setTheme(false);
 
     expect(isDark).toBe(false);
     expect(localStorage.getItem('theme')).toBeNull();
@@ -66,7 +66,7 @@ describe('theme helper transitions', () => {
     delete globalThis.localStorage;
 
     expect(initializeTheme()).toBe(false);
-    expect(toggleTheme()).toBe(false);
+    expect(setTheme(true)).toBe(false);
 
     globalThis.document = originalDocument;
     globalThis.localStorage = originalLocalStorage;

@@ -12,7 +12,7 @@ describe('ThemeSwitch', () => {
   });
 
   it('renders a switch input', () => {
-    render(<ThemeSwitch initialDark={false} />);
+    render(<ThemeSwitch checked={false} onCheckedChange={() => undefined} />);
 
     const input = screen.getByRole('switch');
 
@@ -21,65 +21,53 @@ describe('ThemeSwitch', () => {
   });
 
   it('has accessible label text via sr-only span', () => {
-    render(<ThemeSwitch initialDark={false} />);
+    render(<ThemeSwitch checked={false} onCheckedChange={() => undefined} />);
 
     expect(screen.getByText('Toggle theme')).toBeInTheDocument();
   });
 
-  it('initializes checked state from initialDark', () => {
-    document.documentElement.classList.add('dark');
+  it('reflects the controlled checked state', () => {
+    const { rerender } = render(<ThemeSwitch checked={false} onCheckedChange={() => undefined} />);
 
-    render(<ThemeSwitch initialDark={false} />);
+    expect(screen.getByRole('switch')).not.toBeChecked();
 
-    const input = screen.getByRole('switch');
+    rerender(<ThemeSwitch checked onCheckedChange={() => undefined} />);
 
-    expect(input).not.toBeChecked();
-    expect(document.documentElement.classList.contains('dark')).toBe(true);
+    expect(screen.getByRole('switch')).toBeChecked();
   });
 
-  it('uses initialDark without relying on the document theme class', () => {
-    render(<ThemeSwitch initialDark={true} />);
-
-    const input = screen.getByRole('switch');
-
-    expect(input).toBeChecked();
-    expect(document.documentElement.classList.contains('dark')).toBe(false);
-  });
-
-  it('toggles checked state, storage, and document class on click', () => {
-    render(<ThemeSwitch initialDark={false} />);
-
-    const input = screen.getByRole('switch');
-
-    expect(input).not.toBeChecked();
-
-    fireEvent.click(input);
-
-    expect(input).toBeChecked();
-    expect(localStorage.getItem('theme')).toBe('dark');
-    expect(document.cookie).toContain('theme=dark');
-    expect(document.documentElement.classList.contains('dark')).toBe(true);
-  });
-
-  it('uses onCheckedChange without changing the document theme', () => {
+  it('requests the next checked state without changing global theme state', () => {
     const onCheckedChange = vi.fn();
 
-    render(<ThemeSwitch initialDark={false} onCheckedChange={onCheckedChange} />);
+    render(<ThemeSwitch checked={false} onCheckedChange={onCheckedChange} />);
 
-    const input = screen.getByRole('switch');
+    fireEvent.click(screen.getByRole('switch'));
 
-    fireEvent.click(input);
-
-    expect(input).toBeChecked();
     expect(onCheckedChange).toHaveBeenCalledWith(true);
+    expect(screen.getByRole('switch')).not.toBeChecked();
     expect(localStorage.getItem('theme')).toBeNull();
     expect(document.cookie).not.toContain('theme=dark');
     expect(document.documentElement.classList.contains('dark')).toBe(false);
   });
 
+  it('requests false when the controlled state is checked', () => {
+    const onCheckedChange = vi.fn();
+
+    render(<ThemeSwitch checked onCheckedChange={onCheckedChange} />);
+
+    fireEvent.click(screen.getByRole('switch'));
+
+    expect(onCheckedChange).toHaveBeenCalledWith(false);
+  });
+
   it('merges custom className with base styles', () => {
     render(
-      <ThemeSwitch initialDark={false} className="my-custom-class" data-testid="switch-label" />,
+      <ThemeSwitch
+        checked={false}
+        onCheckedChange={() => undefined}
+        className="my-custom-class"
+        data-testid="switch-label"
+      />,
     );
 
     const label = screen.getByTestId('switch-label');
@@ -88,34 +76,49 @@ describe('ThemeSwitch', () => {
   });
 
   it('applies md size classes by default', () => {
-    render(<ThemeSwitch initialDark={false} data-testid="switch-label" />);
+    render(
+      <ThemeSwitch checked={false} onCheckedChange={() => undefined} data-testid="switch-label" />,
+    );
 
-    const label = screen.getByTestId('switch-label');
-
-    expect(label).toHaveClass('w-12', 'h-6');
+    expect(screen.getByTestId('switch-label')).toHaveClass('w-12', 'h-6');
   });
 
   it('applies sm size classes', () => {
-    render(<ThemeSwitch initialDark={false} size="sm" data-testid="switch-label" />);
+    render(
+      <ThemeSwitch
+        checked={false}
+        onCheckedChange={() => undefined}
+        size="sm"
+        data-testid="switch-label"
+      />,
+    );
 
-    const label = screen.getByTestId('switch-label');
-
-    expect(label).toHaveClass('w-10', 'h-5');
+    expect(screen.getByTestId('switch-label')).toHaveClass('w-10', 'h-5');
   });
 
   it('applies lg size classes', () => {
-    render(<ThemeSwitch initialDark={false} size="lg" data-testid="switch-label" />);
+    render(
+      <ThemeSwitch
+        checked={false}
+        onCheckedChange={() => undefined}
+        size="lg"
+        data-testid="switch-label"
+      />,
+    );
 
-    const label = screen.getByTestId('switch-label');
-
-    expect(label).toHaveClass('w-14', 'h-7');
+    expect(screen.getByTestId('switch-label')).toHaveClass('w-14', 'h-7');
   });
 
   it('forwards extra props to the label element', () => {
-    render(<ThemeSwitch initialDark={false} data-testid="switch-label" aria-describedby="help" />);
+    render(
+      <ThemeSwitch
+        checked={false}
+        onCheckedChange={() => undefined}
+        data-testid="switch-label"
+        aria-describedby="help"
+      />,
+    );
 
-    const label = screen.getByTestId('switch-label');
-
-    expect(label).toHaveAttribute('aria-describedby', 'help');
+    expect(screen.getByTestId('switch-label')).toHaveAttribute('aria-describedby', 'help');
   });
 });

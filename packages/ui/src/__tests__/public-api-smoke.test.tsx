@@ -51,7 +51,10 @@ import TabsSubpath, {
   type TabsListOrientation as TabsListOrientationSubpath,
 } from '@adanft/ui/tabs';
 import * as themeSubpath from '@adanft/ui/theme';
-import { initializeTheme as initializeThemeSubpath } from '@adanft/ui/theme';
+import {
+  initializeTheme as initializeThemeSubpath,
+  setTheme as setThemeSubpath,
+} from '@adanft/ui/theme';
 import TooltipSubpath from '@adanft/ui/tooltip';
 import { render, screen } from '@testing-library/react';
 import type { ComponentPropsWithoutRef, SVGProps } from 'react';
@@ -228,6 +231,9 @@ describe('@adanft/ui public API', () => {
     expect(components.initializeTheme()).toBe(false);
     expect(initializeThemeSubpath).toBe(components.initializeTheme);
     expect(themeSubpath.initializeTheme()).toBe(false);
+    expect(setThemeSubpath).toBe(components.setTheme);
+    expect(components.setTheme(true)).toBe(true);
+    expect(document.documentElement).toHaveClass('dark');
     expect('toggleTheme' in components).toBe(false);
     expect('toggleTheme' in themeSubpath).toBe(false);
     expect(components.ThemeSwitch).toBeTypeOf('function');

@@ -15,7 +15,7 @@ import '@adanft/ui/styles.css';
 If you use theme switching in a client-side app, initialize the theme before rendering:
 
 ```tsx
-import { initializeTheme } from '@adanft/ui/theme';
+import { initializeTheme, setTheme } from '@adanft/ui/theme';
 
 initializeTheme();
 ```
@@ -390,7 +390,7 @@ import RadioGroup from '@adanft/ui/radio-group';
 | --- | --- |
 | `Field`, `Field.Set` | `invalid = false`, `required = false`, `className` |
 | `Field.Legend`, `Field.Label`, `Field.Description` | `className` |
-| `Field.Error` | `errors?: Array<{ message?: string } | undefined>`, `role = "alert"`, `className` |
+| `Field.Error` | `errors?: Array<{ message?: string } | undefined>`,`role = "alert"`,`className` |
 
 ## Input
 
@@ -824,7 +824,7 @@ const [value, setValue] = useState('overview');
 | Component | Public props |
 | --- | --- |
 | `Tabs` | `value`, `onValueChange(value)` |
-| `Tabs.List` | `orientation: "horizontal" | "vertical" = "horizontal"`, `className` |
+| `Tabs.List` | `orientation: "horizontal" | "vertical" = "horizontal"`,`className` |
 | `Tabs.Trigger` | `value`, `disabled = false`, `className` |
 | `Tabs.Content` | `value`, `keepMounted = false`, `className` |
 
@@ -853,31 +853,35 @@ import Textarea from '@adanft/ui/textarea';
 Lets users toggle between light and dark themes.
 
 ```tsx
-import { ThemeSwitch, initializeTheme } from '@adanft/ui';
+import { ThemeSwitch, initializeTheme, setTheme } from '@adanft/ui';
 ```
 
 ```tsx
 import ThemeSwitch from '@adanft/ui/theme-switch';
-import { initializeTheme } from '@adanft/ui/theme';
+import { initializeTheme, setTheme } from '@adanft/ui/theme';
 ```
 
 ```tsx
 // CSR only: call before your app renders.
-initializeTheme();
+const initialDark = initializeTheme();
 
-<ThemeSwitch initialDark={false} />;
+<ThemeSwitch
+  checked={initialDark}
+  onCheckedChange={(nextIsDark) => setTheme(nextIsDark)}
+/>;
 ```
 
-For SSR apps, read your theme source on the server and pass it into `initialDark`.
+For SSR apps, read your theme source on the server and pass it into a controlled client component.
 
-**Examples:** default switch, `sm`/`md`/`lg` sizes, controlled demo with `onCheckedChange`.
+**Examples:** default controlled switch and `sm`/`md`/`lg` sizes.
 
 **API:**
 
 | Export | Public contract |
 | --- | --- |
-| `ThemeSwitch` | `initialDark`, `onCheckedChange(isDark)`, `size: "sm" | "md" | "lg" = "md"`, `className` |
+| `ThemeSwitch` | `checked`, `onCheckedChange(isDark)`, `size: "sm" | "md" | "lg" = "md"`,`className` |
 | `initializeTheme` | Browser setup helper for CSR apps before render. |
+| `setTheme` | Applies and persists an explicit browser theme change. |
 
 ## Tooltip
 

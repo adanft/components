@@ -32,12 +32,10 @@ function initializeTheme(): boolean {
   return isDark;
 }
 
-function toggleTheme(): boolean {
+function setTheme(isDark: boolean): boolean {
   if (!hasBrowserGlobals()) {
     return false;
   }
-
-  const isDark = !document.documentElement.classList.contains('dark');
 
   document.documentElement.classList.toggle('dark', isDark);
   persistTheme(isDark);
@@ -45,4 +43,4 @@ function toggleTheme(): boolean {
   return isDark;
 }
 
-export { initializeTheme, toggleTheme };
+export { initializeTheme, setTheme };

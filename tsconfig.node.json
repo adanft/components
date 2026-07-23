@@ -2,6 +2,7 @@
   "files": [],
   "references": [
     { "path": "./packages/ui/tsconfig.node.json" },
-    { "path": "./apps/docs/tsconfig.node.json" }
+    { "path": "./apps/docs/tsconfig.node.json" },
+    { "path": "./tsconfig.repo-tests.json" }
   ]
 }

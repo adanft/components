@@ -28,6 +28,7 @@ describe('repository documentation contract', () => {
     const packageReadme = readRepoFile('packages/ui/README.md');
 
     expect(packageReadme).toContain('initializeTheme()');
+    expect(packageReadme).toContain('setTheme(isDark)');
     expect(packageReadme).not.toContain('toggleTheme()');
   });
 

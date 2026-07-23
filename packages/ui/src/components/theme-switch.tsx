@@ -1,13 +1,12 @@
-import { type ComponentPropsWithoutRef, useState } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import { cn } from '../helpers/cn';
-import { toggleTheme } from '../helpers/theme';
 import { MoonIcon, SunIcon } from '../icons';
 
 type ThemeSwitchSize = 'sm' | 'md' | 'lg';
 
 type ThemeSwitchProps = Omit<ComponentPropsWithoutRef<'label'>, 'onChange'> & {
-  initialDark: boolean;
-  onCheckedChange?: (isDark: boolean) => void;
+  checked: boolean;
+  onCheckedChange: (isDark: boolean) => void;
   size?: ThemeSwitchSize;
 };
 
@@ -36,21 +35,13 @@ const sizeClassNames: Record<
 } as const;
 
 function ThemeSwitch({
+  checked,
   className,
-  initialDark,
   onCheckedChange,
   size = 'md',
   ...props
 }: ThemeSwitchProps) {
-  const [isDark, setIsDark] = useState(initialDark);
   const sizeClasses = sizeClassNames[size];
-
-  const handleChange = () => {
-    const nextIsDark = onCheckedChange ? !isDark : toggleTheme();
-
-    setIsDark(nextIsDark);
-    onCheckedChange?.(nextIsDark);
-  };
 
   return (
     <label
@@ -81,10 +72,10 @@ function ThemeSwitch({
       <input
         type="checkbox"
         role="switch"
-        aria-checked={isDark}
+        aria-checked={checked}
         className="peer sr-only"
-        onChange={handleChange}
-        checked={isDark}
+        onChange={() => onCheckedChange(!checked)}
+        checked={checked}
       />
 
       <span

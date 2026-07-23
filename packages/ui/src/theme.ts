@@ -1,1 +1,1 @@
-export { initializeTheme } from './helpers/theme';
+export { initializeTheme, setTheme } from './helpers/theme';
