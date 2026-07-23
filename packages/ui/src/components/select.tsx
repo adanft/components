@@ -12,29 +12,31 @@ function Select({
   className,
   defaultValue,
   disabled,
+  multiple,
   placeholder,
   value,
   ...props
 }: SelectProps) {
+  const hasPlaceholder = Boolean(placeholder) && !multiple;
+  const uncontrolledDefaultValue = defaultValue ?? (hasPlaceholder ? '' : undefined);
   const controlledProps =
-    value !== undefined ? { value } : defaultValue !== undefined ? { defaultValue } : {};
-  const isPlaceholderSelected = value === '' || (value === undefined && defaultValue === '');
+    value !== undefined ? { value } : { defaultValue: uncontrolledDefaultValue };
 
   return (
     <div className="relative w-full">
       <select
         {...props}
+        data-ui-select-placeholder={hasPlaceholder ? '' : undefined}
         disabled={disabled}
+        multiple={multiple}
         {...controlledProps}
-        data-placeholder={isPlaceholderSelected ? '' : undefined}
         className={cn(
           'w-full appearance-none rounded-md border border-border bg-background px-3 py-2 pr-10 text-foreground',
-          'data-placeholder:text-muted',
           'aria-invalid:border-danger aria-invalid:focus-visible:outline-outline-danger',
           'disabled:cursor-not-allowed disabled:bg-muted/20 disabled:opacity-50',
           className,
         )}>
-        {placeholder ? (
+        {hasPlaceholder ? (
           <option value="" disabled>
             {placeholder}
           </option>

@@ -80,6 +80,11 @@ input::placeholder {
   font-weight: 400;
 }
 
+/* Progressive enhancement: older browsers keep the functional placeholder with normal text color. */
+[data-ui-select-placeholder]:has(> option[value=""]:checked) {
+  color: var(--color-muted);
+}
+
 /* Match SimpleBar's generated scrollbar thumb to the theme token. */
 .simplebar-scrollbar:before {
   /* biome-ignore lint/complexity/noImportantStyles: required to override simplebar's inline styles */

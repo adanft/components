@@ -638,13 +638,18 @@ import Select from '@adanft/ui/select';
 ```
 
 ```tsx
-<Select placeholder="Choose a plan" defaultValue="starter">
+<Select placeholder="Choose a plan">
   <option value="starter">Starter</option>
   <option value="pro">Pro</option>
 </Select>
 ```
 
 **Examples:** default, invalid, controlled select.
+
+For a single uncontrolled select, `placeholder` becomes the initial selection
+unless an explicit `defaultValue` is provided. Native form reset restores that
+initial selection and its placeholder styling. Multiple selects ignore
+`placeholder`.
 
 **API:** native select props, `placeholder`, `className`.
 
