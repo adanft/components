@@ -1,8 +1,16 @@
 import { createContext, useContext } from 'react';
 
+type TabsTriggerRegistration = {
+  disabled: boolean;
+  node: HTMLElement;
+  value: string;
+};
+
 type TabsContextValue = {
   baseId: string;
   onValueChange: (value: string) => void;
+  registerTrigger: (trigger: TabsTriggerRegistration) => () => void;
+  triggers: TabsTriggerRegistration[];
   value: string;
 };
 
@@ -18,4 +26,5 @@ function useTabsContext(componentName: string) {
   return context;
 }
 
+export type { TabsTriggerRegistration };
 export { TabsContext, useTabsContext };

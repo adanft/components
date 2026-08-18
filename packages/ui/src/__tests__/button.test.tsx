@@ -160,6 +160,38 @@ describe('Button', () => {
     expect(link).not.toHaveAttribute('type');
   });
 
+  it('applies the default type to asChild button children', () => {
+    render(
+      <Button asChild>
+        {/* biome-ignore lint/a11y/useButtonType: asserts the default type Button forwards to the child */}
+        <button>Save</button>
+      </Button>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Save' })).toHaveAttribute('type', 'button');
+  });
+
+  it('forwards an explicit type to asChild button children', () => {
+    render(
+      <Button asChild type="submit">
+        {/* biome-ignore lint/a11y/useButtonType: asserts the type Button forwards to the child */}
+        <button>Send</button>
+      </Button>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Send' })).toHaveAttribute('type', 'submit');
+  });
+
+  it('preserves the type declared on the asChild button child', () => {
+    render(
+      <Button asChild>
+        <button type="submit">Submit</button>
+      </Button>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Submit' })).toHaveAttribute('type', 'submit');
+  });
+
   it('composes outline styles with asChild links', () => {
     render(
       <Button asChild outline variant="danger">

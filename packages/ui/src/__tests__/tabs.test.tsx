@@ -55,6 +55,23 @@ function VerticalTabsHarness() {
   );
 }
 
+function UnmatchedValueTabsHarness({ firstDisabled }: { firstDisabled?: boolean }) {
+  return (
+    <Tabs value="missing" onValueChange={() => undefined}>
+      <Tabs.List>
+        <Tabs.Trigger value="overview" disabled={firstDisabled}>
+          Overview
+        </Tabs.Trigger>
+        <Tabs.Trigger value="analytics">Analytics</Tabs.Trigger>
+        <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value="overview">Overview content</Tabs.Content>
+      <Tabs.Content value="analytics">Analytics content</Tabs.Content>
+      <Tabs.Content value="settings">Settings content</Tabs.Content>
+    </Tabs>
+  );
+}
+
 describe('Tabs', () => {
   it('switches panels on click', () => {
     render(<TabsHarness />);
@@ -129,6 +146,107 @@ describe('Tabs', () => {
     expect(screen.getByRole('tabpanel', { name: 'Analytics' })).toHaveTextContent(
       'Analytics content',
     );
+  });
+
+  it('keeps roving focus on the selected trigger when the value matches a tab', () => {
+    render(<TabsHarness />);
+
+    expect(screen.getByRole('tab', { name: 'Overview' })).toHaveAttribute('tabindex', '0');
+    expect(screen.getByRole('tab', { name: 'Analytics' })).toHaveAttribute('tabindex', '-1');
+    expect(screen.getByRole('tab', { name: 'Settings' })).toHaveAttribute('tabindex', '-1');
+  });
+
+  it('falls back to the first enabled trigger when the value matches no tab', () => {
+    render(<UnmatchedValueTabsHarness />);
+
+    expect(screen.getByRole('tab', { name: 'Overview' })).toHaveAttribute('tabindex', '0');
+    expect(screen.getByRole('tab', { name: 'Analytics' })).toHaveAttribute('tabindex', '-1');
+    expect(screen.getByRole('tab', { name: 'Settings' })).toHaveAttribute('tabindex', '-1');
+  });
+
+  it('skips disabled triggers when falling back to a focusable trigger', () => {
+    render(<UnmatchedValueTabsHarness firstDisabled />);
+
+    expect(screen.getByRole('tab', { name: 'Overview' })).toHaveAttribute('tabindex', '-1');
+    expect(screen.getByRole('tab', { name: 'Analytics' })).toHaveAttribute('tabindex', '0');
+    expect(screen.getByRole('tab', { name: 'Settings' })).toHaveAttribute('tabindex', '-1');
+  });
+
+  it('moves the fallback to a trigger prepended after the initial render', () => {
+    const { rerender } = render(
+      <Tabs value="missing" onValueChange={() => undefined}>
+        <Tabs.List>
+          <Tabs.Trigger key="a" value="a">
+            A
+          </Tabs.Trigger>
+          <Tabs.Trigger key="b" value="b">
+            B
+          </Tabs.Trigger>
+        </Tabs.List>
+      </Tabs>,
+    );
+
+    rerender(
+      <Tabs value="missing" onValueChange={() => undefined}>
+        <Tabs.List>
+          <Tabs.Trigger key="new" value="new">
+            New
+          </Tabs.Trigger>
+          <Tabs.Trigger key="a" value="a">
+            A
+          </Tabs.Trigger>
+          <Tabs.Trigger key="b" value="b">
+            B
+          </Tabs.Trigger>
+        </Tabs.List>
+      </Tabs>,
+    );
+
+    expect(screen.getByRole('tab', { name: 'New' })).toHaveAttribute('tabindex', '0');
+    expect(screen.getByRole('tab', { name: 'A' })).toHaveAttribute('tabindex', '-1');
+    expect(screen.getByRole('tab', { name: 'B' })).toHaveAttribute('tabindex', '-1');
+  });
+
+  it('moves the fallback to the trigger that becomes first in the DOM after a reorder', () => {
+    const { rerender } = render(
+      <Tabs value="missing" onValueChange={() => undefined}>
+        <Tabs.List>
+          <Tabs.Trigger value="a">A</Tabs.Trigger>
+          <Tabs.Trigger value="b">B</Tabs.Trigger>
+        </Tabs.List>
+      </Tabs>,
+    );
+
+    expect(screen.getByRole('tab', { name: 'A' })).toHaveAttribute('tabindex', '0');
+
+    rerender(
+      <Tabs value="missing" onValueChange={() => undefined}>
+        <Tabs.List>
+          <Tabs.Trigger value="b">B</Tabs.Trigger>
+          <Tabs.Trigger value="a">A</Tabs.Trigger>
+        </Tabs.List>
+      </Tabs>,
+    );
+
+    expect(screen.getByRole('tab', { name: 'B' })).toHaveAttribute('tabindex', '0');
+    expect(screen.getByRole('tab', { name: 'A' })).toHaveAttribute('tabindex', '-1');
+  });
+
+  it('restores the fallback to the first trigger after a disable and enable cycle', () => {
+    const { rerender } = render(<UnmatchedValueTabsHarness />);
+
+    expect(screen.getByRole('tab', { name: 'Overview' })).toHaveAttribute('tabindex', '0');
+
+    rerender(<UnmatchedValueTabsHarness firstDisabled />);
+
+    expect(screen.getByRole('tab', { name: 'Overview' })).toHaveAttribute('tabindex', '-1');
+    expect(screen.getByRole('tab', { name: 'Analytics' })).toHaveAttribute('tabindex', '0');
+
+    rerender(<UnmatchedValueTabsHarness />);
+
+    expect(screen.getByRole('tab', { name: 'Overview' })).toHaveAttribute('tabindex', '0');
+    expect(screen.getByRole('tab', { name: 'Analytics' })).toHaveAttribute('tabindex', '-1');
+    expect(screen.getByRole('tab', { name: 'Settings' })).toHaveAttribute('tabindex', '-1');
   });
 
   it('preserves internal tab semantics when native props are passed', () => {

@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { Accordion } from '../index';
 
@@ -130,6 +131,59 @@ describe('Accordion', () => {
 
     fireEvent.keyDown(lastTrigger, { key: 'ArrowDown' });
     expect(firstTrigger).toHaveFocus();
+  });
+
+  it.each([
+    ['boolean', true],
+    ['string', 'true'],
+  ] as const)('keeps aria-disabled (%s) triggers focusable without toggling their panels', async (_kind, ariaDisabled) => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+
+    render(
+      <Accordion value="overview" onValueChange={onValueChange}>
+        <Accordion.Item value="overview">
+          <Accordion.Header>
+            <Accordion.Trigger>Overview</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>Overview content</Accordion.Content>
+        </Accordion.Item>
+        <Accordion.Item value="analytics">
+          <Accordion.Header>
+            <Accordion.Trigger aria-disabled={ariaDisabled}>Analytics</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>Analytics content</Accordion.Content>
+        </Accordion.Item>
+      </Accordion>,
+    );
+
+    const trigger = screen.getByRole('button', { name: 'Analytics' });
+
+    trigger.focus();
+    expect(trigger).toHaveFocus();
+
+    await user.click(trigger);
+    await user.keyboard('{Enter}');
+    await user.keyboard(' ');
+
+    expect(onValueChange).not.toHaveBeenCalled();
+    expect(screen.queryByRole('region', { name: 'Analytics' })).not.toBeInTheDocument();
+  });
+
+  it('toggles the panel when an enabled trigger is activated with the keyboard', async () => {
+    const user = userEvent.setup();
+
+    render(<AccordionHarness />);
+
+    const trigger = screen.getByRole('button', { name: 'Analytics' });
+
+    trigger.focus();
+    await user.keyboard('{Enter}');
+
+    expect(screen.getByRole('region', { name: 'Analytics' })).toHaveTextContent(
+      'Analytics content',
+    );
+    expect(screen.queryByText('Overview content')).not.toBeInTheDocument();
   });
 
   it('limits keyboard navigation to the current accordion when nested accordions exist', () => {

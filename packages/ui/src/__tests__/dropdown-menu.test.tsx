@@ -45,6 +45,14 @@ describe('DropdownMenu', () => {
     );
   });
 
+  it('layers the menu content above overlay surfaces', () => {
+    render(<DropdownMenuHarness />);
+
+    fireEvent.mouseDown(screen.getByRole('button', { name: 'Actions' }));
+
+    expect(screen.getByTestId('menu-content')).toHaveClass('z-50');
+  });
+
   it('merges consumer className into the menu content without losing base styles', () => {
     render(
       <DropdownMenu open={true} onOpenChange={() => undefined}>
