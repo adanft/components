@@ -62,13 +62,16 @@ function PaginationFoot({
 }: PaginationFootProps) {
   if (totalPages === 0) return null;
 
-  const canPrev = pageIndex > 0;
-  const canNext = pageIndex < totalPages - 1;
+  const effectivePageIndex = Number.isFinite(pageIndex)
+    ? Math.min(Math.max(Math.trunc(pageIndex), 0), totalPages - 1)
+    : 0;
+  const canPrev = effectivePageIndex > 0;
+  const canNext = effectivePageIndex < totalPages - 1;
 
-  const pages = getPageNumbers(pageIndex, totalPages);
+  const pages = getPageNumbers(effectivePageIndex, totalPages);
 
-  const rangeStart = pageIndex * pageSize + 1;
-  const rangeEnd = Math.min((pageIndex + 1) * pageSize, totalItems);
+  const rangeStart = effectivePageIndex * pageSize + 1;
+  const rangeEnd = Math.min((effectivePageIndex + 1) * pageSize, totalItems);
 
   return (
     <div
@@ -81,7 +84,7 @@ function PaginationFoot({
               type="button"
               aria-label="Previous page"
               disabled={!canPrev}
-              onClick={() => onPageChange(pageIndex - 1)}
+              onClick={() => onPageChange(effectivePageIndex - 1)}
               className={arrowButtonClasses}>
               <ChevronLeftIcon className="size-4" aria-hidden="true" />
             </button>
@@ -99,9 +102,12 @@ function PaginationFoot({
                 <button
                   type="button"
                   aria-label={`Page ${page + 1}`}
-                  aria-current={pageIndex === page ? 'page' : undefined}
+                  aria-current={effectivePageIndex === page ? 'page' : undefined}
                   onClick={() => onPageChange(page)}
-                  className={cn(pageButtonClasses, pageIndex === page && 'bg-brand text-white')}>
+                  className={cn(
+                    pageButtonClasses,
+                    effectivePageIndex === page && 'bg-brand text-white',
+                  )}>
                   {page + 1}
                 </button>
               )}
@@ -112,7 +118,7 @@ function PaginationFoot({
               type="button"
               aria-label="Next page"
               disabled={!canNext}
-              onClick={() => onPageChange(pageIndex + 1)}
+              onClick={() => onPageChange(effectivePageIndex + 1)}
               className={arrowButtonClasses}>
               <ChevronRightIcon className="size-4" aria-hidden="true" />
             </button>

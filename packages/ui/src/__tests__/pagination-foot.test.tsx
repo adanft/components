@@ -194,6 +194,59 @@ describe('PaginationFoot', () => {
     expect(screen.getByText('Showing 21–25 of 25 items')).toBeInTheDocument();
   });
 
+  it('clamps a controlled page index when the total page count shrinks', () => {
+    const onPageChange = vi.fn();
+    const { rerender } = render(
+      <PaginationFoot
+        pageIndex={9}
+        pageSize={10}
+        totalItems={95}
+        totalPages={10}
+        onPageChange={onPageChange}
+      />,
+    );
+
+    rerender(
+      <PaginationFoot
+        pageIndex={9}
+        pageSize={10}
+        totalItems={25}
+        totalPages={3}
+        onPageChange={onPageChange}
+      />,
+    );
+
+    expect(screen.getByRole('button', { name: 'Page 3' })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByText('Showing 21–25 of 25 items')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Next page' })).toBeDisabled();
+    expect(onPageChange).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Previous page' }));
+    expect(onPageChange).toHaveBeenCalledWith(1);
+  });
+
+  it.each([
+    [Number.NaN, 1],
+    [1.9, 2],
+    [Number.POSITIVE_INFINITY, 1],
+    [Number.NEGATIVE_INFINITY, 1],
+  ])('normalizes invalid pageIndex %s to page %s', (pageIndex, pageNumber) => {
+    render(
+      <PaginationFoot
+        pageIndex={pageIndex}
+        pageSize={10}
+        totalItems={50}
+        totalPages={5}
+        onPageChange={() => {}}
+      />,
+    );
+
+    expect(screen.getByRole('button', { name: `Page ${pageNumber}` })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+  });
+
   it('reflects a custom label prop in the caption', () => {
     render(
       <PaginationFoot
