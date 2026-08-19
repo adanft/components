@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm generate:highlighted-code && pnpm exec vite",
-    "build": "pnpm generate:highlighted-code && pnpm typecheck && pnpm exec vite build",
+    "build": "pnpm generate:highlighted-code:check && pnpm typecheck && pnpm exec vite build",
     "generate:highlighted-code": "node scripts/generate-highlighted-code.mjs",
+    "generate:highlighted-code:check": "node scripts/generate-highlighted-code.mjs --check",
     "preview": "pnpm exec vite preview",
-    "test": "pnpm generate:highlighted-code && pnpm exec vitest run --config vitest.config.ts",
+    "test": "pnpm generate:highlighted-code:check && pnpm exec vitest run --config vitest.config.ts",
     "typecheck": "pnpm exec tsc -b tsconfig.json --pretty false"
   },
   "dependencies": {

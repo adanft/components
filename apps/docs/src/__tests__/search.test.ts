@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
+import { PUBLIC_SUBPATH_EXPORTS } from '../../../../packages/ui/scripts/public-exports.mjs';
 import { type DocsSearchEntry, docsSearchIndex, searchDocs } from '../data/search';
 
 const rankingFixture: DocsSearchEntry[] = [
@@ -50,6 +51,27 @@ describe('docs search', () => {
     const results = searchDocs('@adanft/ui/select', docsSearchIndex);
 
     expect(results[0]).toMatchObject({ name: 'Select', href: '/components/select' });
+  });
+
+  it('indexes only canonical public package subpaths', () => {
+    const publicSubpaths = new Set(
+      Object.keys(PUBLIC_SUBPATH_EXPORTS).map((subpath) => `@adanft/ui/${subpath}`),
+    );
+
+    for (const entry of docsSearchIndex) {
+      for (const subpath of entry.subpaths) {
+        expect(publicSubpaths.has(subpath), `${entry.href} indexes ${subpath}`).toBe(true);
+      }
+    }
+  });
+
+  it('matches both public pagination subpaths', () => {
+    for (const subpath of ['@adanft/ui/pagination-head', '@adanft/ui/pagination-foot']) {
+      expect(searchDocs(subpath, docsSearchIndex)[0]).toMatchObject({
+        name: 'Pagination',
+        href: '/components/pagination',
+      });
+    }
   });
 
   it('limits results to a small result set', () => {

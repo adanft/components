@@ -341,7 +341,8 @@
   },
   "scripts": {
     "sync:exports": "node scripts/sync-package-exports.mjs",
-    "build": "pnpm sync:exports && pnpm typecheck && pnpm exec vite build && pnpm exec tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
+    "sync:exports:check": "node scripts/sync-package-exports.mjs --check",
+    "build": "pnpm sync:exports:check && pnpm typecheck && pnpm exec vite build && pnpm exec tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
     "prepack": "pnpm build",
     "test": "pnpm exec vitest run --config vitest.config.ts",
     "typecheck": "pnpm exec tsc -b tsconfig.json --pretty false"

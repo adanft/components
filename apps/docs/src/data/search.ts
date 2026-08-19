@@ -95,7 +95,7 @@ const searchMetadataByHref: Record<
   '/components/pagination': {
     description: 'Navigation controls for paged collections.',
     keywords: ['navigation', 'pages', 'next', 'previous', 'list'],
-    subpaths: ['@adanft/ui/pagination'],
+    subpaths: ['@adanft/ui/pagination-head', '@adanft/ui/pagination-foot'],
   },
   '/components/popover': {
     description: 'Floating overlay for contextual content.',

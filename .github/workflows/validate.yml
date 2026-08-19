@@ -20,11 +20,7 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Typecheck workspace
-        run: pnpm typecheck
-      - name: Test workspace
-        run: pnpm test
-      - name: Validate boundaries
-        run: pnpm validate:boundaries && pnpm validate:semantic-tokens
-      - name: Build workspace
-        run: pnpm build
+      - name: Validate workspace
+        run: pnpm validate
+      - name: Reject tracked drift
+        run: git diff --exit-code

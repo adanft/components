@@ -7,6 +7,12 @@ honor aria-disabled without losing focusability, tabs keep a keyboard entry
 point by moving roving focus to the first enabled trigger when no tab matches
 the value, and dropdown menu content layers above modal overlays.
 
+Tooltips now remain open while the pointer crosses from their trigger to their
+content, PaginationFoot normalizes stale, fractional, and non-finite page
+indexes before rendering or navigating, and multiple Select controls preserve
+the browser's native presentation without a single-select chevron or forced
+appearance reset.
+
 Breaking behavior change for asChild consumers: a native button child without
 an explicit type now receives Button's default `type="button"` instead of the
 browser default `submit`. A composed button that should submit a form must now
