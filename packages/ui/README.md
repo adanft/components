@@ -4,9 +4,9 @@ Reusable React UI components from the adanft design system.
 
 ## Status
 
-This package is currently published as a **beta** release.
+This repository is prepared for the stable `0.2.0` release.
 
-Current beta version: `0.2.0-beta.6`.
+Current package version: `0.2.0`. Publication is a separate release step.
 
 ## Current package model
 

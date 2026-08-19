@@ -11,11 +11,16 @@ function readRepoFile(relativePath: string) {
   return readFileSync(path.join(repoRoot, relativePath), 'utf8');
 }
 
+function readUiPackageVersion() {
+  const packageJson = JSON.parse(readRepoFile('packages/ui/package.json')) as { version: string };
+  return packageJson.version;
+}
+
 describe('release workspace contract', () => {
   it('reads the legacy alias policy version from the publishable ui package manifest', async () => {
     const { readPackageVersion } = await import('../../scripts/legacy-alias-policy.mjs');
 
-    await expect(readPackageVersion()).resolves.toBe('0.2.0-beta.6');
+    await expect(readPackageVersion()).resolves.toBe(readUiPackageVersion());
   });
 
   it('configures changesets and release scripts for the ui package only', () => {
@@ -47,11 +52,13 @@ describe('release workspace contract', () => {
     const releaseWorkflow = readRepoFile('.github/workflows/release.yml');
     const distTagWorkflow = readRepoFile('.github/workflows/npm-dist-tag.yml');
 
-    expect(releaseWorkflow).toContain('default: beta');
+    expect(releaseWorkflow).toContain('default: latest');
+    expect(releaseWorkflow).toContain('- beta');
     expect(releaseWorkflow).toContain('publish: pnpm release:$' + '{{ inputs.channel }}');
     expect(releaseWorkflow).not.toContain('publish: pnpm release:latest');
-    expect(distTagWorkflow).toContain('default: 0.2.0-beta.6');
-    expect(distTagWorkflow).toContain('default: beta');
+    expect(distTagWorkflow).toContain(`default: ${readUiPackageVersion()}`);
+    expect(distTagWorkflow).toContain('default: latest');
+    expect(distTagWorkflow).toContain('- beta');
     expect(distTagWorkflow).toContain('verify-release-channel.mjs');
   });
 
@@ -113,7 +120,7 @@ describe('release workspace contract', () => {
     );
   });
 
-  it('verifies the pack and publish contract before beta release', async () => {
+  it('verifies the pack and publish contract before release', async () => {
     const { verifyPackContract } = await import('../../scripts/verify-pack-contract.mjs');
 
     const verification = verifyPackContract({ requireBuiltArtifacts: false, rootDir: repoRoot });

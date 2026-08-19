@@ -47,6 +47,7 @@ function verifySubpathExports(exportsMap, rootDir, { requireBuiltArtifacts }) {
 export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = process.cwd() } = {}) {
   const packageManifestPath = path.join(rootDir, 'packages/ui/package.json');
   const rootManifestPath = path.join(rootDir, 'package.json');
+  const distTagWorkflowPath = path.join(rootDir, '.github/workflows/npm-dist-tag.yml');
   const releaseWorkflowPath = path.join(rootDir, '.github/workflows/release.yml');
   const packageStylesPath = path.join(rootDir, 'packages/ui/styles.css');
   const packageSourceStylesPath = path.join(rootDir, 'packages/ui/src/styles.css');
@@ -55,6 +56,7 @@ export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = pro
   const packageManifest = readJson(packageManifestPath);
   const packageBuildConfig = readJson(packageBuildConfigPath);
   const rootManifest = readJson(rootManifestPath);
+  const distTagWorkflow = readFileSync(distTagWorkflowPath, 'utf8');
   const releaseWorkflow = readFileSync(releaseWorkflowPath, 'utf8');
   const packageSourceStyles = readFileSync(packageSourceStylesPath, 'utf8');
 
@@ -123,8 +125,12 @@ export function verifyPackContract({ requireBuiltArtifacts = true, rootDir = pro
     ),
     createCheck(
       'release workflow routes validated publishes to the selected distribution tag',
-      releaseWorkflow.includes('default: beta') &&
+      releaseWorkflow.includes('default: latest') &&
+        releaseWorkflow.includes('- beta') &&
         releaseWorkflow.includes('publish: pnpm release:$' + '{{ inputs.channel }}') &&
+        distTagWorkflow.includes(`default: ${packageManifest.version}`) &&
+        distTagWorkflow.includes('default: latest') &&
+        distTagWorkflow.includes('- beta') &&
         typeof scripts['release:latest'] === 'string' &&
         scripts['release:latest'].includes('verify-release-channel.mjs latest') &&
         scripts['release:latest'].includes('validate:pack-contract') &&

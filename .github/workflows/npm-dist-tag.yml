@@ -6,11 +6,11 @@ on:
       version:
         description: Version to tag
         required: true
-        default: 0.2.0-beta.6
+        default: 0.2.0
       tag:
         description: Dist tag to move
         required: true
-        default: beta
+        default: latest
         type: choice
         options:
           - beta

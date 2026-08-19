@@ -14,7 +14,7 @@ site.
 - **Docs URL**: <https://adanft.github.io/components>
 - **Docs base path**: `/components/`
 - **Default branch**: `main`
-- **Current beta package version**: `0.2.0-beta.6`
+- **Current package version**: `0.2.0` (stable release candidate; not yet published)
 
 The docs app is intentionally a real consumer of the package. It must import from `@adanft/ui`, not
 from package internals.
@@ -41,7 +41,7 @@ from package internals.
 │   └── ui/                # Publishable @adanft/ui package
 ├── scripts/               # Validation and release guardrails
 ├── src/__tests__/         # Root workspace/release/repository contract tests
-├── .changeset/            # Changesets config for npm beta releases
+├── .changeset/            # Changesets config for package releases
 ├── .github/workflows/     # CI, release, and docs deploy workflows
 ├── package.json           # Workspace scripts
 ├── pnpm-workspace.yaml
@@ -372,15 +372,19 @@ The package release flow uses Changesets.
 - `packages/ui` is the only publishable package.
 - `apps/docs` is private and ignored by Changesets.
 - Beta releases publish `@adanft/ui` with the npm `beta` tag; stable releases use `latest`.
-- Current beta package version is `0.2.0-beta.6`.
+- Current package version is the stable `0.2.0` release candidate; repository preparation does not
+  imply that it has been published to npm.
+- The stable transition exits prerelease mode before versioning; the prepared `0.2.0` version has
+  consumed all pending release changesets.
 - Stable `1.0.0` is not the current target.
-- Clean release validation has passed after deleting `node_modules` and `dist` outputs, reinstalling,
-  and running `pnpm validate`.
+- Release preparation must pass the check-only validation and package dry-run contract before
+  publication.
 
 Release-related commands:
 
 ```bash
 pnpm validate:pack-contract
+pnpm changeset status
 pnpm release:beta
 pnpm release:latest
 ```
