@@ -470,6 +470,15 @@ function AccordionPage() {
             </TableRow>
             <TableRow>
               <TableCell>
+                <Code>aria-disabled</Code>
+              </TableCell>
+              <TableCell>
+                When <Code>true</Code>, keeps the trigger focusable for discovery but prevents
+                click, Enter, and Space from toggling it.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
                 <Code>data-state</Code>
               </TableCell>
               <TableCell>Reflects the open or closed trigger state.</TableCell>

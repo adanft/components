@@ -240,7 +240,11 @@ function TabsPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Current selected tab value.</TableCell>
+              <TableCell>
+                Current selected tab value. When no trigger matches, roving focus falls back to the
+                first enabled trigger in current DOM order, including after triggers are prepended
+                or reordered.
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
