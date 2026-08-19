@@ -232,7 +232,11 @@ function ButtonPage() {
               <TableCell>
                 <Code>{`"button"`}</Code>
               </TableCell>
-              <TableCell>Uses the native button type attribute.</TableCell>
+              <TableCell>
+                Uses the native button type attribute. With <Code>asChild</Code> and a native{' '}
+                <Code>{`<button>`}</Code>, Button forwards this value unless the child declares its
+                own type. The child type takes precedence.
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>

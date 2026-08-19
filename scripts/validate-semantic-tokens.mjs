@@ -40,7 +40,6 @@ const LEGACY_UTILITY_CLASSES = [
   'box',
   'border-primary-color',
   'text-primary-color',
-  'text-muted',
   'text-color',
   'active',
 ];
@@ -81,7 +80,7 @@ function createCssClassRegex() {
   return new RegExp(`\\.(${names})(?=[^a-zA-Z0-9_-]|$)`);
 }
 
-function createSourceClassRegex() {
+export function createSourceClassRegex() {
   const names = LEGACY_UTILITY_CLASSES.map((name) => escapeRegExp(name)).join('|');
   return new RegExp(`(?:^|\\s)(${names})(?=\\s|$)`);
 }
@@ -287,8 +286,10 @@ async function run() {
   );
 }
 
-run().catch((error) => {
-  console.error('Semantic token validation crashed.');
-  console.error(error);
-  process.exitCode = 1;
-});
+if (import.meta.url === new URL(process.argv[1], 'file:').href) {
+  run().catch((error) => {
+    console.error('Semantic token validation crashed.');
+    console.error(error);
+    process.exitCode = 1;
+  });
+}

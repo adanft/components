@@ -239,7 +239,11 @@ function PaginationPage() {
                 <Code>number</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Zero-based current page index.</TableCell>
+              <TableCell>
+                Zero-based current page index. Invalid or stale values are normalized for rendering
+                and navigation when the page count shrinks, without changing the controlled value or
+                calling <Code>onPageChange</Code> automatically.
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>

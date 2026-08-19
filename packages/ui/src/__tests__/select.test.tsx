@@ -23,7 +23,7 @@ function SelectHarness() {
 
 describe('Select', () => {
   it('renders as a native select control', () => {
-    render(
+    const { container } = render(
       <Select aria-label="Plan" defaultValue="starter">
         <option value="starter">Starter</option>
       </Select>,
@@ -44,6 +44,7 @@ describe('Select', () => {
       'pr-10',
       'text-foreground',
     );
+    expect(container.querySelector('svg')).toBeInTheDocument();
   });
 
   it('supports controlled updates', () => {
@@ -156,8 +157,8 @@ describe('Select', () => {
   });
 
   it('does not create a placeholder option for a multiple select', () => {
-    render(
-      <Select aria-label="Plans" multiple placeholder="Choose plans">
+    const { container } = render(
+      <Select aria-label="Plans" className="min-h-24" multiple placeholder="Choose plans">
         <option value="starter">Starter</option>
         <option value="pro">Pro</option>
       </Select>,
@@ -167,6 +168,9 @@ describe('Select', () => {
 
     expect(control.querySelector('option[value=""]')).toBeNull();
     expect(control.selectedOptions).toHaveLength(0);
+    expect(control).toHaveClass('min-h-24');
+    expect(control).not.toHaveClass('appearance-none', 'pr-10');
+    expect(container.querySelector('svg')).not.toBeInTheDocument();
   });
 
   it('passes disabled through to the native control', () => {

@@ -32,6 +32,7 @@ type ButtonChildProps = {
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLElement>;
   tabIndex?: number;
+  type?: 'button' | 'reset' | 'submit';
 };
 
 const filledVariantStyles: Record<ButtonVariant, string> = {
@@ -99,7 +100,7 @@ function Button({
 
     return cloneElement(children, {
       ...props,
-      ...(children.type === 'button' ? { disabled } : {}),
+      ...(children.type === 'button' ? { disabled, type: children.props.type ?? type } : {}),
       'aria-disabled': disabled || children.props['aria-disabled'],
       className: cn(buttonClassName, children.props.className),
       onClick: handleClick,

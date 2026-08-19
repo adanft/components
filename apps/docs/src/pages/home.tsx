@@ -36,7 +36,7 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   Popover: 'Popover shows anchored content and is used for interactive contextual panels.',
   Profile: 'Profile shows account identity and is used for user menus and account actions.',
   'Radio Group': 'Radio Group captures one choice and is used for grouped radio options.',
-  Select: 'Select lets users choose one option and is used for compact option lists.',
+  Select: 'Select lets users choose one or more options from a list.',
   Sidebar: 'Sidebar shows app navigation and is used for side menus and nested links.',
   Skeleton: 'Skeleton reserves loading space and is used while async content is pending.',
   Spinner: 'Spinner shows indeterminate progress and is used for loading states.',

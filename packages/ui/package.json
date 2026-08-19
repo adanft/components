@@ -1,6 +1,6 @@
 {
   "name": "@adanft/ui",
-  "version": "0.2.0-beta.6",
+  "version": "0.2.0",
   "description": "Reusable React UI components with a Tailwind-driven design system contract.",
   "license": "MIT",
   "homepage": "https://adanft.github.io/components",
@@ -341,7 +341,8 @@
   },
   "scripts": {
     "sync:exports": "node scripts/sync-package-exports.mjs",
-    "build": "pnpm sync:exports && pnpm typecheck && pnpm exec vite build && pnpm exec tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
+    "sync:exports:check": "node scripts/sync-package-exports.mjs --check",
+    "build": "pnpm sync:exports:check && pnpm typecheck && pnpm exec vite build && pnpm exec tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
     "prepack": "pnpm build",
     "test": "pnpm exec vitest run --config vitest.config.ts",
     "typecheck": "pnpm exec tsc -b tsconfig.json --pretty false"
@@ -360,6 +361,7 @@
     "@tailwindcss/vite": "^4.3.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.4",
     "@types/node": "^25.8.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

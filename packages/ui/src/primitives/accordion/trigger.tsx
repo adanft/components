@@ -8,9 +8,17 @@ function isAccordionNavigationKey(key: string) {
   return key === 'ArrowDown' || key === 'ArrowUp' || key === 'Home' || key === 'End';
 }
 
-function AccordionTrigger({ children, onClick, onKeyDown, ...props }: AccordionTriggerProps) {
+function AccordionTrigger({
+  'aria-disabled': ariaDisabled,
+  children,
+  disabled,
+  onClick,
+  onKeyDown,
+  ...props
+}: AccordionTriggerProps) {
   const accordionContext = useAccordionContext('Trigger');
   const itemContext = useAccordionItemContext('Trigger');
+  const isDisabled = disabled || ariaDisabled === true || ariaDisabled === 'true';
 
   function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
     if (!isAccordionNavigationKey(event.key)) {
@@ -63,12 +71,14 @@ function AccordionTrigger({ children, onClick, onKeyDown, ...props }: AccordionT
       type="button"
       aria-expanded={itemContext.open}
       aria-controls={itemContext.contentId}
+      aria-disabled={ariaDisabled}
+      disabled={disabled}
       data-accordion-trigger="true"
       data-state={itemContext.open ? 'open' : 'closed'}
       onClick={(event) => {
         onClick?.(event);
 
-        if (event.defaultPrevented) {
+        if (event.defaultPrevented || isDisabled) {
           return;
         }
 

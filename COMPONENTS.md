@@ -628,7 +628,7 @@ for radio coordination only.
 
 ## Select
 
-Native select control for choosing one option from a list.
+Native select control for choosing one or more options from a list.
 
 ```tsx
 import { Select } from '@adanft/ui';
@@ -645,12 +645,13 @@ import Select from '@adanft/ui/select';
 </Select>
 ```
 
-**Examples:** default, invalid, controlled select.
+**Examples:** default, invalid, multiple, controlled select.
 
 For a single uncontrolled select, `placeholder` becomes the initial selection
 unless an explicit `defaultValue` is provided. Native form reset restores that
 initial selection and its placeholder styling. Multiple selects ignore
-`placeholder`.
+`placeholder`, keep the browser's native multi-select appearance, and omit the
+single-select chevron. `className` continues to style the native select element.
 
 **API:** native select props, `placeholder`, `className`.
 

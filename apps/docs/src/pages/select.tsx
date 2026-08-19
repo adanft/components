@@ -36,6 +36,12 @@ const invalidExampleSnippet = `<Select aria-invalid aria-label="Choose plan" def
   <option value="pro">Pro</option>
 </Select>`;
 
+const multipleExampleSnippet = `<Select aria-label="Choose plans" className="min-h-24" multiple>
+  <option value="starter">Starter</option>
+  <option value="pro">Pro</option>
+  <option value="team">Team</option>
+</Select>`;
+
 const exampleSnippet = `const [value, setValue] = useState('pro');
 
 <Select
@@ -60,7 +66,7 @@ function SelectPage() {
       <header className="space-y-4 pb-6">
         <h1 className="text-3xl font-bold text-heading">Select</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>Select</Code> lets users choose one option from a list.
+          <Code>Select</Code> lets users choose one or more options from a list.
         </p>
       </header>
 
@@ -71,7 +77,7 @@ function SelectPage() {
         <p className="text-foreground">
           For a single uncontrolled select, <Code>placeholder</Code> is selected initially unless
           you provide an explicit <Code>defaultValue</Code>. Native form reset restores that initial
-          selection. Multiple selects ignore <Code>placeholder</Code>.
+          selection.
         </p>
       </section>
 
@@ -97,6 +103,21 @@ function SelectPage() {
           </Select>
         </Box>
         <CodeBlock code={invalidExampleSnippet} />
+
+        <h3 className="text-lg font-semibold text-heading">Multiple</h3>
+        <p className="text-foreground">
+          Multiple selects keep the browser's native multi-select appearance and omit the
+          single-select placeholder option and decorative chevron. <Code>className</Code> still
+          styles the native select element.
+        </p>
+        <Box shadow="none" surface="none">
+          <Select aria-label="Choose plans" className="min-h-24" multiple>
+            <option value="starter">Starter</option>
+            <option value="pro">Pro</option>
+            <option value="team">Team</option>
+          </Select>
+        </Box>
+        <CodeBlock code={multipleExampleSnippet} />
 
         <h3 className="text-lg font-semibold text-heading">Controlled</h3>
         <Box shadow="none" surface="none">
@@ -155,7 +176,7 @@ function SelectPage() {
                 <Code>string</Code>
               </TableCell>
               <TableCell>—</TableCell>
-              <TableCell>Extends the component styles.</TableCell>
+              <TableCell>Extends the native select element's styles.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -178,7 +199,9 @@ function SelectPage() {
               <TableCell>
                 <Code>aria-hidden</Code>
               </TableCell>
-              <TableCell>Hides the decorative chevron icon from assistive technology.</TableCell>
+              <TableCell>
+                On single selects, hides the decorative chevron icon from assistive technology.
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>

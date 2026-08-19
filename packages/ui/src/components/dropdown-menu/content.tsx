@@ -21,7 +21,7 @@ function DropdownMenuContent({ children, className, style, ...props }: DropdownM
           ref={setFloating}
           data-state={open ? 'open' : 'closed'}
           className={cn(
-            'bg-surface flex flex-col gap-2 rounded-md border border-border p-2 shadow-card outline-none',
+            'bg-surface z-50 flex flex-col gap-2 rounded-md border border-border p-2 shadow-card outline-none',
             className,
           )}
           style={{ ...floatingStyles, ...style }}

@@ -238,7 +238,8 @@ function DropdownMenuPage() {
 
         <h3 className="text-lg font-semibold text-heading">DropdownMenu.Content</h3>
         <p className="text-foreground">
-          A thin wrapper around the native <Code>{`<div>`}</Code> element.
+          A thin wrapper around the native <Code>{`<div>`}</Code> element. Content is portaled and
+          layered above modal overlays, so a menu opened from a Modal remains visible.
         </p>
         <Table>
           <TableHeader>

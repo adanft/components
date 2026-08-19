@@ -83,6 +83,9 @@ function TooltipPage() {
         <h2 className="text-2xl font-semibold text-heading">Usage</h2>
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
+        <p className="text-foreground">
+          The tooltip remains open while the pointer moves from its trigger to the tooltip content.
+        </p>
       </section>
 
       <section className="space-y-4">

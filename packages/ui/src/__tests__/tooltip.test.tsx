@@ -50,4 +50,17 @@ describe('Tooltip', () => {
       expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
     });
   });
+
+  it('stays open while the pointer moves from the trigger to the content', async () => {
+    render(<TooltipHarness />);
+
+    const trigger = screen.getByRole('button', { name: 'Save changes' });
+    fireEvent.mouseEnter(trigger);
+
+    const content = await screen.findByRole('tooltip');
+    fireEvent.mouseLeave(trigger, { clientX: 0, clientY: 0, relatedTarget: content });
+    fireEvent.mouseEnter(content, { relatedTarget: trigger });
+
+    expect(content).toBeInTheDocument();
+  });
 });

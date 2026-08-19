@@ -1,4 +1,6 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
@@ -9,11 +11,16 @@ function readRepoFile(relativePath: string) {
   return readFileSync(path.join(repoRoot, relativePath), 'utf8');
 }
 
+function readUiPackageVersion() {
+  const packageJson = JSON.parse(readRepoFile('packages/ui/package.json')) as { version: string };
+  return packageJson.version;
+}
+
 describe('release workspace contract', () => {
   it('reads the legacy alias policy version from the publishable ui package manifest', async () => {
     const { readPackageVersion } = await import('../../scripts/legacy-alias-policy.mjs');
 
-    await expect(readPackageVersion()).resolves.toBe('0.2.0-beta.6');
+    await expect(readPackageVersion()).resolves.toBe(readUiPackageVersion());
   });
 
   it('configures changesets and release scripts for the ui package only', () => {
@@ -45,12 +52,52 @@ describe('release workspace contract', () => {
     const releaseWorkflow = readRepoFile('.github/workflows/release.yml');
     const distTagWorkflow = readRepoFile('.github/workflows/npm-dist-tag.yml');
 
-    expect(releaseWorkflow).toContain('default: beta');
+    expect(releaseWorkflow).toContain('default: latest');
+    expect(releaseWorkflow).toContain('- beta');
     expect(releaseWorkflow).toContain('publish: pnpm release:$' + '{{ inputs.channel }}');
     expect(releaseWorkflow).not.toContain('publish: pnpm release:latest');
-    expect(distTagWorkflow).toContain('default: 0.2.0-beta.6');
-    expect(distTagWorkflow).toContain('default: beta');
+    expect(distTagWorkflow).toContain(`default: ${readUiPackageVersion()}`);
+    expect(distTagWorkflow).toContain('default: latest');
+    expect(distTagWorkflow).toContain('- beta');
     expect(distTagWorkflow).toContain('verify-release-channel.mjs');
+  });
+
+  it('keeps validation check-only and gates CI on tracked drift', () => {
+    const packageJson = JSON.parse(readRepoFile('package.json')) as {
+      scripts?: Record<string, string>;
+    };
+    const docsPackageJson = JSON.parse(readRepoFile('apps/docs/package.json')) as {
+      scripts?: Record<string, string>;
+    };
+    const uiPackageJson = JSON.parse(readRepoFile('packages/ui/package.json')) as {
+      scripts?: Record<string, string>;
+    };
+    const validationWorkflow = readRepoFile('.github/workflows/validate.yml');
+
+    expect(packageJson.scripts?.check).not.toContain('--write');
+    expect(packageJson.scripts?.validate).not.toContain('--write');
+    expect(packageJson.scripts?.fix).toContain('--write');
+    expect(packageJson.scripts?.validate).toContain('validate:pack-contract');
+    expect(docsPackageJson.scripts?.build).toContain('generate:highlighted-code:check');
+    expect(docsPackageJson.scripts?.test).toContain('generate:highlighted-code:check');
+    expect(uiPackageJson.scripts?.build).toContain('sync:exports:check');
+    expect(validationWorkflow).toContain('pnpm validate');
+    expect(validationWorkflow).toContain('git diff --exit-code');
+  });
+
+  it('fails the CI drift command for an isolated modified tracked file', () => {
+    const fixture = mkdtempSync(path.join(os.tmpdir(), 'components-drift-gate-'));
+
+    try {
+      writeFileSync(path.join(fixture, 'tracked.txt'), 'current\n');
+      expect(spawnSync('git', ['init'], { cwd: fixture }).status).toBe(0);
+      expect(spawnSync('git', ['add', 'tracked.txt'], { cwd: fixture }).status).toBe(0);
+      writeFileSync(path.join(fixture, 'tracked.txt'), 'stale\n');
+
+      expect(spawnSync('git', ['diff', '--exit-code'], { cwd: fixture }).status).toBe(1);
+    } finally {
+      rmSync(fixture, { force: true, recursive: true });
+    }
   });
 
   it('retargets validation scripts to packages and apps boundaries', () => {
@@ -73,7 +120,7 @@ describe('release workspace contract', () => {
     );
   });
 
-  it('verifies the pack and publish contract before beta release', async () => {
+  it('verifies the pack and publish contract before release', async () => {
     const { verifyPackContract } = await import('../../scripts/verify-pack-contract.mjs');
 
     const verification = verifyPackContract({ requireBuiltArtifacts: false, rootDir: repoRoot });
