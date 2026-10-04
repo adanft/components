@@ -62,6 +62,19 @@ describe('release workspace contract', () => {
     expect(distTagWorkflow).toContain('verify-release-channel.mjs');
   });
 
+  it('shares the pinned Node runtime across workflows and keeps installs frozen', () => {
+    for (const name of ['validate', 'release', 'docs-deploy', 'npm-dist-tag']) {
+      const workflow = readRepoFile(`.github/workflows/${name}.yml`);
+      expect(workflow).toContain('uses: actions/setup-node@v6');
+      expect(workflow).toContain('node-version-file: .node-version');
+      expect(workflow).not.toContain('node-version:');
+      if (name !== 'npm-dist-tag') {
+        expect(workflow).toContain('run_install: false');
+        expect(workflow).toContain('pnpm install --frozen-lockfile');
+      }
+    }
+  });
+
   it('keeps validation check-only and gates CI on tracked drift', () => {
     const packageJson = JSON.parse(readRepoFile('package.json')) as {
       scripts?: Record<string, string>;

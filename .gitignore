@@ -42,3 +42,6 @@ playwright-report
 .docs
 .atl
 .agents
+
+# Local development task tracking
+/odd/

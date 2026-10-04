@@ -1,7 +1,8 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { createHighlighter } from 'shiki';
-import ts from 'typescript';
+import * as ts from 'typescript/unstable/ast/is';
+import { API } from 'typescript/unstable/sync';
 
 const docsRoot = new URL('..', import.meta.url);
 const sourceRoot = new URL('src', docsRoot);
@@ -100,7 +101,7 @@ function collectCodeBlockIdentifiers(sourceFile) {
       }
     }
 
-    ts.forEachChild(node, visit);
+    node.forEachChild(visit);
   }
 
   visit(sourceFile);
@@ -124,32 +125,47 @@ function collectSnippetValues(sourceFile, identifiers) {
       }
     }
 
-    ts.forEachChild(node, visit);
+    node.forEachChild(visit);
   }
 
   visit(sourceFile);
   return snippets;
 }
 
-async function run() {
-  const files = await collectSourceFiles(sourceRoot.pathname);
+// TypeScript 7 parses through native project snapshots, not createSourceFile.
+// Keep this unstable API boundary small and the dependency exactly pinned.
+export function collectSnippets(files) {
+  const api = new API();
   const snippets = new Set();
 
-  for (const filePath of files) {
-    const source = await readFile(filePath, 'utf8');
-    const sourceFile = ts.createSourceFile(
-      filePath,
-      source,
-      ts.ScriptTarget.Latest,
-      true,
-      ts.ScriptKind.TSX,
-    );
-    const identifiers = collectCodeBlockIdentifiers(sourceFile);
-
-    for (const snippet of collectSnippetValues(sourceFile, identifiers)) {
-      snippets.add(snippet);
+  try {
+    const snapshot = api.updateSnapshot({ openFiles: files });
+    try {
+      for (const filePath of files) {
+        const sourceFile = snapshot
+          .getDefaultProjectForFile(filePath)
+          ?.program.getSourceFile(filePath);
+        if (!sourceFile) {
+          throw new Error(`TypeScript could not parse ${filePath}`);
+        }
+        const identifiers = collectCodeBlockIdentifiers(sourceFile);
+        for (const snippet of collectSnippetValues(sourceFile, identifiers)) {
+          snippets.add(snippet);
+        }
+      }
+    } finally {
+      snapshot.dispose();
     }
+  } finally {
+    api.close();
   }
+
+  return snippets;
+}
+
+async function run() {
+  const files = await collectSourceFiles(sourceRoot.pathname);
+  const snippets = collectSnippets(files);
 
   const highlighter = await createHighlighter({
     langs: [lang],

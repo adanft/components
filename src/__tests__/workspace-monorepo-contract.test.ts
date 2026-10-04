@@ -21,6 +21,37 @@ describe('workspace monorepo contract', () => {
     expect(packageJson.scripts?.test).toContain('--recursive');
   });
 
+  it('aligns private tooling with Node 24 without imposing a UI consumer engine', () => {
+    const rootManifest = JSON.parse(readRepoFile('package.json'));
+    const uiManifest = JSON.parse(readRepoFile('packages/ui/package.json'));
+
+    expect(readRepoFile('.node-version').trim()).toBe('24.20.0');
+    expect(rootManifest.packageManager).toBe('pnpm@12.9.1');
+    expect(rootManifest.engines?.node).toBe('>=24.15.0 <25');
+    expect(uiManifest.engines?.node).toBeUndefined();
+    for (const manifestPath of [
+      'package.json',
+      'apps/docs/package.json',
+      'packages/ui/package.json',
+    ]) {
+      const manifest = JSON.parse(readRepoFile(manifestPath));
+      expect(manifest.devDependencies['@types/node']).toMatch(/^\^24\./);
+      expect(manifest.devDependencies.typescript).toBe('7.0.2');
+    }
+  });
+
+  it('enforces the release-age gate without exemptions and approves only esbuild', () => {
+    expect(readRepoFile('pnpm-workspace.yaml')).toBe(
+      'packages:\n  - packages/*\n  - apps/*\nallowBuilds:\n  esbuild: true\nminimumReleaseAge: 1440\nminimumReleaseAgeStrict: true\n',
+    );
+    for (const manifestPath of ['apps/docs/package.json', 'packages/ui/package.json']) {
+      const manifest = JSON.parse(readRepoFile(manifestPath));
+      expect(manifest.devDependencies.jsdom).toBe('30.1.1');
+    }
+    const docsManifest = JSON.parse(readRepoFile('apps/docs/package.json'));
+    expect(docsManifest.dependencies['lucide-react']).toBe('1.51.0');
+  });
+
   it('creates workspace manifests and shared tsconfig files', () => {
     expect(existsSync(path.join(repoRoot, 'tsconfig.base.json'))).toBe(true);
     expect(existsSync(path.join(repoRoot, 'packages/ui/package.json'))).toBe(true);
@@ -47,7 +78,7 @@ describe('workspace monorepo contract', () => {
       };
     };
 
-    expect(baseTsconfig.compilerOptions?.baseUrl).toBe('.');
+    expect(baseTsconfig.compilerOptions?.baseUrl).toBeUndefined();
     expect(baseTsconfig.compilerOptions?.paths?.['@adanft/ui']).toEqual([
       './packages/ui/src/index.ts',
     ]);

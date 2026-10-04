@@ -4,7 +4,7 @@ import path from 'node:path';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { writeGeneratedSource } from './generate-highlighted-code.mjs';
+import { collectSnippets, writeGeneratedSource } from './generate-highlighted-code.mjs';
 
 const temporaryDirectories: string[] = [];
 
@@ -25,6 +25,27 @@ afterEach(async () => {
 });
 
 describe('highlighted code generation', () => {
+  it('extracts only referenced static literals across nested TSX and multiple files', async () => {
+    const directory = await mkdtemp(path.join(os.tmpdir(), 'highlighted-code-'));
+    temporaryDirectories.push(directory);
+    const first = path.join(directory, 'first.tsx');
+    const second = path.join(directory, 'second.tsx');
+    await writeFile(
+      first,
+      'const quoted = "line\\nvalue"; const template = `static template`; const unused = "unused"; const dynamic = `value ${quoted}`; const view = <><section><CodeBlock code={quoted} /></section><CodeBlock code={template}></CodeBlock><CodeBlock code={dynamic} /><Other code={unused} /><UI.CodeBlock code={unused} /></>;',
+    );
+    await writeFile(
+      second,
+      'const quoted = "second file"; const view = <CodeBlock code={quoted} />;',
+    );
+
+    expect([...collectSnippets([first, second])]).toEqual([
+      'line\nvalue',
+      'static template',
+      'second file',
+    ]);
+  });
+
   it('accepts a current generated file without rewriting it', async () => {
     const outputFile = await createOutputFile('current\n');
 

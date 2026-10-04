@@ -4,7 +4,10 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "packageManager": "pnpm@11.1.2",
+  "packageManager": "pnpm@12.9.1",
+  "engines": {
+    "node": ">=24.15.0 <25"
+  },
   "scripts": {
     "dev": "pnpm --dir apps/docs dev",
     "build": "pnpm typecheck && pnpm build:packages && pnpm build:docs",
@@ -30,10 +33,10 @@
     "release:beta": "node scripts/verify-release-channel.mjs beta && pnpm --dir packages/ui build && pnpm validate:pack-contract && changeset publish"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
-    "@changesets/cli": "^2.31.0",
-    "@types/node": "^25.8.0",
-    "typescript": "~6.0.3",
-    "vitest": "^4.1.6"
+    "@biomejs/biome": "^2.5.15",
+    "@changesets/cli": "^3.0.3",
+    "@types/node": "^24.19.1",
+    "typescript": "7.0.2",
+    "vitest": "^5.0.3"
   }
 }

@@ -136,39 +136,42 @@ describe('Accordion', () => {
   it.each([
     ['boolean', true],
     ['string', 'true'],
-  ] as const)('keeps aria-disabled (%s) triggers focusable without toggling their panels', async (_kind, ariaDisabled) => {
-    const user = userEvent.setup();
-    const onValueChange = vi.fn();
+  ] as const)(
+    'keeps aria-disabled (%s) triggers focusable without toggling their panels',
+    async (_kind, ariaDisabled) => {
+      const user = userEvent.setup();
+      const onValueChange = vi.fn();
 
-    render(
-      <Accordion value="overview" onValueChange={onValueChange}>
-        <Accordion.Item value="overview">
-          <Accordion.Header>
-            <Accordion.Trigger>Overview</Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Content>Overview content</Accordion.Content>
-        </Accordion.Item>
-        <Accordion.Item value="analytics">
-          <Accordion.Header>
-            <Accordion.Trigger aria-disabled={ariaDisabled}>Analytics</Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Content>Analytics content</Accordion.Content>
-        </Accordion.Item>
-      </Accordion>,
-    );
+      render(
+        <Accordion value="overview" onValueChange={onValueChange}>
+          <Accordion.Item value="overview">
+            <Accordion.Header>
+              <Accordion.Trigger>Overview</Accordion.Trigger>
+            </Accordion.Header>
+            <Accordion.Content>Overview content</Accordion.Content>
+          </Accordion.Item>
+          <Accordion.Item value="analytics">
+            <Accordion.Header>
+              <Accordion.Trigger aria-disabled={ariaDisabled}>Analytics</Accordion.Trigger>
+            </Accordion.Header>
+            <Accordion.Content>Analytics content</Accordion.Content>
+          </Accordion.Item>
+        </Accordion>,
+      );
 
-    const trigger = screen.getByRole('button', { name: 'Analytics' });
+      const trigger = screen.getByRole('button', { name: 'Analytics' });
 
-    trigger.focus();
-    expect(trigger).toHaveFocus();
+      trigger.focus();
+      expect(trigger).toHaveFocus();
 
-    await user.click(trigger);
-    await user.keyboard('{Enter}');
-    await user.keyboard(' ');
+      await user.click(trigger);
+      await user.keyboard('{Enter}');
+      await user.keyboard(' ');
 
-    expect(onValueChange).not.toHaveBeenCalled();
-    expect(screen.queryByRole('region', { name: 'Analytics' })).not.toBeInTheDocument();
-  });
+      expect(onValueChange).not.toHaveBeenCalled();
+      expect(screen.queryByRole('region', { name: 'Analytics' })).not.toBeInTheDocument();
+    },
+  );
 
   it('toggles the panel when an enabled trigger is activated with the keyboard', async () => {
     const user = userEvent.setup();

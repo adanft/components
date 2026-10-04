@@ -198,12 +198,13 @@ const usageImportExamples = [
 ] as const;
 
 describe('docs Usage import examples', () => {
-  it.each(
-    usageImportExamples,
-  )('%s documents the package root and public subpath import forms', (page, rootImport, subpathImport) => {
-    const source = pageSources[page];
+  it.each(usageImportExamples)(
+    '%s documents the package root and public subpath import forms',
+    (page, rootImport, subpathImport) => {
+      const source = pageSources[page];
 
-    expect(source).toContain(rootImport);
-    expect(source).toContain(subpathImport);
-  });
+      expect(source).toContain(rootImport);
+      expect(source).toContain(subpathImport);
+    },
+  );
 });
