@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { Tabs } from '../index';
 
@@ -155,6 +156,103 @@ describe('Tabs', () => {
     expect(screen.getByRole('tab', { name: 'Analytics' })).toHaveAttribute('tabindex', '-1');
     expect(screen.getByRole('tab', { name: 'Settings' })).toHaveAttribute('tabindex', '-1');
   });
+
+  it.each([
+    { disabled: true },
+    { 'aria-disabled': true as const },
+    { 'aria-disabled': 'true' as const },
+  ])('keeps disabled selection reachable via enabled siblings (%j)', async (disabledProps) => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    function Example({ selectedDisabled }: { selectedDisabled: boolean }) {
+      return (
+        <>
+          <button type="button">Before tabs</button>
+          <Tabs value="analytics" onValueChange={onValueChange}>
+            <Tabs.List>
+              <Tabs.Trigger value="unavailable" disabled>
+                Unavailable
+              </Tabs.Trigger>
+              <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
+              <Tabs.Trigger value="analytics" {...(selectedDisabled ? disabledProps : {})}>
+                Analytics
+              </Tabs.Trigger>
+              <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
+            </Tabs.List>
+            <Tabs.Content value="analytics">Analytics content</Tabs.Content>
+          </Tabs>
+          <button type="button">After tabs</button>
+        </>
+      );
+    }
+    const { rerender } = render(<Example selectedDisabled />);
+    const overview = screen.getByRole('tab', { name: 'Overview' });
+    const selected = screen.getByRole('tab', { name: 'Analytics' });
+    const settings = screen.getByRole('tab', { name: 'Settings' });
+
+    expect(selected).toHaveAttribute('tabindex', '-1');
+    expect(overview).toHaveAttribute('tabindex', '0');
+    expect(settings).toHaveAttribute('tabindex', '-1');
+    expect(screen.getByRole('tab', { name: 'Unavailable' })).toHaveAttribute('tabindex', '-1');
+    expect(onValueChange).not.toHaveBeenCalled();
+
+    screen.getByRole('button', { name: 'Before tabs' }).focus();
+    await user.tab();
+    expect(overview).toHaveFocus();
+    expect(selected).toHaveAttribute('aria-selected', 'true');
+    expect(overview).toHaveAttribute('aria-selected', 'false');
+    expect(screen.getByRole('tabpanel', { name: 'Analytics' })).toHaveTextContent(
+      'Analytics content',
+    );
+    expect(onValueChange).not.toHaveBeenCalled();
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'After tabs' })).toHaveFocus();
+
+    rerender(<Example selectedDisabled={false} />);
+    expect(selected).toHaveAttribute('tabindex', '0');
+    expect(overview).toHaveAttribute('tabindex', '-1');
+    expect(settings).toHaveAttribute('tabindex', '-1');
+    screen.getByRole('button', { name: 'Before tabs' }).focus();
+    await user.tab();
+    expect(selected).toHaveFocus();
+
+    rerender(<Example selectedDisabled />);
+    expect(selected).toHaveAttribute('tabindex', '-1');
+    expect(overview).toHaveAttribute('tabindex', '0');
+    expect(onValueChange).not.toHaveBeenCalled();
+  });
+
+  it.each(['analytics', 'missing'])(
+    'has no tab stop when all triggers are disabled (%s)',
+    async (value) => {
+      const user = userEvent.setup();
+      const onValueChange = vi.fn();
+      render(
+        <>
+          <button type="button">Before tabs</button>
+          <Tabs value={value} onValueChange={onValueChange}>
+            <Tabs.List>
+              <Tabs.Trigger value="overview" disabled>
+                Overview
+              </Tabs.Trigger>
+              <Tabs.Trigger value="analytics" aria-disabled="true">
+                Analytics
+              </Tabs.Trigger>
+            </Tabs.List>
+          </Tabs>
+          <button type="button">After tabs</button>
+        </>,
+      );
+
+      for (const tab of screen.getAllByRole('tab')) {
+        expect(tab).toHaveAttribute('tabindex', '-1');
+      }
+      screen.getByRole('button', { name: 'Before tabs' }).focus();
+      await user.tab();
+      expect(screen.getByRole('button', { name: 'After tabs' })).toHaveFocus();
+      expect(onValueChange).not.toHaveBeenCalled();
+    },
+  );
 
   it('falls back to the first enabled trigger when the value matches no tab', () => {
     render(<UnmatchedValueTabsHarness />);

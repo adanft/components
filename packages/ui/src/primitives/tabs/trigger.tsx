@@ -19,9 +19,12 @@ function TabsTrigger({
   const nodeRef = useRef<HTMLButtonElement>(null);
   const isSelected = context.value === value;
   const isDisabled = disabled || ariaDisabled === true || ariaDisabled === 'true';
-  const hasSelectedTrigger = context.triggers.some((trigger) => trigger.value === context.value);
+  const hasEnabledSelectedTrigger = context.triggers.some(
+    (trigger) => trigger.value === context.value && !trigger.disabled && trigger.node.isConnected,
+  );
   const fallbackValue = findFirstEnabledTriggerInDocumentOrder(context.triggers)?.value;
-  const isFocusable = isSelected || (!hasSelectedTrigger && value === fallbackValue);
+  const isFocusable =
+    !isDisabled && (isSelected || (!hasEnabledSelectedTrigger && value === fallbackValue));
   const valueId = createTabsValueId(value);
   const triggerId = `${context.baseId}-trigger-${valueId}`;
   const contentId = `${context.baseId}-content-${valueId}`;
