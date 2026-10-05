@@ -25,7 +25,7 @@ describe('workspace monorepo contract', () => {
     const rootManifest = JSON.parse(readRepoFile('package.json'));
     const uiManifest = JSON.parse(readRepoFile('packages/ui/package.json'));
 
-    expect(readRepoFile('.node-version').trim()).toBe('24.20.0');
+    expect(readRepoFile('.node-version').trim()).toBe('24.21.0');
     expect(rootManifest.packageManager).toBe('pnpm@12.9.1');
     expect(rootManifest.engines?.node).toBe('>=24.15.0 <25');
     expect(uiManifest.engines?.node).toBeUndefined();

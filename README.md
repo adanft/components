@@ -10,7 +10,7 @@ Monorepo for the `@adanft/ui` React component library and its docs consumer app.
 
 ## Local development
 
-Use Node.js 24.20.0 (`.node-version`) and pnpm 12.9.1 (`packageManager`). Workspace
+Use Node.js 24.21.0 (`.node-version`) and pnpm 12.9.1 (`packageManager`). Workspace
 tooling requires Node 24.15 or newer within Node 24; `@types/node` intentionally
 targets 24.x to match this runtime rather than the newest Node major.
 Installs enforce a strict 24-hour release-age gate without exemptions and allow
