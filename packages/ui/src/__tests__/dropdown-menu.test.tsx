@@ -1,5 +1,5 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { useState } from 'react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { type FocusEvent, useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { DropdownMenu } from '../index';
@@ -122,6 +122,52 @@ describe('DropdownMenu', () => {
       expect(screen.getByRole('menuitem', { name: 'Profile' })).toHaveFocus();
     });
   });
+
+  it.each([false, true])(
+    'composes consumer focus with active state (preventDefault: %s)',
+    async (preventDefault) => {
+      let currentTarget: HTMLButtonElement | null = null;
+      const onFocus = vi.fn((event: FocusEvent<HTMLButtonElement>) => {
+        currentTarget = event.currentTarget;
+        if (preventDefault) event.preventDefault();
+      });
+      function FocusHarness() {
+        const [open, setOpen] = useState(false);
+        return (
+          <DropdownMenu open={open} onOpenChange={setOpen}>
+            <DropdownMenu.Trigger>
+              <button type="button">Actions</button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.Item>Profile</DropdownMenu.Item>
+              <DropdownMenu.Item onFocus={onFocus}>Settings</DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu>
+        );
+      }
+      render(<FocusHarness />);
+
+      const trigger = screen.getByRole('button', { name: 'Actions' });
+      trigger.focus();
+      fireEvent.keyDown(trigger, { key: 'ArrowDown' });
+      const first = screen.getByRole('menuitem', { name: 'Profile' });
+      const second = screen.getByRole('menuitem', { name: 'Settings' });
+      await waitFor(() => expect(first).toHaveFocus());
+      onFocus.mockClear();
+
+      const nativeFocus = vi.fn();
+      second.addEventListener('focusin', nativeFocus, { once: true });
+      act(() => second.focus());
+
+      expect(onFocus).toHaveBeenCalledTimes(1);
+      expect(nativeFocus).toHaveBeenCalledTimes(1);
+      expect(second).toHaveFocus();
+      expect(onFocus.mock.calls[0]?.[0].nativeEvent).toBe(nativeFocus.mock.calls[0]?.[0]);
+      expect(currentTarget).toBe(second);
+      expect(second).toHaveAttribute('data-active');
+      expect(first).not.toHaveAttribute('data-active');
+    },
+  );
 
   it('closes with Escape and returns focus to the trigger', async () => {
     render(<DropdownMenuHarness />);

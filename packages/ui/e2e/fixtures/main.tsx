@@ -1,5 +1,6 @@
 import { type ReactNode, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import DropdownMenuCase from './cases/dropdown-menu';
 import ModalCase from './cases/modal';
 import ThemeCase from './cases/theme';
 import './styles.css';
@@ -14,8 +15,10 @@ if (caseName === 'modal') {
   fixture = <ModalCase />;
 } else if (caseName === 'theme') {
   fixture = <ThemeCase />;
+} else if (caseName === 'dropdown-menu') {
+  fixture = <DropdownMenuCase />;
 } else {
-  root.textContent = `Unknown fixture case: ${caseName}. Available cases: modal, theme.`;
+  root.textContent = `Unknown fixture case: ${caseName}. Available cases: modal, theme, dropdown-menu.`;
   throw new Error(`Unknown fixture case: ${caseName}`);
 }
 createRoot(root).render(params.has('strict') ? <StrictMode>{fixture}</StrictMode> : fixture);

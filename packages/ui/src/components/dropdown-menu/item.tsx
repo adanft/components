@@ -1,5 +1,5 @@
 import { useListItem } from '@floating-ui/react';
-import type { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, FocusEvent } from 'react';
 
 import { cn } from '../../helpers/cn';
 import { useDropdownMenuContext } from './context';
@@ -16,6 +16,7 @@ function DropdownMenuItem({
   children,
   className,
   disabled,
+  onFocus,
   onSelect,
   textValue,
   ...props
@@ -52,8 +53,9 @@ function DropdownMenuItem({
           onSelect?.();
           context.onOpenChange(false);
         },
-        onFocus() {
+        onFocus(event: FocusEvent<HTMLButtonElement>) {
           setActiveIndex(index);
+          onFocus?.(event);
         },
       })}>
       {children}

@@ -3,6 +3,7 @@
 This retained, dev-only integration suite exercises public UI APIs in Chromium, not application E2E. All specs are automatically discovered by `test:browser`; the suite does not use the docs app or its generator.
 
 - **Modal:** real portals and native Tab, Enter, and Escape verify nested dismissal and focus restoration, normally and in React StrictMode.
+- **Dropdown Menu:** native Tab and ArrowDown through portaled menu items verify consumer focus callbacks fire exactly once with the focused target while active state is preserved, normally and in React StrictMode.
 - **Theme:** real `initializeTheme`/`setTheme` calls verify DOM classes, returned booleans, and writable storage/cookies. Normal controls cover empty and saved storage; injected failures cover unreadable/missing storage, denied getters, storage write/removal errors, cookie setter errors, and combined failures.
 
 ## Run locally
@@ -44,7 +45,8 @@ pnpm --dir packages/ui exec tsc -p e2e/tsconfig.json --noEmit
 - `tests/*.spec.ts`: Playwright specs, discovered generically rather than by component name.
 - `fixtures/cases/modal.tsx`: isolated Modal case using `@adanft/ui/modal`; nested dialogs retain real React ancestry.
 - `fixtures/cases/theme.tsx`: isolated Theme controls using `@adanft/ui/theme`; the output exposes the actual helper return without catching errors.
-- `fixtures/main.tsx`: small selector. `/?case=modal` selects Modal and `/?case=theme` selects Theme; omitting `case` explicitly defaults to Modal. Add `&strict` for StrictMode. Unknown cases display an error and throw instead of silently selecting Modal.
+- `fixtures/cases/dropdown-menu.tsx`: isolated Dropdown Menu case using `@adanft/ui/dropdown-menu`; visible outputs report consumer focus count and target.
+- `fixtures/main.tsx`: small selector. `/?case=modal` selects Modal and `/?case=theme` selects Theme; `/?case=dropdown-menu` selects Dropdown Menu. Omitting `case` explicitly defaults to Modal. Add `&strict` for StrictMode. Unknown cases display an error and throw instead of silently selecting Modal.
 
 To add the next component, create `fixtures/cases/<component>.tsx`, add an explicit selection branch in `fixtures/main.tsx`, and create `tests/<component>.spec.ts` that visits `/?case=<component>`. No router or registration framework is needed.
 
