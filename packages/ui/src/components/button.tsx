@@ -84,9 +84,11 @@ function Button({
   );
 
   if (asChild && isValidElement<ButtonChildProps>(children)) {
+    const isNativeButton = children.type === 'button';
+    const effectiveDisabled = disabled || (isNativeButton && children.props.disabled);
     const childOnClick = children.props.onClick;
     const handleClick: MouseEventHandler<HTMLElement> = (event) => {
-      if (disabled) {
+      if (effectiveDisabled) {
         event.preventDefault();
         event.stopPropagation();
         return;
@@ -100,11 +102,11 @@ function Button({
 
     return cloneElement(children, {
       ...props,
-      ...(children.type === 'button' ? { disabled, type: children.props.type ?? type } : {}),
-      'aria-disabled': disabled || children.props['aria-disabled'],
+      ...(isNativeButton ? { disabled: effectiveDisabled, type: children.props.type ?? type } : {}),
+      'aria-disabled': effectiveDisabled || children.props['aria-disabled'],
       className: cn(buttonClassName, children.props.className),
       onClick: handleClick,
-      tabIndex: disabled ? -1 : children.props.tabIndex,
+      tabIndex: effectiveDisabled ? -1 : (props.tabIndex ?? children.props.tabIndex),
     });
   }
 

@@ -192,6 +192,61 @@ describe('Button', () => {
     expect(screen.getByRole('button', { name: 'Submit' })).toHaveAttribute('type', 'submit');
   });
 
+  it.each([
+    [undefined, true],
+    [false, true],
+    [true, false],
+  ])(
+    'disables a native child with parent disabled=%s and child disabled=%s',
+    (parentDisabled, childDisabled) => {
+      const onButtonClick = vi.fn();
+      const onChildClick = vi.fn();
+
+      render(
+        <Button asChild disabled={parentDisabled} tabIndex={0} onClick={onButtonClick}>
+          <button type="button" disabled={childDisabled} tabIndex={-1} onClick={onChildClick}>
+            Save
+          </button>
+        </Button>,
+      );
+
+      const button = screen.getByRole('button', { name: 'Save' });
+
+      expect(button).toBeDisabled();
+      expect(button).toHaveAttribute('aria-disabled', 'true');
+      expect(button).toHaveAttribute('tabindex', '-1');
+      fireEvent.click(button);
+      expect(onChildClick).not.toHaveBeenCalled();
+      expect(onButtonClick).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each([
+    [0, -1, '0'],
+    [-1, 0, '-1'],
+    [undefined, 0, '0'],
+    [undefined, undefined, null],
+  ])(
+    'composes enabled tabIndex with parent=%s and child=%s',
+    (parentTabIndex, childTabIndex, expectedTabIndex) => {
+      render(
+        <Button asChild tabIndex={parentTabIndex}>
+          <RouterLink to="/docs" tabIndex={childTabIndex}>
+            Open docs
+          </RouterLink>
+        </Button>,
+      );
+
+      const link = screen.getByRole('link', { name: 'Open docs' });
+
+      if (expectedTabIndex === null) {
+        expect(link).not.toHaveAttribute('tabindex');
+      } else {
+        expect(link).toHaveAttribute('tabindex', expectedTabIndex);
+      }
+    },
+  );
+
   it('composes outline styles with asChild links', () => {
     render(
       <Button asChild outline variant="danger">
@@ -259,6 +314,9 @@ describe('Button', () => {
 
     expect(onLinkClick).toHaveBeenCalledTimes(1);
     expect(onButtonClick).toHaveBeenCalledTimes(1);
+    expect(onLinkClick.mock.invocationCallOrder[0]).toBeLessThan(
+      onButtonClick.mock.invocationCallOrder[0],
+    );
   });
 
   it('honors a child handler that prevents the Button handler', () => {
