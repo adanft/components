@@ -100,27 +100,118 @@ describe('Modal', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it('does not close when Panel onKeyDown prevents Escape default', () => {
-    const onClose = vi.fn();
+  it('isolates nested portal Escape and lets the outer modal close after the inner unmounts', () => {
+    const calls: string[] = [];
+    const onInnerClose = vi.fn(() => calls.push('inner close'));
+    const onOuterClose = vi.fn();
+    const onOuterKeyDown = vi.fn();
+    const onInnerKeyDown = vi.fn(() => calls.push('inner keydown'));
+
+    function nestedModals(innerOpen: boolean) {
+      return (
+        <Modal open={true} onClose={onOuterClose}>
+          <Modal.Panel aria-label="Outer" data-testid="outer-panel" onKeyDown={onOuterKeyDown}>
+            <Modal open={innerOpen} onClose={onInnerClose}>
+              <Modal.Panel aria-label="Inner" data-testid="inner-panel" onKeyDown={onInnerKeyDown}>
+                <button type="button">Inner action</button>
+              </Modal.Panel>
+            </Modal>
+          </Modal.Panel>
+        </Modal>
+      );
+    }
+
+    const { rerender } = render(nestedModals(true));
+    const outerPanel = screen.getByTestId('outer-panel');
+    const innerPanel = screen.getByTestId('inner-panel');
+
+    expect(outerPanel).not.toContainElement(innerPanel);
+    expect(outerPanel.closest('[data-modal-portal]')).not.toBe(
+      innerPanel.closest('[data-modal-portal]'),
+    );
+
+    fireEvent.keyDown(screen.getByRole('button', { name: 'Inner action', hidden: true }), {
+      key: 'Escape',
+    });
+
+    expect(onInnerKeyDown).toHaveBeenCalledTimes(1);
+    expect(onInnerClose).toHaveBeenCalledTimes(1);
+    expect(calls).toEqual(['inner keydown', 'inner close']);
+    expect(onOuterClose).not.toHaveBeenCalled();
+    expect(onOuterKeyDown).not.toHaveBeenCalled();
+
+    rerender(nestedModals(false));
+    expect(screen.queryByTestId('inner-panel')).not.toBeInTheDocument();
+    fireEvent.keyDown(screen.getByTestId('outer-panel'), { key: 'Escape' });
+
+    expect(onOuterKeyDown).toHaveBeenCalledTimes(1);
+    expect(onOuterClose).toHaveBeenCalledTimes(1);
+    expect(onInnerClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('composes consumer keydown before close and preserves non-Escape propagation', () => {
+    const calls: string[] = [];
+    const onClose = vi.fn(() => calls.push('close'));
+    const onParentKeyDown = vi.fn();
+    const onKeyDown = vi.fn(() => calls.push('consumer'));
 
     render(
-      <Modal open={true} onClose={onClose}>
-        <Modal.Backdrop />
-        <Modal.Panel
-          data-testid="panel"
-          onKeyDown={(event) => {
-            if (event.key === 'Escape') {
-              event.preventDefault();
-            }
-          }}>
-          <Modal.Title>Dialog heading</Modal.Title>
+      <Modal open={true} onClose={vi.fn()}>
+        <Modal.Panel aria-label="Parent composition" onKeyDown={onParentKeyDown}>
+          <Modal open={true} onClose={onClose}>
+            <Modal.Panel aria-label="Composition" data-testid="panel" onKeyDown={onKeyDown} />
+          </Modal>
+        </Modal.Panel>
+      </Modal>,
+    );
+
+    fireEvent.keyDown(screen.getByTestId('panel'), { key: 'ArrowDown' });
+
+    expect(onKeyDown).toHaveBeenCalledTimes(1);
+    expect(onParentKeyDown).toHaveBeenCalledTimes(1);
+    expect(onClose).not.toHaveBeenCalled();
+    expect(calls).toEqual(['consumer']);
+
+    fireEvent.keyDown(screen.getByTestId('panel'), { key: 'Escape' });
+
+    expect(onKeyDown).toHaveBeenCalledTimes(2);
+    expect(onParentKeyDown).toHaveBeenCalledTimes(1);
+    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(calls).toEqual(['consumer', 'consumer', 'close']);
+  });
+
+  it('preserves canceled Escape propagation without closing either nested modal', () => {
+    const onClose = vi.fn();
+    const onOuterClose = vi.fn();
+    const onOuterKeyDown = vi.fn();
+    const onConsumerKeyDown = vi.fn();
+
+    render(
+      <Modal open={true} onClose={onOuterClose}>
+        <Modal.Panel aria-label="Outer" onKeyDown={onOuterKeyDown}>
+          <Modal open={true} onClose={onClose}>
+            <Modal.Panel
+              data-testid="panel"
+              onKeyDown={(event) => {
+                onConsumerKeyDown();
+                if (event.key === 'Escape') {
+                  event.preventDefault();
+                }
+              }}>
+              <Modal.Title>Dialog heading</Modal.Title>
+            </Modal.Panel>
+          </Modal>
         </Modal.Panel>
       </Modal>,
     );
 
     fireEvent.keyDown(screen.getByTestId('panel'), { key: 'Escape' });
 
+    expect(onConsumerKeyDown).toHaveBeenCalledTimes(1);
+    expect(onOuterKeyDown).toHaveBeenCalledTimes(1);
+    expect(onOuterKeyDown.mock.calls[0][0].defaultPrevented).toBe(true);
     expect(onClose).not.toHaveBeenCalled();
+    expect(onOuterClose).not.toHaveBeenCalled();
   });
 
   it('calls onClose when pressing Escape from a focused child', () => {

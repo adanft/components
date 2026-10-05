@@ -36,6 +36,7 @@ function ModalPanel({
     }
 
     if (e.key === 'Escape') {
+      e.stopPropagation();
       onClose();
     }
   }
