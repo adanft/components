@@ -6,6 +6,8 @@ import {
   type ReactNode,
   type SVGProps,
   useId,
+  useLayoutEffect,
+  useRef,
   useState,
 } from 'react';
 
@@ -52,6 +54,8 @@ function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProp
   const Icon = icon;
   const [floatOpen, setFloatOpen] = useState(false);
   const contentId = useId();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const { collapsed } = useSidebarContext('Group');
   const groupLinks = Children.toArray(children).map((child) => {
     if (!isSidebarGroupLinkElement(child)) {
@@ -68,8 +72,16 @@ function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProp
       ? manualOverride.open
       : hasActiveGroupLink;
 
+  useLayoutEffect(() => {
+    const content = contentRef.current;
+    if (!collapsed && !groupOpen && content?.contains(content.ownerDocument.activeElement)) {
+      triggerRef.current?.focus();
+    }
+  }, [collapsed, groupOpen]);
+
   const trigger = (
     <button
+      ref={triggerRef}
       type="button"
       className={cn(
         'flex w-full items-center gap-4 rounded-md text-left leading-none text-foreground',
@@ -127,6 +139,9 @@ function SidebarGroup({ active = false, children, icon, text }: SidebarGroupProp
 
       <div
         id={contentId}
+        ref={contentRef}
+        inert={!groupOpen}
+        aria-hidden={!groupOpen}
         className={cn(
           'grid overflow-hidden transition-[grid-template-rows] duration-300',
           groupOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',

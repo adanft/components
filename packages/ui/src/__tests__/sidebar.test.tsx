@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { type SVGProps, useState } from 'react';
+import { type ReactNode, type SVGProps, useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import {
@@ -278,6 +278,101 @@ describe('Sidebar', () => {
     expect(screen.getByRole('link', { name: /monthly/i })).toBeInTheDocument();
   });
 
+  it('excludes closed content and preserves mounted child state and handlers when reopened', () => {
+    const onClick = vi.fn((event) => event.preventDefault());
+    const onMount = vi.fn();
+    function StatefulLink(props: { children?: ReactNode; className?: string }) {
+      const [instance] = useState(() => {
+        onMount();
+        return 'mounted';
+      });
+      return <a {...props} href="/reports/monthly" data-instance={instance} onClick={onClick} />;
+    }
+
+    render(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink asChild text="Monthly">
+            <StatefulLink />
+          </SidebarGroupLink>
+        </SidebarGroup>
+      </Sidebar>,
+    );
+
+    const toggle = screen.getByRole('button', { name: /reports/i });
+    const content = document.getElementById(toggle.getAttribute('aria-controls') as string);
+    const link = screen.getByRole('link', { hidden: true });
+
+    expect(screen.queryByRole('link', { name: /monthly/i })).not.toBeInTheDocument();
+    expect(content).toHaveAttribute('inert');
+    expect(content).toHaveAttribute('aria-hidden', 'true');
+    expect(content).toHaveClass('grid-rows-[0fr]', 'transition-[grid-template-rows]');
+
+    fireEvent.click(toggle);
+    expect(screen.getByRole('link', { name: /monthly/i })).toBe(link);
+    expect(content).not.toHaveAttribute('inert');
+    expect(content).not.toHaveAttribute('aria-hidden', 'true');
+    expect(content).toHaveClass('grid-rows-[1fr]');
+    fireEvent.click(link);
+    expect(onClick).toHaveBeenCalledOnce();
+
+    fireEvent.click(toggle);
+    expect(screen.queryByRole('link', { name: /monthly/i })).not.toBeInTheDocument();
+    expect(content).toHaveAttribute('inert');
+    fireEvent.click(toggle);
+    expect(screen.getByRole('link', { name: /monthly/i })).toBe(link);
+    expect(link).toHaveAttribute('data-instance', 'mounted');
+    expect(onMount).toHaveBeenCalledOnce();
+    link.focus();
+    expect(link).toHaveFocus();
+  });
+
+  it('returns focus from content to the inline toggle on manual closure', () => {
+    render(
+      <Sidebar state action={() => undefined} className="static">
+        <SidebarGroup icon={FolderOpen} text="Reports">
+          <SidebarGroupLink active href="/reports/monthly" text="Monthly" />
+        </SidebarGroup>
+      </Sidebar>,
+    );
+    const toggle = screen.getByRole('button', { name: /reports/i });
+    screen.getByRole('link', { name: /monthly/i }).focus();
+
+    // fireEvent does not focus the clicked button, so this exercises the handoff itself.
+    fireEvent.click(toggle);
+
+    expect(toggle).toHaveFocus();
+    expect(screen.queryByRole('link', { name: /monthly/i })).not.toBeInTheDocument();
+  });
+
+  it.each([true, false])(
+    'handles active-link removal without stealing outside focus (inside=%s)',
+    (inside) => {
+      const view = (active: boolean) => (
+        <>
+          <button type="button">Outside</button>
+          <Sidebar state action={() => undefined} className="static">
+            <SidebarGroup icon={FolderOpen} text="Reports">
+              <SidebarGroupLink active={active} href="/reports/monthly" text="Monthly" />
+            </SidebarGroup>
+          </Sidebar>
+        </>
+      );
+      const { rerender } = render(view(true));
+      const toggle = screen.getByRole('button', { name: /reports/i });
+      const outside = screen.getByRole('button', { name: /outside/i });
+      (inside ? screen.getByRole('link', { name: /monthly/i }) : outside).focus();
+
+      rerender(view(false));
+
+      expect(toggle).toHaveAttribute('aria-expanded', 'false');
+      expect(inside ? toggle : outside).toHaveFocus();
+      expect(screen.queryByRole('link', { name: /monthly/i })).not.toBeInTheDocument();
+      fireEvent.click(toggle);
+      expect(screen.getByRole('link', { name: /monthly/i })).toBeInTheDocument();
+    },
+  );
+
   it('starts inline groups open when a nested link is active', () => {
     render(
       <Sidebar state action={() => undefined} className="static">
@@ -312,7 +407,11 @@ describe('Sidebar', () => {
     fireEvent.click(groupButton);
 
     expect(groupButton).toHaveAttribute('aria-expanded', 'false');
-    expect(screen.getByRole('link', { name: /weekly/i })).toHaveAttribute('aria-current', 'page');
+    expect(screen.queryByRole('link', { name: /weekly/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /weekly/i, hidden: true })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
   });
 
   it('derives inline group expansion from active nested links after mount', () => {
