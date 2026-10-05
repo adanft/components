@@ -19,6 +19,7 @@
     "check": "biome check .",
     "preview": "pnpm --dir apps/docs preview",
     "test": "pnpm exec vitest run src/__tests__ && pnpm --recursive --if-present test",
+    "test:browser": "pnpm --dir packages/ui test:browser",
     "typecheck": "tsc -b --pretty false",
     "validate:boundaries": "node scripts/validate-docs-imports.mjs",
     "validate:exports": "pnpm --dir packages/ui sync:exports:check",

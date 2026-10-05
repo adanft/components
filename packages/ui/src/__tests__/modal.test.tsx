@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { StrictMode, useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { Modal } from '../index';
@@ -24,7 +25,123 @@ function renderModal({
   };
 }
 
+function FocusRestorationFixture({ revision = 0 }: { revision?: number }) {
+  const [outerOpen, setOuterOpen] = useState(false);
+  const [innerOpen, setInnerOpen] = useState(false);
+
+  return (
+    <>
+      <button type="button" onClick={() => setOuterOpen(true)}>
+        First launcher
+      </button>
+      <button type="button" onClick={() => setOuterOpen(true)}>
+        Second launcher
+      </button>
+      <Modal open={outerOpen} onClose={() => setOuterOpen(false)}>
+        <Modal.Panel aria-label="Outer focus" data-testid="outer-focus-panel">
+          <span>Revision {revision}</span>
+          <button type="button" onClick={() => setInnerOpen(true)}>
+            Inner launcher
+          </button>
+          <Modal open={innerOpen} onClose={() => setInnerOpen(false)}>
+            <Modal.Panel aria-label="Inner focus" data-testid="inner-focus-panel">
+              <button type="button" onClick={() => setInnerOpen(false)}>
+                Controlled inner close
+              </button>
+            </Modal.Panel>
+          </Modal>
+        </Modal.Panel>
+      </Modal>
+    </>
+  );
+}
+
+async function openFromLauncher(name: string) {
+  const launcher = screen.getByRole('button', { name });
+  launcher.focus();
+  expect(launcher).toHaveFocus();
+  fireEvent.click(launcher);
+  await waitFor(() => expect(screen.getByTestId('outer-focus-panel')).toHaveFocus());
+  return launcher;
+}
+
+async function openInnerModal() {
+  const launcher = screen.getByRole('button', { name: 'Inner launcher' });
+  launcher.focus();
+  expect(launcher).toHaveFocus();
+  fireEvent.click(launcher);
+  await waitFor(() => expect(screen.getByTestId('inner-focus-panel')).toHaveFocus());
+  return launcher;
+}
+
+function escapeFocusedElement() {
+  expect(document.activeElement).not.toBe(document.body);
+  fireEvent.keyDown(document.activeElement as HTMLElement, { key: 'Escape' });
+}
+
 describe('Modal', () => {
+  it.each([
+    { closeMethod: 'Escape', strictMode: false },
+    { closeMethod: 'controlled', strictMode: false },
+    { closeMethod: 'Escape', strictMode: true },
+    { closeMethod: 'controlled', strictMode: true },
+  ])(
+    'restores nested then original launcher focus after $closeMethod inner close (StrictMode: $strictMode)',
+    async ({ closeMethod, strictMode }) => {
+      render(
+        strictMode ? (
+          <StrictMode>
+            <FocusRestorationFixture />
+          </StrictMode>
+        ) : (
+          <FocusRestorationFixture />
+        ),
+      );
+      const outerLauncher = await openFromLauncher('First launcher');
+      const innerLauncher = await openInnerModal();
+
+      if (closeMethod === 'Escape') {
+        escapeFocusedElement();
+      } else {
+        const close = screen.getByRole('button', { name: 'Controlled inner close' });
+        close.focus();
+        fireEvent.click(close);
+      }
+
+      await waitFor(() => expect(innerLauncher).toHaveFocus());
+      expect(screen.queryByTestId('inner-focus-panel')).not.toBeInTheDocument();
+      expect(screen.getByTestId('outer-focus-panel')).toBeInTheDocument();
+      escapeFocusedElement();
+      await waitFor(() => expect(outerLauncher).toHaveFocus());
+      expect(screen.queryByTestId('outer-focus-panel')).not.toBeInTheDocument();
+    },
+  );
+  it.each([false, true])(
+    'keeps the original target on rerender and refreshes it on reopen (StrictMode: %s)',
+    async (strictMode) => {
+      function fixture(revision: number) {
+        const content = <FocusRestorationFixture revision={revision} />;
+        return strictMode ? <StrictMode>{content}</StrictMode> : content;
+      }
+
+      const { rerender } = render(fixture(0));
+      const firstLauncher = await openFromLauncher('First launcher');
+      const innerLauncher = screen.getByRole('button', { name: 'Inner launcher' });
+      innerLauncher.focus();
+      expect(innerLauncher).toHaveFocus();
+      rerender(fixture(1));
+      expect(screen.getByText('Revision 1')).toBeInTheDocument();
+      expect(innerLauncher).toHaveFocus();
+      escapeFocusedElement();
+      await waitFor(() => expect(firstLauncher).toHaveFocus());
+
+      const secondLauncher = await openFromLauncher('Second launcher');
+      escapeFocusedElement();
+      await waitFor(() => expect(secondLauncher).toHaveFocus());
+      expect(firstLauncher).not.toHaveFocus();
+    },
+  );
+
   it('renders nothing when open is false', () => {
     renderModal({ open: false });
 

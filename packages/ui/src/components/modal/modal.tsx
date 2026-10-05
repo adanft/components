@@ -1,5 +1,5 @@
 import { FloatingFocusManager, useFloating } from '@floating-ui/react';
-import { type ReactNode, useEffect, useId, useRef, useSyncExternalStore } from 'react';
+import { type ReactNode, useCallback, useEffect, useId, useRef, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 
 import { ModalContext } from './context';
@@ -44,6 +44,8 @@ function lockDocumentScroll() {
 function Modal({ open, onClose, children }: ModalProps) {
   const titleId = `modal-title-${useId()}`;
   const initialFocusRef = useRef<HTMLElement | null>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+  const lastFloatingNodeRef = useRef<WeakRef<HTMLDivElement> | null>(null);
   const isClient = useIsClient();
   const { context: floatingContext, refs } = useFloating({
     open,
@@ -51,6 +53,22 @@ function Modal({ open, onClose, children }: ModalProps) {
       if (!nextOpen) onClose();
     },
   });
+
+  const setFloating = useCallback(
+    (node: HTMLDivElement | null) => {
+      // Capture before autofocus, once per opening, not on same-node ref reattachment.
+      // Keep the target through detachment so Floating UI can restore it on cleanup.
+      if (node && node !== lastFloatingNodeRef.current?.deref()) {
+        lastFloatingNodeRef.current = new WeakRef(node);
+        const activeElement = node.ownerDocument.activeElement;
+        const HTMLElementClass = node.ownerDocument.defaultView?.HTMLElement;
+        returnFocusRef.current =
+          HTMLElementClass && activeElement instanceof HTMLElementClass ? activeElement : null;
+      }
+      refs.setFloating(node);
+    },
+    [refs.setFloating],
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -72,9 +90,9 @@ function Modal({ open, onClose, children }: ModalProps) {
         initialFocus={initialFocusRef}
         modal
         outsideElementsInert
-        returnFocus>
+        returnFocus={returnFocusRef}>
         <div
-          ref={refs.setFloating}
+          ref={setFloating}
           data-modal-portal
           className="fixed inset-0 z-40 flex items-center justify-center pointer-events-none px-4">
           {children}

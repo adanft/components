@@ -345,6 +345,7 @@
     "build": "pnpm sync:exports:check && pnpm typecheck && pnpm exec vite build && pnpm exec tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
     "prepack": "pnpm build",
     "test": "pnpm exec vitest run --config vitest.config.ts",
+    "test:browser": "playwright test --config e2e/playwright.config.ts",
     "typecheck": "pnpm exec tsc -b tsconfig.json --pretty false"
   },
   "dependencies": {
@@ -358,6 +359,7 @@
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/vite": "^4.3.3",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
