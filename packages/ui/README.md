@@ -4,9 +4,10 @@ Reusable React UI components from the adanft design system.
 
 ## Status
 
-This repository is prepared for the stable `0.2.0` release.
+This repository is prepared for the stable `0.3.0` release.
 
-Current package version: `0.2.0`. Publication is a separate release step.
+Current package version: `0.3.0`. This version has not been published; publication is a separate
+release step.
 
 ## Current package model
 

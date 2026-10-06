@@ -14,7 +14,8 @@ site.
 - **Docs URL**: <https://adanft.github.io/components>
 - **Docs base path**: `/components/`
 - **Default branch**: `main`
-- **Current package version**: `0.2.0` (stable release candidate; not yet published)
+- **Current package version**: `0.3.0` (prepared for `latest`; not yet published)
+- **Published npm versions**: `latest` is `0.2.0`; `beta` is `0.2.0-beta.6`
 
 The docs app is intentionally a real consumer of the package. It must import from `@adanft/ui`, not
 from package internals.
@@ -22,11 +23,11 @@ from package internals.
 ## Tech Stack
 
 - React 19
-- TypeScript 6
+- TypeScript 7
 - Vite 8
-- Vitest 4
+- Vitest 5
 - Tailwind CSS 4
-- React Router 7
+- React Router 8
 - Biome
 - Changesets
 - pnpm workspace
@@ -372,10 +373,10 @@ The package release flow uses Changesets.
 - `packages/ui` is the only publishable package.
 - `apps/docs` is private and ignored by Changesets.
 - Beta releases publish `@adanft/ui` with the npm `beta` tag; stable releases use `latest`.
-- Current package version is the stable `0.2.0` release candidate; repository preparation does not
-  imply that it has been published to npm.
-- The stable transition exits prerelease mode before versioning; the prepared `0.2.0` version has
-  consumed all pending release changesets.
+- Current package version is `0.3.0`, prepared for `latest` and not yet published. npm `latest`
+  remains `0.2.0`, and `beta` remains `0.2.0-beta.6`.
+- The prepared `0.3.0` minor version was applied once with Changesets and has consumed its release
+  changeset; no pending release changesets remain.
 - Stable `1.0.0` is not the current target.
 - Release preparation must pass the check-only validation and package dry-run contract before
   publication.
