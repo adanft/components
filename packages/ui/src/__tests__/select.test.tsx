@@ -4,6 +4,19 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { Select } from '../index';
 
+// Type-only contract checks; never rendered by the test runner.
+function checkSelectTypes() {
+  // @ts-expect-error Select does not support multiple selection.
+  <Select multiple />;
+  // @ts-expect-error Controlled values must be scalar.
+  <Select value={['starter']} />;
+  // @ts-expect-error Uncontrolled defaults must be scalar.
+  <Select defaultValue={['starter']} />;
+  <Select value={10} onChange={() => undefined} />;
+  <Select defaultValue={10} />;
+}
+void checkSelectTypes;
+
 function SelectHarness() {
   const [value, setValue] = useState('pro');
 
@@ -156,21 +169,27 @@ describe('Select', () => {
     expect(control).not.toHaveAttribute('data-ui-select-placeholder');
   });
 
-  it('does not create a placeholder option for a multiple select', () => {
+  it('ignores an unchecked multiple prop and retains the single-select UI', () => {
+    const rogueProps = { multiple: true };
     const { container } = render(
-      <Select aria-label="Plans" className="min-h-24" multiple placeholder="Choose plans">
+      <Select {...rogueProps} aria-label="Plan" placeholder="Choose a plan">
         <option value="starter">Starter</option>
         <option value="pro">Pro</option>
       </Select>,
     );
 
-    const control = screen.getByRole('listbox', { name: 'Plans' }) as HTMLSelectElement;
+    const control = screen.getByRole('combobox', { name: 'Plan' }) as HTMLSelectElement;
 
-    expect(control.querySelector('option[value=""]')).toBeNull();
-    expect(control.selectedOptions).toHaveLength(0);
-    expect(control).toHaveClass('min-h-24');
-    expect(control).not.toHaveClass('appearance-none', 'pr-10');
-    expect(container.querySelector('svg')).not.toBeInTheDocument();
+    expect(control.multiple).toBe(false);
+    expect(control).toHaveValue('');
+    expect(control.querySelector('option[value=""]')).toBeDisabled();
+    expect(control.selectedOptions).toHaveLength(1);
+    expect(control).toHaveClass('appearance-none', 'pr-10');
+    expect(container.querySelector('svg')).toBeInTheDocument();
+
+    fireEvent.change(control, { target: { value: 'pro' } });
+    expect(control).toHaveValue('pro');
+    expect(control.selectedOptions).toHaveLength(1);
   });
 
   it('passes disabled through to the native control', () => {

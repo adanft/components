@@ -10,6 +10,8 @@ This retained, dev-only integration suite exercises public UI APIs in Chromium, 
 
 - **Text contrast:** public Button/Badge matrix measures 108 samples across light/dark themes and background/surface hosts, including explicit Button hover states.
 
+- **Select:** native single-selection state, computed placeholder color and chevron styles, default/reset precedence, controlled string/numeric updates, and disabled form exclusion. An unchecked JavaScript `multiple` prop must still produce a single combobox; unsupported array values are a compile-time contract, not a runtime validation promise.
+
 ## Run locally
 
 From the repository root, with a Playwright-managed Chromium already available:
@@ -52,6 +54,7 @@ pnpm --dir packages/ui exec tsc -p e2e/tsconfig.json --noEmit
 - `fixtures/cases/dropdown-menu.tsx`: isolated Dropdown Menu case using `@adanft/ui/dropdown-menu`; visible outputs report consumer focus count and target.
 - `fixtures/cases/theme-switch.tsx`: isolated controlled switches using `@adanft/ui/theme-switch`; fixture-owned selectors identify each size.
 - `fixtures/cases/text-contrast.tsx`: public Button/Badge treatments selected by `/?case=text-contrast`, using production color utilities without fixture background overrides.
+- `fixtures/cases/select.tsx`: public `@adanft/ui/select` controls selected by `/?case=select`, with native forms and controlled state.
 - `fixtures/main.tsx`: small selector. `/?case=modal` selects Modal and `/?case=theme` selects Theme; `/?case=dropdown-menu` selects Dropdown Menu and `/?case=theme-switch` selects ThemeSwitch. Omitting `case` explicitly defaults to Modal. Add `&strict` for StrictMode. Unknown cases display an error and throw instead of silently selecting Modal.
 
 To add the next component, create `fixtures/cases/<component>.tsx`, add an explicit selection branch in `fixtures/main.tsx`, and create `tests/<component>.spec.ts` that visits `/?case=<component>`. No router or registration framework is needed.

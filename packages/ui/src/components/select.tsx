@@ -3,7 +3,12 @@ import type { ComponentPropsWithoutRef } from 'react';
 import { cn } from '../helpers/cn';
 import { ChevronDownIcon } from '../icons';
 
-type SelectProps = Omit<ComponentPropsWithoutRef<'select'>, 'size'> & {
+type SelectProps = Omit<
+  ComponentPropsWithoutRef<'select'>,
+  'size' | 'multiple' | 'value' | 'defaultValue'
+> & {
+  value?: string | number;
+  defaultValue?: string | number;
   placeholder?: string;
 };
 
@@ -12,12 +17,11 @@ function Select({
   className,
   defaultValue,
   disabled,
-  multiple,
   placeholder,
   value,
   ...props
 }: SelectProps) {
-  const hasPlaceholder = Boolean(placeholder) && !multiple;
+  const hasPlaceholder = Boolean(placeholder);
   const uncontrolledDefaultValue = defaultValue ?? (hasPlaceholder ? '' : undefined);
   const controlledProps =
     value !== undefined ? { value } : { defaultValue: uncontrolledDefaultValue };
@@ -28,11 +32,10 @@ function Select({
         {...props}
         data-ui-select-placeholder={hasPlaceholder ? '' : undefined}
         disabled={disabled}
-        multiple={multiple}
+        multiple={false}
         {...controlledProps}
         className={cn(
-          'w-full rounded-md border border-border bg-background px-3 py-2 text-foreground',
-          !multiple && 'appearance-none pr-10',
+          'w-full appearance-none rounded-md border border-border bg-background px-3 py-2 pr-10 text-foreground',
           'aria-invalid:border-danger aria-invalid:focus-visible:outline-outline-danger',
           'disabled:cursor-not-allowed disabled:bg-muted/20 disabled:opacity-50',
           className,
@@ -44,12 +47,10 @@ function Select({
         ) : null}
         {children}
       </select>
-      {multiple ? null : (
-        <ChevronDownIcon
-          aria-hidden="true"
-          className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted"
-        />
-      )}
+      <ChevronDownIcon
+        aria-hidden="true"
+        className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted"
+      />
     </div>
   );
 }

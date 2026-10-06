@@ -61,6 +61,17 @@ import { initializeTheme, setTheme } from '@adanft/ui/theme';
 
 See the documentation site for the full list of public component subpaths.
 
+## Select
+
+`Select` is single-selection only. Its `value` and `defaultValue` accept a scalar
+`string | number`, not arrays. Native select attributes and event handlers are supported
+except `multiple` and `size`. An unchecked JavaScript `multiple` prop is ignored.
+Use Checkbox controls when users need multiple choices.
+
+With `placeholder`, an uncontrolled Select starts on a disabled empty option unless
+`defaultValue` is supplied. Native form reset restores the initial selection; controlled
+values remain owned by the consumer.
+
 ## Notes
 
 - The public API is exported from the package root and documented public subpaths.

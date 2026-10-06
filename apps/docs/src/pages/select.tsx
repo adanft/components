@@ -36,12 +36,6 @@ const invalidExampleSnippet = `<Select aria-invalid aria-label="Choose plan" def
   <option value="pro">Pro</option>
 </Select>`;
 
-const multipleExampleSnippet = `<Select aria-label="Choose plans" className="min-h-24" multiple>
-  <option value="starter">Starter</option>
-  <option value="pro">Pro</option>
-  <option value="team">Team</option>
-</Select>`;
-
 const exampleSnippet = `const [value, setValue] = useState('pro');
 
 <Select
@@ -66,7 +60,7 @@ function SelectPage() {
       <header className="space-y-4 pb-6">
         <h1 className="text-3xl font-bold text-heading">Select</h1>
         <p className="text-base leading-7 text-foreground">
-          <Code>Select</Code> lets users choose one or more options from a list.
+          <Code>Select</Code> lets users choose one option from a list.
         </p>
       </header>
 
@@ -75,8 +69,8 @@ function SelectPage() {
         <CodeBlock code={importSnippet} />
         <CodeBlock code={usageSnippet} />
         <p className="text-foreground">
-          For a single uncontrolled select, <Code>placeholder</Code> is selected initially unless
-          you provide an explicit <Code>defaultValue</Code>. Native form reset restores that initial
+          For an uncontrolled select, <Code>placeholder</Code> is selected initially unless you
+          provide an explicit <Code>defaultValue</Code>. Native form reset restores that initial
           selection.
         </p>
       </section>
@@ -104,21 +98,6 @@ function SelectPage() {
         </Box>
         <CodeBlock code={invalidExampleSnippet} />
 
-        <h3 className="text-lg font-semibold text-heading">Multiple</h3>
-        <p className="text-foreground">
-          Multiple selects keep the browser's native multi-select appearance and omit the
-          single-select placeholder option and decorative chevron. <Code>className</Code> still
-          styles the native select element.
-        </p>
-        <Box shadow="none" surface="none">
-          <Select aria-label="Choose plans" className="min-h-24" multiple>
-            <option value="starter">Starter</option>
-            <option value="pro">Pro</option>
-            <option value="team">Team</option>
-          </Select>
-        </Box>
-        <CodeBlock code={multipleExampleSnippet} />
-
         <h3 className="text-lg font-semibold text-heading">Controlled</h3>
         <Box shadow="none" surface="none">
           <Select
@@ -142,7 +121,11 @@ function SelectPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-heading">API Reference</h2>
         <p className="text-foreground">
-          A thin wrapper around the native <Code>{`<select>`}</Code> element.
+          A single-selection wrapper around the native <Code>{`<select>`}</Code> element. Native
+          attributes and event handlers are supported except <Code>size</Code> and{' '}
+          <Code>multiple</Code>. The <Code>value</Code> and <Code>defaultValue</Code> props accept a
+          scalar <Code>string | number</Code>, not arrays. Use Checkbox controls for multiple
+          choices.
         </p>
         <Table>
           <TableHeader>
@@ -163,9 +146,8 @@ function SelectPage() {
               </TableCell>
               <TableCell>—</TableCell>
               <TableCell>
-                For single selects, renders a disabled option and selects it initially in
-                uncontrolled mode unless <Code>defaultValue</Code> is provided. Ignored when{' '}
-                <Code>multiple</Code> is enabled.
+                Renders a disabled option and selects it initially in uncontrolled mode unless{' '}
+                <Code>defaultValue</Code> is provided.
               </TableCell>
             </TableRow>
             <TableRow>
@@ -199,9 +181,7 @@ function SelectPage() {
               <TableCell>
                 <Code>aria-hidden</Code>
               </TableCell>
-              <TableCell>
-                On single selects, hides the decorative chevron icon from assistive technology.
-              </TableCell>
+              <TableCell>Hides the decorative chevron icon from assistive technology.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
