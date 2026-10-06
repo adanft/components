@@ -50,6 +50,13 @@ initializeTheme();
 | Variable | Light default | Dark default | Usage |
 | --- | --- | --- | --- |
 | `--color-brand` | `#6747c8` | `#6747c8` | Primary brand color. |
+| `--color-on-muted` | `#16141a` | `#ffffff` | Text on solid muted fills in Button and Badge. |
+| `--color-on-accent` | `#000000` | `#000000` | Text on solid danger, info, and success fills in Button. |
+| `--color-accent-brand` | `#6747c8` | `#b39aef` | Text in primary outline Button and tinted primary Badge. |
+| `--color-accent-muted` | `#625e6d` | `#b3aebe` | Text in secondary outline Button. |
+| `--color-accent-danger` | `#b80036` | `#ff7097` | Text in danger outline Button and tinted danger Badge. |
+| `--color-accent-info` | `#00758c` | `#00b4d8` | Text in info outline Button. |
+| `--color-accent-success` | `#176d63` | `#53b9ac` | Text in success outline Button and tinted success Badge. |
 | `--color-danger` | `#ff004c` | `#ff004c` | Danger and destructive states. |
 | `--color-info` | `#00b4d8` | `#00b4d8` | Informational states. |
 | `--color-success` | `#2a9d8f` | `#2a9d8f` | Success states. |
@@ -628,7 +635,7 @@ for radio coordination only.
 
 ## Select
 
-Native select control for choosing one or more options from a list.
+Native select control for choosing one option from a list.
 
 ```tsx
 import { Select } from '@adanft/ui';
@@ -645,15 +652,16 @@ import Select from '@adanft/ui/select';
 </Select>
 ```
 
-**Examples:** default, invalid, multiple, controlled select.
+**Examples:** default, invalid, controlled select.
 
-For a single uncontrolled select, `placeholder` becomes the initial selection
+For an uncontrolled select, `placeholder` becomes the initial selection
 unless an explicit `defaultValue` is provided. Native form reset restores that
-initial selection and its placeholder styling. Multiple selects ignore
-`placeholder`, keep the browser's native multi-select appearance, and omit the
-single-select chevron. `className` continues to style the native select element.
+initial selection and its placeholder styling. `className` continues to style
+the native select element.
 
-**API:** native select props, `placeholder`, `className`.
+**API:** native select attributes and event handlers except `multiple` and `size`,
+plus `placeholder` and `className`. `value` and `defaultValue` accept a scalar
+`string | number`, not arrays.
 
 ## Sidebar
 
