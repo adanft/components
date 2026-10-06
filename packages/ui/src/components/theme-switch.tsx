@@ -59,7 +59,7 @@ function ThemeSwitch({
       <SunIcon
         aria-hidden="true"
         className={cn(
-          'absolute right-1 z-1 text-white animate-[spin_15s_linear_infinite]',
+          'absolute right-1 z-1 text-white animate-[spin_15s_linear_infinite] motion-reduce:animate-none',
           sizeClasses.icon,
         )}
       />
@@ -67,7 +67,7 @@ function ThemeSwitch({
       <MoonIcon
         aria-hidden="true"
         className={cn(
-          'absolute left-1 z-1 text-white animate-[tilt_5s_linear_infinite]',
+          'absolute left-1 z-1 text-white animate-[tilt_5s_linear_infinite] motion-reduce:animate-none',
           sizeClasses.icon,
         )}
       />
@@ -96,7 +96,7 @@ function ThemeSwitch({
         aria-hidden="true"
         className={cn(
           'absolute bottom-0.5 left-0.5 rounded-full bg-white z-10',
-          'transition-transform duration-400',
+          'transition-transform duration-400 motion-reduce:transition-none',
           sizeClasses.thumb,
           sizeClasses.thumbTranslate,
         )}

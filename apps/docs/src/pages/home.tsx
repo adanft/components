@@ -150,6 +150,13 @@ const COLOR_TOKENS = [
   ['--color-info', '#00b4d8', '#00b4d8', 'Informational states.'],
   ['--color-success', '#2a9d8f', '#2a9d8f', 'Success states.'],
   ['--color-warning', '#e9c46a', '#e9c46a', 'Warning states.'],
+  ['--color-on-muted', '#16141a', '#ffffff', 'Button/Badge text on solid muted fills.'],
+  ['--color-on-accent', '#000000', '#000000', 'Button text on solid danger/info/success fills.'],
+  ['--color-accent-brand', '#6747c8', '#b39aef', 'Brand outline Button and tinted Badge text.'],
+  ['--color-accent-muted', '#625e6d', '#b3aebe', 'Muted outline Button text.'],
+  ['--color-accent-danger', '#b80036', '#ff7097', 'Danger outline Button and tinted Badge text.'],
+  ['--color-accent-info', '#00758c', '#00b4d8', 'Info outline Button text.'],
+  ['--color-accent-success', '#176d63', '#53b9ac', 'Success outline Button and tinted Badge text.'],
   ['--color-background', '#ffffff', '#16141a', 'Page background.'],
   ['--color-surface', '#ffffff', '#1f1d24', 'Card and overlay surfaces.'],
   ['--color-foreground', '#34303d', '#9e99ad', 'Default body text.'],
@@ -279,6 +286,15 @@ function Home() {
             These CSS variables define the default visual contract. Import the package stylesheet
             first, then override any token in your app CSS with <Code>:root</Code> and{' '}
             <Code>:root.dark</Code>.
+          </p>
+          <p className="max-w-3xl text-foreground">
+            Button and Badge use separate foreground-purpose tokens: <Code>--color-on-muted</Code>{' '}
+            and <Code>--color-on-accent</Code> for solid fills, and <Code>--color-accent-*</Code>{' '}
+            for colored outlines and tinted badges. These text colors do not change the shared fill
+            or border palette; solid brand buttons keep white text. When customizing colors or host
+            backgrounds, recheck text contrast in both themes and hover states, including alpha
+            fills. Custom palettes must supply compatible foregrounds; the default regression covers
+            only Button and Badge text on background and surface hosts.
           </p>
         </div>
 

@@ -9,10 +9,10 @@ type BadgeProps = ComponentPropsWithoutRef<'span'> & {
 };
 
 const variantStyles: Record<BadgeVariant, string> = {
-  primary: 'border-transparent bg-brand/10 text-brand',
-  secondary: 'border-transparent bg-muted text-white',
-  success: 'border-transparent bg-success/10 text-success',
-  danger: 'border-transparent bg-danger/10 text-danger',
+  primary: 'border-transparent bg-brand/10 text-accent-brand',
+  secondary: 'border-transparent bg-muted text-on-muted',
+  success: 'border-transparent bg-success/10 text-accent-success',
+  danger: 'border-transparent bg-danger/10 text-accent-danger',
   outline: 'border-border bg-background text-foreground',
 };
 

@@ -56,14 +56,14 @@ describe('Button', () => {
 
     const button = screen.getByTestId('button');
 
-    expect(button).toHaveClass('bg-muted', 'text-white');
+    expect(button).toHaveClass('bg-muted', 'text-on-muted', 'hover:bg-muted/90');
     expect(button).not.toHaveClass('bg-brand');
   });
 
   it.each([
-    ['danger', 'bg-danger', 'text-white'],
-    ['info', 'bg-info', 'text-white'],
-    ['success', 'bg-success', 'text-white'],
+    ['danger', 'bg-danger', 'text-on-accent'],
+    ['info', 'bg-info', 'text-on-accent'],
+    ['success', 'bg-success', 'text-on-accent'],
   ] as const)('applies %s variant styles', (variant, backgroundClass, textClass) => {
     render(
       <Button variant={variant} data-testid="button">
@@ -78,11 +78,11 @@ describe('Button', () => {
   });
 
   it.each([
-    ['primary', 'border-brand', 'text-brand'],
-    ['secondary', 'border-muted', 'text-muted'],
-    ['danger', 'border-danger', 'text-danger'],
-    ['info', 'border-info', 'text-info'],
-    ['success', 'border-success', 'text-success'],
+    ['primary', 'border-brand', 'text-accent-brand'],
+    ['secondary', 'border-muted', 'text-accent-muted'],
+    ['danger', 'border-danger', 'text-accent-danger'],
+    ['info', 'border-info', 'text-accent-info'],
+    ['success', 'border-success', 'text-accent-success'],
     ['theme', 'border-heading', 'text-heading'],
   ] as const)('applies %s outline variant styles', (variant, borderClass, textClass) => {
     render(
@@ -130,7 +130,7 @@ describe('Button', () => {
 
     const button = screen.getByTestId('button');
 
-    expect(button).toHaveClass('bg-muted', 'text-white', 'text-sm', 'h-8', 'px-4');
+    expect(button).toHaveClass('bg-muted', 'text-on-muted', 'text-sm', 'h-8', 'px-4');
   });
 
   it('allows className to override variant styles via tailwind-merge', () => {
@@ -156,7 +156,7 @@ describe('Button', () => {
     const link = screen.getByRole('link', { name: 'Open docs' });
 
     expect(link).toHaveAttribute('href', '/docs');
-    expect(link).toHaveClass('bg-muted', 'text-white', 'text-sm', 'h-8', 'px-4');
+    expect(link).toHaveClass('bg-muted', 'text-on-muted', 'text-sm', 'h-8', 'px-4');
     expect(link).not.toHaveAttribute('type');
   });
 
@@ -257,7 +257,7 @@ describe('Button', () => {
     const link = screen.getByRole('link', { name: 'Delete docs' });
 
     expect(link).toHaveAttribute('href', '/docs');
-    expect(link).toHaveClass('border', 'border-danger', 'text-danger', 'bg-transparent');
+    expect(link).toHaveClass('border', 'border-danger', 'text-accent-danger', 'bg-transparent');
   });
 
   it('merges child className with Button className when asChild is enabled', () => {

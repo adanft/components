@@ -3,6 +3,15 @@
 /* Design tokens exposed as Tailwind theme utilities and CSS variables. */
 @theme {
   --color-brand: #6747c8;
+  /* Button/Badge text on solid fills, separate from the shared fill palette. */
+  --color-on-muted: #16141a;
+  --color-on-accent: #000000;
+  /* Button outlines and tinted Badge text on background/surface hosts. */
+  --color-accent-brand: #6747c8;
+  --color-accent-muted: #625e6d;
+  --color-accent-danger: #b80036;
+  --color-accent-info: #00758c;
+  --color-accent-success: #176d63;
   --color-danger: #ff004c;
   --color-info: #00b4d8;
   --color-success: #2a9d8f;
@@ -23,6 +32,12 @@
 
 /* Runtime theme overrides toggled by the theme helpers. */
 :root.dark {
+  --color-on-muted: #ffffff;
+  --color-accent-brand: #b39aef;
+  --color-accent-muted: #b3aebe;
+  --color-accent-danger: #ff7097;
+  --color-accent-info: #00b4d8;
+  --color-accent-success: #53b9ac;
   --color-background: #16141a;
   --color-surface: #1f1d24;
   --color-foreground: #9e99ad;

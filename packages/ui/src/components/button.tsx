@@ -37,18 +37,18 @@ type ButtonChildProps = {
 
 const filledVariantStyles: Record<ButtonVariant, string> = {
   primary: 'bg-brand text-white hover:bg-brand/90',
-  secondary: 'bg-muted text-white hover:bg-muted/90',
-  danger: 'bg-danger text-white hover:bg-danger/90',
-  info: 'bg-info text-white hover:bg-info/90',
-  success: 'bg-success text-white hover:bg-success/90',
+  secondary: 'bg-muted text-on-muted hover:bg-muted/90',
+  danger: 'bg-danger text-on-accent hover:bg-danger/90',
+  info: 'bg-info text-on-accent hover:bg-info/90',
+  success: 'bg-success text-on-accent hover:bg-success/90',
 };
 
 const outlineVariantStyles: Record<ButtonOutlineVariant, string> = {
-  primary: 'border border-brand bg-transparent text-brand hover:bg-brand/10',
-  secondary: 'border border-muted bg-transparent text-muted hover:bg-muted/10',
-  danger: 'border border-danger bg-transparent text-danger hover:bg-danger/10',
-  info: 'border border-info bg-transparent text-info hover:bg-info/10',
-  success: 'border border-success bg-transparent text-success hover:bg-success/10',
+  primary: 'border border-brand bg-transparent text-accent-brand hover:bg-brand/10',
+  secondary: 'border border-muted bg-transparent text-accent-muted hover:bg-muted/10',
+  danger: 'border border-danger bg-transparent text-accent-danger hover:bg-danger/10',
+  info: 'border border-info bg-transparent text-accent-info hover:bg-info/10',
+  success: 'border border-success bg-transparent text-accent-success hover:bg-success/10',
   theme: 'border border-heading bg-transparent text-heading hover:bg-heading/10',
 };
 

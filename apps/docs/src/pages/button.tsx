@@ -177,7 +177,8 @@ function ButtonPage() {
                 <Code>false</Code>
               </TableCell>
               <TableCell>
-                Renders a transparent button with a variant-colored border and matching text.
+                Renders a transparent button with a variant-colored border and same-hue,
+                contrast-adjusted text (theme uses heading text).
               </TableCell>
             </TableRow>
             <TableRow>

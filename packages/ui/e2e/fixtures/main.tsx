@@ -2,7 +2,9 @@ import { type ReactNode, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import DropdownMenuCase from './cases/dropdown-menu';
 import ModalCase from './cases/modal';
+import TextContrastCase from './cases/text-contrast';
 import ThemeCase from './cases/theme';
+import ThemeSwitchCase from './cases/theme-switch';
 import './styles.css';
 
 const root = document.getElementById('root');
@@ -17,8 +19,12 @@ if (caseName === 'modal') {
   fixture = <ThemeCase />;
 } else if (caseName === 'dropdown-menu') {
   fixture = <DropdownMenuCase />;
+} else if (caseName === 'theme-switch') {
+  fixture = <ThemeSwitchCase />;
+} else if (caseName === 'text-contrast') {
+  fixture = <TextContrastCase />;
 } else {
-  root.textContent = `Unknown fixture case: ${caseName}. Available cases: modal, theme, dropdown-menu.`;
+  root.textContent = `Unknown fixture case: ${caseName}. Available cases: modal, theme, dropdown-menu, theme-switch, text-contrast.`;
   throw new Error(`Unknown fixture case: ${caseName}`);
 }
 createRoot(root).render(params.has('strict') ? <StrictMode>{fixture}</StrictMode> : fixture);
