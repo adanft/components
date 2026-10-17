@@ -56,6 +56,30 @@ const footSnippet = `<PaginationFoot
   onPageChange={setPageIndex}
 />`;
 
+const messagesSnippet = `<PaginationHead
+  pageSize={pageSize}
+  totalItems={125}
+  onPaginationChange={onPaginationChange}
+  label="productos"
+  messages={{
+    perPage: (label) => \`\${label} por página:\`,
+    total: (count, label) => \`Total: \${count} \${label}\`,
+  }}
+/>
+
+<PaginationFoot
+  pageIndex={pageIndex}
+  pageSize={pageSize}
+  totalItems={125}
+  totalPages={Math.ceil(125 / pageSize)}
+  onPageChange={setPageIndex}
+  label="productos"
+  messages={{
+    range: (start, end, total, label) =>
+      \`Mostrando \${start}–\${end} de \${total} \${label}\`,
+  }}
+/>`;
+
 function PaginationPage() {
   const [headPageSize, setHeadPageSize] = useState(10);
   const [footPageIndex, setFootPageIndex] = useState(2);
@@ -106,6 +130,9 @@ function PaginationPage() {
           />
         </Box>
         <CodeBlock code={footSnippet} />
+
+        <h3 className="text-lg font-semibold text-heading">Custom messages</h3>
+        <CodeBlock code={messagesSnippet} />
       </section>
 
       <section className="space-y-4">
@@ -167,7 +194,22 @@ function PaginationPage() {
               <TableCell>
                 <Code>{`"items"`}</Code>
               </TableCell>
-              <TableCell>Label used in the “per page” control and total count text.</TableCell>
+              <TableCell>
+                Label used by the default messages; also passed to custom formatters.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>messages</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`{ perPage?: (label: string) => string; total?: (count: number, label: string) => string }`}</Code>
+              </TableCell>
+              <TableCell>English defaults</TableCell>
+              <TableCell>
+                Optional visible text formatters. A custom per-page message also names the select;
+                otherwise its existing accessible name stays unchanged.
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -305,7 +347,17 @@ function PaginationPage() {
               <TableCell>
                 <Code>{`"items"`}</Code>
               </TableCell>
-              <TableCell>Label used in the visible range text.</TableCell>
+              <TableCell>Label used by the default range message and custom formatter.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Code>messages</Code>
+              </TableCell>
+              <TableCell>
+                <Code>{`{ range?: (start: number, end: number, total: number, label: string) => string }`}</Code>
+              </TableCell>
+              <TableCell>English default</TableCell>
+              <TableCell>Optional formatter for the visible range text.</TableCell>
             </TableRow>
           </TableBody>
         </Table>

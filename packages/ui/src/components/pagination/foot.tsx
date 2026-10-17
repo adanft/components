@@ -10,6 +10,9 @@ export type PaginationFootProps = ComponentPropsWithoutRef<'div'> & {
   totalPages: number;
   onPageChange: (pageIndex: number) => void;
   label?: string;
+  messages?: {
+    range?: (start: number, end: number, total: number, label: string) => string;
+  };
 };
 
 const ELLIPSIS = -1;
@@ -53,6 +56,7 @@ const pageButtonClasses = cn(
 function PaginationFoot({
   className,
   label = 'items',
+  messages,
   onPageChange,
   pageIndex,
   pageSize,
@@ -126,7 +130,8 @@ function PaginationFoot({
         </ul>
       </nav>
       <p className="text-muted">
-        Showing {rangeStart}–{rangeEnd} of {totalItems} {label}
+        {messages?.range?.(rangeStart, rangeEnd, totalItems, label) ??
+          `Showing ${rangeStart}–${rangeEnd} of ${totalItems} ${label}`}
       </p>
     </div>
   );

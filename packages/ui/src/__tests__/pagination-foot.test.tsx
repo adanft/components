@@ -262,6 +262,24 @@ describe('PaginationFoot', () => {
     expect(screen.getByText('Showing 1–10 of 25 users')).toBeInTheDocument();
   });
 
+  it('customizes the visible range message', () => {
+    render(
+      <PaginationFoot
+        pageIndex={1}
+        pageSize={10}
+        totalItems={25}
+        totalPages={3}
+        onPageChange={() => {}}
+        label="productos"
+        messages={{
+          range: (start, end, total, label) => `Mostrando ${start}–${end} de ${total} ${label}`,
+        }}
+      />,
+    );
+
+    expect(screen.getByText('Mostrando 11–20 de 25 productos')).toBeInTheDocument();
+  });
+
   it('exposes the nav with aria-label="Pagination"', () => {
     render(
       <PaginationFoot
